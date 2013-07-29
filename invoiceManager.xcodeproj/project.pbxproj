@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		890D466E17A6EFDC00F85645 /* BasePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D466D17A6EFDB00F85645 /* BasePopoverVC.m */; };
+		890D467117A6F02500F85645 /* ConfirmationPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D467017A6F02500F85645 /* ConfirmationPopoverVC.m */; };
 		891E0185175520D700FF53CE /* popoverBg5.png in Resources */ = {isa = PBXBuildFile; fileRef = 891E0181175520D700FF53CE /* popoverBg5.png */; };
 		891E0186175520D700FF53CE /* popoverBg5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 891E0182175520D700FF53CE /* popoverBg5@2x.png */; };
 		891E018B1755257200FF53CE /* horizontalLine5.png in Resources */ = {isa = PBXBuildFile; fileRef = 891E01891755257200FF53CE /* horizontalLine5.png */; };
@@ -98,8 +100,6 @@
 		89C834D1174B1DCB00CC3F07 /* checkboxYes.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C834CB174B1DCB00CC3F07 /* checkboxYes.png */; };
 		89C834D2174B1DCB00CC3F07 /* checkboxYes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C834CC174B1DCB00CC3F07 /* checkboxYes@2x.png */; };
 		89C834D5174B251B00CC3F07 /* SecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C834D4174B251B00CC3F07 /* SecondVC.m */; };
-		89C911CE17569BA7002303B2 /* pdfBackg.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C911CD17569BA7002303B2 /* pdfBackg.png */; };
-		89C911D017569D86002303B2 /* invoice_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C911CF17569D86002303B2 /* invoice_image.png */; };
 		89C9BA4F1752C4C4008907CB /* OptionsRepairPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9BA4E1752C4C3008907CB /* OptionsRepairPopoverVC.m */; };
 		89C9BA521752C605008907CB /* OptionsFloodPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9BA511752C605008907CB /* OptionsFloodPopoverVC.m */; };
 		89CA61E61749E998002014CB /* InvoiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89CA61E51749E998002014CB /* InvoiceManager.m */; };
@@ -107,14 +107,6 @@
 		89CE716C1755D32B009EE0DC /* customLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89CE716B1755D32B009EE0DC /* customLabel.m */; };
 		89CE716E1755E6BE009EE0DC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CE716D1755E6BD009EE0DC /* CoreText.framework */; };
 		89D445B11757CA67003E2B25 /* InvoiceDiscountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D445B01757CA67003E2B25 /* InvoiceDiscountVC.m */; };
-		89D445B61757EE5B003E2B25 /* checkboxNo5.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D445B21757EE5B003E2B25 /* checkboxNo5.png */; };
-		89D445B71757EE5B003E2B25 /* checkboxNo5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D445B31757EE5B003E2B25 /* checkboxNo5@2x.png */; };
-		89D445B81757EE5B003E2B25 /* checkboxYes5.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D445B41757EE5B003E2B25 /* checkboxYes5.png */; };
-		89D445B91757EE5B003E2B25 /* checkboxYes5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D445B51757EE5B003E2B25 /* checkboxYes5@2x.png */; };
-		89D445BE1757EFF7003E2B25 /* checkboxNo6.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D445BA1757EFF7003E2B25 /* checkboxNo6.png */; };
-		89D445BF1757EFF7003E2B25 /* checkboxNo6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D445BB1757EFF7003E2B25 /* checkboxNo6@2x.png */; };
-		89D445C01757EFF7003E2B25 /* checkboxYes6.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D445BC1757EFF7003E2B25 /* checkboxYes6.png */; };
-		89D445C11757EFF7003E2B25 /* checkboxYes6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89D445BD1757EFF7003E2B25 /* checkboxYes6@2x.png */; };
 		89F593E3174E8C58003F0608 /* bgCommercialResidential.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F593E1174E8C57003F0608 /* bgCommercialResidential.png */; };
 		89F593E4174E8C58003F0608 /* bgCommercialResidential@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F593E2174E8C58003F0608 /* bgCommercialResidential@2x.png */; };
 		89F593E9174E8CAF003F0608 /* btnBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F593E5174E8CAC003F0608 /* btnBack.png */; };
@@ -159,6 +151,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		890D466C17A6EFDB00F85645 /* BasePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasePopoverVC.h; sourceTree = "<group>"; };
+		890D466D17A6EFDB00F85645 /* BasePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasePopoverVC.m; sourceTree = "<group>"; };
+		890D466F17A6F02400F85645 /* ConfirmationPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationPopoverVC.h; sourceTree = "<group>"; };
+		890D467017A6F02500F85645 /* ConfirmationPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationPopoverVC.m; sourceTree = "<group>"; };
 		891E0181175520D700FF53CE /* popoverBg5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popoverBg5.png; sourceTree = "<group>"; };
 		891E0182175520D700FF53CE /* popoverBg5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popoverBg5@2x.png"; sourceTree = "<group>"; };
 		891E01891755257200FF53CE /* horizontalLine5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horizontalLine5.png; sourceTree = "<group>"; };
@@ -269,8 +265,6 @@
 		89C834CC174B1DCB00CC3F07 /* checkboxYes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkboxYes@2x.png"; sourceTree = "<group>"; };
 		89C834D3174B251B00CC3F07 /* SecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondVC.h; sourceTree = "<group>"; };
 		89C834D4174B251B00CC3F07 /* SecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondVC.m; sourceTree = "<group>"; };
-		89C911CD17569BA7002303B2 /* pdfBackg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pdfBackg.png; path = ../../../../Downloads/pdfBackg.png; sourceTree = "<group>"; };
-		89C911CF17569D86002303B2 /* invoice_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = invoice_image.png; path = ../../../../Downloads/invoice_image.png; sourceTree = "<group>"; };
 		89C9BA4D1752C4C3008907CB /* OptionsRepairPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsRepairPopoverVC.h; sourceTree = "<group>"; };
 		89C9BA4E1752C4C3008907CB /* OptionsRepairPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsRepairPopoverVC.m; sourceTree = "<group>"; };
 		89C9BA501752C605008907CB /* OptionsFloodPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsFloodPopoverVC.h; sourceTree = "<group>"; };
@@ -283,14 +277,6 @@
 		89CE716D1755E6BD009EE0DC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		89D445AF1757CA67003E2B25 /* InvoiceDiscountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceDiscountVC.h; sourceTree = "<group>"; };
 		89D445B01757CA67003E2B25 /* InvoiceDiscountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceDiscountVC.m; sourceTree = "<group>"; };
-		89D445B21757EE5B003E2B25 /* checkboxNo5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkboxNo5.png; path = ../../../../Downloads/Attachments_2013530/checkboxNo5.png; sourceTree = "<group>"; };
-		89D445B31757EE5B003E2B25 /* checkboxNo5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkboxNo5@2x.png"; path = "../../../../Downloads/Attachments_2013530/checkboxNo5@2x.png"; sourceTree = "<group>"; };
-		89D445B41757EE5B003E2B25 /* checkboxYes5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkboxYes5.png; path = ../../../../Downloads/Attachments_2013530/checkboxYes5.png; sourceTree = "<group>"; };
-		89D445B51757EE5B003E2B25 /* checkboxYes5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkboxYes5@2x.png"; path = "../../../../Downloads/Attachments_2013530/checkboxYes5@2x.png"; sourceTree = "<group>"; };
-		89D445BA1757EFF7003E2B25 /* checkboxNo6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkboxNo6.png; path = "../../../../Downloads/Attachments_2013530 (1)/checkboxNo6.png"; sourceTree = "<group>"; };
-		89D445BB1757EFF7003E2B25 /* checkboxNo6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkboxNo6@2x.png"; path = "../../../../Downloads/Attachments_2013530 (1)/checkboxNo6@2x.png"; sourceTree = "<group>"; };
-		89D445BC1757EFF7003E2B25 /* checkboxYes6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkboxYes6.png; path = "../../../../Downloads/Attachments_2013530 (1)/checkboxYes6.png"; sourceTree = "<group>"; };
-		89D445BD1757EFF7003E2B25 /* checkboxYes6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkboxYes6@2x.png"; path = "../../../../Downloads/Attachments_2013530 (1)/checkboxYes6@2x.png"; sourceTree = "<group>"; };
 		89F593E1174E8C57003F0608 /* bgCommercialResidential.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgCommercialResidential.png; sourceTree = "<group>"; };
 		89F593E2174E8C58003F0608 /* bgCommercialResidential@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgCommercialResidential@2x.png"; sourceTree = "<group>"; };
 		89F593E5174E8CAC003F0608 /* btnBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnBack.png; sourceTree = "<group>"; };
@@ -439,16 +425,6 @@
 		8989D25F17431419000F11BF /* images */ = {
 			isa = PBXGroup;
 			children = (
-				89D445BA1757EFF7003E2B25 /* checkboxNo6.png */,
-				89D445BB1757EFF7003E2B25 /* checkboxNo6@2x.png */,
-				89D445BC1757EFF7003E2B25 /* checkboxYes6.png */,
-				89D445BD1757EFF7003E2B25 /* checkboxYes6@2x.png */,
-				89D445B21757EE5B003E2B25 /* checkboxNo5.png */,
-				89D445B31757EE5B003E2B25 /* checkboxNo5@2x.png */,
-				89D445B41757EE5B003E2B25 /* checkboxYes5.png */,
-				89D445B51757EE5B003E2B25 /* checkboxYes5@2x.png */,
-				89C911CF17569D86002303B2 /* invoice_image.png */,
-				89C911CD17569BA7002303B2 /* pdfBackg.png */,
 				891E01891755257200FF53CE /* horizontalLine5.png */,
 				891E018A1755257200FF53CE /* horizontalLine5@2x.png */,
 				891E0181175520D700FF53CE /* popoverBg5.png */,
@@ -567,6 +543,10 @@
 				89674AD517572AB600461BC3 /* SignaturePopoverVC.m */,
 				89D445AF1757CA67003E2B25 /* InvoiceDiscountVC.h */,
 				89D445B01757CA67003E2B25 /* InvoiceDiscountVC.m */,
+				890D466C17A6EFDB00F85645 /* BasePopoverVC.h */,
+				890D466D17A6EFDB00F85645 /* BasePopoverVC.m */,
+				890D466F17A6F02400F85645 /* ConfirmationPopoverVC.h */,
+				890D467017A6F02500F85645 /* ConfirmationPopoverVC.m */,
 			);
 			name = popoverOptions;
 			sourceTree = "<group>";
@@ -781,16 +761,6 @@
 				891E018C1755257200FF53CE /* horizontalLine5@2x.png in Resources */,
 				891E018F1755292E00FF53CE /* popoverBgBottom5.png in Resources */,
 				891E01901755292E00FF53CE /* popoverBgBottom5@2x.png in Resources */,
-				89C911CE17569BA7002303B2 /* pdfBackg.png in Resources */,
-				89C911D017569D86002303B2 /* invoice_image.png in Resources */,
-				89D445B61757EE5B003E2B25 /* checkboxNo5.png in Resources */,
-				89D445B71757EE5B003E2B25 /* checkboxNo5@2x.png in Resources */,
-				89D445B81757EE5B003E2B25 /* checkboxYes5.png in Resources */,
-				89D445B91757EE5B003E2B25 /* checkboxYes5@2x.png in Resources */,
-				89D445BE1757EFF7003E2B25 /* checkboxNo6.png in Resources */,
-				89D445BF1757EFF7003E2B25 /* checkboxNo6@2x.png in Resources */,
-				89D445C01757EFF7003E2B25 /* checkboxYes6.png in Resources */,
-				89D445C11757EFF7003E2B25 /* checkboxYes6@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -847,6 +817,8 @@
 				89CE716C1755D32B009EE0DC /* customLabel.m in Sources */,
 				89674AD617572AB600461BC3 /* SignaturePopoverVC.m in Sources */,
 				89D445B11757CA67003E2B25 /* InvoiceDiscountVC.m in Sources */,
+				890D466E17A6EFDC00F85645 /* BasePopoverVC.m in Sources */,
+				890D467117A6F02500F85645 /* ConfirmationPopoverVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,11 +33,15 @@
 }
 
 -(void) viewDidAppear:(BOOL)animated {
-    notesField.text = @"Place notes and comments here";
-    notesField.textColor = [UIColor lightGrayColor];
-    [notesField setDelegate:self];
-    itemName = @"empty";
-    //vacOrFull = @"empty";
+    if ([self editMode]){
+        
+    } else {
+        notesField.text = @"Place notes and comments here";
+        notesField.textColor = [UIColor lightGrayColor];
+        [notesField setDelegate:self];
+        itemName = @"empty";
+        //vacOrFull = @"empty";
+    }
 }
 
 - (void)viewDidLoad

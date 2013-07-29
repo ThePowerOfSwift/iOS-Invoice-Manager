@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BasePopoverVC.h"
 
 @class OptionsMatressPopoverVC;
 
@@ -15,7 +16,7 @@
 - (void)updateMatressDataTable:(OptionsMatressPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsMatressPopoverVC : UIViewController <UITextViewDelegate> {
+@interface OptionsMatressPopoverVC : BasePopoverVC <UITextViewDelegate> {
     
     id <OptionsMatressPopoverVCDelegate> MVCDelegate;  // options view controller delegate
     

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomUIButton.h"
+#import "ConfirmationPopoverVC.h"
 
-@interface SecondVC : UIViewController {
+@interface SecondVC : UIViewController <ConfirmationPopoverVCDelegate> {
     IBOutlet UITextField *estimationDate;
     IBOutlet UITextField *ratePerSqFeet;
     IBOutlet UIView *hey;
@@ -19,10 +20,13 @@
 	UIImageView *drawImage;
 	BOOL mouseSwiped;
 	int mouseMoved;
+    
+    UIPopoverController *popover;
 }
 
 @property (assign, readwrite) IBOutlet UIView *hey;
 @property (assign, readwrite) IBOutlet UIImageView *selectedBtnBgThree;
+@property (nonatomic, assign) UIPopoverController *popover;
 
 -(IBAction) gotoNextView;
 -(IBAction) gotoLastView;

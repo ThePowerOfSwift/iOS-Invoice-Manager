@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BasePopoverVC.h"
 
 @class OptionsRepairPopoverVC;
 
@@ -14,7 +15,7 @@
 - (void)updateMatressDataTable:(OptionsRepairPopoverVC *)optionsMVC editType: (NSString*) editType withItem: (NSString *) item_name withCleanType: (NSString *) vac_or_full andQuantity: (NSInteger) quantity_arg andPrice: (float) item_price_arg andNotes:(NSString *) notesAboutRoom;
 @end
 
-@interface OptionsRepairPopoverVC : UIViewController <UITextViewDelegate> {
+@interface OptionsRepairPopoverVC : BasePopoverVC <UITextViewDelegate> {
     
     id <OptionsMatressPopoverVCDelegate> RVCDelegate;  // options view controller delegate
     

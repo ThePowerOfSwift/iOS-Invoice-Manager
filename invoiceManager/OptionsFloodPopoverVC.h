@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BasePopoverVC.h"
 
 @class OptionsFloodPopoverVC;
 
@@ -15,7 +16,7 @@
 - (void)updateFloodServicesDataTable:(OptionsFloodPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsFloodPopoverVC : UIViewController <UITextViewDelegate> {
+@interface OptionsFloodPopoverVC : BasePopoverVC <UITextViewDelegate> {
     
     id <OptionsFloodPopoverVCDelegate> FVCDelegate;  // options view controller delegate
     

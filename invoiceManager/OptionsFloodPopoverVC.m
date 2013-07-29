@@ -31,14 +31,18 @@
 }
 
 -(void) viewDidAppear:(BOOL)animated {
-    notesField.text = @"Place notes and comments here";
-    notesField.textColor = [UIColor lightGrayColor];
-    [notesField setDelegate:self];
-    itemName = @"empty";
-    //vacOrFull = @"empty";
-    
-    //[noOfItems setHidden:TRUE];
-    //[noOfItemsLabel setHidden:TRUE];
+    if ([self editMode]){
+        
+    } else {
+        notesField.text = @"Place notes and comments here";
+        notesField.textColor = [UIColor lightGrayColor];
+        [notesField setDelegate:self];
+        itemName = @"empty";
+        //vacOrFull = @"empty";
+        
+        //[noOfItems setHidden:TRUE];
+        //[noOfItemsLabel setHidden:TRUE];
+    }
 }
 
 - (void)viewDidLoad
@@ -57,26 +61,26 @@
 }
 
 /*
--(IBAction) showHumidAndBlowers: (id) sender {
-    [noOfItems setHidden:FALSE];
-    [noOfItemsLabel setHidden:FALSE];
-    [noOfItemsLabel setText:@"quantity"];
-    [noOfHours setHidden:TRUE];
-    [noOfHoursLabel setHidden:TRUE];
-}
-
--(IBAction) showOthers: (id) sender {
-    [noOfItemsLabel setText:@"rate per sq. feet ($/sq feet)"];
-    if ([[[sender titleLabel] text] isEqualToString:@"Water Extraction"] || [[[sender titleLabel] text] isEqualToString:@"Demolition"]){
-        [noOfItemsLabel setText:@"rate per hr ($/hr)"];
-    }
-    //NSLog();
-    [noOfItems setHidden:FALSE];
-    [noOfItemsLabel setHidden:FALSE];
-    [noOfHours setHidden:FALSE];
-    [noOfHoursLabel setHidden:FALSE];
-}
-*/
+ -(IBAction) showHumidAndBlowers: (id) sender {
+ [noOfItems setHidden:FALSE];
+ [noOfItemsLabel setHidden:FALSE];
+ [noOfItemsLabel setText:@"quantity"];
+ [noOfHours setHidden:TRUE];
+ [noOfHoursLabel setHidden:TRUE];
+ }
+ 
+ -(IBAction) showOthers: (id) sender {
+ [noOfItemsLabel setText:@"rate per sq. feet ($/sq feet)"];
+ if ([[[sender titleLabel] text] isEqualToString:@"Water Extraction"] || [[[sender titleLabel] text] isEqualToString:@"Demolition"]){
+ [noOfItemsLabel setText:@"rate per hr ($/hr)"];
+ }
+ //NSLog();
+ [noOfItems setHidden:FALSE];
+ [noOfItemsLabel setHidden:FALSE];
+ [noOfHours setHidden:FALSE];
+ [noOfHoursLabel setHidden:FALSE];
+ }
+ */
 
 -(IBAction) onSelectingType:(id)sender {
     [priceRateField setHidden:FALSE];
@@ -227,7 +231,7 @@
         newCell.price = price;
         [FVCDelegate updateFloodServicesDataTable:self editType:@"add" withServiceCell:newCell];
         //[FVCDelegate updateFloodDataTable:self editType:@"add" withItemName:nil withRate:0.0f withQuantity:0 withPrice:price andNotes:nil];
-         
+        
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
         [FVCDelegate updateFloodServicesDataTable:self editType:@"cancel" withServiceCell:nil];
         //[FVCDelegate updateFloodDataTable:self editType:@"cancel" withItemName:nil withRate:0.0f withQuantity:0 withQuantity2:0 withPrice:price andNotes:nil];

@@ -16,6 +16,7 @@
 
 @synthesize hey;
 @synthesize selectedBtnBgThree;
+@synthesize popover;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,8 +47,8 @@
                                    action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
-
-
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -154,16 +155,19 @@
     UIButton *btn = (UIButton*)sender;
     NSString *senderID = [btn restorationIdentifier];
     
+    InvoiceManager *invoiceMngr = [InvoiceManager sharedInvoiceManager];
+    
     if ([senderID isEqualToString:@"greenProducts"]){
         [selectedBtnBgThree setFrame:
          CGRectMake(99.0, selectedBtnBgThree.frame.origin.y, selectedBtnBgThree.frame.size.width, selectedBtnBgThree.frame.size.height)];
+        [invoiceMngr setUsingProductType:@"Green Products"];
     } else if ([senderID isEqualToString:@"blueProducts"]){
         [selectedBtnBgThree setFrame:
          CGRectMake(226.0, selectedBtnBgThree.frame.origin.y, selectedBtnBgThree.frame.size.width, selectedBtnBgThree.frame.size.height)];
+        [invoiceMngr setUsingProductType:@"Normal Products"];
     }
     [btn setTag:45];
     //[btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
 }
 
 // - - - - - - START of IBActions
@@ -182,37 +186,72 @@
 // change button background when user clicks it
 -(IBAction)onCustomTouchDown:(id)sender {
     /*NSLog(@"creating pdf..");
-    InvoiceManager *blah = [InvoiceManager sharedInvoiceManager];
-    [blah createPDFfromUIView:hey saveToDocumentsWithFileName:@"justASimplePdf.pdf"];
-    */
+     InvoiceManager *blah = [InvoiceManager sharedInvoiceManager];
+     [blah createPDFfromUIView:hey saveToDocumentsWithFileName:@"justASimplePdf.pdf"];
+     */
     InvoiceManager *invoiceMngr = [InvoiceManager sharedInvoiceManager];    // get invoice manager instance ( will be used to add/remove data )
     if ([sender activeBtn] == 0){
         [sender setBackgroundImage:[UIImage imageNamed:@"checkboxYes6.png"] forState:UIControlStateNormal];
-
+        
         [sender setActiveBtn:1];
         
         // save this into invoice manager ( create a 'service' object )
-        [invoiceMngr createServiceItem:[sender restorationIdentifier] withOrderVal:[sender tag]];        
+        [invoiceMngr createServiceItem:[sender restorationIdentifier] withOrderVal:[sender tag]];
         
         // print array ( for testing )
         /*NSMutableArray *hey2 = [invoiceMngr listOfServices];
-        for (int i = 0; i < [hey count]; i++){
-            //NSLog(@"SORT 2: i IS: %@", [[hey2 objectAtIndex:i] name]);
-        }*/
+         for (int i = 0; i < [hey count]; i++){
+         //NSLog(@"SORT 2: i IS: %@", [[hey2 objectAtIndex:i] name]);
+         }*/
         
     } else {
-        [sender setBackgroundImage:[UIImage imageNamed:@"checkboxNo6.png"] forState:UIControlStateNormal];
-
-        [sender setActiveBtn:0];
-        [invoiceMngr removeServiceItemWithName:[sender restorationIdentifier]];
+        
+        // confirm that the user actually wants to delete this service:
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
+        
+        ConfirmationPopoverVC *confirmPopover = (ConfirmationPopoverVC*) [storyboard instantiateViewControllerWithIdentifier:@"ConfirmationPopoverVC"];
+        
+        if (popover){
+            //NSLog(@"popover EXISTS !");
+            [popover setContentViewController:confirmPopover];
+        }else {
+            //NSLog(@"popover getting INITIALIZED ! !");
+            popover = [[UIPopoverController alloc] initWithContentViewController:confirmPopover];
+        }
+        
+        confirmPopover.confirmationDelegate = self; // set the popover's delegate to this ui vc (IMPORTANT!)
+        //confirmPopover.serviceSender = sender;
+        [confirmPopover setServiceSender:sender];
+        //NSLog(@"AAAAAAAAA %@", [[confirmPopover serviceSender] restorationIdentifier]);
+        [popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        
+        /*[sender setBackgroundImage:[UIImage imageNamed:@"checkboxNo6.png"] forState:UIControlStateNormal];
+         
+         [sender setActiveBtn:0];
+         [invoiceMngr removeServiceItemWithName:[sender restorationIdentifier]];*/
         
         // print array ( for testing )
-       /* NSMutableArray *hey2 = [invoiceMngr listOfServices];
-        for (int i = 0; i < [hey count]; i++){
-            NSLog(@"SORT 2: i IS: %@", [[hey2 objectAtIndex:i] name]);
-        }*/
+        /* NSMutableArray *hey2 = [invoiceMngr listOfServices];
+         for (int i = 0; i < [hey count]; i++){
+         NSLog(@"SORT 2: i IS: %@", [[hey2 objectAtIndex:i] name]);
+         }*/
         
     }
+}
+
+// receive confirmation whether or not to delete the service clicked
+-(void) sendConfirmation: (NSString*) answer forSender: (id) serviceSender {
+    InvoiceManager* invoiceMngr = [InvoiceManager sharedInvoiceManager];
+    if ([answer isEqualToString:@"yes"]){
+        [serviceSender setBackgroundImage:[UIImage imageNamed:@"checkboxNo6.png"] forState:UIControlStateNormal];
+        
+        [serviceSender setActiveBtn:0];
+        [invoiceMngr removeServiceItemWithName:[serviceSender restorationIdentifier]];
+    } else {
+        // do nothing
+    }
+    
+    [popover dismissPopoverAnimated:NO];
 }
 
 // saves the data currently displayed on the page

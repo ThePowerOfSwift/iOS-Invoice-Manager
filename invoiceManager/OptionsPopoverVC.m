@@ -32,28 +32,36 @@
 }
 
 -(void) viewDidAppear:(BOOL)animated {
-    // set up the notes field
-    notesField.text = @"Place notes and comments here";
-    notesField.textColor = [UIColor lightGrayColor];
-    [notesField setDelegate:self];
     
-    // init vars in case error occurs
-    roomName = @"";
-    notesAboutRoom = @"";
-    rLength = 0;
-    rWidth = 0;
-    squareFeet = 0;
-    price = 0;
-    priceRate = 0;
-    stairs = 0;
-    landings = 0;
-    stairsService = FALSE;
+    // NSLog(@" !! edit mode is %@", [self editMode]);
+    //NSLog([self editMode] ? @"Yes" : @"No");
+    if ([self editMode]){
+        
+    } else {
+        // set up the notes field
+        notesField.text = @"Place notes and comments here";
+        notesField.textColor = [UIColor lightGrayColor];
+        [notesField setDelegate:self];
+        
+        // init vars in case error occurs
+        roomName = @"";
+        notesAboutRoom = @"";
+        rLength = 0;
+        rWidth = 0;
+        squareFeet = 0;
+        price = 0;
+        priceRate = 0;
+        stairs = 0;
+        landings = 0;
+        stairsService = FALSE;
+    }
+    // NSLog(@"title of uivc is %@", [self title]);
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.    
+	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -181,7 +189,7 @@
         if (addonBiocide){
             priceRate = priceRate + 0.15f;
         }
-    
+        
         if (rLength && rWidth){
             squareFeet = (float) rLength * rWidth;
             [sqfeetLabel setText:[NSString stringWithFormat:@"%0.02f square feet", squareFeet]];
@@ -197,7 +205,7 @@
 
 -(IBAction) saveOrCancel: (id) sender {
     notesAboutRoom = notesField.text;
-        
+    
     if ([[sender restorationIdentifier] isEqualToString:@"save"]){
         // if stairs/landings was selected
         if (stairsService){

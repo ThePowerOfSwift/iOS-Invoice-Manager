@@ -13,6 +13,8 @@
 @end
 
 @implementation InvoiceVC
+
+@synthesize pdfData;
 @synthesize mainView, test;
 @synthesize signatureView;
 
@@ -36,9 +38,9 @@
 }
 
 /*-(void) viewDidAppear:(BOOL)animated {
-    [mainView setBackgroundColor:[UIColor clearColor]];
-    [mainView setOpaque:NO];
-}*/
+ [mainView setBackgroundColor:[UIColor clearColor]];
+ [mainView setOpaque:NO];
+ }*/
 
 - (void)viewDidLoad
 {
@@ -64,15 +66,15 @@
 	// Do any additional setup after loading the view.
     // for signature capture BELOW
     /*drawImage = [[UIImageView alloc] initWithImage:nil];
-	drawImage.frame = signatureView.frame;
-	[signatureView addSubview:drawImage];
-	signatureView.backgroundColor = [UIColor lightGrayColor];
-	mouseMoved = 0;*/
+     drawImage.frame = signatureView.frame;
+     [signatureView addSubview:drawImage];
+     signatureView.backgroundColor = [UIColor lightGrayColor];
+     mouseMoved = 0;*/
     // for signature capture ABOVE
 }
 
 -(void) viewDidDisappear:(BOOL)animated {
-    [self clearView];    
+    [self clearView];
 }
 
 -(void) clearView {
@@ -93,12 +95,12 @@
     miscellaneousDiscount = 0;
     floodDiscount = 0;
     
+    discountedCarpetPrice = 0;
     discountedUpholsteryPrice = 0;
     discountedMattressPrice = 0;
+    discountedAreaRugsPrice = 0;
     discountedMiscePrice = 0;
     discountedFloodPrice = 0;
-    discountedCarpetPrice = 0;
-    discountedAreaRugsPrice = 0;
     
     [self createInvoice];
 }
@@ -114,52 +116,40 @@
     CGFloat pdfX = 53.0;
     CGFloat pdfY = 382.0;
     
-    // START PDF CREATION
-    UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/blahblah.pdf", CGRectZero, nil);
+    ///pdfData = [NSMutableData dataWithCapacit
+    
+    // start drawing in pdf context
+    //UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/MightyCleanInvoice.pdf", CGRectZero, nil);
+    UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
+    
     //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 1753, 1240), nil);
-    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 768.0, 1024.0), nil);
-    //[self drawText];
-    //NSLog(@"width: %f, %f", pageSize.width, pageSize.height);
-    //[self drawText:@"Hello world2s" inFrame:CGRectMake(40, 80, 100, 50) withFontSize:223.0f];
-    //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 500, 1000), nil);
-    //[self drawText:@"Hello world" inFrame:CGRectMake(40, 80, 100, 80)];
-    //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 500, 1000), nil);
-    //[self drawText:@"Hello world" inFrame:CGRectMake(40, 80, 100, 80)];
-    //[self drawText:@"Hello world" inFrame:CGRectMake(40, 80, 100, 1650)];
+    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0.0, 0.0, 768.0, 1024.0), nil);
     
-    //Draw an image
-    //[self drawImage];
-    //done = YES;
-    //}
-    //while (!done);
-    [self drawImage:@"pdfBackg.png" withRect:CGRectMake(0.0, 0.0, 768.0f, 1024.0f)];
-    [self drawImage:@"invoice_image" withRect:CGRectMake(40.0, 40.0, 174.0f, 35.0f)];
+    // draw the mighty clean logo
+    //[self drawImage:@"invoice_image" withRect:CGRectMake(40.0, 40.0, 174.0f, 35.0f)];
+    [self drawText:[NSString stringWithFormat:@"Invoice "] inFrame:CGRectMake(39.0, 132.0, 300.0f, 100.0f) withFontSize:60.0];
     
+    CGFloat fontSize = 33.0f;
+    //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(0.0, 100.0, 300.0f, 100.0f) withFontSize:fontSize];
+    //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(200.0, 1115.0, 300.0f, 100.0f) withFontSize:35.0f];
+    //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(400.0, 1114.0, 300.0f, 100.0f) withFontSize:35.0f];
+    //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(0.0, 100.0, 300.0f, 100.0f) withFontSize:16.0];
     
-    /*
-    [self drawImage:@"horizontalLine5.png" withRect:CGRectMake(0.0, 100.0, 500.0f, 5.0f)];
-    [self drawImage:@"horizontalLine5.png" withRect:CGRectMake(0.0, 200.0, 500.0f, 5.0f)];
-    [self drawImage:@"horizontalLine5.png" withRect:CGRectMake(0.0, 300.0, 500.0f, 5.0f)];
-    [self drawImage:@"horizontalLine5.png" withRect:CGRectMake(0.0, 400.0, 500.0f, 5.0f)];
-    [self drawImage:@"horizontalLine5.png" withRect:CGRectMake(0.0, 500.0, 500.0f, 5.0f)];
-     */
+    // Draw Invoice Text:
+    [self drawText:[NSString stringWithFormat:@"From: Mighty Clean 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 \n Address \n Edmonton, Alberta "] inFrame:CGRectMake(40.0, 200.0, 300.0f, 100.0f) withFontSize:16.0];
     
-    // Mighty Clean Invoice Address: 
-    [self drawText:[NSString stringWithFormat:@"From: Mighty Clean 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 \n Address \n Edmonton, Alberta"] inFrame:CGRectMake(40.0, 200.0, 300.0f, 100.0f) withFontSize:16.0];
-    // Customer Invoice Address:
+    //NSLog(@"first name: %@", [invMngr customerFirstName]);
+    NSLog(@"first name: %@", [invMngr customerLastName]);
+    NSLog(@"first name: %@", [invMngr customerAddressOne]);
+    NSLog(@"first name: %@", [invMngr customerEmail]);
     
-    [self drawText:[NSString stringWithFormat:@"To: %@ %@ \n %@\n email: %@\n haha \n 2 \n 3 \n 4 \n 5 \n 6 \n 7 \n 8", [invMngr customerFirstName], [invMngr customerLastName], [invMngr
-        customerAddressOne], [invMngr customerEmail]] inFrame:CGRectMake(40.0, 300.0, 300.0f, 100.0f) withFontSize:16.0];
+    // Draw Customer Invoice Address:
+    [self drawText:[NSString stringWithFormat:@"To: %@ %@ \n %@\n email: %@\n haha \n 2 \n 3 \n 4 \n 5 \n 6 \n 7 \n 8 ", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerEmail]] inFrame:CGRectMake(40.0, 300.0, 300.0f, 100.0f) withFontSize:16.0];
     
-    // NSInteger currentPage = 0;
-    
-    // [self drawImage:@"mightyCleanCarpetCareLogo.png" withRect:CGRectMake(430.0, 35.0, 313.0f, 186.0f)]; // in the middle ish
+    // Draw the Mighty Clean logo
     [self drawImage:@"mightyCleanCarpetCareLogo.png" withRect:CGRectMake(425.0, 35.0, 313.0f, 186.0f)];
     
-    // [self drawImage:@"horizontalLine5.png" withRect:CGRectMake(0.0, 210.0, 500.0f, 5.0f)];
-    //[mainView setBackgroundColor:[UIColor whiteColor]];
-    //[self.view setBackgroundColor:[UIColor whiteColor]];
-    
+    // set the subtotal of each service to 0
     [self setSubtotalAreaRugsPrice:0];
     [self setSubtotalCarpetPrice:0];
     [self setSubtotalFloodPrice:0];
@@ -167,403 +157,535 @@
     [self setSubtotalMiscePrice:0];
     [self setSubtotalUpholsteryPrice:0];
     
+    /* iterate through each service */
     for (int i = 0; i < [[invMngr listOfServices] count]; i++){
-        //NSLog(@"printout: %@", [[[invMngr listOfServices] objectAtIndex:i] name]);
         ServiceItem *item = [[invMngr listOfServices] objectAtIndex:i];
         ServiceTypeViewController *vc = (ServiceTypeViewController*)[[[invMngr listOfServices] objectAtIndex:i] serviceVC];
         
-        UILabel *serviceNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(posX, posY, 250.0f, 38.0f)];
-        UILabel *serviceNameLabelpdf = [[UILabel alloc] initWithFrame: CGRectMake(pdfX, pdfY, 250.0f, 38.0f)];
+        //NSLog(@"this is service %u", i);
         
-        [invoiceSubviews addObject:serviceNameLabel];       // add to an array
-        [invoiceSubviews addObject:serviceNameLabelpdf];
+        /* Print the service name on screen and in pdf context */
+        [self printServiceNameAtX:posX AtY:posY AtPdfX:pdfX AtPdfY:pdfY withServiceName:[item name]];
+        //NSLog(@"Print service %@ at %f, %f", [item name], pdfX, pdfY);
         
-        [serviceNameLabel setText:[NSString stringWithFormat:@"%@ service", [item name]]];
-        [serviceNameLabel setFont:[UIFont systemFontOfSize:25.0f]];
-        [serviceNameLabelpdf setText:[NSString stringWithFormat:@"%@ service", [item name]]];
-        [serviceNameLabelpdf setFont:[UIFont systemFontOfSize:25.0f]];
-        //[self.view addSubview:serviceNameLabel];
-        [mainView addSubview:serviceNameLabel];
-        [self drawText:[NSString stringWithFormat:@"%@ service", [item name]] inFrame:CGRectMake(pdfX, pdfY, 250.0f, 38.0f) withFontSize:16.0f];
+        /* Draw Add Discount Button to the screen ( NOT TO PDF )*/
+        [self printDiscountButtonAtX:(posX+400.0) AtY:posY withServiceName:[item name]];
+        //NSLog(@"-----Creating BUTTON for %@", [item name]);
         
-        // SUBTOTAL SERVICE PRICE LABEL:
-        UILabel *subtotalServiceLabel = [[UILabel alloc] initWithFrame: CGRectMake(posX + 550, posY, 250.0f, 38.0f)];
-        UILabel *subtotalServiceLabelpdf = [[UILabel alloc] initWithFrame: CGRectMake(pdfX + 550, pdfY, 150.0f, 70.0f)];
-        
-        // [subtotalServiceLabelpdf retain];
-        
-        [invoiceSubviews addObject:subtotalServiceLabel];
-        [invoiceSubviews addObject:subtotalServiceLabelpdf];
-        
-        [subtotalServiceLabel setText:[NSString stringWithFormat:@"$%.02f",0.0f ]];
-        
-        [mainView addSubview:subtotalServiceLabel];
-        // THE FOLLOWING IS WRITTEN MUCH LATERR IN THIS CODE WHEN ITS ACTUALLY CALCULATED ! ____ ******
-        //[self drawText:[NSString stringWithFormat:@"%.02f", 0.0f] inFrame:subtotalServiceLabelpdf.frame withFontSize:16.0f];
-        
-        
-        //UIButton *addDiscount = [[UIButton alloc] initWithFrame:CGRectMake(200.0, 200.0, 139.0f, 43.0f)];
-        UIButton *addDiscount = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [addDiscount setFrame:CGRectMake(posX + 335.0, posY, 139.0f, 43.0f)];
-        [addDiscount setTitle:@"Add Discount" forState:UIControlStateNormal];
-        [addDiscount setRestorationIdentifier:[item name]];
-        //NSLog(@">>>> item name is %@", [item name]);
-        [addDiscount addTarget:self action:@selector(displayDiscountPopover:)
-              forControlEvents:UIControlEventTouchDown];
-        [mainView addSubview:addDiscount];
-        //[invoiceSubviews addObject:addDiscount];
-        
-        //[self drawText:@"asdf asdf asdf asd" inFrame:CGRectMake(0,0,300,50)]; // NEW ADDITION ****
-        //posX = posX - 10.0;
+        // increase current y position
         posY = posY + 45.0;
-        pdfY = pdfY + 45.0;
+        pdfY = pdfY + 5.0;
         
-        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(posX, posY, 698.0f, 4.0f)];
-        UIImageView *linepdf = [[UIImageView alloc] initWithFrame:CGRectMake(pdfX, pdfY, 698.0f, 4.0f)];
+        /* Draw horizontal line */
+        [self printHorizLineBelowX:posX Y:posY pdfX:(pdfX - 8.0) pdfY:(pdfY - 23.0)];
+        // substracted some pixels cause drawing the image doesn't render at proper coordinates ( should not affect flow as pdfY is not affected )
+        //NSLog(@"Print horizontal line at %f, %f", pdfX, pdfY);
         
-        [line setImage:[UIImage imageNamed:@"horizontalLine5.png"]];
-        [linepdf setImage:[UIImage imageNamed:@"horizontalLine5.png"]];
+        // adjust the scroll view / extend if necessary
+        [self adjustScreenSize_CurrentY:posY];
+        // adjust the pdf pages, if necessary
+        [self adjustPdfPages_currentPdfY:&pdfY];
         
-        [invoiceSubviews addObject:line];
-        [invoiceSubviews addObject:linepdf];
-        
-        [mainView addSubview:line];
-        
-        posX = posX + 50.0;
-        posY = posY + 15.0;
-        
-        pdfX = pdfX + 50.0;
-        pdfY = pdfY + 15.0;
-        
-        /*if ((posY + 150) > mainView.frame.size.height){
-            NSLog(@"increasing scrollviewer by 100 .. ");
-            [mainView setContentSize:CGSizeMake(mainView.frame.size.width, mainView.frame.size.height + 300)];
-        }*/
-        
+        /* get the array of all data cells of service 'i', iterate through it and go through all subservices */
         NSMutableArray *dataCellArray = [vc serviceDataCellArray];
-        float priceOfService = 0;
-        // for each data cell..
+        //float priceOfService = 0;
+        
+        posY += 15.0;
+        pdfY += 55.0;
+        //NSLog(@" -- starting to print subservices at %f", pdfY);
+        
+        // for each data cell of service 'i'
         for (int j = 0; j < [dataCellArray count]; j++){
             ServiceDataCell *data_cell = [dataCellArray objectAtIndex:j];
-            UILabel *serviceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(posX, posY, 520.0f, 70.0f)];
-            UILabel *serviceDataLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfX, pdfY, 520.0f, 70.0f)];
+            [self printSubservice:data_cell PosX:posX PosY:posY PdfX:pdfX PdfY:pdfY];
+            posY += 75.0;
+            pdfY += 50.0;
             
-            [invoiceSubviews addObject:serviceDataLabel];
-            [invoiceSubviews addObject:serviceDataLabelpdf];
-
-            [serviceDataLabel setNumberOfLines:0];  // allows for multiline
-            [serviceDataLabel setFont:[UIFont systemFontOfSize:17.0f]];
+            // adjust the scroll view / extend if necessary
+            [self adjustScreenSize_CurrentY:posY];
+            // adjust the pdf pages, if necessary
+            [self adjustPdfPages_currentPdfY:&pdfY];
             
-            [serviceNameLabelpdf setNumberOfLines:0];
-            [serviceNameLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
-            
-            //NSLog(@"IT IS UPHOLSTERY");
-            NSString *servicetype = [data_cell serviceType];
-            if ([servicetype isEqualToString:@"carpet"]){
-                if ([[data_cell itemAttribute] isEqualToString:@"Room"] ){
-                    
-                    [serviceDataLabel setText:[NSString stringWithFormat: @"Room: %@, Area: %.02fx%.02f, Rate: $%.02f\naddons: %s%s%s",[data_cell name] , [data_cell rlength], [data_cell rwidth], [data_cell priceRate], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ]];
-                    [self drawText:[NSString stringWithFormat: @"Room: %@, Area: %.02fx%.02f, Rate: $%.02f\naddons: %s%s%s",[data_cell name] , [data_cell rlength], [data_cell rwidth], [data_cell priceRate], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ] inFrame:serviceDataLabelpdf.frame withFontSize:16.0f];
-                } else {
-                    [serviceDataLabel setText:[NSString stringWithFormat: @"%@, # of stairs: %u, # of landings: %u",[data_cell name] ,
-                                               [data_cell quantity], [data_cell quantity2] ]];
-                    
-                    [self drawText:[NSString stringWithFormat: @"%@, # of stairs: %u, # of landings: %u",[data_cell name] ,
-                                    [data_cell quantity], [data_cell quantity2] ] inFrame:serviceDataLabelpdf.frame withFontSize:16.0f];
-                }
-            } else if ([servicetype isEqualToString:@"upholstery"]){
-                
-                    [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Material: %@\nClean Type: %@, quantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell materialType], [data_cell vacOrFull], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ]];
-                
-                    [self drawText:[NSString stringWithFormat: @"Item: %@, Material: %@\nClean Type: %@, quantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell materialType], [data_cell vacOrFull], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ] inFrame:serviceDataLabelpdf.frame withFontSize:16.0f];
-                
-            } else if ([servicetype isEqualToString:@"mattress"]){
-                [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Clean Type: %@\nquantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell vacOrFull], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ]];
-                
-                [self drawText:[NSString stringWithFormat: @"Item: %@, Clean Type: %@\nquantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell vacOrFull], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ] inFrame:serviceDataLabelpdf.frame withFontSize:16.0f];
-                
-            } else if ([servicetype isEqualToString:@"miscellaneous"]){
-                
-                [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Price per item: %.02f\nquantity: %u",[data_cell name] , [data_cell priceRate], [data_cell quantity] ]];
-                
-                [self drawText:[NSString stringWithFormat: @"Item: %@, Price per item: %.02f\nquantity: %u",[data_cell name] , [data_cell priceRate], [data_cell quantity] ] inFrame:serviceDataLabelpdf.frame withFontSize:16.0f];
-                
-            } else if ([servicetype isEqualToString:@"areaRugs"]){
-                
-                [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Material: %@\nquantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell materialType], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ]];
-                
-                [self drawText:[NSString stringWithFormat: @"Item: %@, Material: %@\nquantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell materialType], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ] inFrame:serviceDataLabelpdf.frame withFontSize:16.0f];
-                
-            } else if ([servicetype isEqualToString:@"floodcleanup"]){
-                
-                if ([[data_cell name] isEqualToString:@"Blowers"] || [[data_cell name] isEqualToString:@"Dehumidifiers"]){
-                    
-                    [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Rate per day: %.02f\n# of days: %u, quantity: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity], [data_cell quantity2]]];
-                    
-                    [self drawText:[NSString stringWithFormat: @"Item: %@, Rate per day: %.02f\n# of days: %u, quantity: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity], [data_cell quantity2]] inFrame:serviceDataLabelpdf.frame withFontSize:16.0f];
-                    
-                } else if ([[data_cell name] isEqualToString:@"Biocide Application"]){
-                    
-                    [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Rate per sq.ft.: %.02f\nsquare feet: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity] ]];
-                    
-                    [self drawText:[NSString stringWithFormat: @"Item: %@, Rate per sq.ft.: %.02f\nsquare feet: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity] ] inFrame:serviceDataLabelpdf.frame withFontSize:16.0f];
-                    
-                } else if ([[data_cell name] isEqualToString:@"Water Extraction"] || [[data_cell name] isEqualToString:@"Demolition"]){
-                    [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Rate per hr: %.02f\n# of hours: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity] ]];
-                    
-                    [self drawText:[NSString stringWithFormat: @"Item: %@, Rate per hr: %.02f\n# of hours: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity] ] inFrame:serviceDataLabelpdf.frame withFontSize:16.0f];
-                }
-                
-
-            }
-            /*
-            name = upholstery item name
-            materialType = leather, synthetic, natural, specialty
-            vacOrFull = (power-vac only | full clean)
-            quantity = ..
-            price = full price ( quantity * price per item, which is hardcoded )
-            */
-            //[self.view addSubview:serviceDataLabel];
-            [mainView addSubview:serviceDataLabel];
-            //NSLog(@"OUT: %@", serviceDataLabel.text);
-            //NSLog(@"height of frame is %f, posY is %f", mainView.frame.size.height, posY);
-            //[self drawText:@"asdf" inFrame:CGRectMake(93.0, 432.0, 320.0f, 40.0f)];
-            
-            //[self drawText:serviceDataLabel.text inFrame:serviceDataLabel.frame]; // NEW ADDITION ****
-            
-            posX = posX + 505.0;
-            posY = posY - 10.0;
-            pdfX = pdfX + 505.0;
-            pdfY = pdfY - 10.0;
-            
-            //NSLog(@"pdf y for price is: %f, %@", pdfY, );
-            UILabel *priceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(posX, posY, 150.0f, 40.0f)];
-            UILabel *priceDataLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfX, pdfY, 150.0f, 40.0f)];
-            
-            [priceDataLabel setFont:[UIFont systemFontOfSize:17.0f]];
-            [priceDataLabel setTextAlignment:NSTextAlignmentCenter];
-            [priceDataLabel setText:[NSString stringWithFormat:@"$%.02f", [data_cell price]]];
-            
-            [priceDataLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
-            [priceDataLabelpdf setTextAlignment:NSTextAlignmentCenter];
-            [priceDataLabelpdf setText:[NSString stringWithFormat:@"$%.02f", [data_cell price]]];
-            
-            [invoiceSubviews addObject:priceDataLabel];
-            [invoiceSubviews addObject:priceDataLabelpdf];
-
-            [mainView addSubview:priceDataLabel];
-            [self drawText:[NSString stringWithFormat:@"$%.02f", [data_cell price]] inFrame:CGRectMake(pdfX, pdfY, priceDataLabelpdf.frame.size.width, priceDataLabelpdf.frame.size.height) withFontSize:16.0f];
-            
-            // subtotal includes prices for ALL services
-            //subtotal = subtotal + [data_cell price];
-            if ([[item name] isEqualToString:@"carpet"]){
-                subtotalCarpetPrice += [data_cell price];
-                NSLog(@"carpet discount is %f", carpetDiscount);
-                discountedCarpetPrice = subtotalCarpetPrice - [self carpetDiscount];
-                [subtotalServiceLabel setText:[NSString stringWithFormat:@"$%.02f",discountedCarpetPrice]];
-                if (([dataCellArray count] - 1) == j){
-                    [self drawText:[NSString stringWithFormat:@"$%.02f", discountedCarpetPrice] inFrame:subtotalServiceLabelpdf.frame withFontSize:16.0f];
-                }
-                
-
-            } else if([[item name] isEqualToString:@"upholstery"]){
-                subtotalUpholsteryPrice += [data_cell price];
-                discountedUpholsteryPrice = subtotalUpholsteryPrice - upholsteryDiscount;
-                [subtotalServiceLabel setText:[NSString stringWithFormat:@"$%.02f",discountedUpholsteryPrice]];
-                if (([dataCellArray count] - 1) == j){
-                    [self drawText:[NSString stringWithFormat:@"$%.02f", discountedUpholsteryPrice] inFrame:subtotalServiceLabelpdf.frame withFontSize:16.0f];
-                }
-            } else if([[item name] isEqualToString:@"mattress"]){
-                subtotalMattressPrice += [data_cell price];
-                discountedMattressPrice = subtotalMattressPrice - mattressDiscount;
-                [subtotalServiceLabel setText:[NSString stringWithFormat:@"$%.02f",discountedMattressPrice]];
-                if (([dataCellArray count] - 1) == j){
-                    [self drawText:[NSString stringWithFormat:@"$%.02f", discountedMattressPrice] inFrame:subtotalServiceLabelpdf.frame withFontSize:16.0f];
-                }
-            } else if([[item name] isEqualToString:@"miscellaneous"]){
-                subtotalMiscePrice += [data_cell price];
-                discountedMiscePrice = subtotalMiscePrice - miscellaneousDiscount;
-                [subtotalServiceLabel setText:[NSString stringWithFormat:@"$%.02f",discountedMiscePrice]];
-                if (([dataCellArray count] - 1) == j){
-                    [self drawText:[NSString stringWithFormat:@"$%.02f", discountedMiscePrice] inFrame:subtotalServiceLabelpdf.frame withFontSize:16.0f];
-                }
-            } else if([[item name] isEqualToString:@"areaRugs"]){
-                subtotalAreaRugsPrice += [data_cell price];
-                discountedAreaRugsPrice = subtotalAreaRugsPrice - areaRugsDiscount;
-                [subtotalServiceLabel setText:[NSString stringWithFormat:@"$%.02f",discountedAreaRugsPrice]];
-                if (([dataCellArray count] - 1) == j){
-                    [self drawText:[NSString stringWithFormat:@"$%.02f", discountedAreaRugsPrice] inFrame:subtotalServiceLabelpdf.frame withFontSize:16.0f];
-                }
-            } else if([[item name] isEqualToString:@"floodcleanup"]){
-                subtotalFloodPrice += [data_cell price];
-                discountedFloodPrice = subtotalFloodPrice - floodDiscount;
-                [subtotalServiceLabel setText:[NSString stringWithFormat:@"$%.02f",discountedFloodPrice]];
-                if (([dataCellArray count] - 1) == j){
-                    [self drawText:[NSString stringWithFormat:@"$%.02f", discountedFloodPrice] inFrame:subtotalServiceLabelpdf.frame withFontSize:16.0f];
-                }
-            }
-            
-            // IF IT IS AT ITS LAST ITERATION..
+            // if j is the second last item in the dataCellArray array, then print the discount, if any
             if (([dataCellArray count] - 1) == j){
-                NSLog(@"LAST ITERATION FOR %@", [item name]);
-                posY = posY + 50.0;
-                pdfY = pdfY + 50.0;
-                UILabel *discountLabel = [[UILabel alloc] initWithFrame:CGRectMake(posX, posY, 150.0f, 40.0f)];
-                UILabel *discountLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfX, pdfY, 150.0f, 40.0f)];
+                [self printSubserviceDiscountService:[data_cell serviceType] PosX:posX PosY:posY PdfX:pdfX PdfY:pdfY];
                 
-                [discountLabel setFont:[UIFont systemFontOfSize:17.0f]];
-                [discountLabel setTextAlignment:NSTextAlignmentCenter];
-
-                
-                [discountLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
-                [discountLabelpdf setTextAlignment:NSTextAlignmentCenter];
-                
-                
-                [invoiceSubviews addObject:discountLabel];
-                [invoiceSubviews addObject:discountLabelpdf];
-                
-                NSString *discountToDisplay = @"";
-                if ([[item name] isEqualToString:@"carpet"]){
-                    discountToDisplay = [NSString stringWithFormat:@"-$%.02f", [self carpetDiscount]];
-                } else if([[item name] isEqualToString:@"upholstery"]){
-                    discountToDisplay = [NSString stringWithFormat:@"-$%.02f", [self upholsteryDiscount]];
-                } else if([[item name] isEqualToString:@"mattress"]){
-                    discountToDisplay = [NSString stringWithFormat:@"-$%.02f", [self mattressDiscount]];
-                } else if([[item name] isEqualToString:@"miscellaneous"]){
-                    discountToDisplay = [NSString stringWithFormat:@"-$%.02f", [self miscellaneousDiscount]];
-                } else if([[item name] isEqualToString:@"areaRugs"]){
-                    discountToDisplay = [NSString stringWithFormat:@"-$%.02f", [self areaRugsDiscount]];
-                } else if([[item name] isEqualToString:@"floodcleanup"]){
-                    discountToDisplay = [NSString stringWithFormat:@"-$%.02f", [self floodDiscount]];
-                }
-                
-                [discountLabel setText:discountToDisplay];
-                [self drawText:discountToDisplay inFrame:CGRectMake(pdfX, pdfY, discountLabelpdf.frame.size.width, discountLabelpdf.frame.size.height) withFontSize:16.0f];
-                
-                [mainView addSubview:discountLabel];
-                
+                posY += 50.0;
+                pdfY += 20.0;
             }
             
-            // add to the price of the current service
-            priceOfService = priceOfService + [data_cell price];
-            
-            
-            
-            posY = posY + 10.0;
-            pdfY = pdfY + 10.0;
-            
-            posX = posX - 505.0;
-            pdfX = pdfX - 505.0;
-            
-            posY = posY + 80.0;
-            pdfY = pdfY + 80.0;
-            
-            // start new pdf page if its too close to the edge
-            if ( (pdfY + 100) > 1024 ){
-                pdfY = 130;
-                UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 768.0, 1024.0), nil);
-            }
-            
-            // ******************************
-            if ((posY + 200) > signatureImageView.frame.size.height){
-                //NSLog(@"increasing scrollviewer by 100 .. ");
-                [mainView setContentSize:CGSizeMake(mainView.frame.size.width, posY + 600)];
-                //[signatureImageView setFrame:CGRectMake(28.0f, posY + 200, 331.0f, 257.0f)];
-                CGFloat maxY = posY + 600;
-                [signatureImageView setFrame:CGRectMake(28.0f, maxY - 446.0f,331.0f, 257.0f)];
-                [signaturebtn setFrame:CGRectMake(28.0f + 331.0f + 30.0f, maxY - 246.0f, 190.0f, 43.0f)];
-                [backbtn setFrame:CGRectMake(47.0f, maxY - 107, 286.0f, 62.0f)];
-            }
-            
+            // adjust the scroll view / extend if necessary
+            [self adjustScreenSize_CurrentY:posY];
+            // adjust the pdf pages, if necessary
+            [self adjustPdfPages_currentPdfY:&pdfY];
         }
         
-        posX = posX - 50.0;
-        pdfX = pdfX - 50.0;
-        
-        // ******************************
-        if ((posY + 200) > signatureImageView.frame.size.height){
-            //NSLog(@"increasing scrollviewer by 100 .. ");
-            [mainView setContentSize:CGSizeMake(mainView.frame.size.width, posY + 600)];
-            //[signatureImageView setFrame:CGRectMake(28.0f, posY + 200, 331.0f, 257.0f)];
-            CGFloat maxY = posY + 600;
-            [signatureImageView setFrame:CGRectMake(28.0f, maxY - 446.0f,331.0f, 257.0f)];
-            [signaturebtn setFrame:CGRectMake(28.0f + 331.0f + 30.0f, maxY - 246.0f, 190.0f, 43.0f)];
-            [backbtn setFrame:CGRectMake(47.0f, maxY - 107, 286.0f, 62.0f)];
+        // if there are any subservices, print their subtotal and increase y
+        if ([dataCellArray count]){
+            [self printServiceTotal_PosX:posX PosY:posY PdfX:pdfX PdfY:pdfY ServiceName:[item name]];
+            posY += 50.0;
+            pdfY += 50.0;
+            
+            // adjust the scroll view / extend if necessary
+            [self adjustScreenSize_CurrentY:posY];
+            // adjust the pdf pages, if necessary
+            [self adjustPdfPages_currentPdfY:&pdfY];
+            
         }
-        if ( (pdfY + 100) > 1024 ){
-            pdfY = 130.0;
-            UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 768.0, 1024.0), nil);
-        }
-        
-        //UIImageView *line2 = [[UIImageView alloc] initWithFrame:CGRectMake(posX, posY, 698.0f, 4.0f)];
-        //[line2 setImage:[UIImage imageNamed:@"horizontalLine5.png"]];
-        //[self.view addSubview:line2];
-        //[mainView addSubview:line2];
-        
-        //[self drawImage:@"horizontalLine5.png" withRect:line2.frame];
-
-        
-        
-        /*for (int j = 0; j < [[aa serviceDataCellArray] count]; j++){
-            NSLog(@"name: %@", [[[aa serviceDataCellArray] objectAtIndex:j] name]);
-        }*/
-        
+        // increase y for the next service
+        posY += 20.0;
+        //pdfY += 20.0;
     }
     
-    // Close the PDF context and write the contents out.
+    posY += 30.0;
+    pdfY += 30.0;
+    // print subtotal, tax and total..
+    [self printTotal_PosX:posX PosY:posY PdfX:pdfX PdfY:pdfY];
+    
+    // adjust the scroll view / extend if necessary
+    [self adjustScreenSize_CurrentY:posY];
+    // adjust the pdf pages, if necessary
+    [self adjustPdfPages_currentPdfY:&pdfY];
+    
+    // extend screen/pdf
+    posY += 70.0;
+    pdfY += 70.0;
+    
+    // adjust the scroll view / extend if necessary
+    [self adjustScreenSize_CurrentY:posY];
+    // adjust the pdf pages, if necessary
+    // create a new pdf page on which to write the order information
+    [self adjustNewPdfPage:&pdfY];
+    
+    // print other general order info
+    [self printOrderInfo_ScreenPos:CGPointMake(posX, posY) PDFPos:CGPointMake(pdfX, pdfY)];
+    
+    posY += 800.0;
+    pdfY += 800.0;
+    
+    // adjust the scroll view / extend if necessary
+    [self adjustScreenSize_CurrentY:posY];
+    // adjust the pdf pages, if necessary
+    //[self adjustPdfPages_currentPdfY:&pdfY];
+    
+    // end drawing in pdf context
     UIGraphicsEndPDFContext();
-    
-    //mainView.frame = CGRectIntegral(mainView.frame);
-    
-
-    
-    //[MFMailComposeViewController canSendMail];
-    /*MFMailComposeViewController *vc = [[[MFMailComposeViewController alloc] init] autorelease];
-    [vc setSubject:@"my pdf"];
-    [vc addAttachmentData:pdfData mimeType:@"application/pdf" fileName:@"SomeFile.pdf"];
-    
-    MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-    [controller addAttachmentData:pdfData mimeType:@"application/pdf" fileName:@"blah.pdf"];
-    controller.mailComposeDelegate = self;
-    [controller setSubject:@"My Subject"];
-    [controller setMessageBody:@"Hello there." isHTML:NO];
-    if (controller) {
-        //[self presentModalViewController:controller animated:YES];
-        [self presentViewController:controller animated:YES completion:nil];
-    }
-    [controller release];
-    
-    if ([MFMailComposeViewController canSendMail]) {
-        // Show the composer
-        NSLog(@"IT IS CONFIGURED");
-    } else {
-        // Handle the error
-        NSLog(@"IT IS NOT CONFIGURED");
-    }*/
 }
+
+-(void) printOrderInfo_ScreenPos: (CGPoint) pos PDFPos: (CGPoint) pdfpos {
+    //CGFloat pdfFontSize = 15.0f;
+    //CGFloat screenFontSize = 21.0f;
+    UILabel* customerTitleLabel = [[UILabel alloc] initWithFrame: CGRectMake(pos.x, pos.y, 250.0f, 38.0f)];
+    
+    // add to an array of subviews
+    [invoiceSubviews addObject:customerTitleLabel];
+    
+    // create label for the service subtotal
+    [customerTitleLabel setText:[NSString stringWithFormat:@"Order Information "]];
+    [customerTitleLabel setFont:[UIFont systemFontOfSize:21.0f]];
+    
+    pos.y += 40.0;
+    
+    UILabel* customerInfoLabel = [[UILabel alloc] initWithFrame: CGRectMake(pos.x, pos.y, 650.0f, 900.0f)];
+    //UILabel* customerInfoDetailsLabel = [[UILabel alloc] initWithFrame: CGRectMake(pos.x + 200, pos.y, 300.0f, 400.0f)];
+    // set as multiline
+    [customerInfoLabel setNumberOfLines:0];
+    //[customerInfoDetailsLabel setNumberOfLines:0];
+    
+    // add to invoiceSubviews ( so it can be deallocated later )
+    [invoiceSubviews addObject:customerInfoLabel];
+    //[invoiceSubviews addObject:customerInfoDetailsLabel];
+    
+    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
+    //NSString* customerInfo = [NSString stringWithFormat:@"Name:                %@ %@ \nAddress:            %@ \nAddress:            %@ \nE-mail:               %@ \nPhone:               %@ \nPhone:               %@ \nReferred By:      %@ \n\nBuilding Type:         %@ \nBuilding State:        %@ \n\nType of Products:   %@ \n\nInvoice No:    %@ \nPO No:           %@ \nOrder Date:   %@ \nTech Name:   %@", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerAddressTwo], [invMngr customerEmail], [invMngr customerPhoneNo], [invMngr customerPhoneNoTwo], [invMngr customerReferredBy], [invMngr typeOfBuilding], [invMngr buildingState], [invMngr usingProductType], [invMngr invoiceNo], [invMngr poNo], [invMngr orderDate], [invMngr technicianName]];
+    NSString* customerInfo = [NSString stringWithFormat:@"Name:\n%@ %@\n\nAddress:\n%@\n%@\n\nE-mail:\n%@\n\nPhone:\n%@ \n%@\n\nReferred By:\n%@\n\nBuilding Type:\n%@\n\nBuilding State:\n%@\n\nType of Products:\n%@\n\nInvoice No:\n%@\n\nPO No:\n%@\n\nOrder Date:\n%@\n\nTech Name:\n%@", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerAddressTwo], [invMngr customerEmail], [invMngr customerPhoneNo], [invMngr customerPhoneNoTwo], [invMngr customerReferredBy], [invMngr typeOfBuilding], [invMngr buildingState], [invMngr usingProductType], [invMngr invoiceNo], [invMngr poNo], [invMngr orderDate], [invMngr technicianName]];
+    
+    /*NSString* titlesOnly = [NSString stringWithFormat:@"Name:\nAddress:\nAddress:\nE-mail:\nPhone:\nPhone\nReferred By:\nBuilding Type:\nBuilding State:\nType of Products:\nInvoice No:\nPO No:\nOrder Date:\nTechnician Name:"];
+     
+     NSString* detailsOnly = [NSString stringWithFormat:@"%@ %@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerAddressTwo], [invMngr customerEmail], [invMngr customerPhoneNo], [invMngr customerPhoneNoTwo], [invMngr customerReferredBy], [invMngr typeOfBuilding], [invMngr buildingState], [invMngr usingProductType], [invMngr invoiceNo], [invMngr poNo], [invMngr orderDate], [invMngr technicianName]];
+     */
+    // add properties
+    [customerInfoLabel setText:customerInfo];
+    [customerInfoLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    
+    //[customerInfoDetailsLabel setText:detailsOnly];
+    //[customerInfoDetailsLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    
+    // print to screen
+    [mainView addSubview:customerTitleLabel];
+    [mainView addSubview:customerInfoLabel];
+    //[mainView addSubview:customerInfoDetailsLabel];
+    
+    // printing to pdf (context)
+    [self drawText:[NSString stringWithFormat: @"Order Information "] inFrame:CGRectMake(pdfpos.x, pdfpos.y,250.0, 40.0) withFontSize:15.0];
+    
+    pdfpos.y += 800.0;
+    [self drawText:customerInfo inFrame:CGRectMake(pdfpos.x, pdfpos.y,200.0, 800.0) withFontSize:15.0];
+    //[self drawText:detailsOnly inFrame:CGRectMake(pdfpos.x + 200, pdfpos.y,300.0, 300.0) withFontSize:15.0];
+    
+    // text above customer's signature
+    [self drawText:@"Customer Signature " inFrame:CGRectMake(590.0, 915.0, 160.0, 40.0) withFontSize:13.0];
+    // draw the customer's signature
+    [[signatureImageView image] drawInRect:CGRectMake(600.0, 900.0, 100.0, 100.0)];
+}
+
+-(void) printServiceTotal_PosX: (CGFloat) posx PosY: (CGFloat) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat) pdfy ServiceName: (NSString *) service_name {
+    CGFloat subserviceFontSize = 13.0f;
+    NSString *discountToDisplay = @"";
+    if ([service_name isEqualToString:@"carpet"]){
+        discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedCarpetPrice]];
+    } else if([service_name isEqualToString:@"upholstery"]){
+        discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedUpholsteryPrice]];
+    } else if([service_name isEqualToString:@"mattress"]){
+        discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedMattressPrice]];
+    } else if([service_name isEqualToString:@"miscellaneous"]){
+        discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedMiscePrice]];
+    } else if([service_name isEqualToString:@"areaRugs"]){
+        discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedAreaRugsPrice]];
+    } else if([service_name isEqualToString:@"floodcleanup"]){
+        discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedFloodPrice]];
+    }
+    
+    /* Print Service Subtotal */
+    UILabel *serviceSubtotalLabel = [[UILabel alloc] initWithFrame: CGRectMake(posx, posy, 250.0f, 38.0f)];
+    
+    // add to an array of subviews
+    [invoiceSubviews addObject:serviceSubtotalLabel];
+    
+    
+    // create label for the service subtotal
+    [serviceSubtotalLabel setText:[NSString stringWithFormat:@"Subtotal "]];
+    [serviceSubtotalLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    
+    posx += 600.0;
+    
+    
+    UILabel *serviceSubtotalPriceLabel = [[UILabel alloc] initWithFrame: CGRectMake(posx, posy, 250.0f, 38.0f)];
+    [serviceSubtotalPriceLabel setText:[NSString stringWithFormat:@"%@ ", discountToDisplay]];
+    [serviceSubtotalPriceLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    
+    // add to an array of subviews
+    [invoiceSubviews addObject:serviceSubtotalPriceLabel];
+    
+    // print to screen
+    [mainView addSubview:serviceSubtotalLabel];
+    [mainView addSubview:serviceSubtotalPriceLabel];
+    
+    // print to pdf
+    [self drawText:[NSString stringWithFormat:@"Subtotal "] inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:subserviceFontSize];
+    
+    pdfx += 625.0;
+    
+    [self drawText:[NSString stringWithFormat:@"%@ ", discountToDisplay] inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:subserviceFontSize];
+}
+
+-(void) printTotal_PosX: (CGFloat) posx PosY: (CGFloat) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat) pdfy {
+    
+    CGFloat pdfFontSize = 15.0f;
+    CGFloat screenFontSize = 21.0f;
+    
+    UILabel *priceNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 250.0f, 70.0f)];
+    [invoiceSubviews addObject:priceNameLabel];
+    [priceNameLabel setFont:[UIFont systemFontOfSize:screenFontSize]];
+    [priceNameLabel setText:@"Total "];
+    
+    posx += 600.0;
+    //pdfx += 625.0;
+    
+    // CGFloat totalPrice = subtotalCarpetPrice + subtotalUpholsteryPrice + subtotalMattressPrice + subtotalMiscePrice + subtotalAreaRugsPrice + subtotalFloodPrice;
+    CGFloat totalPrice = discountedCarpetPrice + discountedUpholsteryPrice + discountedMattressPrice + discountedMiscePrice + discountedAreaRugsPrice + discountedFloodPrice;
+    
+    UILabel *priceTotalLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 250.0f, 70.0f)];
+    [invoiceSubviews addObject:priceTotalLabel];
+    [priceTotalLabel setFont:[UIFont systemFontOfSize:screenFontSize]];
+    [priceTotalLabel setText:[NSString stringWithFormat:@"$%.02f ", totalPrice]];
+    
+    [mainView addSubview:priceNameLabel];
+    [mainView addSubview:priceTotalLabel];
+    
+    [self drawText:[NSString stringWithFormat: @"Total "] inFrame:CGRectMake(pdfx, pdfy,250.0, 70.0) withFontSize:pdfFontSize];
+    
+    pdfx += 625.0;
+    
+    [self drawText:[NSString stringWithFormat: @"$%.02f ", totalPrice] inFrame:CGRectMake(pdfx, pdfy,250.0, 70.0) withFontSize:pdfFontSize];
+}
+
+-(void) printSubserviceDiscountService: (NSString*) service_name PosX: (CGFloat) posx PosY: (CGFloat) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat) pdfy {
+    CGFloat subserviceFontSize = 13.0f;
+    
+    UILabel *discountNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 250.0f, 70.0f)];
+    UILabel *discountNameLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfx, pdfy, 400.0f, 70.0f)];
+    
+    [invoiceSubviews addObject:discountNameLabel];
+    [invoiceSubviews addObject:discountNameLabelpdf];
+    
+    [discountNameLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    [discountNameLabel setNumberOfLines:0];  // allows for multiline
+    [discountNameLabel setText:@"Discount"];
+    //[discountNameLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
+    
+    // add the subview to the screen
+    [mainView addSubview:discountNameLabel];
+    [self drawText:[NSString stringWithFormat: @"Discount"] inFrame:discountNameLabelpdf.frame withFontSize:subserviceFontSize];
+    
+    posx += 600.0;
+    pdfx += 625.0;
+    
+    UILabel *discountLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 250.0f, 70.0f)];
+    UILabel *discountLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfx, pdfy, 400.0f, 70.0f)];
+    
+    [discountLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    //[discountLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    [invoiceSubviews addObject:discountLabel];
+    [invoiceSubviews addObject:discountLabelpdf];
+    
+    NSString *discountToDisplay = @"";
+    if ([service_name isEqualToString:@"carpet"]){
+        discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self carpetDiscount]];
+    } else if([service_name isEqualToString:@"upholstery"]){
+        discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self upholsteryDiscount]];
+    } else if([service_name isEqualToString:@"mattress"]){
+        discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self mattressDiscount]];
+    } else if([service_name isEqualToString:@"miscellaneous"]){
+        discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self miscellaneousDiscount]];
+    } else if([service_name isEqualToString:@"areaRugs"]){
+        discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self areaRugsDiscount]];
+    } else if([service_name isEqualToString:@"floodcleanup"]){
+        discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self floodDiscount]];
+    }
+    
+    [discountLabel setText:discountToDisplay];
+    [self drawText:discountToDisplay inFrame:discountLabelpdf.frame withFontSize:subserviceFontSize];
+    
+    [mainView addSubview:discountLabel];
+}
+
+-(void) printSubservice: (ServiceDataCell*) data_cell PosX: (CGFloat) posx PosY: (CGFloat) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat) pdfy {
+    UILabel *serviceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 400.0f, 70.0f)];
+    UILabel *serviceDataLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfx, pdfy, 400.0f, 70.0f)];
+    
+    [invoiceSubviews addObject:serviceDataLabel];
+    [invoiceSubviews addObject:serviceDataLabelpdf];
+    
+    [serviceDataLabel setNumberOfLines:0];  // allows for multiline
+    [serviceDataLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    
+    CGFloat subserviceFontSize = 13.0f;
+    //[serviceNameLabelpdf setNumberOfLines:0];
+    //[serviceNameLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
+    
+    NSString *servicetype = [data_cell serviceType];
+    if ([servicetype isEqualToString:@"carpet"]){
+        subtotalCarpetPrice += [data_cell price];   // add price to subtotal
+        discountedCarpetPrice = subtotalCarpetPrice - carpetDiscount;
+        if ([[data_cell itemAttribute] isEqualToString:@"Room"] ){
+            
+            [serviceDataLabel setText:[NSString stringWithFormat: @"Room: %@, Area: %.02fx%.02f, Rate: $%.02f\naddons: %s%s%s",[data_cell name] , [data_cell rlength], [data_cell rwidth], [data_cell priceRate], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ]];
+            [self drawText:[NSString stringWithFormat: @"Room: %@, Area: %.02fx%.02f, Rate: $%.02f\naddons: %s%s%s",[data_cell name] , [data_cell rlength], [data_cell rwidth], [data_cell priceRate], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        } else {
+            [serviceDataLabel setText:[NSString stringWithFormat: @"%@, # of stairs: %u, # of landings: %u",[data_cell name] ,
+                                       [data_cell quantity], [data_cell quantity2] ]];
+            
+            [self drawText:[NSString stringWithFormat: @"%@, # of stairs: %u, # of landings: %u",[data_cell name] ,
+                            [data_cell quantity], [data_cell quantity2] ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        }
+    } else if ([servicetype isEqualToString:@"upholstery"]){
+        subtotalUpholsteryPrice += [data_cell price];   // add price to subtotal
+        discountedUpholsteryPrice = subtotalUpholsteryPrice - upholsteryDiscount;
+        [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Material: %@\nClean Type: %@, quantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell materialType], [data_cell vacOrFull], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ]];
+        
+        [self drawText:[NSString stringWithFormat: @"Item: %@, Material: %@\nClean Type: %@, quantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell materialType], [data_cell vacOrFull], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        
+    } else if ([servicetype isEqualToString:@"mattress"]){
+        subtotalMattressPrice += [data_cell price];     // add price to subtotal
+        discountedMattressPrice = subtotalMattressPrice - mattressDiscount;
+        [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Clean Type: %@\nquantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell vacOrFull], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ]];
+        
+        [self drawText:[NSString stringWithFormat: @"Item: %@, Clean Type: %@\nquantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell vacOrFull], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        
+    } else if ([servicetype isEqualToString:@"miscellaneous"]){
+        subtotalMiscePrice += [data_cell price];     // add price to subtotal
+        discountedMiscePrice = subtotalMiscePrice - miscellaneousDiscount;
+        [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Price per item: %.02f\nquantity: %u",[data_cell name] , [data_cell priceRate], [data_cell quantity] ]];
+        
+        [self drawText:[NSString stringWithFormat: @"Item: %@, Price per item: %.02f\nquantity: %u",[data_cell name] , [data_cell priceRate], [data_cell quantity] ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        
+    } else if ([servicetype isEqualToString:@"areaRugs"]){
+        subtotalAreaRugsPrice += [data_cell price];     // add price to subtotal
+        discountedAreaRugsPrice = subtotalAreaRugsPrice - areaRugsDiscount;
+        [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Material: %@\nquantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell materialType], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ]];
+        
+        [self drawText:[NSString stringWithFormat: @"Item: %@, Material: %@\nquantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell materialType], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        
+    } else if ([servicetype isEqualToString:@"floodcleanup"]){
+        subtotalFloodPrice += [data_cell price];     // add price to subtotal
+        discountedFloodPrice = subtotalFloodPrice - floodDiscount;
+        if ([[data_cell name] isEqualToString:@"Blowers"] || [[data_cell name] isEqualToString:@"Dehumidifiers"]){
+            
+            [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Rate per day: %.02f\n# of days: %u, quantity: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity], [data_cell quantity2]]];
+            
+            [self drawText:[NSString stringWithFormat: @"Item: %@, Rate per day: %.02f\n# of days: %u, quantity: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity], [data_cell quantity2]] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+            
+        } else if ([[data_cell name] isEqualToString:@"Biocide Application"]){
+            
+            [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Rate per sq.ft.: %.02f\nsquare feet: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity] ]];
+            
+            [self drawText:[NSString stringWithFormat: @"Item: %@, Rate per sq.ft.: %.02f\nsquare feet: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity] ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+            
+        } else if ([[data_cell name] isEqualToString:@"Water Extraction"] || [[data_cell name] isEqualToString:@"Demolition"]){
+            [serviceDataLabel setText:[NSString stringWithFormat: @"Item: %@, Rate per hr: %.02f\n# of hours: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity] ]];
+            
+            [self drawText:[NSString stringWithFormat: @"Item: %@, Rate per hr: %.02f\n# of hours: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity] ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        }
+    }
+    
+    // add the subview to the screen
+    [mainView addSubview:serviceDataLabel];
+    
+    posx += 600.0;
+    pdfx += 625.0;
+    
+    /* Print/draw the price of the subservice */
+    UILabel *priceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 150.0f, 70.0f)];
+    UILabel *priceDataLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfx, pdfy, 400.0f, 70.0f)];
+    
+    [priceDataLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    //[priceDataLabel setTextAlignment:NSTextAlignmentCenter];
+    [priceDataLabel setText:[NSString stringWithFormat:@"$%.02f ", [data_cell price]]];
+    
+    //[priceDataLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
+    //[priceDataLabelpdf setTextAlignment:NSTextAlignmentCenter];
+    [priceDataLabelpdf setText:[NSString stringWithFormat:@"$%.02f ", [data_cell price]]];
+    
+    [invoiceSubviews addObject:priceDataLabel];
+    [invoiceSubviews addObject:priceDataLabelpdf];
+    
+    [mainView addSubview:priceDataLabel];
+    [self drawText:[NSString stringWithFormat:@"$%.02f ", [data_cell price]] inFrame:CGRectMake(pdfx, pdfy, priceDataLabelpdf.frame.size.width, priceDataLabelpdf.frame.size.height) withFontSize:subserviceFontSize];
+}
+
+/* if current y ( posy ) is 200 pixels within the signatureImageView, then the 'mainView' needs to be extended. */
+-(void) adjustScreenSize_CurrentY: (CGFloat) posy {
+    if ((posy + 200) > signatureImageView.frame.size.height){
+        NSLog(@" ++ INCREASING SCROLLVIEWER HEIGHT ++ ");
+        [mainView setContentSize:CGSizeMake(mainView.frame.size.width, posy + 600)];
+        //[signatureImageView setFrame:CGRectMake(28.0f, posY + 200, 331.0f, 257.0f)];
+        CGFloat maxY = posy + 600;
+        [signatureImageView setFrame:CGRectMake(28.0f, maxY - 446.0f,331.0f, 257.0f)];
+        [signaturebtn setFrame:CGRectMake(28.0f + 331.0f + 30.0f, maxY - 246.0f, 190.0f, 43.0f)];
+        [backbtn setFrame:CGRectMake(47.0f, maxY - 107, 286.0f, 62.0f)];
+    }
+}
+
+// check if there is any more room on the current pdf page; if there isn't, start a new page
+-(void) adjustPdfPages_currentPdfY: (CGFloat *) pdfy{
+    if ( (*pdfy + 100) > 1024 ){
+        // pdfy = 130.0;
+        *pdfy = 130.0;
+        UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 768.0, 1024.0), nil);
+    }
+}
+
+// check if there is any more room on the current pdf page; if there isn't, start a new page
+-(void) adjustPdfPagesLong_currentPdfY: (CGFloat *) pdfy{
+    if ( (*pdfy + 600) > 1024 ){
+        // pdfy = 130.0;
+        *pdfy = 130.0;
+        UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 768.0, 1024.0), nil);
+    }
+}
+
+// start new pdf page and restart the pdf y coordinate (pdfy)
+-(void) adjustNewPdfPage: (CGFloat*) pdfy {
+    *pdfy = 130.0;
+    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 768.0, 1024.0), nil);
+}
+
+-(void) printServiceNameAtX: (CGFloat) posx AtY: (CGFloat) posy AtPdfX: (CGFloat) pdfx AtPdfY: (CGFloat) pdfy withServiceName: (NSString*) service_name {
+    /* Print Service Name */
+    UILabel *serviceNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(posx, posy, 315.0f, 38.0f)];
+    UILabel *serviceNameLabelpdf = [[UILabel alloc] initWithFrame: CGRectMake(pdfx, pdfy, 250.0f, 38.0f)];
+    
+    // add to an array of subviews
+    [invoiceSubviews addObject:serviceNameLabel];
+    [invoiceSubviews addObject:serviceNameLabelpdf];
+    
+    // create label for the service name
+    [serviceNameLabel setText:[NSString stringWithFormat:@"%@ service ", service_name]];
+    [serviceNameLabel setFont:[UIFont systemFontOfSize:25.0f]];
+    [serviceNameLabelpdf setText:[NSString stringWithFormat:@"%@ service ", service_name]];
+    [serviceNameLabelpdf setFont:[UIFont systemFontOfSize:25.0f]];
+    // print to screen
+    [mainView addSubview:serviceNameLabel];
+    // print to pdf
+    [self drawText:[NSString stringWithFormat:@"%@ service ", service_name] inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:14.0f];
+    
+}
+
+// prints a discount UIButton on screen
+-(void) printDiscountButtonAtX: (CGFloat) px AtY: (CGFloat) py withServiceName: (NSString*) service_name {
+    UIButton *addDiscount = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [addDiscount retain];
+    [addDiscount setFrame:CGRectMake(px, py, 139.0f, 43.0f)];
+    [addDiscount setTitle:@"Add Discount" forState:UIControlStateNormal];
+    [addDiscount setRestorationIdentifier:service_name];
+    NSLog(@"()()()ADD DISCOUNT restoration id is %@", service_name);
+    [addDiscount addTarget:self action:@selector(displayDiscountPopover:)
+          forControlEvents:UIControlEventTouchDown];
+    [mainView addSubview:addDiscount];  // add the uibutton to the 'mainView'
+    [invoiceSubviews addObject:addDiscount];
+}
+
+// prints a horizontal line on screen and in pdf context
+-(void) printHorizLineBelowX: (CGFloat)posx Y:(CGFloat) posy pdfX: (CGFloat) pdfx pdfY: (CGFloat) pdfy {
+    UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(posx, posy, 698.0f, 3.0f)];
+    UIImageView *linepdf = [[UIImageView alloc] initWithFrame:CGRectMake(pdfx, pdfy, 698.0f, 3.0f)];
+    [line setImage:[UIImage imageNamed:@"horizontalLine5.png"]];
+    [linepdf setImage:[UIImage imageNamed:@"horizontalLine5.png"]];
+    [invoiceSubviews addObject:line];
+    [invoiceSubviews addObject:linepdf];
+    
+    [mainView addSubview:line];
+    
+    [self drawImage:@"horizontalLine.png" withRect:CGRectMake(pdfx, pdfy, 698.0f, 3.0f)];
+}
+
+/* END of print/draw functions */
 
 -(IBAction) sendMail {
     MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-    //[controller addAttachmentData:nil mimeType:@"application/pdf" fileName:@"blah.pdf"];
+    
+    
+    // adding attachment
+    
+    [controller addAttachmentData:nil mimeType:@"application/pdf" fileName:@"MightyCleanInvoice.pdf"];  // attach the pdf invoice
+    
     controller.mailComposeDelegate = self;
-    [controller setSubject:@"My Subject"];
-    [controller setMessageBody:@"Hello there." isHTML:NO];
+    [controller setSubject:@"Mighty Clean Invoice"];
+    [controller setMessageBody:@"Please find attached a pdf copy of your invoice." isHTML:NO];
+    
+    // add the customer's email as a recipient
+    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
+    NSArray *toRecipients = [NSArray arrayWithObjects:[invMngr customerEmail], nil];
+    [controller setToRecipients:toRecipients];
+    
     if (controller) {
         //[self presentModalViewController:controller animated:YES];
         [self presentViewController:controller animated:YES completion:nil];
     }
     [controller release];
-
+    
 }
 
 - (void)updateSignature:(SignaturePopoverVC *)optionsVS callType: (NSString *) call_type image: (UIImage*) image_arg {
-    NSLog(@"HELLO WORLD ! ! !");
     if ([call_type isEqualToString:@"cancel"]){
         [popoverController dismissPopoverAnimated:YES];
     } else if ([call_type isEqualToString:@"add"]){
         [popoverController dismissPopoverAnimated:YES];
         [signatureImageView setImage:image_arg];
     }
+    [self createInvoice];
 }
 
 // instantiate popover (+ Add item) in terms of what service type page is generated
@@ -579,7 +701,7 @@
         popoverController = [[UIPopoverController alloc] initWithContentViewController:signatureVC];
     }
     signatureVC.signatureDelegate = self;
-    [popoverController presentPopoverFromRect:[signaturebtn frame] inView:mainView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];    
+    [popoverController presentPopoverFromRect:[signaturebtn frame] inView:mainView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)updateDiscount:(InvoiceDiscountVC *)optionsVS updateType:(NSString*)update_type discountType: (NSString *) discountType_arg amount: (float) amount_arg forService: (NSString*) service_name_arg {
@@ -595,27 +717,27 @@
             }
         } else if ([service_name_arg isEqualToString:@"upholstery"]){
             if ([discountType_arg isEqualToString:@"percent"]){
-                upholsteryDiscount = (amount_arg / 100.0) * subtotalUpholsteryPrice;
+                [self setUpholsteryDiscount:(amount_arg / 100.0) * subtotalUpholsteryPrice];
             } else if ([discountType_arg isEqualToString:@"amount"]){
-                upholsteryDiscount = amount_arg;
+                [self setUpholsteryDiscount:amount_arg];
             }
         } else if ([service_name_arg isEqualToString:@"mattress"]){
             if ([discountType_arg isEqualToString:@"percent"]){
-                mattressDiscount = (amount_arg / 100.0) * subtotalUpholsteryPrice;
+                [self setMattressDiscount:(amount_arg / 100.0) * subtotalMattressPrice];
             } else if ([discountType_arg isEqualToString:@"amount"]){
-                upholsteryDiscount = amount_arg;
+                [self setMattressDiscount:amount_arg];
             }
         } else if ([service_name_arg isEqualToString:@"miscellaneous"]){
             if ([discountType_arg isEqualToString:@"percent"]){
-                miscellaneousDiscount = (amount_arg / 100.0) * subtotalMiscePrice;
+                [self setMiscellaneousDiscount:(amount_arg / 100.0) * subtotalMiscePrice];
             } else if ([discountType_arg isEqualToString:@"amount"]){
-                miscellaneousDiscount = amount_arg;
+                [self setMiscellaneousDiscount:amount_arg];
             }
         } else if ([service_name_arg isEqualToString:@"areaRugs"]){
             if ([discountType_arg isEqualToString:@"percent"]){
-                areaRugsDiscount = (amount_arg / 100.0) * subtotalAreaRugsPrice;
+                [self setAreaRugsDiscount:(amount_arg / 100.0) * subtotalAreaRugsPrice];
             } else if ([discountType_arg isEqualToString:@"amount"]){
-                areaRugsDiscount = amount_arg;
+                [self setAreaRugsDiscount:amount_arg];
             }
         } else if ([service_name_arg isEqualToString:@"floodcleanup"]){
             if ([discountType_arg isEqualToString:@"percent"]){
@@ -631,7 +753,6 @@
     } else if ([update_type isEqualToString:@"cancel"]){
         [popoverController dismissPopoverAnimated:YES];
     }
-    NSLog(@" !!!carpet disc is %f", [self carpetDiscount]);
 }
 
 // display discount popover
@@ -648,9 +769,7 @@
     }
     
     discountVC.discountDelegate = self;
-    //discountVC.serviceName = [sender restorationIdentifier];
     [discountVC setServiceName:[sender restorationIdentifier]];
-    NSLog(@"BTN IDENTIFIER IS %@", [sender restorationIdentifier]);
     [popoverController presentPopoverFromRect:[sender frame] inView:mainView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
@@ -715,6 +834,21 @@
     CFStringRef stringRef = (CFStringRef)textToDraw;
     // Prepare the text using a Core Text Framesetter.
     CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, stringRef, NULL);
+    
+    // Still unsure of why CFMutableAttributedStringRef instead of CFAttributedStringRef doesnt work, or what the mutable version
+    // does extra// setting the font seems to work without it being mutable.
+    
+    // set the font size:
+    int length=[textToDraw length];
+    CTFontRef font = CTFontCreateWithName((CFStringRef)@"ArialMT", fontSize_arg, nil);
+    CFAttributedStringSetAttribute((CFMutableAttributedStringRef)currentText,CFRangeMake(0, length-1),kCTFontAttributeName,font);
+    
+    /* // the mutable version.. gives bad exec access error if used
+     CFMutableAttributedStringRef currentText = CFAttributedStringCreateMutable(kCFAllocatorDefault, 0);
+     CFStringRef stringRef = (CFStringRef) textToDraw;
+     CFMutableAttributedStringRef currentText = CFAttributedStringCreateMutable(kCFAllocatorDefault, 0);
+     CFAttributedStringReplaceString (currentText,CFRangeMake(0, 0), string); */
+    
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(currentText);
     
     CGMutablePathRef framePath = CGPathCreateMutable();
@@ -728,6 +862,7 @@
     // Get the graphics context.
     CGContextRef    currentContext = UIGraphicsGetCurrentContext();
     CGContextSetFontSize(currentContext, fontSize_arg);
+    
     //CGContextSetCMYKFillColor(currentContext, 1.0, 0.0, 0.0, 0.0, 0.0);
     
     // Put the text matrix into a known state. This ensures
@@ -768,80 +903,80 @@
 /*=======================================================================================================*/
 
 /*
--(void)drawImage:(UIImage*)image inRect:(CGRect)rect
-{
+ -(void)drawImage:(UIImage*)image inRect:(CGRect)rect
+ {
  
-    [image drawInRect:rect];
+ [image drawInRect:rect];
  
-}*/
+ }*/
 
 -(IBAction) makeMeAPDF {
     /*
-    // Create the PDF context using the default page size of 612 x 792.
-    UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/new.pdf", CGRectZero, nil);
-    // Mark the beginning of a new page.
-    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil);
-    
-    // DRAW LOGO:
-    for (UIView* view in [mainView subviews]) {
-        if([view isKindOfClass:[UIImageView class]])
-        {
-            UIImage* logo = [UIImage imageNamed:@"mightyCleanCarpetCareLogo.png"];
-            [self drawImage:logo inRect:CGRectMake(60.0f, 100.0f, 313.0f, 186.0f)];
-        }
-    }
-    
-    //[self drawText:@"Hello World" inFrame:CGRectMake(0, 0, 300, 50)];
-    
-    for (UIView* view in mainView.subviews) {
-        for (UIView *view2 in view.subviews){
-            if([view2 isKindOfClass:[UILabel class]])
-            {
-                UILabel* label2 = (UILabel*)view2;
-                NSLog(@"label2 text is %@", [label2 text]);
-                //[self drawText:label2.text inFrame:label2.frame];
-            }
-        }
-        if([view isKindOfClass:[UILabel class]])
-        {
-            UILabel* label = (UILabel*)view;
-            NSLog(@"label text is %@", [label text]);
-            [self drawText:label.text inFrame:label.frame];
-        }
-    }
-   
-    
-    UIGraphicsEndPDFContext(); */
+     // Create the PDF context using the default page size of 612 x 792.
+     UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/new.pdf", CGRectZero, nil);
+     // Mark the beginning of a new page.
+     UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil);
+     
+     // DRAW LOGO:
+     for (UIView* view in [mainView subviews]) {
+     if([view isKindOfClass:[UIImageView class]])
+     {
+     UIImage* logo = [UIImage imageNamed:@"mightyCleanCarpetCareLogo.png"];
+     [self drawImage:logo inRect:CGRectMake(60.0f, 100.0f, 313.0f, 186.0f)];
+     }
+     }
+     
+     //[self drawText:@"Hello World" inFrame:CGRectMake(0, 0, 300, 50)];
+     
+     for (UIView* view in mainView.subviews) {
+     for (UIView *view2 in view.subviews){
+     if([view2 isKindOfClass:[UILabel class]])
+     {
+     UILabel* label2 = (UILabel*)view2;
+     NSLog(@"label2 text is %@", [label2 text]);
+     //[self drawText:label2.text inFrame:label2.frame];
+     }
+     }
+     if([view isKindOfClass:[UILabel class]])
+     {
+     UILabel* label = (UILabel*)view;
+     NSLog(@"label text is %@", [label text]);
+     [self drawText:label.text inFrame:label.frame];
+     }
+     }
+     
+     
+     UIGraphicsEndPDFContext(); */
     
     
     /*InvoiceManager *bla = [InvoiceManager sharedInvoiceManager];
-    [bla createPDFfromUIView:self.view saveToDocumentsWithFileName:@"hello.pdf"];
-    NSMutableData *pdfData = [bla createPDFDatafromUIView:mainView];*/
+     [bla createPDFfromUIView:self.view saveToDocumentsWithFileName:@"hello.pdf"];
+     NSMutableData *pdfData = [bla createPDFDatafromUIView:mainView];*/
     //[self.view setNeedsDisplay];
     
     //[self.view setBackgroundColor:[UIColor clearColor]];
     //[mainView setBackgroundColor:[UIColor clearColor]];
     
     /*[self.view setNeedsDisplay];
-    [mainView setNeedsDisplay];
-    for (UIView *aSubview2 in [mainView subviews]){
-        NSLog(@"name of view: %@", [aSubview2 restorationIdentifier]);
-        [aSubview2 setNeedsDisplay];
-        for (UIView *blah in aSubview2.subviews){
-            [blah setNeedsDisplay];
-        }
-    }*/
+     [mainView setNeedsDisplay];
+     for (UIView *aSubview2 in [mainView subviews]){
+     NSLog(@"name of view: %@", [aSubview2 restorationIdentifier]);
+     [aSubview2 setNeedsDisplay];
+     for (UIView *blah in aSubview2.subviews){
+     [blah setNeedsDisplay];
+     }
+     }*/
     
     
     /*
-    UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/DUDE.pdf", CGRectMake(0, 0, 1000.0f, 600.0f), nil);
-    
-    UIGraphicsBeginPDFPage();
-    
-
-    CGContextRef pdfContext = UIGraphicsGetCurrentContext();
-    [mainView.layer renderInContext:pdfContext];
-    UIGraphicsEndPDFContext();*/
+     UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/DUDE.pdf", CGRectMake(0, 0, 1000.0f, 600.0f), nil);
+     
+     UIGraphicsBeginPDFPage();
+     
+     
+     CGContextRef pdfContext = UIGraphicsGetCurrentContext();
+     [mainView.layer renderInContext:pdfContext];
+     UIGraphicsEndPDFContext();*/
     
     [self generatePdfWithFilePath:@"Users/Oprescu/blah.pdf"];
 }
@@ -858,82 +993,87 @@
 }
 
 //==================================== FOR SIGNATURE CAPTURE BELOW
-//==================================== 
+//====================================
 /*- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	
-	mouseSwiped = NO;
-	UITouch *touch = [touches anyObject];
-	
-	if ([touch tapCount] == 2) {
-		drawImage.image = nil;
-		return;
-	}
-    NSLog(@"Hello There !");
-	lastPoint = [touch locationInView:signatureView];
-	lastPoint.y -= 20;
-    
-}
-
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	mouseSwiped = YES;
-	NSLog(@"Hello There MOVEWD !");
-	UITouch *touch = [touches anyObject];
-	CGPoint currentPoint = [touch locationInView:signatureView];
-	currentPoint.y -= 20;
-	
-	
-	UIGraphicsBeginImageContext(signatureView.frame.size);
-    NSLog(@"drawing");
-	[drawImage.image drawInRect:CGRectMake(0, 0, signatureView.frame.size.width, signatureView.frame.size.height)];
-	CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-	CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 5.0);
-	CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1.0, 0.0, 0.0, 1.0);
-	CGContextBeginPath(UIGraphicsGetCurrentContext());
-	CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-	CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
-	CGContextStrokePath(UIGraphicsGetCurrentContext());
-	drawImage.image = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	
-	lastPoint = currentPoint;
-    
-	mouseMoved++;
-	
-	if (mouseMoved == 10) {
-		mouseMoved = 0;
-	}
-    
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog(@"Hello There ENDED!");
-	UITouch *touch = [touches anyObject];
-	
-	if ([touch tapCount] == 2) {
-		drawImage.image = nil;
-		return;
-	}
-	
-	
-	if(!mouseSwiped) {
-		UIGraphicsBeginImageContext(signatureView.frame.size);
-		[drawImage.image drawInRect:CGRectMake(0, 0, signatureView.frame.size.width, signatureView.frame.size.height)];
-		CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-		CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 5.0);
-		CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1.0, 0.0, 0.0, 1.0);
-		CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-		CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-		CGContextStrokePath(UIGraphicsGetCurrentContext());
-		CGContextFlush(UIGraphicsGetCurrentContext());
-		drawImage.image = UIGraphicsGetImageFromCurrentImageContext();
-		UIGraphicsEndImageContext();
-	}
-}*/
-//==================================== 
+ 
+ mouseSwiped = NO;
+ UITouch *touch = [touches anyObject];
+ 
+ if ([touch tapCount] == 2) {
+ drawImage.image = nil;
+ return;
+ }
+ NSLog(@"Hello There !");
+ lastPoint = [touch locationInView:signatureView];
+ lastPoint.y -= 20;
+ 
+ }
+ 
+ 
+ - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+ mouseSwiped = YES;
+ NSLog(@"Hello There MOVEWD !");
+ UITouch *touch = [touches anyObject];
+ CGPoint currentPoint = [touch locationInView:signatureView];
+ currentPoint.y -= 20;
+ 
+ 
+ UIGraphicsBeginImageContext(signatureView.frame.size);
+ NSLog(@"drawing");
+ [drawImage.image drawInRect:CGRectMake(0, 0, signatureView.frame.size.width, signatureView.frame.size.height)];
+ CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+ CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 5.0);
+ CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1.0, 0.0, 0.0, 1.0);
+ CGContextBeginPath(UIGraphicsGetCurrentContext());
+ CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+ CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+ CGContextStrokePath(UIGraphicsGetCurrentContext());
+ drawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+ UIGraphicsEndImageContext();
+ 
+ lastPoint = currentPoint;
+ 
+ mouseMoved++;
+ 
+ if (mouseMoved == 10) {
+ mouseMoved = 0;
+ }
+ 
+ }
+ 
+ - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+ NSLog(@"Hello There ENDED!");
+ UITouch *touch = [touches anyObject];
+ 
+ if ([touch tapCount] == 2) {
+ drawImage.image = nil;
+ return;
+ }
+ 
+ 
+ if(!mouseSwiped) {
+ UIGraphicsBeginImageContext(signatureView.frame.size);
+ [drawImage.image drawInRect:CGRectMake(0, 0, signatureView.frame.size.width, signatureView.frame.size.height)];
+ CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+ CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 5.0);
+ CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1.0, 0.0, 0.0, 1.0);
+ CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+ CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+ CGContextStrokePath(UIGraphicsGetCurrentContext());
+ CGContextFlush(UIGraphicsGetCurrentContext());
+ drawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+ UIGraphicsEndImageContext();
+ }
+ }*/
+//====================================
 //==================================== FOR SIGNATURE CAPTURE ABOVE
 
 -(IBAction) gotoLastView {
+    NSArray *viewsToRemove = [mainView subviews];
+    for (UIView *v in invoiceSubviews){
+        [v removeFromSuperview];
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

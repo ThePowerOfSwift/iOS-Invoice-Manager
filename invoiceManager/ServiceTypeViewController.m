@@ -48,7 +48,7 @@
 }
 
 -(void) viewDidAppear:(BOOL)animated {
-
+    
     //NSLog(@"view loaded. name of service: %@ and %@", self.VCServiceNameType, invMngr.currActiveVCName);
     //examp.text = VCServiceNameType;
     //NSLog(@" --->> current service name: %@", VCServiceNameType);
@@ -64,18 +64,18 @@
     //uilabelsArray = [[NSMutableArray alloc] initWithCapacity:2];
     
     //if (!col1Name){
-        col1Name = [[[UILabel alloc] initWithFrame:CGRectMake(78.0f, 324.0f, 161.0f, 21.0f)] autorelease];
-        //[col1Name setText:@"room name / stairs"];
-        [self.view addSubview:col1Name];
-        
-        col2Name = [[[UILabel alloc] initWithFrame:CGRectMake(247.0f, 324.0f, 170.0f, 21.0f)] autorelease];
-        [self.view addSubview:col2Name];
-        
-        col3Name = [[[UILabel alloc] initWithFrame:CGRectMake(425.0f, 324.0f, 131.0f, 21.0f)] autorelease];
-        [self.view addSubview:col3Name];
-        
-        col4Name = [[[UILabel alloc] initWithFrame:CGRectMake(564.0f, 324.0f, 86.0, 21.0f)] autorelease];
-        [self.view addSubview:col4Name];
+    col1Name = [[[UILabel alloc] initWithFrame:CGRectMake(78.0f, 324.0f, 161.0f, 21.0f)] autorelease];
+    //[col1Name setText:@"room name / stairs"];
+    [self.view addSubview:col1Name];
+    
+    col2Name = [[[UILabel alloc] initWithFrame:CGRectMake(247.0f, 324.0f, 170.0f, 21.0f)] autorelease];
+    [self.view addSubview:col2Name];
+    
+    col3Name = [[[UILabel alloc] initWithFrame:CGRectMake(425.0f, 324.0f, 131.0f, 21.0f)] autorelease];
+    [self.view addSubview:col3Name];
+    
+    col4Name = [[[UILabel alloc] initWithFrame:CGRectMake(564.0f, 324.0f, 86.0, 21.0f)] autorelease];
+    [self.view addSubview:col4Name];
     //}
     
     if ([VCServiceNameType isEqualToString:@"carpet"]){
@@ -129,7 +129,7 @@
 - (void)viewDidLoad
 {
     //InvoiceManager *invoiceMngr = [InvoiceManager sharedInvoiceManager];
-    //[invoiceMngr printOut];    
+    //[invoiceMngr printOut];
     [super viewDidLoad];
 }
 
@@ -140,13 +140,13 @@
 }
 
 /*-(IBAction)goBackCUSTOMACTION {
-    //[self dismissModalViewControllerAnimated:YES];
-    //[self dismissViewControllerAnimated:YES completion:nil];
-    [self.navigationController popViewControllerAnimated:YES];
-    //NSLog(@"Hi");
-    //[SVCdelegate updateTableSVC:self];
-    
-}*/
+ //[self dismissModalViewControllerAnimated:YES];
+ //[self dismissViewControllerAnimated:YES completion:nil];
+ [self.navigationController popViewControllerAnimated:YES];
+ //NSLog(@"Hi");
+ //[SVCdelegate updateTableSVC:self];
+ 
+ }*/
 
 #pragma mark - Table view data source
 
@@ -200,7 +200,7 @@
             [serviceCell setPrice:priceUpdate];
             cell.colFour.text = [NSString stringWithFormat:@"%.02f", [serviceCell price]];
         }
-
+        
     } else if ([VCServiceNameType isEqualToString:@"mattress"]){                // MATTRESS service
         cell.colOne.text = [serviceCell name];
         cell.colTwo.text = [serviceCell vacOrFull];
@@ -234,6 +234,7 @@
     
     // add a delete button for each cell
     [[cell deleteBtn] setCellIndex:indexPath.row];
+    [[cell editBtn] setCellIndex:indexPath.row];
     return cell;
 }
 // table view data source implementations ABOVE
@@ -273,14 +274,55 @@
     }
     [btn setTag:10];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
 }
 
 -(IBAction)removeRow:(id)sender {
-    //NSLog(@"removing row with index: %u", [sender cellIndex]);
+    NSLog(@"removing row with index: %u", [sender cellIndex]);
     [serviceDataCellArray removeObjectAtIndex: [sender cellIndex]];
+    
     dataTableNoOfRows--;
     [dataTable reloadData];
+}
+
+-(IBAction)editRow:(id)sender {
+    
+    UIViewController* popoverToEdit = [[serviceDataCellArray objectAtIndex:[sender cellIndex]] popoverVC];
+    BasePopoverVC* popovervcEdit = (BasePopoverVC*) popoverToEdit;
+    //NSLog(@"HEY BUDDY EDITING %u, %@", [sender cellIndex], [popoverToEdit restorationIdentifier]);
+    NSLog(@">>>>>>>>>>>index is %u", [sender cellIndex]);
+    [popovervcEdit setEditMode:true];
+    
+    /*NSString* popoverVCrestorationID = [popoverToEdit restorationIdentifier];
+     if ([popoverVCrestorationID isEqualToString:@"OptionsPopoverVC"]){
+     
+     } else if ([popoverVCrestorationID isEqualToString:@"OptionsMatressPopoverVC"]){
+     
+     } else if ([popoverVCrestorationID isEqualToString:@"OptionsUpholsteryPopoverVC"]){
+     
+     } else if ([popoverVCrestorationID isEqualToString:@"OptionsRepairPopoverVC"]){
+     
+     } else if ([popoverVCrestorationID isEqualToString:@"OptionsFloodPopoverVC"]){
+     
+     } else if ([popoverVCrestorationID isEqualToString:@"OptionsAreaRugsPopoverVC"]){
+     
+     } else if ([popoverVCrestorationID isEqualToString:@"OptionsMiscellaneousPopoverVC"]){
+     
+     }*/
+    
+    //OptionsPopoverVC *blah = (OptionsPopoverVC*) popoverToEdit;
+    //[blah setEditMode:true];
+    
+    NSLog(@"RESTORATION ID is %@", [popoverToEdit restorationIdentifier]);
+    if (popover){
+        [popover setContentViewController:popovervcEdit];
+    }else {
+        popover = [[UIPopoverController alloc] initWithContentViewController:popovervcEdit];
+    }
+    
+    //optionsMatressVC.MVCDelegate = self;        // set the popover's delegate to this ui vc (IMPORTANT!)
+    [popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
+    [self removeRow:sender];
 }
 
 // instantiate popover (+ Add item) in terms of what service type page is generated
@@ -372,17 +414,24 @@
 - (void)updateMatressDataTable:(OptionsMatressPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     if ([editType isEqualToString:@"add"]){
         // save popover info into a Service data cell
-
+        
         /*ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
-        newCell.serviceType = @"matress";
-        newCell.quantity = quantity_arg;
-        newCell.name = item_name;
-        newCell.price = item_price_arg;
-        newCell.vacOrFull = vac_or_full;
-        newCell.notes = notesAboutRoom;
-        */
+         newCell.serviceType = @"matress";
+         newCell.quantity = quantity_arg;
+         newCell.name = item_name;
+         newCell.price = item_price_arg;
+         newCell.vacOrFull = vac_or_full;
+         newCell.notes = notesAboutRoom;
+         */
         // save the service data cell to an array ( which will be called upon by table view delegate funcs )
         //[serviceDataCellArray addObject:newCell];
+        
+        //UIViewController* tempVC = (OptionsMatressPopoverVC*) optionsVS;
+        //[tempVC retain];
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
+        
+        //[serviceDataCellArray insertObject:cell_arg atIndex:]
         [serviceDataCellArray addObject:cell_arg];
         dataTableNoOfRows++;                    // increase the data table view's # of rows
         [dataTable reloadData];                 // reload table view data
@@ -396,22 +445,32 @@
 
 // carpet delegate function
 /*- (void)updateDataTable:(OptionsPopoverVC *)optionsVS editType:(NSString*) editType withLength: (float) length_arg withWidth: (float) width_arg
-                andRoom: (NSString*) roomName withPriceRate:(float) priceRate_arg andNotes:(NSString *) notesAboutRoom {*/
+ andRoom: (NSString*) roomName withPriceRate:(float) priceRate_arg andNotes:(NSString *) notesAboutRoom {*/
 - (void)updateDataTable:(OptionsPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     
     if ([editType isEqualToString:@"add"]){
         // save popover info into a Service data cell
         /*ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
-        newCell.serviceType = @"carpet";
-        newCell.rlength = length_arg;
-        newCell.rwidth = width_arg;
-        newCell.name = roomName;
-        newCell.priceRate = priceRate_arg;
-        //NSLog(@"NOTES ARE EQUAL TO : %@", notesAboutRoom);
-        newCell.notes = notesAboutRoom;*/
+         newCell.serviceType = @"carpet";
+         newCell.rlength = length_arg;
+         newCell.rwidth = width_arg;
+         newCell.name = roomName;
+         newCell.priceRate = priceRate_arg;
+         //NSLog(@"NOTES ARE EQUAL TO : %@", notesAboutRoom);
+         newCell.notes = notesAboutRoom;*/
         
         // save the service data cell to an array ( which will be called upon by table view delegate funcs )
         //[serviceDataCellArray addObject:newCell];
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
+        NSLog(@"price is %f", [cell_arg price]);
+        /*if (optionsVS){
+         NSLog(@"its NOT NULL ");
+         } else {
+         NSLog(@"its  NULL ");
+         }*/
+        // [[cell_arg popoverVC] retain];
+        
         [serviceDataCellArray addObject:cell_arg];
         dataTableNoOfRows++;                    // increase the data table view's # of rows
         [dataTable reloadData];                 // reload table view data
@@ -429,17 +488,19 @@
     if ([editType isEqualToString:@"add"]){
         // save popover info into a Service data cell
         /*ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
-        
-        newCell.serviceType = @"upholstery";
-        newCell.notes = notes_arg;
-        newCell.name = item_name_arg;
-        newCell.materialType = item_material_arg;
-        newCell.vacOrFull = vac_or_full_arg;
-        newCell.quantity = quantity_arg;
-        newCell.price = item_price_arg;*/
+         
+         newCell.serviceType = @"upholstery";
+         newCell.notes = notes_arg;
+         newCell.name = item_name_arg;
+         newCell.materialType = item_material_arg;
+         newCell.vacOrFull = vac_or_full_arg;
+         newCell.quantity = quantity_arg;
+         newCell.price = item_price_arg;*/
         
         // save the service data cell to an array ( which will be called upon by table view delegate funcs )
         //[serviceDataCellArray addObject:newCell];
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
         [serviceDataCellArray addObject:cell_arg];
         dataTableNoOfRows++;                    // increase the data table view's # of rows
         [dataTable reloadData];                 // reload table view data
@@ -467,6 +528,9 @@
         
         // save the service data cell to an array ( which will be called upon by table view delegate funcs )
         //[serviceDataCellArray addObject:newCell];
+        
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
         [serviceDataCellArray addObject:cell_arg];
         dataTableNoOfRows++;                    // increase the data table view's # of rows
         [dataTable reloadData];                 // reload table view data
@@ -479,21 +543,24 @@
 }
 
 //-(void)updateFloodDataTable:(OptionsFloodPopoverVC *)optionsFVC editType: (NSString*) editType withItemName: (NSString *) item_name_arg withRate: (float) rate_arg withQuantity: (float) quantity_arg withQuantity2: (float) quantity2_arg withPrice:(float)price_arg andNotes: (NSString *) notes_arg {
- - (void)updateFloodServicesDataTable:(OptionsFloodPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
-     
+- (void)updateFloodServicesDataTable:(OptionsFloodPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
+    
     if ([editType isEqualToString:@"add"]){
         // save popover info into a Service data cell
         /*ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
-        
-        newCell.serviceType = @"floodcleanup";
-        newCell.notes = notes_arg;
-        newCell.name = item_name_arg;
-        newCell.quantity = quantity_arg;
-        newCell.quantity2 = quantity2_arg;
-        newCell.price = price_arg;
-        newCell.ratePerHr = rate_arg;*/
          
+         newCell.serviceType = @"floodcleanup";
+         newCell.notes = notes_arg;
+         newCell.name = item_name_arg;
+         newCell.quantity = quantity_arg;
+         newCell.quantity2 = quantity2_arg;
+         newCell.price = price_arg;
+         newCell.ratePerHr = rate_arg;*/
+        
         // save the service data cell to an array ( which will be called upon by table view delegate funcs )
+        
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
         [serviceDataCellArray addObject:cell_arg];
         dataTableNoOfRows++;                    // increase the data table view's # of rows
         [dataTable reloadData];                 // reload table view data
@@ -510,9 +577,12 @@
 - (void)updateMiscellaneousDataTable:(OptionsMiscellaneousPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     if ([editType isEqualToString:@"add"]){
         // save popover info into a Service data cell
-
+        
         
         // save the service data cell to an array ( which will be called upon by table view delegate funcs )
+        
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
         [serviceDataCellArray addObject:cell_arg];
         dataTableNoOfRows++;                    // increase the data table view's # of rows
         [dataTable reloadData];                 // reload table view data
@@ -558,8 +628,8 @@
     
     // release uilabels allocated
     /*for (int i = 0; i < [uilabelsArray count]; i++){
-        [[uilabelsArray objectAtIndex:i] release];
-    }*/
+     [[uilabelsArray objectAtIndex:i] release];
+     }*/
     
     for (int i = 0; i < [serviceDataCellArray count]; i++){
         [[serviceDataCellArray objectAtIndex:i] release];

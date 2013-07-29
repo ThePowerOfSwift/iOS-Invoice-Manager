@@ -40,8 +40,9 @@
     NSString *customerEmail;
     NSString *customerReferredBy;
     
-    NSString *typeOfBuilding;   // 'residential', 'commercial' or other
-    NSString *buildingState;    // 'furnished', 'vacant' or 'mobile'
+    NSString *typeOfBuilding;       // 'Residential Building', 'Commercial Building' or other
+    NSString *buildingState;        // 'Furnished State', 'Vacant State' or 'Portable State'
+    NSString *usingProductType;     // 'Normal Products' or 'Green Products' products
     
     NSString *estimateDate;
     float ratePerSquareFeet;
@@ -49,7 +50,7 @@
     UIViewController *secondVC;
     UIViewController *invoiceVC;
     // array that holds all the services
-    NSMutableArray *listOfServices;	
+    NSMutableArray *listOfServices;
     
 }
 
@@ -57,7 +58,7 @@
 
 @property (assign, readwrite) NSString *currActiveVCName;
 @property (assign, readwrite) NSString *orderDate, *invoiceNo, *poNo, *technicianName, *customerFirstName, *customerLastName,
-                                *customerAddressOne, *customerAddressTwo, *customerPhoneNo, *customerPhoneNoTwo, *customerEmail, *customerReferredBy, *typeOfBuilding, *buildingState;
+*customerAddressOne, *customerAddressTwo, *customerPhoneNo, *customerPhoneNoTwo, *customerEmail, *customerReferredBy, *typeOfBuilding, *buildingState, *usingProductType;
 @property (assign, readwrite) NSString *estimateDate;
 @property (assign, readwrite) NSMutableArray *listOfServices;
 @property (assign, readwrite) float ratePerSquareFeet;

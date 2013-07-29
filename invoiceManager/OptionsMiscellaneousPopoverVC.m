@@ -30,17 +30,21 @@
 }
 
 -(void) viewDidAppear:(BOOL)animated {
-    // set up the notes field
-    notesField.text = @"Place notes and comments here";
-    notesField.textColor = [UIColor lightGrayColor];
-    [notesField setDelegate:self];
-    
-    // init vars in case error occurs
-    itemName = @"";
-    quantity = 0;
-    notes = @"";
-    itemPrice = 0.0f;
-    price = 0.0f;
+    if ([self editMode]){
+        
+    } else {
+        // set up the notes field
+        notesField.text = @"Place notes and comments here";
+        notesField.textColor = [UIColor lightGrayColor];
+        [notesField setDelegate:self];
+        
+        // init vars in case error occurs
+        itemName = @"";
+        quantity = 0;
+        notes = @"";
+        itemPrice = 0.0f;
+        price = 0.0f;
+    }
 }
 
 - (void)viewDidLoad

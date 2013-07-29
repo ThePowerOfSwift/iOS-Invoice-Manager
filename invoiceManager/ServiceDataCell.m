@@ -17,15 +17,17 @@
 @synthesize priceRate;
 @synthesize vacOrFull;
 @synthesize addonFabricProtector, addonDeodorizer, addonBiocide;
+@synthesize popoverVC;
 
 -(id) init {
     if (self = [super init]){
-        
+        // popoverVC = [[UIViewController alloc] init];
     }
     return self;
 }
 
 -(void) dealloc {
+    [popoverVC release];
     [name release];
     [notes release];
     [vacOrFull release];

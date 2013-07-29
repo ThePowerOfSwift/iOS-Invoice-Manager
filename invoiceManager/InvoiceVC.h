@@ -15,7 +15,7 @@
 #import "InvoiceDiscountVC.h"
 
 @interface InvoiceVC : UIViewController <MFMailComposeViewControllerDelegate, SignaturePopoverVCDelegate, InvoiceDiscountVCDelegate> {
-   id <MFMailComposeViewControllerDelegate> mailDel;
+    id <MFMailComposeViewControllerDelegate> mailDel;
     IBOutlet UIScrollView *mainView;
     IBOutlet UILabel *test;
     
@@ -23,10 +23,10 @@
     UIPopoverController *popoverController;
     IBOutlet UIView *signatureView;
     /*// vars for signature capture:
-    CGPoint lastPoint;
-	UIImageView *drawImage;
-	BOOL mouseSwiped;
-	int mouseMoved;*/
+     CGPoint lastPoint;
+     UIImageView *drawImage;
+     BOOL mouseSwiped;
+     int mouseMoved;*/
     
     bool writePDF;
     NSMutableArray *invoiceSubviews;
@@ -47,11 +47,15 @@
     float carpetDiscount, upholsteryDiscount, mattressDiscount, miscellaneousDiscount, areaRugsDiscount, floodDiscount;
     float discountedCarpetPrice, discountedUpholsteryPrice, discountedMattressPrice, discountedMiscePrice, discountedAreaRugsPrice, discountedFloodPrice;
     float subtotalCarpetPrice, subtotalUpholsteryPrice, subtotalMattressPrice, subtotalMiscePrice, subtotalAreaRugsPrice, subtotalFloodPrice;
+    
+    NSMutableData* pdfData;
 }
 
 
 //@property (assign, nonatomic) IBOutlet UIImageView *mainImage;
 //@property (nonatomic, assign) IBOutlet UIImageView *tempDrawImage;
+
+@property (assign, readwrite) NSMutableData* pdfData;
 
 @property (assign, nonatomic) float carpetDiscount, upholsteryDiscount, mattressDiscount, miscellaneousDiscount, areaRugsDiscount, floodDiscount;
 @property (assign, nonatomic) float discountedCarpetPrice, discountedUpholsteryPrice, discountedMattressPrice, discountedMiscePrice, discountedAreaRugsPrice, discountedFloodPrice;

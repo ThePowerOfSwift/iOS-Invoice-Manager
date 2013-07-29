@@ -32,15 +32,19 @@
 }
 
 -(void) viewDidAppear:(BOOL)animated {
-    notesField.text = @"Place notes and comments here";
-    notesField.textColor = [UIColor lightGrayColor];
-    [notesField setDelegate:self];
-    itemName = @"";
-    itemType = @"";
-    //vacOrFull = @"empty";
-    
-    //[noOfItems setHidden:TRUE];
-    //[noOfItemsLabel setHidden:TRUE];
+    if ([self editMode]){
+        
+    } else {
+        notesField.text = @"Place notes and comments here";
+        notesField.textColor = [UIColor lightGrayColor];
+        [notesField setDelegate:self];
+        itemName = @"";
+        itemType = @"";
+        //vacOrFull = @"empty";
+        
+        //[noOfItems setHidden:TRUE];
+        //[noOfItemsLabel setHidden:TRUE];
+    }
 }
 
 - (void)viewDidLoad

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BasePopoverVC.h"
 
 @class OptionsMiscellaneousPopoverVC;
 
@@ -15,7 +16,7 @@
 - (void)updateMiscellaneousDataTable:(OptionsMiscellaneousPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsMiscellaneousPopoverVC : UIViewController <UITextViewDelegate> {
+@interface OptionsMiscellaneousPopoverVC : BasePopoverVC <UITextViewDelegate> {
     
     // delegate variables
     id <OptionsMiscellaneousPopoverVCDelegate> MIVCDelegate;  // options view controller delegate

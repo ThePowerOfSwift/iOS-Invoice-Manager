@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BasePopoverVC.h"
 
 @class OptionsUpholsteryPopoverVC;
 
@@ -16,7 +17,7 @@
 - (void)updateUpholsteryDataTable:(OptionsUpholsteryPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsUpholsteryPopoverVC : UIViewController <UITextViewDelegate> {
+@interface OptionsUpholsteryPopoverVC : BasePopoverVC <UITextViewDelegate> {
     
     // delegate variables
     id <OptionsUpholsteryPopoverVCDelegate> UVCDelegate;  // options view controller delegate

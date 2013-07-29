@@ -181,6 +181,7 @@
         [invMngr setSecondVC:second];
         [[invMngr secondVC] retain];
         [self.navigationController pushViewController:second animated:YES];
+        
     }
     
     if ([invMngr invoiceVC]){

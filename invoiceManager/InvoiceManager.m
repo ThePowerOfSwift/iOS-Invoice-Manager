@@ -14,7 +14,7 @@
 @synthesize currActiveVCName;
 @synthesize listOfServices;
 @synthesize estimateDate, ratePerSquareFeet, customerAddressOne, customerAddressTwo, customerFirstName, customerLastName, customerEmail, customerReferredBy,
-typeOfBuilding, buildingState, poNo, invoiceNo, technicianName, orderDate, customerPhoneNoTwo, customerPhoneNo;
+typeOfBuilding, buildingState, poNo, invoiceNo, technicianName, orderDate, customerPhoneNoTwo, customerPhoneNo, usingProductType;
 
 
 static InvoiceManager *shared = NULL;
@@ -26,14 +26,22 @@ static InvoiceManager *shared = NULL;
         // initialize your singleton variable here (i.e. set to initial value that you require)
         //listOfServices = [NSMutableArray arrayWithCapacity:1];
         listOfServices = [[NSMutableArray alloc] initWithCapacity:2];
-        [self setCustomerAddressOne:@""];
-        [self setCustomerAddressTwo:@""];
-        [self setCustomerEmail:@""];
-        [self setCustomerFirstName:@""];
-        [self setCustomerLastName:@""];
-        [self setCustomerPhoneNo:@""];
-        [self setCustomerPhoneNoTwo:@""];
-        [self setCustomerReferredBy:@""];
+        [self setCustomerAddressOne:@"(Empty)"];
+        [self setCustomerAddressTwo:@"(Empty)"];
+        [self setCustomerEmail:@"(Empty)"];
+        [self setCustomerFirstName:@"(Empty)"];
+        [self setCustomerLastName:@"(Empty)"];
+        [self setCustomerPhoneNo:@"(Empty)"];
+        [self setCustomerPhoneNoTwo:@"(Empty)"];
+        [self setCustomerReferredBy:@"(Empty)"];
+        
+        [self setBuildingState:@"Vacant State"];          // 'Furnished State', 'Vacant State' or 'Mobile State'
+        [self setUsingProductType:@"Normal Products"];       // 'Normal Products' or 'Green Products' products
+        [self setTypeOfBuilding:@"Residential Building"];    // 'Residential Building', 'Commercial Building' or other
+        [self setInvoiceNo:@"(Empty)"];
+        [self setPoNo:@"(Empty)"];
+        [self setTechnicianName:@"(Empty)"];
+        [self setOrderDate:@"(Empty)"];
     }
     return self;
     
@@ -128,7 +136,6 @@ static InvoiceManager *shared = NULL;
     return pdfData;
 }
 
-
 -(NSString*)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename
 {
     // Creates a mutable data object for updating with binary data, like a byte array
@@ -151,19 +158,32 @@ static InvoiceManager *shared = NULL;
 
 -(void) printOut {
     NSLog(@"list of services count: %u", [listOfServices count]);
-    
 }
 
 - (void)dealloc
 {
     //NSLog(@"Deallocating singleton...");
-    NSLog(@"IF I GET CALLED OMG OMG");
+    //NSLog(@"IF I GET CALLED OMG OMG");
     // Deallocating all ServiceItem objects
     for (int i = 0; i < [listOfServices count]; i++){
-        NSLog(@"deallocating.. %@", [[listOfServices objectAtIndex:i] name]);
+        //NSLog(@"deallocating.. %@", [[listOfServices objectAtIndex:i] name]);
         [[listOfServices objectAtIndex:i] release];
         
     }
+    
+    // dealloc all strings holding customer info and other
+    [customerReferredBy release];
+    [customerPhoneNoTwo release];
+    [customerPhoneNo release];
+    [customerLastName release];
+    [customerFirstName release];
+    [customerEmail release];
+    [customerAddressTwo release];
+    [customerAddressOne release];
+    [poNo release];
+    [invoiceNo release];
+    [orderDate release];
+    [technicianName release];
     
     [listOfServices release];
     [secondVC release];

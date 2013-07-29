@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BasePopoverVC.h"
 
 @class OptionsAreaRugsPopoverVC;
 
@@ -15,7 +16,7 @@
 - (void)updateAreaRugsDataTable:(OptionsAreaRugsPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsAreaRugsPopoverVC : UIViewController <UITextViewDelegate> {
+@interface OptionsAreaRugsPopoverVC : BasePopoverVC <UITextViewDelegate> {
     
     id <OptionsAreaRugsPopoverVCDelegate> ARVCDelegate;  // options view controller delegate
     

@@ -41,7 +41,7 @@
  notes - ..
  
  -------------------------------------------
-
+ 
  miscellaneous:
  name, price per item ( = priceRate ), quantity;
  
@@ -75,11 +75,13 @@
     NSString *vacOrFull;
     
     NSInteger quantity, quantity2;
-
+    
     NSString *materialType;
     
     NSInteger noOfHours;
     float ratePerHr;
+    
+    UIViewController* popoverVC;    // keep track of each UIViewController so it can be displayed for 'editing' purposes
 }
 
 @property (assign, readwrite) bool addonBiocide, addonDeodorizer, addonFabricProtector;
@@ -90,5 +92,6 @@
 @property (copy, readwrite) NSString *notes;
 @property (assign, readwrite) float rlength, rwidth, price, ratePerHr, priceRate;
 
+@property (assign, readwrite) UIViewController* popoverVC;
 @property (copy) NSString *vacOrFull;
 @end

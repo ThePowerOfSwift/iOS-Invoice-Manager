@@ -8,16 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "ServiceDataCell.h"
+#import "BasePopoverVC.h"
 
 @class OptionsPopoverVC;
 
 @protocol OptionsPopoverVCDelegate <NSObject>
 /*- (void)updateDataTable:(OptionsPopoverVC *)optionsVS editType:(NSString*) editType withLength: (float) length_arg withWidth: (float) width_arg
-                andRoom: (NSString*) roomName withPriceRate: (float) priceRate_arg andNotes: (NSString*) notesAboutRoom;*/
+ andRoom: (NSString*) roomName withPriceRate: (float) priceRate_arg andNotes: (NSString*) notesAboutRoom;*/
 - (void)updateDataTable:(OptionsPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsPopoverVC : UIViewController <UITextViewDelegate> {
+@interface OptionsPopoverVC : BasePopoverVC <UITextViewDelegate> {
     
     // delegate variables
     id <OptionsPopoverVCDelegate> OVCDelegate;  // options view controller delegate
