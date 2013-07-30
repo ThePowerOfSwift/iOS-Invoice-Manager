@@ -20,7 +20,6 @@
 @synthesize addonDeodorizer, addonFabricProtector, addonBiocide;
 @synthesize priceRate;
 @synthesize stairs, landings, stairsService;
-//@synthesize saveOrEditBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,11 +33,10 @@
 
 -(void) viewDidAppear:(BOOL)animated {
     
-    // NSLog(@" !! edit mode is %@", [self editMode]);
-    //NSLog([self editMode] ? @"Yes" : @"No");
     if ([self editMode]){
         [saveOrEditBtn setRestorationIdentifier:@"edit"];
         [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
+        [self doCalculations];  // do calculations in case some variables changes ( rate per square feet )
     } else {
         // set up the notes field
         notesField.text = @"Place notes and comments here";
@@ -197,6 +195,7 @@
             [sqfeetLabel setText:[NSString stringWithFormat:@"%0.02f square feet", squareFeet]];
             
             //NSLog(@"rate us %f", [invoiceMngr ratePerSquareFeet]);
+            NSLog(@"caculation !!!!");
             price = (float)squareFeet * priceRate;
             [priceLabel setText:[NSString stringWithFormat:@"$%0.02f", price]];
         } else {
@@ -241,7 +240,7 @@
             newCell.addonFabricProtector = addonFabricProtector;
             newCell.addonBiocide = addonBiocide;
             newCell.price = price;
-            
+            NSLog(@"the PRICE SENT IS %f", newCell.price);
             [OVCDelegate updateDataTable:self editType:@"add" withServiceCell:newCell];
             /*[OVCDelegate updateDataTable: self editType:@"add" withLength: rLength withWidth: rWidth andRoom: roomName withPriceRate: priceRate andNotes: notesAboutRoom];*/
         }
@@ -260,7 +259,7 @@
             self.editingCell.quantity2 = landings;
             self.editingCell.notes = notesAboutRoom;
             self.editingCell.price = price;
-            [[self editingCell] setPrice:99.0f];
+            //[[self editingCell] setPrice:99.0f];
         } else {
             self.editingCell.itemAttribute = @"Room";
             self.editingCell.serviceType = @"carpet";

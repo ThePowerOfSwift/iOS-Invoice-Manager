@@ -187,8 +187,31 @@
             cell.colTwo.text = [NSString stringWithFormat:@"%0.02f x %0.02f", rl, rw ];
             
             // get the user-inputted rate per sq feet (invoiceMngr ratePerSquareFeet)
-            CGFloat priceUpdate = [invoiceMngr ratePerSquareFeet] * rl * rw;
+            // CGFloat priceUpdate = [invoiceMngr ratePerSquareFeet] * rl * rw;
+            // [serviceCell setPrice:priceUpdate];
+            
+            // calculating
+            CGFloat currentPriceRate = [serviceCell priceRate];
+            currentPriceRate = [invoiceMngr ratePerSquareFeet];
+            if ([serviceCell addonDeodorizer]) {
+                currentPriceRate += 0.10f;
+                [serviceCell setPriceRate:currentPriceRate];
+                //priceRate = priceRate + 0.10f;
+            }
+            if ([serviceCell addonFabricProtector]){
+                currentPriceRate += 0.15f;
+                [serviceCell setPriceRate:currentPriceRate];
+                //priceRate = priceRate + 0.15f;
+            }
+            if ([serviceCell addonBiocide]){
+                currentPriceRate += 0.15f;
+                [serviceCell setPriceRate:currentPriceRate];
+                //priceRate = priceRate + 0.15f;
+            }
+            CGFloat priceUpdate = currentPriceRate * rl * rw;
+            [serviceCell setPriceRate:currentPriceRate];
             [serviceCell setPrice:priceUpdate];
+            
             cell.colFour.text = [NSString stringWithFormat:@"%.02f", [serviceCell price] ];
             //cell.colFour.text = [NSString stringWithFormat:@"%0.02f", ([invoiceMngr ratePerSquareFeet] * rl * rw) ];
         } else if ([[serviceCell itemAttribute] isEqualToString:@"Stairs"]){
@@ -201,18 +224,18 @@
             cell.colFour.text = [NSString stringWithFormat:@"%.02f", [serviceCell price]];
         }
         
-    } else if ([VCServiceNameType isEqualToString:@"mattress"]){                // MATTRESS service
+    } else if ([VCServiceNameType isEqualToString:@"mattress"]){                // Mattress service
         cell.colOne.text = [serviceCell name];
         cell.colTwo.text = [serviceCell vacOrFull];
         cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
         cell.colFour.text = [NSString stringWithFormat:@"%0.02f",[serviceCell price]];
-    } else if ([VCServiceNameType isEqualToString:@"upholstery"]){              // UPHOLSTERY service
+    } else if ([VCServiceNameType isEqualToString:@"upholstery"]){              // Upholstery service
         cell.colOne.text = [serviceCell name];
         NSString *vacAndMat = [NSString stringWithFormat:@"%@, %@", [serviceCell vacOrFull], [serviceCell materialType]];
         cell.colTwo.text = vacAndMat;
         cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
         cell.colFour.text = [NSString stringWithFormat:@"%0.02f",[serviceCell price]];
-    } else if ([VCServiceNameType isEqualToString:@"floodcleanup"]){              // UPHOLSTERY service
+    } else if ([VCServiceNameType isEqualToString:@"floodcleanup"]){              // Flood Cleanup service
         cell.colOne.text = [serviceCell name];
         //NSString *vacAndMat = [NSString stringWithFormat:@"%@, %@", [serviceCell vacOrFull], [serviceCell materialType]];
         cell.colTwo.text = [NSString stringWithFormat:@"%f", [serviceCell ratePerHr]];

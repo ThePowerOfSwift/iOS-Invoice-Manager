@@ -209,7 +209,7 @@
     
     //[second release];
     
-    NSLog(@"initiating new view controller..%@", self.navigationController);
+    //NSLog(@"initiating new view controller..%@", self.navigationController);
     
     //[second release];
 }

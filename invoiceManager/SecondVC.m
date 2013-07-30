@@ -41,7 +41,7 @@
     if (invoiceMngr.ratePerSquareFeet){
         ratePerSqFeet.text = [NSString stringWithFormat:@"%f", invoiceMngr.ratePerSquareFeet];
     }
-    
+    NSLog(@"ALLOCATING TAP NOW !!");
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];

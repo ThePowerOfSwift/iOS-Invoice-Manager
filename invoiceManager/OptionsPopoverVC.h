@@ -46,7 +46,6 @@
     
     IBOutlet UITextField *stairsField, *landingsField;
     
-    //IBOutlet UIButton *saveOrEditBtn;
 }
 
 @property (nonatomic, assign) id <OptionsPopoverVCDelegate> OVCDelegate;

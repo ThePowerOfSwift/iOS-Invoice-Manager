@@ -84,6 +84,7 @@
 		899409A51746CF49005CD368 /* labelServices@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899409931746CF49005CD368 /* labelServices@2x.png */; };
 		899409A71746CF49005CD368 /* settingsBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899409951746CF49005CD368 /* settingsBtn@2x.png */; };
 		899409A81746CF49005CD368 /* topBarGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899409961746CF49005CD368 /* topBarGreen@2x.png */; };
+		8995231917A8368B0011D9DE /* SettingsPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8995231817A8368B0011D9DE /* SettingsPopoverVC.m */; };
 		89AB24121751E4E7007B2419 /* OptionsMatressPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AB24111751E4E7007B2419 /* OptionsMatressPopoverVC.m */; };
 		89AB24151751F385007B2419 /* OptionsUpholsteryPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AB24141751F385007B2419 /* OptionsUpholsteryPopoverVC.m */; };
 		89C51158174D3B1B003880F7 /* ServiceDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C51157174D3B1B003880F7 /* ServiceDataCell.m */; };
@@ -249,6 +250,8 @@
 		899409931746CF49005CD368 /* labelServices@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "labelServices@2x.png"; sourceTree = "<group>"; };
 		899409951746CF49005CD368 /* settingsBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsBtn@2x.png"; sourceTree = "<group>"; };
 		899409961746CF49005CD368 /* topBarGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topBarGreen@2x.png"; sourceTree = "<group>"; };
+		8995231717A8368A0011D9DE /* SettingsPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsPopoverVC.h; sourceTree = "<group>"; };
+		8995231817A8368B0011D9DE /* SettingsPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsPopoverVC.m; sourceTree = "<group>"; };
 		89AB24101751E4E7007B2419 /* OptionsMatressPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMatressPopoverVC.h; sourceTree = "<group>"; };
 		89AB24111751E4E7007B2419 /* OptionsMatressPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsMatressPopoverVC.m; sourceTree = "<group>"; };
 		89AB24131751F385007B2419 /* OptionsUpholsteryPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsUpholsteryPopoverVC.h; sourceTree = "<group>"; };
@@ -565,6 +568,8 @@
 				890D466D17A6EFDB00F85645 /* BasePopoverVC.m */,
 				890D466F17A6F02400F85645 /* ConfirmationPopoverVC.h */,
 				890D467017A6F02500F85645 /* ConfirmationPopoverVC.m */,
+				8995231717A8368A0011D9DE /* SettingsPopoverVC.h */,
+				8995231817A8368B0011D9DE /* SettingsPopoverVC.m */,
 			);
 			name = popoverOptions;
 			sourceTree = "<group>";
@@ -843,6 +848,7 @@
 				89D445B11757CA67003E2B25 /* InvoiceDiscountVC.m in Sources */,
 				890D466E17A6EFDC00F85645 /* BasePopoverVC.m in Sources */,
 				890D467117A6F02500F85645 /* ConfirmationPopoverVC.m in Sources */,
+				8995231917A8368B0011D9DE /* SettingsPopoverVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
