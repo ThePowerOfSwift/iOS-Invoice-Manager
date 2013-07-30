@@ -70,19 +70,28 @@ static InvoiceManager *shared = NULL;
     NSLog(@"ALLOC SERVICE VC");
     // create a UIViewController instance and save it
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
-    ServiceTypeViewController *serviceVC = (ServiceTypeViewController*) [storyboard instantiateViewControllerWithIdentifier:@"ServiceTypeViewController"];
     
-    serviceVC.serviceDataCellArray = [[NSMutableArray alloc] initWithCapacity:1];
-    serviceVC.dataTableNoOfRows = 0;
-    //serviceVC.examp.text = serviceTypeName;
-    //NSLog(@"label text is %@", serviceVC.examp.text);
-    serviceVC.VCServiceNameType = serviceTypeName;   // currentVCServiceName = 'name of the type of service'
-    [serviceVC retain];                              // retain VC's; they will be used globally to navigate.. globally
-    item.serviceVC = serviceVC;                      // save to invoice manager..
-    
+    if ([serviceTypeName isEqualToString:@"autoSpa"] || [serviceTypeName isEqualToString:@"ductCleaning"]){
+        ServiceTypeTwoVC *serviceVC = (ServiceTypeTwoVC*) [storyboard instantiateViewControllerWithIdentifier:@"ServiceTypeTwoVC"];
+        serviceVC.VCServiceNameType = serviceTypeName;
+        [serviceVC retain];
+        item.serviceVC = serviceVC;
+    } else {
+        ServiceTypeViewController *serviceVC = (ServiceTypeViewController*) [storyboard instantiateViewControllerWithIdentifier:@"ServiceTypeViewController"];
+        
+        serviceVC.serviceDataCellArray = [[NSMutableArray alloc] initWithCapacity:1];
+        serviceVC.dataTableNoOfRows = 0;
+        
+        //serviceVC.examp.text = serviceTypeName;
+        //NSLog(@"label text is %@", serviceVC.examp.text);
+        serviceVC.VCServiceNameType = serviceTypeName;   // currentVCServiceName = 'name of the type of service'
+        [serviceVC retain];                              // retain VC's; they will be used globally to navigate.. globally
+        item.serviceVC = serviceVC;                      // save to invoice manager..
+    }
     // sort the array in ascending order, in terms of their 'order' variable
     NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES] autorelease];
     [listOfServices sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
     return item;
 }
 

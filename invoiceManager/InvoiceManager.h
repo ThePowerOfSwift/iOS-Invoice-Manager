@@ -40,6 +40,10 @@
     NSString *customerEmail;
     NSString *customerReferredBy;
     
+    // auto spa:
+    
+    
+    // carpet care:
     NSString *typeOfBuilding;       // 'Residential Building', 'Commercial Building' or other
     NSString *buildingState;        // 'Furnished State', 'Vacant State' or 'Portable State'
     NSString *usingProductType;     // 'Normal Products' or 'Green Products' products
@@ -47,10 +51,13 @@
     NSString *estimateDate;
     float ratePerSquareFeet;
     
+    // array that holds all the carpet care services
+    NSMutableArray *listOfServices;
+    
+    // View Controllers
     UIViewController *secondVC;
     UIViewController *invoiceVC;
-    // array that holds all the services
-    NSMutableArray *listOfServices;
+
     
 }
 

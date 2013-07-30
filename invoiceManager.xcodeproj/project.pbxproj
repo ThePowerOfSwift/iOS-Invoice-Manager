@@ -56,7 +56,6 @@
 		898994561742A4D7004D0A85 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 898994541742A4D7004D0A85 /* InfoPlist.strings */; };
 		898994591742A4D7004D0A85 /* invoiceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 898994581742A4D7004D0A85 /* invoiceManagerTests.m */; };
 		898994681742BBF3004D0A85 /* ServiceTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898994671742BBF3004D0A85 /* ServiceTypeViewController.m */; };
-		8989946E1742EE8D004D0A85 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989946D1742EE8D004D0A85 /* ThirdViewController.m */; };
 		89906A3A17A792D3002C3A20 /* plusIcon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 89906A3817A792D3002C3A20 /* plusIcon2.png */; };
 		89906A3B17A792D3002C3A20 /* plusIcon2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89906A3917A792D3002C3A20 /* plusIcon2@2x.png */; };
 		89906A3D17A7A9BB002C3A20 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 89906A3C17A7A9BB002C3A20 /* close.png */; };
@@ -85,6 +84,7 @@
 		899409A71746CF49005CD368 /* settingsBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899409951746CF49005CD368 /* settingsBtn@2x.png */; };
 		899409A81746CF49005CD368 /* topBarGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 899409961746CF49005CD368 /* topBarGreen@2x.png */; };
 		8995231917A8368B0011D9DE /* SettingsPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8995231817A8368B0011D9DE /* SettingsPopoverVC.m */; };
+		8995231C17A847660011D9DE /* ServiceTypeTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8995231B17A847650011D9DE /* ServiceTypeTwoVC.m */; };
 		89AB24121751E4E7007B2419 /* OptionsMatressPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AB24111751E4E7007B2419 /* OptionsMatressPopoverVC.m */; };
 		89AB24151751F385007B2419 /* OptionsUpholsteryPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AB24141751F385007B2419 /* OptionsUpholsteryPopoverVC.m */; };
 		89C51158174D3B1B003880F7 /* ServiceDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C51157174D3B1B003880F7 /* ServiceDataCell.m */; };
@@ -220,8 +220,6 @@
 		898994581742A4D7004D0A85 /* invoiceManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = invoiceManagerTests.m; sourceTree = "<group>"; };
 		898994661742BBF3004D0A85 /* ServiceTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTypeViewController.h; sourceTree = "<group>"; };
 		898994671742BBF3004D0A85 /* ServiceTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTypeViewController.m; sourceTree = "<group>"; };
-		8989946C1742EE8D004D0A85 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
-		8989946D1742EE8D004D0A85 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		89906A3817A792D3002C3A20 /* plusIcon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plusIcon2.png; sourceTree = "<group>"; };
 		89906A3917A792D3002C3A20 /* plusIcon2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plusIcon2@2x.png"; sourceTree = "<group>"; };
 		89906A3C17A7A9BB002C3A20 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
@@ -252,6 +250,8 @@
 		899409961746CF49005CD368 /* topBarGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topBarGreen@2x.png"; sourceTree = "<group>"; };
 		8995231717A8368A0011D9DE /* SettingsPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsPopoverVC.h; sourceTree = "<group>"; };
 		8995231817A8368B0011D9DE /* SettingsPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsPopoverVC.m; sourceTree = "<group>"; };
+		8995231A17A847640011D9DE /* ServiceTypeTwoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTypeTwoVC.h; sourceTree = "<group>"; };
+		8995231B17A847650011D9DE /* ServiceTypeTwoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTypeTwoVC.m; sourceTree = "<group>"; };
 		89AB24101751E4E7007B2419 /* OptionsMatressPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMatressPopoverVC.h; sourceTree = "<group>"; };
 		89AB24111751E4E7007B2419 /* OptionsMatressPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsMatressPopoverVC.m; sourceTree = "<group>"; };
 		89AB24131751F385007B2419 /* OptionsUpholsteryPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsUpholsteryPopoverVC.h; sourceTree = "<group>"; };
@@ -396,8 +396,6 @@
 				89CA61E31749E906002014CB /* Scenes */,
 				8989943C1742A4D7004D0A85 /* MainStoryboard_iPhone.storyboard */,
 				8989943F1742A4D7004D0A85 /* MainStoryboard_iPad.storyboard */,
-				8989946C1742EE8D004D0A85 /* ThirdViewController.h */,
-				8989946D1742EE8D004D0A85 /* ThirdViewController.m */,
 				8989D25F17431419000F11BF /* images */,
 				8989942B1742A4D7004D0A85 /* Supporting Files */,
 			);
@@ -594,6 +592,8 @@
 				89C834D4174B251B00CC3F07 /* SecondVC.m */,
 				898994661742BBF3004D0A85 /* ServiceTypeViewController.h */,
 				898994671742BBF3004D0A85 /* ServiceTypeViewController.m */,
+				8995231A17A847640011D9DE /* ServiceTypeTwoVC.h */,
+				8995231B17A847650011D9DE /* ServiceTypeTwoVC.m */,
 				891E01941755677200FF53CE /* InvoiceVC.h */,
 				891E01951755677200FF53CE /* InvoiceVC.m */,
 				89AB240F1751E4BA007B2419 /* popoverOptions */,
@@ -828,7 +828,6 @@
 				898994351742A4D7004D0A85 /* AppDelegate.m in Sources */,
 				898994441742A4D7004D0A85 /* ViewController.m in Sources */,
 				898994681742BBF3004D0A85 /* ServiceTypeViewController.m in Sources */,
-				8989946E1742EE8D004D0A85 /* ThirdViewController.m in Sources */,
 				8946358D174421DE00CF60B8 /* CustomTableViewCell.m in Sources */,
 				89CA61E61749E998002014CB /* InvoiceManager.m in Sources */,
 				89C834C2174AC68300CC3F07 /* OptionsPopoverVC.m in Sources */,
@@ -849,6 +848,7 @@
 				890D466E17A6EFDC00F85645 /* BasePopoverVC.m in Sources */,
 				890D467117A6F02500F85645 /* ConfirmationPopoverVC.m in Sources */,
 				8995231917A8368B0011D9DE /* SettingsPopoverVC.m in Sources */,
+				8995231C17A847660011D9DE /* ServiceTypeTwoVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

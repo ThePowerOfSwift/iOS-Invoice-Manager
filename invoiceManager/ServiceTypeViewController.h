@@ -60,7 +60,7 @@
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 //-(IBAction) goBackCUSTOMACTION;
--(IBAction)removeRow:(id)sender;
+-(IBAction) removeRow: (id)sender;
 -(IBAction) helloWorld: (id) sender;
 -(IBAction) onChoosingType: (id) sender;
 -(IBAction) displayOptionsPopoverVC: (id) sender;
