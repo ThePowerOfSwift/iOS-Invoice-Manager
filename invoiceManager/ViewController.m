@@ -36,7 +36,7 @@
     //segmentedControl.transform = CGAffineTransformMakeRotation(M_PI / 2.0);
     
     /*UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
-    [scrollViewer addGestureRecognizer:singleTap];*/
+     [scrollViewer addGestureRecognizer:singleTap];*/
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -49,49 +49,49 @@
     [list1 addObject:@"first one"];
     [list1 addObject:@"second one"];
     [list1 addObject:@"third one"];
-
+    
     // load saved values (IF ANY)
     InvoiceManager *invoiceMngr = [InvoiceManager sharedInvoiceManager];
     
     [invoiceMngr printOut];
     
     /*if (invoiceMngr.invoiceNo != NULL){
-        invoiceField.text = invoiceMngr.invoiceNo;
-    }
-    if (invoiceMngr.poNo != NULL){
-        poField.text = invoiceMngr.poNo;
-    }
-    if (invoiceMngr.orderDate != NULL){
-        poField.text = invoiceMngr.orderDate;
-    }
-    if (invoiceMngr.technicianName != NULL){
-        techNameField.text = invoiceMngr.technicianName;
-    }
-    if (invoiceMngr.customerFirstName != NULL){
-        customerFirstNameField.text = invoiceMngr.customerFirstName;
-    }
-    if (invoiceMngr.customerLastName != NULL){
-        customerLastNameField.text = invoiceMngr.customerLastName;
-    }
-    if (invoiceMngr.customerAddressOne != NULL){
-        customerAddressOneField.text = invoiceMngr.customerAddressOne;
-    }
-    if (invoiceMngr.customerAddressTwo != NULL){
-        customerAddressTwoField.text = invoiceMngr.customerAddressTwo;
-    }
-    if (invoiceMngr.customerPhoneNo != NULL){
-        customerPhoneField.text = invoiceMngr.customerPhoneNo;
-    }
-    if (invoiceMngr.customerEmail != NULL){
-        customerEmailField.text = invoiceMngr.customerEmail;
-    }
-    if (invoiceMngr.customerReferredBy != NULL){
-        customerReferredField.text = invoiceMngr.customerReferredBy;
-    }
-    */
+     invoiceField.text = invoiceMngr.invoiceNo;
+     }
+     if (invoiceMngr.poNo != NULL){
+     poField.text = invoiceMngr.poNo;
+     }
+     if (invoiceMngr.orderDate != NULL){
+     poField.text = invoiceMngr.orderDate;
+     }
+     if (invoiceMngr.technicianName != NULL){
+     techNameField.text = invoiceMngr.technicianName;
+     }
+     if (invoiceMngr.customerFirstName != NULL){
+     customerFirstNameField.text = invoiceMngr.customerFirstName;
+     }
+     if (invoiceMngr.customerLastName != NULL){
+     customerLastNameField.text = invoiceMngr.customerLastName;
+     }
+     if (invoiceMngr.customerAddressOne != NULL){
+     customerAddressOneField.text = invoiceMngr.customerAddressOne;
+     }
+     if (invoiceMngr.customerAddressTwo != NULL){
+     customerAddressTwoField.text = invoiceMngr.customerAddressTwo;
+     }
+     if (invoiceMngr.customerPhoneNo != NULL){
+     customerPhoneField.text = invoiceMngr.customerPhoneNo;
+     }
+     if (invoiceMngr.customerEmail != NULL){
+     customerEmailField.text = invoiceMngr.customerEmail;
+     }
+     if (invoiceMngr.customerReferredBy != NULL){
+     customerReferredField.text = invoiceMngr.customerReferredBy;
+     }
+     */
     /*if (invoiceMngr.ratePerSquareFeet){
-        ratePerSqFeet.text = [NSString stringWithFormat:@"%f", invoiceMngr.ratePerSquareFeet];
-    }*/
+     ratePerSqFeet.text = [NSString stringWithFormat:@"%f", invoiceMngr.ratePerSquareFeet];
+     }*/
     
     //InvoiceManager *blah = [InvoiceManager sharedInvoiceManager];
     //blah.customerName = @"Heybaboo";
@@ -100,19 +100,19 @@
     //[testBtn setImage:[UIImage imageNamed:@"bg1.jpg"] forState:nil];
     
     /*NSArray *arr = [segmentedControl subviews];
-    NSLog(@"count is %u", [arr count]);
-    for (int i = 0; i < [arr count]; i++) {
-        UIView *v = (UIView*) [arr objectAtIndex:i];
-        NSArray *subarr = [v subviews];
-        NSLog(@"count is %u", [subarr count]);
-        for (int j = 0; j < [subarr count]; j++) {
-            if ([[subarr objectAtIndex:j] isKindOfClass:[UILabel class]]) {
-                UILabel *l = (UILabel*) [subarr objectAtIndex:j];
-                l.transform = CGAffineTransformMakeRotation(-M_PI / 2.0); //do the reverse of what Ben did
-                
-            }
-        }
-    }*/
+     NSLog(@"count is %u", [arr count]);
+     for (int i = 0; i < [arr count]; i++) {
+     UIView *v = (UIView*) [arr objectAtIndex:i];
+     NSArray *subarr = [v subviews];
+     NSLog(@"count is %u", [subarr count]);
+     for (int j = 0; j < [subarr count]; j++) {
+     if ([[subarr objectAtIndex:j] isKindOfClass:[UILabel class]]) {
+     UILabel *l = (UILabel*) [subarr objectAtIndex:j];
+     l.transform = CGAffineTransformMakeRotation(-M_PI / 2.0); //do the reverse of what Ben did
+     
+     }
+     }
+     }*/
     
 	//scrollViewer.contentSize = CGSizeMake(847, 800);
     //self.scrollViewer.contentSize = CGSizeMake(768, 3600);
@@ -126,12 +126,12 @@
 }
 
 /*
-- (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
-{
-    CGPoint touchPoint=[gesture locationInView:scrollViewer];
-    [invoiceField resignFirstResponder];
-    NSLog(@"HEEELLO THERE ");
-}*/
+ - (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
+ {
+ CGPoint touchPoint=[gesture locationInView:scrollViewer];
+ [invoiceField resignFirstResponder];
+ NSLog(@"HEEELLO THERE ");
+ }*/
 
 - (void)didReceiveMemoryWarning
 {
@@ -140,19 +140,21 @@
 }
 
 /*
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-*/
+ - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+ return 1;
+ }
+ 
+ // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+ // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+ 
+ - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+ }
+ */
 
 -(IBAction)switchControllers {
+    InvoiceManager* invoiceMngr = [InvoiceManager sharedInvoiceManager];
+    NSLog(@"c !!!!!!!!! ust last nameis %@", [invoiceMngr customerLastName]);
     //SecondViewController *viewcontroller = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
     //ThirdViewController *viewcontroller = [[ThirdViewController alloc] init];
     //[self presentModalViewController:viewcontroller animated:YES];
@@ -160,12 +162,12 @@
     //[storyboard instantiateViewControllerWithIdentifier:@"SecondController"];
     
     /*
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
-    SecondViewController *second = (SecondViewController*) [storyboard instantiateViewControllerWithIdentifier:@"SecondController"];
-    second.set = 56;
-    second.SVCdelegate = self;
-    [self presentViewController:second animated:YES completion:nil];
-    */
+     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
+     SecondViewController *second = (SecondViewController*) [storyboard instantiateViewControllerWithIdentifier:@"SecondController"];
+     second.set = 56;
+     second.SVCdelegate = self;
+     [self presentViewController:second animated:YES completion:nil];
+     */
     //UINavigationController *ha = [self.navigationController initWithRootViewController:self];
     //NSLog(@"nav controller: %@", ha);
     
@@ -197,7 +199,7 @@
     }
     
     //ServiceTypeViewController *second = (ServiceTypeViewController*) [storyboard instantiateViewControllerWithIdentifier:@"ServiceTypeViewController"];
-
+    
     //AAAViewController *aaa = [[AAAViewController alloc] initWithNibName:@"AAAViewController" bundle:nil];
     //[ha pushViewController:second animated:YES];
     
@@ -211,10 +213,10 @@
 }
 
 /*-(IBAction) goAwayKeyboard: (id) sender {
-    NSLog(@"keyboard going away ?");
-    [sender resignFirstResponder];
-    [invoiceField resignFirstResponder];
-}*/
+ NSLog(@"keyboard going away ?");
+ [sender resignFirstResponder];
+ [invoiceField resignFirstResponder];
+ }*/
 
 -(void) textFieldDidEndEditing:(UITextField *)textField {
     NSLog(@"done editing");
@@ -236,31 +238,46 @@
     InvoiceManager *invoiceMngr = [InvoiceManager sharedInvoiceManager];
     // THE CAST: (note! read above)
     NSString *inputtedText = [(UITextField *)sender text];
+    NSLog(@"inputted text is : %@", inputtedText);
     if ([[sender restorationIdentifier] isEqualToString:@"invoiceNo"]){
-        invoiceMngr.invoiceNo = inputtedText;
+        [invoiceMngr setInvoiceNo:inputtedText];
+        [[invoiceMngr invoiceNo] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"poNo"]){
-        invoiceMngr.poNo = inputtedText;
+        [invoiceMngr setPoNo:inputtedText];
+        [[invoiceMngr poNo] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"technicianName"]){
-        invoiceMngr.technicianName = inputtedText;
+        [invoiceMngr setTechnicianName:inputtedText];
+        [[invoiceMngr technicianName] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"currentDate"]){
-        invoiceMngr.orderDate = inputtedText;
+        [invoiceMngr setOrderDate:inputtedText];
+        [[invoiceMngr orderDate] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"customerFirstName"]){
-        invoiceMngr.customerFirstName = inputtedText;
+        [invoiceMngr setCustomerFirstName:inputtedText];
+        [[invoiceMngr customerFirstName] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"customerLastName"]){
-        invoiceMngr.customerLastName = inputtedText;
+        [invoiceMngr setCustomerLastName:inputtedText];
+        [[invoiceMngr customerLastName] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"customerAddressOne"]){
-        invoiceMngr.customerAddressOne = inputtedText;
+        [invoiceMngr setCustomerAddressOne:inputtedText];
+        [[invoiceMngr customerAddressOne] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"customerAddressTwo"]){
-        invoiceMngr.customerAddressTwo = inputtedText;
+        [invoiceMngr setCustomerAddressTwo:inputtedText];
+        [[invoiceMngr customerAddressTwo] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"customerPhone"]){
-        invoiceMngr.customerPhoneNo = inputtedText;
+        [invoiceMngr setCustomerPhoneNo:inputtedText];
+        [[invoiceMngr customerPhoneNo] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"customerPhoneTwo"]){
-        invoiceMngr.customerPhoneNoTwo = inputtedText;
+        [invoiceMngr setCustomerPhoneNoTwo:inputtedText];
+        [[invoiceMngr customerPhoneNoTwo] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"customerEmail"]){
-        invoiceMngr.customerEmail = inputtedText;
+        [invoiceMngr setCustomerEmail:inputtedText];
+        [[invoiceMngr customerEmail] retain];
     } else if ([[sender restorationIdentifier] isEqualToString:@"customerReferredBy"]){
-        invoiceMngr.customerReferredBy = inputtedText;
+        [invoiceMngr setCustomerReferredBy:inputtedText];
+        [[invoiceMngr customerReferredBy] retain];
     }
+    
+    NSLog(@"cust last nameis %@", [invoiceMngr customerLastName]);
 }
 
 // only supports UIButton's right now
@@ -268,35 +285,40 @@
     // set last selected back to normal
     for (UIButton *aSubview in self.view.subviews){
         //for (id aSubview in aSubview2.subviews){
-            if ([aSubview isKindOfClass:[UIButton class]]){
-                if ([aSubview tag] == 10){
-                    NSLog(@"hi, %@, %u", [aSubview restorationIdentifier], [aSubview tag]);
-                    //[aSubview setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                    
-                    [aSubview setTag:0];
-                }
+        if ([aSubview isKindOfClass:[UIButton class]]){
+            if ([aSubview tag] == 10){
+                NSLog(@"hi, %@, %u", [aSubview restorationIdentifier], [aSubview tag]);
+                //[aSubview setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                
+                [aSubview setTag:0];
             }
+        }
         //}
     }
     
     // put background image view under the newly selected button
     UIButton *btn = (UIButton*)sender;
     NSString *senderID = [btn restorationIdentifier];
-    NSLog(@"id=%@", senderID);
+    
+    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
+    
     if ([senderID isEqualToString:@"residential"]){
         [selectedBtnBg setFrame:CGRectMake(447.0f, selectedBtnBg.frame.origin.y, selectedBtnBg.frame.size.width, selectedBtnBg.frame.size.height)];
         [customerFirstNameField setPlaceholder:@"customer first name"];
         [customerLastNameField setPlaceholder:@"customer last name"];
+        
+        // save the type of building selected in the invoice manager singleton
+        [invMngr setTypeOfBuilding:@"Residential Building"];
     } else if ([senderID isEqualToString:@"commercial"]){
         [selectedBtnBg setFrame:CGRectMake(581.0f, selectedBtnBg.frame.origin.y, selectedBtnBg.frame.size.width, selectedBtnBg.frame.size.height)];
         [customerFirstNameField setPlaceholder:@"company name"];
         [customerLastNameField setPlaceholder:@"project manager name"];
         
+        // save the type of building selected in the invoice manager singleton
+        [invMngr setTypeOfBuilding:@"Commercial Building"];
     }
     [btn setTag:10];
     
-    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
-    [invMngr setTypeOfBuilding:[btn restorationIdentifier]];
     //[btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
 }
@@ -321,20 +343,23 @@
     UIButton *btn = (UIButton*)sender;
     NSString *senderID = [btn restorationIdentifier];
     
+    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
+    
     if ([senderID isEqualToString:@"furnished"]){
         [selectedBtnBgTwo setFrame:
          CGRectMake(403.0f, selectedBtnBgTwo.frame.origin.y, selectedBtnBgTwo.frame.size.width, selectedBtnBgTwo.frame.size.height)];
+        [invMngr setBuildingState:@"Furnished State"];
     } else if ([senderID isEqualToString:@"vacant"]){
         [selectedBtnBgTwo setFrame:
          CGRectMake(517.0f, selectedBtnBgTwo.frame.origin.y, selectedBtnBgTwo.frame.size.width, selectedBtnBgTwo.frame.size.height)];
+        [invMngr setBuildingState:@"Vacant State"];
     } else if ([senderID isEqualToString:@"portable"]){
         [selectedBtnBgTwo setFrame:
          CGRectMake(640.0f, selectedBtnBgTwo.frame.origin.y, selectedBtnBgTwo.frame.size.width, selectedBtnBgTwo.frame.size.height)];
+        [invMngr setBuildingState:@"Portable State"];
     }
     [btn setTag:11];
     //[btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
-    [invMngr setBuildingState:[btn restorationIdentifier]];
 }
 
 -(IBAction)onTouchDownIcon {
