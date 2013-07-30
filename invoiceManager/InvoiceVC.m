@@ -38,7 +38,7 @@
 }
 
 /*
--(void) viewDidAppear:(BOOL)animated {
+ -(void) viewDidAppear:(BOOL)animated {
  [mainView setBackgroundColor:[UIColor clearColor]];
  [mainView setOpaque:NO];
  }
@@ -120,9 +120,17 @@
     
     ///pdfData = [NSMutableData dataWithCapacit
     
+    if (pdfData){
+        UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
+    } else {
+        pdfData = [NSMutableData data];
+        UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
+    }
+    [pdfData retain];
+    
     // start drawing in pdf context
     //UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/MightyCleanInvoice.pdf", CGRectZero, nil);
-    UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
+    
     
     //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 1753, 1240), nil);
     UIGraphicsBeginPDFPageWithInfo(CGRectMake(0.0, 0.0, 768.0, 1024.0), nil);
@@ -661,7 +669,7 @@
     
     // adding attachment
     
-    [controller addAttachmentData:nil mimeType:@"application/pdf" fileName:@"MightyCleanInvoice.pdf"];  // attach the pdf invoice
+    [controller addAttachmentData:pdfData mimeType:@"application/pdf" fileName:@"MightyCleanInvoice.pdf"];  // attach the pdf invoice
     
     controller.mailComposeDelegate = self;
     [controller setSubject:@"Mighty Clean Invoice"];
