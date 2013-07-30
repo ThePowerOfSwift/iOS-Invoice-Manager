@@ -30,8 +30,10 @@
     //NSArray *array    ToLoadPicker = [[NSArray alloc] initWithObjects:@”iPhone”,@”iPad”,@”iPod”,@”iMac”,@”MacBook”,@”MacBook Pro”, nil];
     
     //NSLog(@"hey bud, %@", invMgr.customerName);
-    [scrollViewer setScrollEnabled:YES];
-    [scrollViewer setContentSize:CGSizeMake(768, 3500)];
+    
+    // make a scrollviewer and set its content size
+    //[scrollViewer setScrollEnabled:YES];
+    //[scrollViewer setContentSize:CGSizeMake(768, 3500)];
     
     //segmentedControl.transform = CGAffineTransformMakeRotation(M_PI / 2.0);
     

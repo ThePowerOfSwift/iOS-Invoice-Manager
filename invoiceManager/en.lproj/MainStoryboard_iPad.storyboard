@@ -410,7 +410,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Miscellaneous" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Gb-vO-SR5">
-                                <rect key="frame" x="59" y="306" width="108" height="21"/>
+                                <rect key="frame" x="59" y="306" width="163" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -842,11 +842,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ydX-YH-G6j">
-                                <rect key="frame" x="47" y="284" width="24" height="25"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="U8e-eD-27f">
+                                <rect key="frame" x="17" y="296" width="49" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" backgroundImage="plusIcon.png">
+                                <state key="normal" backgroundImage="plusIcon2.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -854,11 +854,11 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="displayOptionsPopoverVC:" destination="8pM-po-MtX" eventType="touchUpInside" id="t28-Dc-VbF"/>
+                                    <action selector="displayOptionsPopoverVC:" destination="8pM-po-MtX" eventType="touchUpInside" id="Vw1-iU-CTA"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add Service" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aoC-WG-ZfZ">
-                                <rect key="frame" x="83" y="274" width="187" height="43"/>
+                                <rect key="frame" x="78" y="279" width="187" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -906,10 +906,10 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9pV-fN-LUb" customClass="CustomUIButton">
-                                                    <rect key="frame" x="590" y="7" width="43" height="31"/>
+                                                    <rect key="frame" x="609" y="7" width="32" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal" title="del">
+                                                    <state key="normal" title="del" image="close.png">
                                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -921,10 +921,10 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="L1L-Ha-ZUZ" customClass="CustomUIButton">
-                                                    <rect key="frame" x="641" y="7" width="43" height="31"/>
+                                                    <rect key="frame" x="651" y="7" width="32" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal" title="edit">
+                                                    <state key="normal" title="edit" image="pencil.png">
                                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -4334,6 +4334,7 @@
         <image name="btnBackground5.png" width="218" height="33"/>
         <image name="btnNext.png" width="289" height="64"/>
         <image name="checkboxNo6.png" width="111" height="62"/>
+        <image name="close.png" width="64" height="64"/>
         <image name="horizontalLine.png" width="337" height="4"/>
         <image name="horizontalLine5.png" width="720" height="4"/>
         <image name="horizontalLineFull.png" width="776" height="2"/>
@@ -4361,7 +4362,8 @@
         <image name="labelOrderInfo.png" width="189" height="33"/>
         <image name="labelServices.png" width="148" height="31"/>
         <image name="mightyCleanCarpetCareLogo.png" width="313" height="186"/>
-        <image name="plusIcon.png" width="24" height="25"/>
+        <image name="pencil.png" width="64" height="64"/>
+        <image name="plusIcon2.png" width="49" height="49"/>
         <image name="popoverBg.png" width="16" height="16"/>
         <image name="popoverBg5.png" width="657" height="70"/>
         <image name="popoverBgBottom.png" width="16" height="16"/>

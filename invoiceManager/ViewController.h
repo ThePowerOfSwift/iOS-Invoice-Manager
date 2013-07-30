@@ -13,8 +13,6 @@
 #import "InvoiceVC.h"
 #import "CustomTableViewCell.h"
 
-
-
 @interface ViewController : UIViewController <SecondViewControllerDelegate> {
     IBOutlet UITextField *nameTextField;
     IBOutlet UIScrollView *scrollViewer;
