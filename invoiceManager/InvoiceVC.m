@@ -37,10 +37,12 @@
     return self;
 }
 
-/*-(void) viewDidAppear:(BOOL)animated {
+/*
+-(void) viewDidAppear:(BOOL)animated {
  [mainView setBackgroundColor:[UIColor clearColor]];
  [mainView setOpaque:NO];
- }*/
+ }
+*/
 
 - (void)viewDidLoad
 {

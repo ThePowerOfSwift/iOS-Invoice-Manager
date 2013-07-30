@@ -33,7 +33,8 @@
 
 -(void) viewDidAppear:(BOOL)animated {
     if ([self editMode]){
-        
+        [saveOrEditBtn setRestorationIdentifier:@"edit"];
+        [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
     } else {
         notesField.text = @"Place notes and comments here";
         notesField.textColor = [UIColor lightGrayColor];
@@ -351,6 +352,20 @@
         newCell.addonFabricProtector = addonFabricSoftener;
         [ARVCDelegate updateAreaRugsDataTable:self editType:@"add" withServiceCell:newCell];
         //[FVCDelegate updateFloodDataTable:self editType:@"add" withItemName:nil withRate:0.0f withQuantity:0 withPrice:price andNotes:nil];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
+        //[ARVCDelegate updateAreaRugsDataTable:self editType:@"cancel" withServiceCell:nil];
+        // [ARVCDelegate updateFloodDataTable:self editType:@"cancel" withItemName:nil withRate:0.0f withQuantity:0 withQuantity2:0 withPrice:price andNotes:nil];
+        
+        self.editingCell.serviceType = @"areaRugs";
+        self.editingCell.name = itemName;
+        self.editingCell.materialType = itemType;
+        self.editingCell.quantity = quantity;
+        self.editingCell.price = price;
+        self.editingCell.notes = notes;
+        self.editingCell.addonBiocide = addonBiocide;
+        self.editingCell.addonDeodorizer = addonDeodorizer;
+        self.editingCell.addonFabricProtector = addonFabricSoftener;
+        [ARVCDelegate updateAreaRugsDataTable:self editType:@"edit" withServiceCell:nil];
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
         [ARVCDelegate updateAreaRugsDataTable:self editType:@"cancel" withServiceCell:nil];
         // [ARVCDelegate updateFloodDataTable:self editType:@"cancel" withItemName:nil withRate:0.0f withQuantity:0 withQuantity2:0 withPrice:price andNotes:nil];

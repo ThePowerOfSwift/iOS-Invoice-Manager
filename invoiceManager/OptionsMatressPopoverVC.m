@@ -34,7 +34,8 @@
 
 -(void) viewDidAppear:(BOOL)animated {
     if ([self editMode]){
-        
+        [saveOrEditBtn setRestorationIdentifier:@"edit"];
+        [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
     } else {
         notesField.text = @"Place notes and comments here";
         notesField.textColor = [UIColor lightGrayColor];
@@ -254,6 +255,19 @@
         
         [MVCDelegate updateMatressDataTable:self editType:@"add" withServiceCell:newCell];
         //[MVCDelegate updateMatressDataTable:self editType:@"add" withItem:itemName withCleanType:vacOrFull andQuantity:quantity andPrice:price andNotes:notes];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
+        //[MVCDelegate updateMatressDataTable:self editType:@"cancel" withServiceCell:nil];
+        //[MVCDelegate updateMatressDataTable:self editType:@"cancel" withItem:itemName withCleanType:vacOrFull andQuantity:quantity  andPrice:price andNotes:notes];
+        self.editingCell.serviceType = @"mattress";
+        self.editingCell.quantity = quantity;
+        self.editingCell.name = itemName;
+        self.editingCell.price = price;
+        self.editingCell.vacOrFull = vacOrFull;
+        self.editingCell.notes = notes;
+        self.editingCell.addonBiocide = addonBiocide;
+        self.editingCell.addonDeodorizer = addonDeodorizer;
+        self.editingCell.addonFabricProtector = addonFabricProtector;
+        [MVCDelegate updateMatressDataTable:self editType:@"edit" withServiceCell:nil];
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
         [MVCDelegate updateMatressDataTable:self editType:@"cancel" withServiceCell:nil];
         //[MVCDelegate updateMatressDataTable:self editType:@"cancel" withItem:itemName withCleanType:vacOrFull andQuantity:quantity  andPrice:price andNotes:notes];

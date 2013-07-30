@@ -10,8 +10,13 @@
 
 @interface BasePopoverVC : UIViewController {
     bool editMode;
+    ServiceDataCell* editingCell;
+    
+    IBOutlet UIButton *saveOrEditBtn;
 }
 
+@property (nonatomic, assign) IBOutlet UIButton *saveOrEditBtn;
 @property (assign, readwrite) bool editMode;
+@property (assign, readwrite) ServiceDataCell* editingCell;
 
 @end

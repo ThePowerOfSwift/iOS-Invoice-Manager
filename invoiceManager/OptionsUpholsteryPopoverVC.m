@@ -31,7 +31,8 @@
 
 -(void) viewDidAppear:(BOOL)animated {
     if ([self editMode]){
-        
+        [saveOrEditBtn setRestorationIdentifier:@"edit"];
+        [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
     } else {
         // set up the notes field
         notesField.text = @"Place notes and comments here";
@@ -378,6 +379,22 @@
         
         [UVCDelegate updateUpholsteryDataTable:self editType:@"add" withServiceCell:newCell];
         //[UVCDelegate updateUpholsteryDataTable:self editType:@"add" withItemName:itemName withMaterialType:materialType withCleanType:vacOrFull andQuantity:quantity andPrice:price andNotes:notes];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
+        //[UVCDelegate updateUpholsteryDataTable:self editType:@"cancel" withServiceCell:nil];
+        //[UVCDelegate updateUpholsteryDataTable:self editType:@"cancel" withItemName:nil withMaterialType:nil withCleanType:nil andQuantity:0 andPrice:0.0f andNotes:nil];
+        
+        self.editingCell.serviceType = @"upholstery";
+        self.editingCell.notes = notes;
+        self.editingCell.name = itemName;
+        self.editingCell.materialType = materialType;
+        self.editingCell.vacOrFull = vacOrFull;
+        self.editingCell.quantity = quantity;
+        self.editingCell.price = price;
+        self.editingCell.addonFabricProtector = addonFabricSoftener;
+        self.editingCell.addonDeodorizer = addonDeodorizer;
+        self.editingCell.addonBiocide = addonBiocide;
+        
+        [UVCDelegate updateUpholsteryDataTable:self editType:@"edit" withServiceCell:nil];
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
         [UVCDelegate updateUpholsteryDataTable:self editType:@"cancel" withServiceCell:nil];
         //[UVCDelegate updateUpholsteryDataTable:self editType:@"cancel" withItemName:nil withMaterialType:nil withCleanType:nil andQuantity:0 andPrice:0.0f andNotes:nil];

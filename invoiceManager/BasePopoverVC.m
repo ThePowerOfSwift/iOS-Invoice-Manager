@@ -14,7 +14,7 @@
 
 @implementation BasePopoverVC
 
-@synthesize editMode;
+@synthesize editMode, editingCell, saveOrEditBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

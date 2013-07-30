@@ -33,7 +33,8 @@
 
 -(void) viewDidAppear:(BOOL)animated {
     if ([self editMode]){
-        
+        [saveOrEditBtn setRestorationIdentifier:@"edit"];
+        [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
     } else {
         notesField.text = @"Place notes and comments here";
         notesField.textColor = [UIColor lightGrayColor];

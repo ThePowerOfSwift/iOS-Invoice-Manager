@@ -287,10 +287,12 @@
 -(IBAction)editRow:(id)sender {
     
     UIViewController* popoverToEdit = [[serviceDataCellArray objectAtIndex:[sender cellIndex]] popoverVC];
+    ServiceDataCell* cellToEdit = [serviceDataCellArray objectAtIndex:[sender cellIndex]];
     BasePopoverVC* popovervcEdit = (BasePopoverVC*) popoverToEdit;
-    //NSLog(@"HEY BUDDY EDITING %u, %@", [sender cellIndex], [popoverToEdit restorationIdentifier]);
-    NSLog(@">>>>>>>>>>>index is %u", [sender cellIndex]);
+    // NSLog(@"HEY BUDDY EDITING %u, %@", [sender cellIndex], [popoverToEdit restorationIdentifier]);
+    // NSLog(@">>>>>>>>>>>index is %u", [sender cellIndex]);
     [popovervcEdit setEditMode:true];
+    [popovervcEdit setEditingCell:cellToEdit];
     
     /*NSString* popoverVCrestorationID = [popoverToEdit restorationIdentifier];
      if ([popoverVCrestorationID isEqualToString:@"OptionsPopoverVC"]){
@@ -322,7 +324,7 @@
     //optionsMatressVC.MVCDelegate = self;        // set the popover's delegate to this ui vc (IMPORTANT!)
     [popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     
-    [self removeRow:sender];
+    // [self removeRow:sender];
 }
 
 // instantiate popover (+ Add item) in terms of what service type page is generated
@@ -437,7 +439,8 @@
         [dataTable reloadData];                 // reload table view data
         [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"edit"]){
-        
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
+        [dataTable reloadData];                 // reload table view data
     } else if ([editType isEqualToString:@"cancel"]){
         [popover dismissPopoverAnimated:NO];
     }
@@ -464,7 +467,8 @@
         [optionsVS retain];
         [cell_arg setPopoverVC:optionsVS];
         NSLog(@"price is %f", [cell_arg price]);
-        /*if (optionsVS){
+        /*
+         if (optionsVS){
          NSLog(@"its NOT NULL ");
          } else {
          NSLog(@"its  NULL ");
@@ -476,7 +480,8 @@
         [dataTable reloadData];                 // reload table view data
         [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"edit"]){
-        
+        [dataTable reloadData];                 // update table
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"cancel"]){
         [popover dismissPopoverAnimated:NO];
     }
@@ -506,7 +511,8 @@
         [dataTable reloadData];                 // reload table view data
         [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"edit"]){
-        
+        [dataTable reloadData];                 // update table
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"cancel"]){
         [popover dismissPopoverAnimated:NO];
     }
@@ -536,7 +542,8 @@
         [dataTable reloadData];                 // reload table view data
         [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"edit"]){
-        
+        [dataTable reloadData];                 // update table
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"cancel"]){
         [popover dismissPopoverAnimated:NO];
     }
@@ -566,7 +573,8 @@
         [dataTable reloadData];                 // reload table view data
         [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"edit"]){
-        
+        [dataTable reloadData];                 // update table
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"cancel"]){
         [popover dismissPopoverAnimated:NO];
     }
@@ -588,7 +596,8 @@
         [dataTable reloadData];                 // reload table view data
         [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"edit"]){
-        
+        [dataTable reloadData];                 // update table
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
     } else if ([editType isEqualToString:@"cancel"]){
         [popover dismissPopoverAnimated:NO];
     }

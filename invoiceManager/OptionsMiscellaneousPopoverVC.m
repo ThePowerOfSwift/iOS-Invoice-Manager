@@ -31,7 +31,8 @@
 
 -(void) viewDidAppear:(BOOL)animated {
     if ([self editMode]){
-        
+        [saveOrEditBtn setRestorationIdentifier:@"edit"];
+        [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
     } else {
         // set up the notes field
         notesField.text = @"Place notes and comments here";
@@ -110,6 +111,18 @@
         newCell.price = price;
         [MIVCDelegate updateMiscellaneousDataTable:self editType:@"add" withServiceCell:newCell];
         //[MIVCDelegate updateMiscellaneousDataTable:self editType:@"add" withItemName:itemName withItemPrice:itemPrice withQuantity:quantity withSubtotalPrice:price andNotes:notes];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
+        //[MIVCDelegate updateMiscellaneousDataTable:self editType:@"cancel" withServiceCell:nil];
+        //[MIVCDelegate updateMiscellaneousDataTable:self editType:@"cancel" withItemName:nil withItemPrice:0.0f withQuantity:0 withSubtotalPrice:0.0f andNotes:nil];
+        
+        self.editingCell.serviceType = @"miscellaneous";
+        self.editingCell.notes = notes;
+        self.editingCell.name = itemName;
+        self.editingCell.quantity = quantity;
+        self.editingCell.priceRate = itemPrice;
+        self.editingCell.price = price;
+        [MIVCDelegate updateMiscellaneousDataTable:self editType:@"edit" withServiceCell:nil];
+        
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
         [MIVCDelegate updateMiscellaneousDataTable:self editType:@"cancel" withServiceCell:nil];
         //[MIVCDelegate updateMiscellaneousDataTable:self editType:@"cancel" withItemName:nil withItemPrice:0.0f withQuantity:0 withSubtotalPrice:0.0f andNotes:nil];

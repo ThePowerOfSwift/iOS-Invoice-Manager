@@ -32,7 +32,8 @@
 
 -(void) viewDidAppear:(BOOL)animated {
     if ([self editMode]){
-        
+        [saveOrEditBtn setRestorationIdentifier:@"edit"];
+        [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
     } else {
         notesField.text = @"Place notes and comments here";
         notesField.textColor = [UIColor lightGrayColor];
@@ -231,6 +232,19 @@
         newCell.price = price;
         [FVCDelegate updateFloodServicesDataTable:self editType:@"add" withServiceCell:newCell];
         //[FVCDelegate updateFloodDataTable:self editType:@"add" withItemName:nil withRate:0.0f withQuantity:0 withPrice:price andNotes:nil];
+        
+    } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
+        //[FVCDelegate updateFloodServicesDataTable:self editType:@"cancel" withServiceCell:nil];
+        //[FVCDelegate updateFloodDataTable:self editType:@"cancel" withItemName:nil withRate:0.0f withQuantity:0 withQuantity2:0 withPrice:price andNotes:nil];
+        
+        self.editingCell.serviceType = @"floodcleanup";
+        self.editingCell.notes = notes;
+        self.editingCell.name = itemName;
+        self.editingCell.quantity = quantity;
+        self.editingCell.quantity2 = quantity2;
+        self.editingCell.ratePerHr = rate_price;
+        self.editingCell.price = price;
+        [FVCDelegate updateFloodServicesDataTable:self editType:@"edit" withServiceCell:nil];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
         [FVCDelegate updateFloodServicesDataTable:self editType:@"cancel" withServiceCell:nil];

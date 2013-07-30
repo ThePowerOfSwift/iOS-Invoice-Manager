@@ -20,6 +20,7 @@
 @synthesize addonDeodorizer, addonFabricProtector, addonBiocide;
 @synthesize priceRate;
 @synthesize stairs, landings, stairsService;
+//@synthesize saveOrEditBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,7 +37,8 @@
     // NSLog(@" !! edit mode is %@", [self editMode]);
     //NSLog([self editMode] ? @"Yes" : @"No");
     if ([self editMode]){
-        
+        [saveOrEditBtn setRestorationIdentifier:@"edit"];
+        [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
     } else {
         // set up the notes field
         notesField.text = @"Place notes and comments here";
@@ -243,6 +245,37 @@
             [OVCDelegate updateDataTable:self editType:@"add" withServiceCell:newCell];
             /*[OVCDelegate updateDataTable: self editType:@"add" withLength: rLength withWidth: rWidth andRoom: roomName withPriceRate: priceRate andNotes: notesAboutRoom];*/
         }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
+        //[OVCDelegate updateDataTable:self editType:@"cancel" withServiceCell:nil];
+        //[OVCDelegate updateDataTable: self editType:@"cancel" withLength: 0.0 withWidth: 0.0 andRoom: nil withPriceRate: 0.0 andNotes:nil];
+        // NSLog(@"I AM EDITING STUFF!");
+        if (stairsService){
+            self.editingCell.itemAttribute = @"Stairs";
+            self.editingCell.serviceType = @"carpet";
+            self.editingCell.rlength = 0.0f;
+            self.editingCell.rwidth = 0.0f;
+            self.editingCell.name = roomName;
+            self.editingCell.priceRate = 0.0f;
+            self.editingCell.quantity = stairs;
+            self.editingCell.quantity2 = landings;
+            self.editingCell.notes = notesAboutRoom;
+            self.editingCell.price = price;
+            [[self editingCell] setPrice:99.0f];
+        } else {
+            self.editingCell.itemAttribute = @"Room";
+            self.editingCell.serviceType = @"carpet";
+            self.editingCell.rlength = rLength;
+            self.editingCell.rwidth = rWidth;
+            self.editingCell.name = roomName;
+            self.editingCell.priceRate = priceRate;
+            self.editingCell.notes = notesAboutRoom;
+            self.editingCell.addonDeodorizer = addonDeodorizer;
+            self.editingCell.addonFabricProtector = addonFabricProtector;
+            self.editingCell.addonBiocide = addonBiocide;
+            self.editingCell.price = price;
+        }
+        [OVCDelegate updateDataTable:self editType:@"edit" withServiceCell:nil];
+        
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
         [OVCDelegate updateDataTable:self editType:@"cancel" withServiceCell:nil];
         //[OVCDelegate updateDataTable: self editType:@"cancel" withLength: 0.0 withWidth: 0.0 andRoom: nil withPriceRate: 0.0 andNotes:nil];

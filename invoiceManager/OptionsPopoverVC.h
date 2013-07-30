@@ -45,6 +45,8 @@
     IBOutlet UITextView *notesField;
     
     IBOutlet UITextField *stairsField, *landingsField;
+    
+    //IBOutlet UIButton *saveOrEditBtn;
 }
 
 @property (nonatomic, assign) id <OptionsPopoverVCDelegate> OVCDelegate;
@@ -56,6 +58,7 @@
 
 @property (nonatomic, assign) IBOutlet UITextView *notesField;
 @property (nonatomic, assign) IBOutlet UITextField *lengthField, *widthField, *stairsField, *landingsField;
+//@property (nonatomic, assign) IBOutlet UIButton *saveOrEditBtn;
 
 -(BOOL)textViewShouldBeginEditing: (UITextView*)textView;
 -(IBAction) saveOrCancel: (id) sender;
