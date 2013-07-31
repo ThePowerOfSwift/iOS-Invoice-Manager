@@ -17,6 +17,7 @@
 		891E01901755292E00FF53CE /* popoverBgBottom5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 891E018E1755292E00FF53CE /* popoverBgBottom5@2x.png */; };
 		891E01931755393B00FF53CE /* OptionsMiscellaneousPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 891E01921755393B00FF53CE /* OptionsMiscellaneousPopoverVC.m */; };
 		891E01961755677300FF53CE /* InvoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 891E01951755677200FF53CE /* InvoiceVC.m */; };
+		89276C1F17A8C5D2004BF36C /* IntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89276C1E17A8C5D2004BF36C /* IntroVC.m */; };
 		8935A24C17469FE400C83E4F /* iconCommercial.png in Resources */ = {isa = PBXBuildFile; fileRef = 8935A23A17469FE400C83E4F /* iconCommercial.png */; };
 		8935A24D17469FE400C83E4F /* iconCustomerAddress.png in Resources */ = {isa = PBXBuildFile; fileRef = 8935A23B17469FE400C83E4F /* iconCustomerAddress.png */; };
 		8935A24E17469FE400C83E4F /* iconCustomerEmail.png in Resources */ = {isa = PBXBuildFile; fileRef = 8935A23C17469FE400C83E4F /* iconCustomerEmail.png */; };
@@ -172,6 +173,8 @@
 		891E01921755393B00FF53CE /* OptionsMiscellaneousPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsMiscellaneousPopoverVC.m; sourceTree = "<group>"; };
 		891E01941755677200FF53CE /* InvoiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceVC.h; sourceTree = "<group>"; };
 		891E01951755677200FF53CE /* InvoiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceVC.m; sourceTree = "<group>"; };
+		89276C1D17A8C5D2004BF36C /* IntroVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroVC.h; sourceTree = "<group>"; };
+		89276C1E17A8C5D2004BF36C /* IntroVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroVC.m; sourceTree = "<group>"; };
 		8935A23A17469FE400C83E4F /* iconCommercial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconCommercial.png; sourceTree = "<group>"; };
 		8935A23B17469FE400C83E4F /* iconCustomerAddress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconCustomerAddress.png; sourceTree = "<group>"; };
 		8935A23C17469FE400C83E4F /* iconCustomerEmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconCustomerEmail.png; sourceTree = "<group>"; };
@@ -586,6 +589,8 @@
 		89CA61E31749E906002014CB /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				89276C1D17A8C5D2004BF36C /* IntroVC.h */,
+				89276C1E17A8C5D2004BF36C /* IntroVC.m */,
 				898994421742A4D7004D0A85 /* ViewController.h */,
 				898994431742A4D7004D0A85 /* ViewController.m */,
 				89C834D3174B251B00CC3F07 /* SecondVC.h */,
@@ -849,6 +854,7 @@
 				890D467117A6F02500F85645 /* ConfirmationPopoverVC.m in Sources */,
 				8995231917A8368B0011D9DE /* SettingsPopoverVC.m in Sources */,
 				8995231C17A847660011D9DE /* ServiceTypeTwoVC.m in Sources */,
+				89276C1F17A8C5D2004BF36C /* IntroVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

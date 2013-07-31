@@ -10,7 +10,7 @@
 
 @implementation InvoiceManager
 
-@synthesize secondVC, invoiceVC;
+@synthesize secondVC, invoiceVC, firstVC;
 @synthesize currActiveVCName;
 @synthesize listOfServices;
 @synthesize estimateDate, ratePerSquareFeet, customerAddressOne, customerAddressTwo, customerFirstName, customerLastName, customerEmail, customerReferredBy,

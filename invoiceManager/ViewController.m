@@ -155,8 +155,8 @@
  */
 
 -(IBAction)switchControllers {
-    InvoiceManager* invoiceMngr = [InvoiceManager sharedInvoiceManager];
-    NSLog(@"c !!!!!!!!! ust last nameis %@", [invoiceMngr customerLastName]);
+    //InvoiceManager* invoiceMngr = [InvoiceManager sharedInvoiceManager];
+    //NSLog(@"c !!!!!!!!! ust last nameis %@", [invoiceMngr customerLastName]);
     //SecondViewController *viewcontroller = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
     //ThirdViewController *viewcontroller = [[ThirdViewController alloc] init];
     //[self presentModalViewController:viewcontroller animated:YES];

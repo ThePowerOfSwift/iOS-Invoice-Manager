@@ -55,13 +55,16 @@
     NSMutableArray *listOfServices;
     
     // View Controllers
+    UIViewController *firstVC;
     UIViewController *secondVC;
     UIViewController *invoiceVC;
-
+    
+    // current company
+    NSString *currCompanyName;  // could be carpet care, auto spa or duct cleaning
     
 }
 
-@property (assign, readwrite) UIViewController *secondVC, *invoiceVC;
+@property (assign, readwrite) UIViewController *secondVC, *invoiceVC, *firstVC;
 
 @property (assign, readwrite) NSString *currActiveVCName;
 @property (assign, readwrite) NSString *orderDate, *invoiceNo, *poNo, *technicianName, *customerFirstName, *customerLastName,
