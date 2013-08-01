@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Mihai. All rights reserved.
 //
 
-#import "SecondVC.h"
+#import "CCSecondVC.h"
 
-@interface SecondVC ()
+@interface CCSecondVC ()
 
 @end
 
-@implementation SecondVC
+@implementation CCSecondVC
 
 @synthesize hey;
 @synthesize selectedBtnBgThree;
@@ -264,7 +264,6 @@
     
     // if any services exist, push the first service VC
     //ServiceItem *nextitem = [[invoiceMngr listOfServices] objectAtIndex:0];
-    
     
     NSLog(@"number of services: %u", [[invoiceMngr listOfServices] count]);
     //NSLog(@"name for 0: %@", [[[invoiceMngr listOfServices] objectAtIndex:0] serviceVC]);

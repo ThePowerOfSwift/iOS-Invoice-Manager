@@ -10,7 +10,7 @@
 #import "CustomUIButton.h"
 #import "ConfirmationPopoverVC.h"
 
-@interface SecondVC : UIViewController <ConfirmationPopoverVCDelegate> {
+@interface CCSecondVC : UIViewController <ConfirmationPopoverVCDelegate> {
     IBOutlet UITextField *estimationDate;
     IBOutlet UITextField *ratePerSqFeet;
     IBOutlet UIView *hey;

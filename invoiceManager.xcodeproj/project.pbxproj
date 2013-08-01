@@ -107,10 +107,13 @@
 		89C834D0174B1DCB00CC3F07 /* checkboxNo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C834CA174B1DCB00CC3F07 /* checkboxNo@2x.png */; };
 		89C834D1174B1DCB00CC3F07 /* checkboxYes.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C834CB174B1DCB00CC3F07 /* checkboxYes.png */; };
 		89C834D2174B1DCB00CC3F07 /* checkboxYes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89C834CC174B1DCB00CC3F07 /* checkboxYes@2x.png */; };
-		89C834D5174B251B00CC3F07 /* SecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C834D4174B251B00CC3F07 /* SecondVC.m */; };
-		89C9BA4F1752C4C4008907CB /* OptionsRepairPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9BA4E1752C4C3008907CB /* OptionsRepairPopoverVC.m */; };
+		89C834D5174B251B00CC3F07 /* CCSecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C834D4174B251B00CC3F07 /* CCSecondVC.m */; };
 		89C9BA521752C605008907CB /* OptionsFloodPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C9BA511752C605008907CB /* OptionsFloodPopoverVC.m */; };
 		89CA61E61749E998002014CB /* InvoiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89CA61E51749E998002014CB /* InvoiceManager.m */; };
+		89CAAF5917A9D466003CDF2A /* autoSpaBronzePic.png in Resources */ = {isa = PBXBuildFile; fileRef = 89CAAF5817A9D466003CDF2A /* autoSpaBronzePic.png */; };
+		89CAAF5D17A9DD84003CDF2A /* autoSpaGoldPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 89CAAF5A17A9DD83003CDF2A /* autoSpaGoldPic.png */; };
+		89CAAF5E17A9DD84003CDF2A /* autoSpaPlatinumPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 89CAAF5B17A9DD83003CDF2A /* autoSpaPlatinumPic.png */; };
+		89CAAF5F17A9DD84003CDF2A /* autoSpaSilverPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 89CAAF5C17A9DD83003CDF2A /* autoSpaSilverPic.png */; };
 		89CE71691755C86B009EE0DC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CE71681755C86B009EE0DC /* MessageUI.framework */; };
 		89CE716C1755D32B009EE0DC /* customLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 89CE716B1755D32B009EE0DC /* customLabel.m */; };
 		89CE716E1755E6BE009EE0DC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CE716D1755E6BD009EE0DC /* CoreText.framework */; };
@@ -281,14 +284,16 @@
 		89C834CA174B1DCB00CC3F07 /* checkboxNo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkboxNo@2x.png"; sourceTree = "<group>"; };
 		89C834CB174B1DCB00CC3F07 /* checkboxYes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkboxYes.png; sourceTree = "<group>"; };
 		89C834CC174B1DCB00CC3F07 /* checkboxYes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkboxYes@2x.png"; sourceTree = "<group>"; };
-		89C834D3174B251B00CC3F07 /* SecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondVC.h; sourceTree = "<group>"; };
-		89C834D4174B251B00CC3F07 /* SecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondVC.m; sourceTree = "<group>"; };
-		89C9BA4D1752C4C3008907CB /* OptionsRepairPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsRepairPopoverVC.h; sourceTree = "<group>"; };
-		89C9BA4E1752C4C3008907CB /* OptionsRepairPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsRepairPopoverVC.m; sourceTree = "<group>"; };
+		89C834D3174B251B00CC3F07 /* CCSecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSecondVC.h; sourceTree = "<group>"; };
+		89C834D4174B251B00CC3F07 /* CCSecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSecondVC.m; sourceTree = "<group>"; };
 		89C9BA501752C605008907CB /* OptionsFloodPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsFloodPopoverVC.h; sourceTree = "<group>"; };
 		89C9BA511752C605008907CB /* OptionsFloodPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsFloodPopoverVC.m; sourceTree = "<group>"; };
 		89CA61E41749E998002014CB /* InvoiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceManager.h; sourceTree = "<group>"; };
 		89CA61E51749E998002014CB /* InvoiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceManager.m; sourceTree = "<group>"; };
+		89CAAF5817A9D466003CDF2A /* autoSpaBronzePic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autoSpaBronzePic.png; sourceTree = "<group>"; };
+		89CAAF5A17A9DD83003CDF2A /* autoSpaGoldPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autoSpaGoldPic.png; sourceTree = "<group>"; };
+		89CAAF5B17A9DD83003CDF2A /* autoSpaPlatinumPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autoSpaPlatinumPic.png; sourceTree = "<group>"; };
+		89CAAF5C17A9DD83003CDF2A /* autoSpaSilverPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autoSpaSilverPic.png; sourceTree = "<group>"; };
 		89CE71681755C86B009EE0DC /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		89CE716A1755D32B009EE0DC /* customLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customLabel.h; sourceTree = "<group>"; };
 		89CE716B1755D32B009EE0DC /* customLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customLabel.m; sourceTree = "<group>"; };
@@ -441,6 +446,10 @@
 		8989D25F17431419000F11BF /* images */ = {
 			isa = PBXGroup;
 			children = (
+				89CAAF5A17A9DD83003CDF2A /* autoSpaGoldPic.png */,
+				89CAAF5B17A9DD83003CDF2A /* autoSpaPlatinumPic.png */,
+				89CAAF5C17A9DD83003CDF2A /* autoSpaSilverPic.png */,
+				89CAAF5817A9D466003CDF2A /* autoSpaBronzePic.png */,
 				89906A4017A7AA85002C3A20 /* pencil.png */,
 				89906A4117A7AA85002C3A20 /* pencil@2x.png */,
 				89906A3E17A7A9CF002C3A20 /* close@2x.png */,
@@ -553,8 +562,6 @@
 				89AB24111751E4E7007B2419 /* OptionsMatressPopoverVC.m */,
 				89AB24131751F385007B2419 /* OptionsUpholsteryPopoverVC.h */,
 				89AB24141751F385007B2419 /* OptionsUpholsteryPopoverVC.m */,
-				89C9BA4D1752C4C3008907CB /* OptionsRepairPopoverVC.h */,
-				89C9BA4E1752C4C3008907CB /* OptionsRepairPopoverVC.m */,
 				89C9BA501752C605008907CB /* OptionsFloodPopoverVC.h */,
 				89C9BA511752C605008907CB /* OptionsFloodPopoverVC.m */,
 				8990794117546BE5007028B9 /* OptionsAreaRugsPopoverVC.h */,
@@ -593,8 +600,8 @@
 				89276C1E17A8C5D2004BF36C /* IntroVC.m */,
 				898994421742A4D7004D0A85 /* ViewController.h */,
 				898994431742A4D7004D0A85 /* ViewController.m */,
-				89C834D3174B251B00CC3F07 /* SecondVC.h */,
-				89C834D4174B251B00CC3F07 /* SecondVC.m */,
+				89C834D3174B251B00CC3F07 /* CCSecondVC.h */,
+				89C834D4174B251B00CC3F07 /* CCSecondVC.m */,
 				898994661742BBF3004D0A85 /* ServiceTypeViewController.h */,
 				898994671742BBF3004D0A85 /* ServiceTypeViewController.m */,
 				8995231A17A847640011D9DE /* ServiceTypeTwoVC.h */,
@@ -795,6 +802,10 @@
 				89906A3F17A7A9CF002C3A20 /* close@2x.png in Resources */,
 				89906A4217A7AA85002C3A20 /* pencil.png in Resources */,
 				89906A4317A7AA85002C3A20 /* pencil@2x.png in Resources */,
+				89CAAF5917A9D466003CDF2A /* autoSpaBronzePic.png in Resources */,
+				89CAAF5D17A9DD84003CDF2A /* autoSpaGoldPic.png in Resources */,
+				89CAAF5E17A9DD84003CDF2A /* autoSpaPlatinumPic.png in Resources */,
+				89CAAF5F17A9DD84003CDF2A /* autoSpaSilverPic.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -837,12 +848,11 @@
 				89CA61E61749E998002014CB /* InvoiceManager.m in Sources */,
 				89C834C2174AC68300CC3F07 /* OptionsPopoverVC.m in Sources */,
 				89C834C5174B131800CC3F07 /* ServiceItem.m in Sources */,
-				89C834D5174B251B00CC3F07 /* SecondVC.m in Sources */,
+				89C834D5174B251B00CC3F07 /* CCSecondVC.m in Sources */,
 				89F9F8DF174C1EBF00C32DD3 /* CustomUIButton.m in Sources */,
 				89C51158174D3B1B003880F7 /* ServiceDataCell.m in Sources */,
 				89AB24121751E4E7007B2419 /* OptionsMatressPopoverVC.m in Sources */,
 				89AB24151751F385007B2419 /* OptionsUpholsteryPopoverVC.m in Sources */,
-				89C9BA4F1752C4C4008907CB /* OptionsRepairPopoverVC.m in Sources */,
 				89C9BA521752C605008907CB /* OptionsFloodPopoverVC.m in Sources */,
 				8990794317546BE6007028B9 /* OptionsAreaRugsPopoverVC.m in Sources */,
 				891E01931755393B00FF53CE /* OptionsMiscellaneousPopoverVC.m in Sources */,

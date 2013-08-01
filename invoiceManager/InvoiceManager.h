@@ -56,15 +56,16 @@
     
     // View Controllers
     UIViewController *firstVC;
-    UIViewController *secondVC;
+    UIViewController *ccSecondVC;   // carpet care second view controller
     UIViewController *invoiceVC;
     
     // current company
-    NSString *currCompanyName;  // could be carpet care, auto spa or duct cleaning
+    NSString *currCompanyName;  // can be one of the three: 'carpetCare', 'autoSpa' or 'ductFurnaceCleaning'
     
 }
 
-@property (assign, readwrite) UIViewController *secondVC, *invoiceVC, *firstVC;
+@property (assign, readwrite) NSString *currCompanyName;
+@property (assign, readwrite) UIViewController *ccSecondVC, *invoiceVC, *firstVC;
 
 @property (assign, readwrite) NSString *currActiveVCName;
 @property (assign, readwrite) NSString *orderDate, *invoiceNo, *poNo, *technicianName, *customerFirstName, *customerLastName,

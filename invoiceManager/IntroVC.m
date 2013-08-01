@@ -36,19 +36,26 @@
 }
 
 -(IBAction) goToNextVC:(id)sender {
+    
     InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
     if ([invMngr firstVC]){
-        //NSLog(@">>> its already initiated !");
-        [self.navigationController pushViewController:[invMngr firstVC] animated:YES];
+        // NSLog(@">>> its already initiated !");
+        // [self.navigationController pushViewController:[invMngr firstVC] animated:YES];
     } else {
         NSLog(@">>> it's NOT initiated !");
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
         ViewController *firstVCinst = (ViewController*) [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
         [invMngr setFirstVC:firstVCinst];
         [[invMngr firstVC] retain];
-        [self.navigationController pushViewController:firstVCinst animated:YES];
         
+        //[self.navigationController pushViewController:firstVCinst animated:YES];
     }
+    
+    // can be one of the three: 'carpetCare', 'autoSpa' or 'ductFurnaceCleaning'
+    [invMngr setCurrCompanyName:[sender restorationIdentifier]];
+    
+    [self.navigationController pushViewController:[invMngr firstVC] animated:YES];
+    
 }
 
 @end

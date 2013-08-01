@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ServiceTypeViewController.h"
 #import "ServiceTypeTwoVC.h"
-#import "SecondVC.h"
+#import "CCSecondVC.h"
 #import "InvoiceVC.h"
 #import "CustomTableViewCell.h"
 
@@ -25,17 +25,20 @@
     IBOutlet UITextField *invoiceField, *poField, *currentDateField, *techNameField, *customerFirstNameField, *customerLastNameField, *customerAddressOneField, *customerAddressTwoField, *customerPhoneField, *customerEmailField, *customerReferredField;
     NSArray *pickerViewArray;
     NSMutableArray *list1;
-        
+    
+    IBOutlet UIView* carpetCareOptionsView;
 }
-
-@property (assign, nonatomic) UITextField *invoiceField;
+@property (assign, nonatomic) IBOutlet UIView* carpetCareOptionsView;
+@property (assign, nonatomic) IBOutlet UITextField *invoiceField;
 //@property (retain) UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollViewer;
 @property (assign, readwrite) IBOutlet UIImageView *selectedBtnBg, *selectedBtnBgTwo;
 
--(IBAction) switchControllers;
 -(IBAction) textFieldDidEndEditing:(UITextField *)textField;
 -(IBAction) onTouchDownIcon;
 -(IBAction) onChoosingGreenProducts: (id) sender;
+-(IBAction) gotoNextView;
+-(IBAction) gotoLastView;
+
 @end

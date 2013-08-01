@@ -10,7 +10,8 @@
 
 @implementation InvoiceManager
 
-@synthesize secondVC, invoiceVC, firstVC;
+@synthesize currCompanyName;
+@synthesize ccSecondVC, invoiceVC, firstVC;
 @synthesize currActiveVCName;
 @synthesize listOfServices;
 @synthesize estimateDate, ratePerSquareFeet, customerAddressOne, customerAddressTwo, customerFirstName, customerLastName, customerEmail, customerReferredBy,
@@ -195,7 +196,7 @@ static InvoiceManager *shared = NULL;
     [technicianName release];
     
     [listOfServices release];
-    [secondVC release];
+    [CCSecondVC release];
     [invoiceVC release];
     [shared release];   // release the shared singleton
     [super dealloc];

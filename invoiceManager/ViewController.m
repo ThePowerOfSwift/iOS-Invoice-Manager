@@ -14,13 +14,27 @@
 
 @implementation ViewController
 
+@synthesize carpetCareOptionsView;
 @synthesize scrollViewer;
 @synthesize segmentedControl;
 @synthesize invoiceField;
 @synthesize selectedBtnBg, selectedBtnBgTwo;
 
 -(void) viewDidAppear:(BOOL)animated {
+
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    InvoiceManager*invMngr = [InvoiceManager sharedInvoiceManager];
+    NSLog(@"company is: %@", [invMngr currCompanyName]);
     
+    if ([[invMngr currCompanyName] isEqualToString:@"carpetCare"]){
+        [carpetCareOptionsView setHidden:false];
+    } else if ([[invMngr currCompanyName] isEqualToString:@"autoSpa"]){
+        [carpetCareOptionsView setHidden:true];
+    } else if ([[invMngr currCompanyName] isEqualToString:@"ductFurnaceCleaning"]){
+        [carpetCareOptionsView setHidden:true];
+    }
 }
 
 - (void)viewDidLoad
@@ -40,6 +54,8 @@
     /*UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
      [scrollViewer addGestureRecognizer:singleTap];*/
     
+    
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
@@ -57,6 +73,13 @@
     
     [invoiceMngr printOut];
     
+    if ([[invoiceMngr currCompanyName] isEqualToString:@"carpetCare"]){
+        [carpetCareOptionsView setHidden:false];
+    } else if ([[invoiceMngr currCompanyName] isEqualToString:@"autoSpa"]){
+        [carpetCareOptionsView setHidden:true];
+    } else if ([[invoiceMngr currCompanyName] isEqualToString:@"ductFurnaceCleaning"]){
+        [carpetCareOptionsView setHidden:true];
+    }
     /*if (invoiceMngr.invoiceNo != NULL){
      invoiceField.text = invoiceMngr.invoiceNo;
      }
@@ -154,36 +177,18 @@
  }
  */
 
--(IBAction)switchControllers {
-    //InvoiceManager* invoiceMngr = [InvoiceManager sharedInvoiceManager];
-    //NSLog(@"c !!!!!!!!! ust last nameis %@", [invoiceMngr customerLastName]);
-    //SecondViewController *viewcontroller = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
-    //ThirdViewController *viewcontroller = [[ThirdViewController alloc] init];
-    //[self presentModalViewController:viewcontroller animated:YES];
-    //[self.storyboard instantiateViewControllerWithIdentifier:@"Third"];
-    //[storyboard instantiateViewControllerWithIdentifier:@"SecondController"];
-    
-    /*
-     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
-     SecondViewController *second = (SecondViewController*) [storyboard instantiateViewControllerWithIdentifier:@"SecondController"];
-     second.set = 56;
-     second.SVCdelegate = self;
-     [self presentViewController:second animated:YES completion:nil];
-     */
-    //UINavigationController *ha = [self.navigationController initWithRootViewController:self];
-    //NSLog(@"nav controller: %@", ha);
-    
-    //SecondViewController *second = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:[NSBundle mainBundle]];
+-(IBAction)gotoNextView {
+
     InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
-    if ([invMngr secondVC]){
+    if ([invMngr ccSecondVC]){
         //NSLog(@">>> its already initiated !");
-        [self.navigationController pushViewController:[invMngr secondVC] animated:YES];
+        [self.navigationController pushViewController:[invMngr ccSecondVC] animated:YES];
     } else {
         NSLog(@">>> it's NOT initiated !");
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
-        SecondVC *second = (SecondVC*) [storyboard instantiateViewControllerWithIdentifier:@"SecondVC"];
-        [invMngr setSecondVC:second];
-        [[invMngr secondVC] retain];
+        CCSecondVC *second = (CCSecondVC*) [storyboard instantiateViewControllerWithIdentifier:@"CCSecondVC"];
+        [invMngr setCcSecondVC:second];
+        [[invMngr ccSecondVC] retain];
         [self.navigationController pushViewController:second animated:YES];
         
     }
@@ -305,14 +310,15 @@
     InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
     
     if ([senderID isEqualToString:@"residential"]){
-        [selectedBtnBg setFrame:CGRectMake(447.0f, selectedBtnBg.frame.origin.y, selectedBtnBg.frame.size.width, selectedBtnBg.frame.size.height)];
+        NSLog(@"resssiiiident");
+        [selectedBtnBg setFrame:CGRectMake(70.0f, selectedBtnBg.frame.origin.y, selectedBtnBg.frame.size.width, selectedBtnBg.frame.size.height)];
         [customerFirstNameField setPlaceholder:@"customer first name"];
         [customerLastNameField setPlaceholder:@"customer last name"];
         
         // save the type of building selected in the invoice manager singleton
         [invMngr setTypeOfBuilding:@"Residential Building"];
     } else if ([senderID isEqualToString:@"commercial"]){
-        [selectedBtnBg setFrame:CGRectMake(581.0f, selectedBtnBg.frame.origin.y, selectedBtnBg.frame.size.width, selectedBtnBg.frame.size.height)];
+        [selectedBtnBg setFrame:CGRectMake(206.0f, selectedBtnBg.frame.origin.y, selectedBtnBg.frame.size.width, selectedBtnBg.frame.size.height)];
         [customerFirstNameField setPlaceholder:@"company name"];
         [customerLastNameField setPlaceholder:@"project manager name"];
         
@@ -328,7 +334,7 @@
 // only supports UIButton's right now
 -(IBAction) onChoosingBuildingBtnTwo: (id) sender {
     // set last selected back to normal
-    for (UIButton *aSubview in self.view.subviews){
+    /*for (UIButton *aSubview in self.view.subviews){
         //for (id aSubview in aSubview2.subviews){
         if ([aSubview isKindOfClass:[UIButton class]]){
             if ([aSubview tag] == 11){
@@ -339,6 +345,16 @@
             }
         }
         //}
+    }*/
+    
+    // *NEW cause I added a new view, the carpetCareOptionsView* // set last selected back to normal
+    for (id aButton in [carpetCareOptionsView subviews]){
+        if ([aButton isKindOfClass:[UIButton class]]){
+            if ([aButton tag] == 11){
+                [aButton setTag:0];
+            }
+        }
+        NSLog(@"items: ");
     }
     
     // put background image view under the newly selected button
@@ -349,15 +365,15 @@
     
     if ([senderID isEqualToString:@"furnished"]){
         [selectedBtnBgTwo setFrame:
-         CGRectMake(403.0f, selectedBtnBgTwo.frame.origin.y, selectedBtnBgTwo.frame.size.width, selectedBtnBgTwo.frame.size.height)];
+         CGRectMake(27.0f, selectedBtnBgTwo.frame.origin.y, selectedBtnBgTwo.frame.size.width, selectedBtnBgTwo.frame.size.height)];
         [invMngr setBuildingState:@"Furnished State"];
     } else if ([senderID isEqualToString:@"vacant"]){
         [selectedBtnBgTwo setFrame:
-         CGRectMake(517.0f, selectedBtnBgTwo.frame.origin.y, selectedBtnBgTwo.frame.size.width, selectedBtnBgTwo.frame.size.height)];
+         CGRectMake(140.0f, selectedBtnBgTwo.frame.origin.y, selectedBtnBgTwo.frame.size.width, selectedBtnBgTwo.frame.size.height)];
         [invMngr setBuildingState:@"Vacant State"];
     } else if ([senderID isEqualToString:@"portable"]){
         [selectedBtnBgTwo setFrame:
-         CGRectMake(640.0f, selectedBtnBgTwo.frame.origin.y, selectedBtnBgTwo.frame.size.width, selectedBtnBgTwo.frame.size.height)];
+         CGRectMake(263.0f, selectedBtnBgTwo.frame.origin.y, selectedBtnBgTwo.frame.size.width, selectedBtnBgTwo.frame.size.height)];
         [invMngr setBuildingState:@"Portable State"];
     }
     [btn setTag:11];
@@ -366,6 +382,10 @@
 
 -(IBAction)onTouchDownIcon {
     [testBtn setBackgroundImage:[UIImage imageNamed:@"settingsBtnTouchDown.png"] forState:UIControlStateHighlighted];
+}
+
+-(IBAction) gotoLastView {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void) dealloc {
