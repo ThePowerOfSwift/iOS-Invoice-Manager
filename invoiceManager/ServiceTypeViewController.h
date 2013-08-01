@@ -13,6 +13,8 @@
 #import "OptionsFloodPopoverVC.h"
 #import "OptionsAreaRugsPopoverVC.h"
 #import "OptionsMiscellaneousPopoverVC.h"
+#import "OptionsAutoSpaPopoverVC.h"
+
 //#import "ServiceDataCell.h"
 
 @class ServiceTypeViewController;

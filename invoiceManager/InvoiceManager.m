@@ -72,12 +72,12 @@ static InvoiceManager *shared = NULL;
     // create a UIViewController instance and save it
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
     
-    if ([serviceTypeName isEqualToString:@"autoSpa"] || [serviceTypeName isEqualToString:@"ductCleaning"]){
-        ServiceTypeTwoVC *serviceVC = (ServiceTypeTwoVC*) [storyboard instantiateViewControllerWithIdentifier:@"ServiceTypeTwoVC"];
-        serviceVC.VCServiceNameType = serviceTypeName;
-        [serviceVC retain];
-        item.serviceVC = serviceVC;
-    } else {
+    //if ([serviceTypeName isEqualToString:@"autoSpa"] || [serviceTypeName isEqualToString:@"ductCleaning"]){
+    //    ServiceTypeTwoVC *serviceVC = (ServiceTypeTwoVC*) [storyboard instantiateViewControllerWithIdentifier:@"ServiceTypeTwoVC"];
+    //    serviceVC.VCServiceNameType = serviceTypeName;
+    //    [serviceVC retain];
+    //    item.serviceVC = serviceVC;
+    //} else {
         ServiceTypeViewController *serviceVC = (ServiceTypeViewController*) [storyboard instantiateViewControllerWithIdentifier:@"ServiceTypeViewController"];
         
         serviceVC.serviceDataCellArray = [[NSMutableArray alloc] initWithCapacity:1];
@@ -88,7 +88,7 @@ static InvoiceManager *shared = NULL;
         serviceVC.VCServiceNameType = serviceTypeName;   // currentVCServiceName = 'name of the type of service'
         [serviceVC retain];                              // retain VC's; they will be used globally to navigate.. globally
         item.serviceVC = serviceVC;                      // save to invoice manager..
-    }
+    //}
     // sort the array in ascending order, in terms of their 'order' variable
     NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES] autorelease];
     [listOfServices sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -104,6 +104,16 @@ static InvoiceManager *shared = NULL;
             [listOfServices removeObjectAtIndex:i];
         }
     }
+}
+
+// if there is a service in the 'listOfServices' array with the name 'serviceTypeName', return true
+-(bool) existsServiceName: (NSString*) serviceTypeName {
+    for (NSInteger i = 0; i < [listOfServices count]; i++){
+        if ([[[listOfServices objectAtIndex:i] name] isEqualToString:serviceTypeName]){
+            return true;
+        }
+    }
+    return false;
 }
 
 // check what VC is currently being presented. then, find out the next VC ( if any )

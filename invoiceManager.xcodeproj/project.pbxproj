@@ -18,6 +18,7 @@
 		891E01931755393B00FF53CE /* OptionsMiscellaneousPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 891E01921755393B00FF53CE /* OptionsMiscellaneousPopoverVC.m */; };
 		891E01961755677300FF53CE /* InvoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 891E01951755677200FF53CE /* InvoiceVC.m */; };
 		89276C1F17A8C5D2004BF36C /* IntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89276C1E17A8C5D2004BF36C /* IntroVC.m */; };
+		892995A217AAE79E00C61483 /* OptionsAutoSpaPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 892995A117AAE79E00C61483 /* OptionsAutoSpaPopoverVC.m */; };
 		8935A24C17469FE400C83E4F /* iconCommercial.png in Resources */ = {isa = PBXBuildFile; fileRef = 8935A23A17469FE400C83E4F /* iconCommercial.png */; };
 		8935A24D17469FE400C83E4F /* iconCustomerAddress.png in Resources */ = {isa = PBXBuildFile; fileRef = 8935A23B17469FE400C83E4F /* iconCustomerAddress.png */; };
 		8935A24E17469FE400C83E4F /* iconCustomerEmail.png in Resources */ = {isa = PBXBuildFile; fileRef = 8935A23C17469FE400C83E4F /* iconCustomerEmail.png */; };
@@ -178,6 +179,8 @@
 		891E01951755677200FF53CE /* InvoiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceVC.m; sourceTree = "<group>"; };
 		89276C1D17A8C5D2004BF36C /* IntroVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroVC.h; sourceTree = "<group>"; };
 		89276C1E17A8C5D2004BF36C /* IntroVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroVC.m; sourceTree = "<group>"; };
+		892995A017AAE79E00C61483 /* OptionsAutoSpaPopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsAutoSpaPopoverVC.h; sourceTree = "<group>"; };
+		892995A117AAE79E00C61483 /* OptionsAutoSpaPopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsAutoSpaPopoverVC.m; sourceTree = "<group>"; };
 		8935A23A17469FE400C83E4F /* iconCommercial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconCommercial.png; sourceTree = "<group>"; };
 		8935A23B17469FE400C83E4F /* iconCustomerAddress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconCustomerAddress.png; sourceTree = "<group>"; };
 		8935A23C17469FE400C83E4F /* iconCustomerEmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconCustomerEmail.png; sourceTree = "<group>"; };
@@ -362,6 +365,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8929959E17AAE77C00C61483 /* auto spa popover(s) */ = {
+			isa = PBXGroup;
+			children = (
+				892995A017AAE79E00C61483 /* OptionsAutoSpaPopoverVC.h */,
+				892995A117AAE79E00C61483 /* OptionsAutoSpaPopoverVC.m */,
+			);
+			name = "auto spa popover(s)";
+			sourceTree = "<group>";
+		};
+		892995A317AAE7A200C61483 /* duct and furnace cleaning popover(s) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "duct and furnace cleaning popover(s)";
+			sourceTree = "<group>";
+		};
+		892995A417AAE7B700C61483 /* carpet care popover(s) */ = {
+			isa = PBXGroup;
+			children = (
+				89C834C0174AC68300CC3F07 /* OptionsPopoverVC.h */,
+				89C834C1174AC68300CC3F07 /* OptionsPopoverVC.m */,
+				89AB24101751E4E7007B2419 /* OptionsMatressPopoverVC.h */,
+				89AB24111751E4E7007B2419 /* OptionsMatressPopoverVC.m */,
+				89AB24131751F385007B2419 /* OptionsUpholsteryPopoverVC.h */,
+				89AB24141751F385007B2419 /* OptionsUpholsteryPopoverVC.m */,
+				89C9BA501752C605008907CB /* OptionsFloodPopoverVC.h */,
+				89C9BA511752C605008907CB /* OptionsFloodPopoverVC.m */,
+				8990794117546BE5007028B9 /* OptionsAreaRugsPopoverVC.h */,
+				8990794217546BE6007028B9 /* OptionsAreaRugsPopoverVC.m */,
+				891E01911755393B00FF53CE /* OptionsMiscellaneousPopoverVC.h */,
+				891E01921755393B00FF53CE /* OptionsMiscellaneousPopoverVC.m */,
+			);
+			name = "carpet care popover(s)";
+			sourceTree = "<group>";
+		};
 		898994151742A4D7004D0A85 = {
 			isa = PBXGroup;
 			children = (
@@ -556,24 +594,15 @@
 		89AB240F1751E4BA007B2419 /* popoverOptions */ = {
 			isa = PBXGroup;
 			children = (
-				89C834C0174AC68300CC3F07 /* OptionsPopoverVC.h */,
-				89C834C1174AC68300CC3F07 /* OptionsPopoverVC.m */,
-				89AB24101751E4E7007B2419 /* OptionsMatressPopoverVC.h */,
-				89AB24111751E4E7007B2419 /* OptionsMatressPopoverVC.m */,
-				89AB24131751F385007B2419 /* OptionsUpholsteryPopoverVC.h */,
-				89AB24141751F385007B2419 /* OptionsUpholsteryPopoverVC.m */,
-				89C9BA501752C605008907CB /* OptionsFloodPopoverVC.h */,
-				89C9BA511752C605008907CB /* OptionsFloodPopoverVC.m */,
-				8990794117546BE5007028B9 /* OptionsAreaRugsPopoverVC.h */,
-				8990794217546BE6007028B9 /* OptionsAreaRugsPopoverVC.m */,
-				891E01911755393B00FF53CE /* OptionsMiscellaneousPopoverVC.h */,
-				891E01921755393B00FF53CE /* OptionsMiscellaneousPopoverVC.m */,
+				892995A417AAE7B700C61483 /* carpet care popover(s) */,
+				892995A317AAE7A200C61483 /* duct and furnace cleaning popover(s) */,
+				8929959E17AAE77C00C61483 /* auto spa popover(s) */,
+				890D466C17A6EFDB00F85645 /* BasePopoverVC.h */,
+				890D466D17A6EFDB00F85645 /* BasePopoverVC.m */,
 				89674AD417572AB500461BC3 /* SignaturePopoverVC.h */,
 				89674AD517572AB600461BC3 /* SignaturePopoverVC.m */,
 				89D445AF1757CA67003E2B25 /* InvoiceDiscountVC.h */,
 				89D445B01757CA67003E2B25 /* InvoiceDiscountVC.m */,
-				890D466C17A6EFDB00F85645 /* BasePopoverVC.h */,
-				890D466D17A6EFDB00F85645 /* BasePopoverVC.m */,
 				890D466F17A6F02400F85645 /* ConfirmationPopoverVC.h */,
 				890D467017A6F02500F85645 /* ConfirmationPopoverVC.m */,
 				8995231717A8368A0011D9DE /* SettingsPopoverVC.h */,
@@ -865,6 +894,7 @@
 				8995231917A8368B0011D9DE /* SettingsPopoverVC.m in Sources */,
 				8995231C17A847660011D9DE /* ServiceTypeTwoVC.m in Sources */,
 				89276C1F17A8C5D2004BF36C /* IntroVC.m in Sources */,
+				892995A217AAE79E00C61483 /* OptionsAutoSpaPopoverVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

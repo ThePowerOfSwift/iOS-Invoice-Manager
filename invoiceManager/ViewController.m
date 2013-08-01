@@ -177,48 +177,6 @@
  }
  */
 
--(IBAction)gotoNextView {
-
-    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
-    if ([invMngr ccSecondVC]){
-        //NSLog(@">>> its already initiated !");
-        [self.navigationController pushViewController:[invMngr ccSecondVC] animated:YES];
-    } else {
-        NSLog(@">>> it's NOT initiated !");
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
-        CCSecondVC *second = (CCSecondVC*) [storyboard instantiateViewControllerWithIdentifier:@"CCSecondVC"];
-        [invMngr setCcSecondVC:second];
-        [[invMngr ccSecondVC] retain];
-        [self.navigationController pushViewController:second animated:YES];
-        
-    }
-    
-    if ([invMngr invoiceVC]){
-        //NSLog(@">>> its already initiated !");
-        //[self.navigationController pushViewController:[invMngr secondVC] animated:YES];
-    } else {
-        NSLog(@">>> invoice VC is NOT initiated !");
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
-        InvoiceVC *invoiceVCinst = (InvoiceVC*) [storyboard instantiateViewControllerWithIdentifier:@"InvoiceVC"];
-        [invMngr setInvoiceVC:invoiceVCinst];
-        [[invMngr invoiceVC] retain];
-        //[self.navigationController pushViewController:invoiceVCinst animated:YES];
-    }
-    
-    //ServiceTypeViewController *second = (ServiceTypeViewController*) [storyboard instantiateViewControllerWithIdentifier:@"ServiceTypeViewController"];
-    
-    //AAAViewController *aaa = [[AAAViewController alloc] initWithNibName:@"AAAViewController" bundle:nil];
-    //[ha pushViewController:second animated:YES];
-    
-    //[self presentModalViewController:second animated:YES];
-    
-    //[second release];
-    
-    //NSLog(@"initiating new view controller..%@", self.navigationController);
-    
-    //[second release];
-}
-
 /*-(IBAction) goAwayKeyboard: (id) sender {
  NSLog(@"keyboard going away ?");
  [sender resignFirstResponder];
@@ -382,6 +340,93 @@
 
 -(IBAction)onTouchDownIcon {
     [testBtn setBackgroundImage:[UIImage imageNamed:@"settingsBtnTouchDown.png"] forState:UIControlStateHighlighted];
+}
+
+-(IBAction)gotoNextView {
+    
+    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
+    
+    
+    if ([invMngr ccSecondVC]){
+        //NSLog(@">>> its already initiated !");
+        //[self.navigationController pushViewController:[invMngr ccSecondVC] animated:YES];
+    } else {
+        NSLog(@">>> it's NOT initiated !");
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
+        CCSecondVC *second = (CCSecondVC*) [storyboard instantiateViewControllerWithIdentifier:@"CCSecondVC"];
+        [invMngr setCcSecondVC:second];
+        [[invMngr ccSecondVC] retain];
+        //[self.navigationController pushViewController:second animated:YES];
+        
+    }
+    
+    if ([invMngr invoiceVC]){
+        //NSLog(@">>> its already initiated !");
+        //[self.navigationController pushViewController:[invMngr secondVC] animated:YES];
+    } else {
+        NSLog(@">>> invoice VC is NOT initiated !");
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
+        InvoiceVC *invoiceVCinst = (InvoiceVC*) [storyboard instantiateViewControllerWithIdentifier:@"InvoiceVC"];
+        [invMngr setInvoiceVC:invoiceVCinst];
+        [[invMngr invoiceVC] retain];
+        //[self.navigationController pushViewController:invoiceVCinst animated:YES];
+    }
+    
+    if ([[invMngr currCompanyName] isEqualToString:@"autoSpa"]){
+        
+        if (![invMngr existsServiceName:@"autoSpa"]) {
+            // create service item
+            [invMngr createServiceItem:@"autoSpa" withOrderVal:7];
+        }
+        
+        
+        if ( [[invMngr listOfServices] count] > 0){
+            if ([[invMngr listOfServices] objectAtIndex:0]){
+                ServiceItem *nextitem = [[invMngr listOfServices] objectAtIndex:0];
+                UIViewController *vcc = nextitem.serviceVC;
+                [self.navigationController pushViewController:vcc animated:YES];
+            }
+        } else {
+            NSLog(@"Please add some services ?");
+            [self.navigationController pushViewController:[invMngr invoiceVC] animated:YES];
+        }
+        
+    }else if ([[invMngr currCompanyName] isEqualToString:@"ductFurnaceCleaning"]){
+        
+        if (![invMngr existsServiceName:@"ductFurnaceCleaning"]) {
+            // create service item
+            [invMngr createServiceItem:@"ductFurnaceCleaning" withOrderVal:8];
+        }
+
+        
+        if ( [[invMngr listOfServices] count] > 0){
+            if ([[invMngr listOfServices] objectAtIndex:0]){
+                ServiceItem *nextitem = [[invMngr listOfServices] objectAtIndex:0];
+                UIViewController *vcc = nextitem.serviceVC;
+                [self.navigationController pushViewController:vcc animated:YES];
+            }
+        } else {
+            NSLog(@"Please add some services ?");
+            [self.navigationController pushViewController:[invMngr invoiceVC] animated:YES];
+        }
+        
+        
+    } else {
+        [self.navigationController pushViewController:[invMngr ccSecondVC] animated:YES];
+    }
+
+    //ServiceTypeViewController *second = (ServiceTypeViewController*) [storyboard instantiateViewControllerWithIdentifier:@"ServiceTypeViewController"];
+    
+    //AAAViewController *aaa = [[AAAViewController alloc] initWithNibName:@"AAAViewController" bundle:nil];
+    //[ha pushViewController:second animated:YES];
+    
+    //[self presentModalViewController:second animated:YES];
+    
+    //[second release];
+    
+    //NSLog(@"initiating new view controller..%@", self.navigationController);
+    
+    //[second release];
 }
 
 -(IBAction) gotoLastView {

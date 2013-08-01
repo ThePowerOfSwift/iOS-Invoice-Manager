@@ -40,6 +40,9 @@
     NSString *customerEmail;
     NSString *customerReferredBy;
     
+    // Each service has a tag assigned to it, based on which an order is made
+    // 'carpet' tag = 1, 'upholstery' tag = 2, 'mattress' tag = 3, 'miscellaneous' tag = 4, 'areaRugs' tag = 5, 'floodCleanup' tag = 6, 'autoSpa' tag = 7, 'ductFurnaceCleaning' tag = 8
+    
     // auto spa:
     
     
@@ -78,6 +81,7 @@
 +(InvoiceManager *) sharedInvoiceManager;
 -(ServiceItem *) createServiceItem:(NSString*) serviceTypeName withOrderVal:(NSInteger) orderArg;
 -(void) removeServiceItemWithName:(NSString*) serviceTypeName;
+-(bool) existsServiceName: (NSString*) serviceTypeName;
 -(UIViewController *) getNextVC;            // returns the VC that is following the currently presented VC (this func is only called when a service VC is being presented)
 
 -(void) printOut;

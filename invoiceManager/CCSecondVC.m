@@ -275,7 +275,7 @@
             [self.navigationController pushViewController:vcc animated:YES];
         }
     } else {
-        NSLog(@"Please add some services ?");
+        // NSLog(@"Please add some services ?");
         [self.navigationController pushViewController:[invoiceMngr invoiceVC] animated:YES];
     }
 }
