@@ -45,7 +45,6 @@
     
     // auto spa:
     
-    
     // carpet care:
     NSString *typeOfBuilding;       // 'Residential Building', 'Commercial Building' or other
     NSString *buildingState;        // 'Furnished State', 'Vacant State' or 'Portable State'

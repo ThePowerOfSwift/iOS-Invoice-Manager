@@ -12,7 +12,6 @@
 @class OptionsMiscellaneousPopoverVC;
 
 @protocol OptionsMiscellaneousPopoverVCDelegate <NSObject>
-//- (void)updateMiscellaneousDataTable:(OptionsMiscellaneousPopoverVC *)optionsVS editType:(NSString*) editType withItemName: (NSString *) itemName_arg withItemPrice: (float) itemPrice_arg withQuantity: (NSInteger) quantity_arg withSubtotalPrice: (float) price_arg andNotes: (NSString*) notes_arg;
 - (void)updateMiscellaneousDataTable:(OptionsMiscellaneousPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 

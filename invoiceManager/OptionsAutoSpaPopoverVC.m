@@ -14,10 +14,12 @@
 
 @implementation OptionsAutoSpaPopoverVC
 
+@synthesize selectedCarBg;
 @synthesize ASVCDelegate;
 @synthesize scrollViewer;
-@synthesize price, notesAboutRoom, notesField;
+@synthesize price, notesAboutRoom, notesField, priceRate, priceLabel, carType, packageType;
 @synthesize packageTypeLabel;
+@synthesize quantity;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,10 +31,7 @@
     return self;
 }
 
--(void) viewDidAppear:(BOOL)animated {
-    
-    
-    
+-(void) viewDidAppear:(BOOL)animated {    
     if ([self editMode]){
         [saveOrEditBtn setRestorationIdentifier:@"edit"];
         [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
@@ -56,7 +55,7 @@
 	// Do any additional setup after loading the view.
     
     [scrollViewer setScrollEnabled:YES];
-    [scrollViewer setContentSize:CGSizeMake(614, 2950)];
+    [scrollViewer setContentSize:CGSizeMake(614, 3100)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,13 +67,18 @@
 -(IBAction) onChoosingPackageType:(id) sender {
     if ([[sender restorationIdentifier] isEqualToString:@"bronze"]){
         [packageTypeLabel setText:@"Bronze"];
+        [self setPackageType:@"Bronze"];
     } else if ([[sender restorationIdentifier] isEqualToString:@"silver"]){
         [packageTypeLabel setText:@"Silver"];
+        [self setPackageType:@"Silver"];
     } else if ([[sender restorationIdentifier] isEqualToString:@"gold"]){
         [packageTypeLabel setText:@"Gold"];
+        [self setPackageType:@"Gold"];
     } else if ([[sender restorationIdentifier] isEqualToString:@"platinum"]){
         [packageTypeLabel setText:@"Platinum"];
+        [self setPackageType:@"Platinum"];
     }
+    [self doCalculations];
 }
 
 // ------------------------ UITextView procol implementation BELOW
@@ -95,46 +99,124 @@
 }
 // ------------------------ UITextView procol implementation ABOVE
 
+// only supports UIButton's right now
+-(IBAction) onChoosingCarType: (id) sender {
+    // set last selected back to normal
+    for (UIButton *aSubview in self.view.subviews){
+        //for (id aSubview in aSubview2.subviews){
+        if ([aSubview isKindOfClass:[UIButton class]]){
+            if ([aSubview tag] == 10){
+                //NSLog(@"hi, %@, %u", [aSubview restorationIdentifier], [aSubview tag]);
+                //[aSubview setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                
+                [aSubview setTag:0];
+            }
+        }
+        //}
+    }
+    
+    // put background image view under the newly selected button
+    UIButton *btn = (UIButton*)sender;
+    NSString *senderID = [btn restorationIdentifier];
+    
+    if ([senderID isEqualToString:@"SUV"]){
+        [selectedCarBg setFrame:CGRectMake(466.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
+        [self setCarType:@"SUV"];
+    } else if ([senderID isEqualToString:@"Compact"]){
+        [selectedCarBg setFrame:CGRectMake(75.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
+        [self setCarType:@"Compact"];
+    } else if ([senderID isEqualToString:@"Midsize"]){
+        [selectedCarBg setFrame:CGRectMake(272.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
+        [self setCarType:@"Midsize"];
+    }
+    [btn setTag:10];
+    
+    [self doCalculations];
+}
+
+-(IBAction) quantityChanged: (id) sender {
+    UITextField* qField = (UITextField*) sender;
+    NSLog(@"the quantity is %ld", (long)[[qField text] integerValue]);
+    [self setQuantity:[[qField text] integerValue]];
+    [self doCalculations];
+}
+
+-(void) doCalculations {
+    // if quantity is > 0
+    if ([self quantity] && [self packageType] && [self carType]){
+        if ([[self packageType] isEqualToString:@"Bronze"]){
+            if ([[self carType] isEqualToString:@"Compact"]){
+                [self setPriceRate:49.95f];
+            } else if ([[self carType] isEqualToString:@"Midsize"]){
+                // N/A
+                [self setPriceRate:0.0f];
+            } else if ([[self carType] isEqualToString:@"SUV"]){
+                [self setPriceRate:69.95f];
+            }
+        } else if ([[self packageType] isEqualToString:@"Silver"]){
+            if ([[self carType] isEqualToString:@"Compact"]){
+                [self setPriceRate:99.95f];
+            } else if ([[self carType] isEqualToString:@"Midsize"]){
+                // N/A
+                [self setPriceRate:0.0f];
+            } else if ([[self carType] isEqualToString:@"SUV"]){
+                [self setPriceRate:129.95f];
+            }
+        } else if ([[self packageType] isEqualToString:@"Gold"]){
+            if ([[self carType] isEqualToString:@"Compact"]){
+                [self setPriceRate:199.95f];
+            } else if ([[self carType] isEqualToString:@"Midsize"]){
+                [self setPriceRate:249.95f];
+            } else if ([[self carType] isEqualToString:@"SUV"]){
+                [self setPriceRate:289.95f];
+            }
+        } else if ([[self packageType] isEqualToString:@"Platinum"]){
+            if ([[self carType] isEqualToString:@"Compact"]){
+                [self setPriceRate:349.95f];
+            } else if ([[self carType] isEqualToString:@"Midsize"]){
+                [self setPriceRate:399.95f];
+            } else if ([[self carType] isEqualToString:@"SUV"]){
+                [self setPriceRate:449.95f];
+            }
+        }
+        [self setPrice: ([self priceRate] * [self quantity]) ];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price] ]];
+    } else {
+        [self setPriceRate:0.0f];
+        [self setPrice:0.0f];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price]]];
+    }
+    
+}
+
 -(IBAction) saveOrCancel: (id) sender {
+    [self doCalculations];
     notesAboutRoom = notesField.text;
     
     if ([[sender restorationIdentifier] isEqualToString:@"save"]){
-            //[ASVCDelegate updateAutoSpaDataTable:self editType:@"add" withServiceCell:newCell];
+        ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
+        newCell.name = [self packageType];
+        newCell.itemAttribute = [self carType];
+        newCell.quantity = [self quantity];
+        newCell.priceRate = [self priceRate];
+        newCell.price = [self price];
+        newCell.notes = [self notesAboutRoom];
+        
+        [ASVCDelegate updateAutoSpaDataTable:self editType:@"add" withServiceCell:newCell];
 
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
-        //[OVCDelegate updateDataTable:self editType:@"cancel" withServiceCell:nil];
-        //[OVCDelegate updateDataTable: self editType:@"cancel" withLength: 0.0 withWidth: 0.0 andRoom: nil withPriceRate: 0.0 andNotes:nil];
-        // NSLog(@"I AM EDITING STUFF!");
-        /*if (stairsService){
-            self.editingCell.itemAttribute = @"Stairs";
-            self.editingCell.serviceType = @"carpet";
-            self.editingCell.rlength = 0.0f;
-            self.editingCell.rwidth = 0.0f;
-            self.editingCell.name = roomName;
-            self.editingCell.priceRate = 0.0f;
-            self.editingCell.quantity = stairs;
-            self.editingCell.quantity2 = landings;
-            self.editingCell.notes = notesAboutRoom;
-            self.editingCell.price = price;
-            //[[self editingCell] setPrice:99.0f];
-        } else {
-            self.editingCell.itemAttribute = @"Room";
-            self.editingCell.serviceType = @"carpet";
-            self.editingCell.rlength = rLength;
-            self.editingCell.rwidth = rWidth;
-            self.editingCell.name = roomName;
-            self.editingCell.priceRate = priceRate;
-            self.editingCell.notes = notesAboutRoom;
-            self.editingCell.addonDeodorizer = addonDeodorizer;
-            self.editingCell.addonFabricProtector = addonFabricProtector;
-            self.editingCell.addonBiocide = addonBiocide;
-            self.editingCell.price = price;
-        }*/
-        [ASVCDelegate updateDataTable:self editType:@"edit" withServiceCell:nil];
+        
+        [[self editingCell] setName:[self packageType]];
+        [[self editingCell] setItemAttribute:[self carType]];
+        [[self editingCell] setQuantity:[self quantity]];
+        [[self editingCell] setPriceRate:[self priceRate]];
+        [[self editingCell] setPrice:[self price]];
+        [[self editingCell] setNotes:[self notesAboutRoom]];
+        
+        [ASVCDelegate updateAutoSpaDataTable:self editType:@"edit" withServiceCell:nil];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
-        [ASVCDelegate updateDataTable:self editType:@"cancel" withServiceCell:nil];
-        //[OVCDelegate updateDataTable: self editType:@"cancel" withLength: 0.0 withWidth: 0.0 andRoom: nil withPriceRate: 0.0 andNotes:nil];
+        [ASVCDelegate updateAutoSpaDataTable:self editType:@"cancel" withServiceCell:nil];
     }
 }
 

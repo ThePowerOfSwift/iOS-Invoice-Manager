@@ -52,9 +52,17 @@
  materialType = (synthetic | wool)
  quantity = ..
  price = ..
- note = ..
+ notes = ..
  addons..
  
+ -------------------------------------------
+ auto spa:
+ name = package name ( Bronze, Silver, Gold, Platinum )
+ itemAttribute = car type ( SUV, Compact, Midsize )
+ quantity = # of cars
+ price = price
+ priceRate = price per one car
+ notes = ..
  */
 
 @interface ServiceDataCell : NSObject {

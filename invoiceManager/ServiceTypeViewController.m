@@ -434,7 +434,9 @@
             popover = [[UIPopoverController alloc] initWithContentViewController:optionsVC];
         }
         
+        
         optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+        //optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         [popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     
@@ -522,7 +524,19 @@
 }
 
 - (void)updateAutoSpaDataTable:(OptionsAutoSpaPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
-    
+    if ([editType isEqualToString:@"add"]){
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
+        [serviceDataCellArray addObject:cell_arg];
+        dataTableNoOfRows++;
+        [dataTable reloadData];
+        [popover dismissPopoverAnimated:NO];
+    } else if ([editType isEqualToString:@"edit"]){
+        [dataTable reloadData];
+        [popover dismissPopoverAnimated:NO];
+    } else if ([editType isEqualToString:@"cancel"]){
+        [popover dismissPopoverAnimated:NO];
+    }
 }
 
 //- (void)updateUpholsteryDataTable:(OptionsUpholsteryPopoverVC *)optionsVS editType:(NSString*) editType withItemName: (NSString*) item_name_arg withMaterialType: (NSString*) item_material_arg withCleanType: (NSString*) vac_or_full_arg andQuantity: (NSInteger) quantity_arg andPrice: (float) item_price_arg andNotes: (NSString*) notes_arg {

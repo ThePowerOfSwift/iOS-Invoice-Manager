@@ -23,7 +23,7 @@
 - (void)updateTableSVC:(ServiceTypeViewController *)ServiceTypeViewController;
 @end
 
-@interface ServiceTypeViewController : UIViewController <OptionsPopoverVCDelegate, OptionsMiscellaneousPopoverVCDelegate, OptionsAreaRugsPopoverVCDelegate, OptionsFloodPopoverVCDelegate, OptionsMatressPopoverVCDelegate, OptionsUpholsteryPopoverVCDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface ServiceTypeViewController : UIViewController <OptionsAutoSpaPopoverVCDelegate, OptionsPopoverVCDelegate, OptionsMiscellaneousPopoverVCDelegate, OptionsAreaRugsPopoverVCDelegate, OptionsFloodPopoverVCDelegate, OptionsMatressPopoverVCDelegate, OptionsUpholsteryPopoverVCDelegate, UITableViewDataSource, UITableViewDelegate> {
     // delegate vars
     id <SecondViewControllerDelegate> SVCdelegate;
     
