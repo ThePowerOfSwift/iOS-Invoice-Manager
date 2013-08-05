@@ -192,7 +192,7 @@
 -(IBAction) saveOrCancel: (id) sender {
     [self doCalculations];
     notesAboutRoom = notesField.text;
-    
+    NSLog(@"hekki wirkd");
     if ([[sender restorationIdentifier] isEqualToString:@"save"]){
         ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
         newCell.name = [self packageType];
@@ -202,6 +202,7 @@
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
         
+        NSLog(@"SENT UPDATE ?");
         [ASVCDelegate updateAutoSpaDataTable:self editType:@"add" withServiceCell:newCell];
 
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){

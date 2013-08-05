@@ -78,6 +78,8 @@
     [self.view addSubview:col4Name];
     //}
     
+    NSLog(@"VCServiceNameType is %@", VCServiceNameType);
+    
     if ([VCServiceNameType isEqualToString:@"carpet"]){
         [carpetTypeSelection setHidden:FALSE];
         
@@ -115,6 +117,8 @@
         [col2Name setText:@"rate price"];
         [col3Name setText:@""];
         [col4Name setText:@"price"];
+    } else if ([VCServiceNameType isEqualToString:@"autoSpa"]){
+        // AUTO SPA STUFF !!
     }
     
     NSLog(@"size of data table: %f, %f", [dataTable contentSize].height, [dataTable bounds].size.width );
@@ -253,6 +257,9 @@
         cell.colTwo.text = [serviceCell materialType];
         //cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
         cell.colFour.text = [NSString stringWithFormat:@"%0.02f",[serviceCell price]];
+    } else if ([VCServiceNameType isEqualToString:@"autoSpa"]){
+        cell.colOne.text = [serviceCell name];
+        cell.colTwo.text = [serviceCell itemAttribute];
     }
     
     // add a delete button for each cell
@@ -434,7 +441,6 @@
             popover = [[UIPopoverController alloc] initWithContentViewController:optionsVC];
         }
         
-        
         optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         //optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         [popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -524,6 +530,7 @@
 }
 
 - (void)updateAutoSpaDataTable:(OptionsAutoSpaPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
+    NSLog(@"GIT YODATE?");
     if ([editType isEqualToString:@"add"]){
         [optionsVS retain];
         [cell_arg setPopoverVC:optionsVS];

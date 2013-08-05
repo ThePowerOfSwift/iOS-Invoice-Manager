@@ -463,11 +463,14 @@
         discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self areaRugsDiscount]];
     } else if([service_name isEqualToString:@"floodcleanup"]){
         discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self floodDiscount]];
+    } else {
+        discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", 0.0f];
     }
+    
     
     [discountLabel setText:discountToDisplay];
     [self drawText:discountToDisplay inFrame:discountLabelpdf.frame withFontSize:subserviceFontSize];
-    
+
     [mainView addSubview:discountLabel];
 }
 
