@@ -66,7 +66,6 @@ static InvoiceManager *shared = NULL;
     ServiceItem *item = [[ServiceItem alloc] init];
     item.name = serviceTypeName;
     item.order = orderArg;
-    
     [listOfServices addObject:item];
     NSLog(@"ALLOC SERVICE VC");
     // create a UIViewController instance and save it

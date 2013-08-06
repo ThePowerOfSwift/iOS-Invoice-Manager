@@ -48,6 +48,10 @@
     float discountedCarpetPrice, discountedUpholsteryPrice, discountedMattressPrice, discountedMiscePrice, discountedAreaRugsPrice, discountedFloodPrice;
     float subtotalCarpetPrice, subtotalUpholsteryPrice, subtotalMattressPrice, subtotalMiscePrice, subtotalAreaRugsPrice, subtotalFloodPrice;
     
+    float autospaDiscount;
+    float discountedAutospaPrice;
+    float subtotalAutospaPrice;
+    
     NSMutableData* pdfData;
 }
 
@@ -57,6 +61,7 @@
 
 @property (assign, readwrite) NSMutableData* pdfData;
 
+@property (assign, nonatomic) float autospaDiscount, discountedAutospaPrice, subtotalAutospaPrice;
 @property (assign, nonatomic) float carpetDiscount, upholsteryDiscount, mattressDiscount, miscellaneousDiscount, areaRugsDiscount, floodDiscount;
 @property (assign, nonatomic) float discountedCarpetPrice, discountedUpholsteryPrice, discountedMattressPrice, discountedMiscePrice, discountedAreaRugsPrice, discountedFloodPrice;
 @property (assign, nonatomic) float subtotalCarpetPrice, subtotalUpholsteryPrice, subtotalMattressPrice, subtotalMiscePrice, subtotalAreaRugsPrice, subtotalFloodPrice;

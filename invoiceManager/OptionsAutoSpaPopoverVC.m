@@ -195,6 +195,7 @@
     NSLog(@"hekki wirkd");
     if ([[sender restorationIdentifier] isEqualToString:@"save"]){
         ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
+        newCell.serviceType = @"autoSpa";
         newCell.name = [self packageType];
         newCell.itemAttribute = [self carType];
         newCell.quantity = [self quantity];
@@ -207,6 +208,7 @@
 
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
         
+        [[self editingCell] setServiceType:@"autoSpa"];
         [[self editingCell] setName:[self packageType]];
         [[self editingCell] setItemAttribute:[self carType]];
         [[self editingCell] setQuantity:[self quantity]];

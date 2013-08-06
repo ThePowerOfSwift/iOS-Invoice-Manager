@@ -4846,6 +4846,8 @@
                 <relationship kind="action" name="gotoLastView"/>
                 <relationship kind="action" name="gotoNextView"/>
                 <relationship kind="action" name="onChoosingGreenProducts:"/>
+                <relationship kind="action" name="onCustomEditingDone:"/>
+                <relationship kind="action" name="onCustomTouchDown:"/>
                 <relationship kind="outlet" name="estimationDate" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="hey" candidateClass="UIView"/>
                 <relationship kind="outlet" name="ratePerSqFeet" candidateClass="UITextField"/>
@@ -4910,6 +4912,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsAreaRugsPopoverVC.h"/>
             <relationships>
                 <relationship kind="action" name="onClickingBtn:"/>
+                <relationship kind="action" name="onClickingBtnTwo:"/>
                 <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="action" name="onSelectingType:"/>
                 <relationship kind="action" name="saveAddon:"/>
@@ -4949,6 +4952,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsFloodPopoverVC.h"/>
             <relationships>
                 <relationship kind="action" name="onClickingBtn:"/>
+                <relationship kind="action" name="onClickingBtnTwo:"/>
                 <relationship kind="action" name="onSelectingType:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
                 <relationship kind="outlet" name="notesField" candidateClass="UITextView"/>
@@ -4965,6 +4969,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsMatressPopoverVC.h"/>
             <relationships>
                 <relationship kind="action" name="onClickingBtn:"/>
+                <relationship kind="action" name="onClickingBtnTwo:"/>
                 <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="action" name="saveAddon:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
@@ -5007,6 +5012,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsUpholsteryPopoverVC.h"/>
             <relationships>
                 <relationship kind="action" name="onClickingBtn:"/>
+                <relationship kind="action" name="onClickingBtnThree:"/>
+                <relationship kind="action" name="onClickingBtnTwo:"/>
                 <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="action" name="saveAddon:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
@@ -5020,6 +5027,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ServiceTypeViewController.h"/>
             <relationships>
                 <relationship kind="action" name="displayOptionsPopoverVC:"/>
+                <relationship kind="action" name="editRow:"/>
                 <relationship kind="action" name="gotoLastView"/>
                 <relationship kind="action" name="gotoNextView"/>
                 <relationship kind="action" name="helloWorld:"/>
@@ -5045,6 +5053,7 @@
         <class className="SignaturePopoverVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SignaturePopoverVC.h"/>
             <relationships>
+                <relationship kind="action" name="pencilPressed:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
                 <relationship kind="outlet" name="mainImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="tempDrawImage" candidateClass="UIImageView"/>
@@ -5055,7 +5064,10 @@
             <relationships>
                 <relationship kind="action" name="gotoLastView"/>
                 <relationship kind="action" name="gotoNextView"/>
+                <relationship kind="action" name="onChoosingBuildingBtn:"/>
+                <relationship kind="action" name="onChoosingBuildingBtnTwo:"/>
                 <relationship kind="action" name="onChoosingGreenProducts:"/>
+                <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="action" name="onTouchDownIcon"/>
                 <relationship kind="action" name="textFieldDidEndEditing:" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="carpetCareOptionsView" candidateClass="UIView"/>

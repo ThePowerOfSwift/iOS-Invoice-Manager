@@ -27,6 +27,7 @@
 @synthesize carpetDiscount, upholsteryDiscount, mattressDiscount, areaRugsDiscount, miscellaneousDiscount, floodDiscount;
 @synthesize discountedAreaRugsPrice, discountedCarpetPrice, discountedFloodPrice, discountedMattressPrice, discountedMiscePrice, discountedUpholsteryPrice;
 @synthesize subtotalCarpetPrice, subtotalUpholsteryPrice, subtotalMattressPrice, subtotalMiscePrice, subtotalAreaRugsPrice, subtotalFloodPrice;
+@synthesize subtotalAutospaPrice, discountedAutospaPrice, autospaDiscount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -96,6 +97,7 @@
     areaRugsDiscount = 0;
     miscellaneousDiscount = 0;
     floodDiscount = 0;
+    autospaDiscount = 0;
     
     discountedCarpetPrice = 0;
     discountedUpholsteryPrice = 0;
@@ -103,6 +105,7 @@
     discountedAreaRugsPrice = 0;
     discountedMiscePrice = 0;
     discountedFloodPrice = 0;
+    discountedAutospaPrice = 0;
     
     [self createInvoice];
 }
@@ -149,9 +152,9 @@
     [self drawText:[NSString stringWithFormat:@"From: Mighty Clean 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 \n Address \n Edmonton, Alberta "] inFrame:CGRectMake(40.0, 200.0, 300.0f, 100.0f) withFontSize:16.0];
     
     //NSLog(@"first name: %@", [invMngr customerFirstName]);
-    NSLog(@"first name: %@", [invMngr customerLastName]);
-    NSLog(@"first name: %@", [invMngr customerAddressOne]);
-    NSLog(@"first name: %@", [invMngr customerEmail]);
+    //NSLog(@"first name: %@", [invMngr customerLastName]);
+    //NSLog(@"first name: %@", [invMngr customerAddressOne]);
+    //NSLog(@"first name: %@", [invMngr customerEmail]);
     
     // Draw Customer Invoice Address:
     [self drawText:[NSString stringWithFormat:@"To: %@ %@ \n %@\n email: %@\n haha \n 2 \n 3 \n 4 \n 5 \n 6 \n 7 \n 8 ", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerEmail]] inFrame:CGRectMake(40.0, 300.0, 300.0f, 100.0f) withFontSize:16.0];
@@ -166,6 +169,8 @@
     [self setSubtotalMattressPrice:0];
     [self setSubtotalMiscePrice:0];
     [self setSubtotalUpholsteryPrice:0];
+    
+    [self setSubtotalAutospaPrice:0];
     
     /* iterate through each service */
     for (int i = 0; i < [[invMngr listOfServices] count]; i++){
@@ -186,7 +191,7 @@
         posY = posY + 45.0;
         pdfY = pdfY + 5.0;
         
-        /* Draw horizontal line */
+        // Draw horizontal line 
         [self printHorizLineBelowX:posX Y:posY pdfX:(pdfX - 8.0) pdfY:(pdfY - 23.0)];
         // substracted some pixels cause drawing the image doesn't render at proper coordinates ( should not affect flow as pdfY is not affected )
         //NSLog(@"Print horizontal line at %f, %f", pdfX, pdfY);
@@ -344,16 +349,18 @@
     NSString *discountToDisplay = @"";
     if ([service_name isEqualToString:@"carpet"]){
         discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedCarpetPrice]];
-    } else if([service_name isEqualToString:@"upholstery"]){
+    } else if ([service_name isEqualToString:@"upholstery"]){
         discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedUpholsteryPrice]];
-    } else if([service_name isEqualToString:@"mattress"]){
+    } else if ([service_name isEqualToString:@"mattress"]){
         discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedMattressPrice]];
-    } else if([service_name isEqualToString:@"miscellaneous"]){
+    } else if ([service_name isEqualToString:@"miscellaneous"]){
         discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedMiscePrice]];
-    } else if([service_name isEqualToString:@"areaRugs"]){
+    } else if ([service_name isEqualToString:@"areaRugs"]){
         discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedAreaRugsPrice]];
-    } else if([service_name isEqualToString:@"floodcleanup"]){
+    } else if ([service_name isEqualToString:@"floodcleanup"]){
         discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedFloodPrice]];
+    } else if ([service_name isEqualToString:@"autoSpa"]){
+        discountToDisplay = [NSString stringWithFormat:@"$%.02f ", [self discountedAutospaPrice]];
     }
     
     /* Print Service Subtotal */
@@ -368,7 +375,6 @@
     [serviceSubtotalLabel setFont:[UIFont systemFontOfSize:17.0f]];
     
     posx += 600.0;
-    
     
     UILabel *serviceSubtotalPriceLabel = [[UILabel alloc] initWithFrame: CGRectMake(posx, posy, 250.0f, 38.0f)];
     [serviceSubtotalPriceLabel setText:[NSString stringWithFormat:@"%@ ", discountToDisplay]];
@@ -403,7 +409,7 @@
     //pdfx += 625.0;
     
     // CGFloat totalPrice = subtotalCarpetPrice + subtotalUpholsteryPrice + subtotalMattressPrice + subtotalMiscePrice + subtotalAreaRugsPrice + subtotalFloodPrice;
-    CGFloat totalPrice = discountedCarpetPrice + discountedUpholsteryPrice + discountedMattressPrice + discountedMiscePrice + discountedAreaRugsPrice + discountedFloodPrice;
+    CGFloat totalPrice = discountedCarpetPrice + discountedUpholsteryPrice + discountedMattressPrice + discountedMiscePrice + discountedAreaRugsPrice + discountedFloodPrice + discountedAutospaPrice;
     
     UILabel *priceTotalLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 250.0f, 70.0f)];
     [invoiceSubviews addObject:priceTotalLabel];
@@ -463,10 +469,11 @@
         discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self areaRugsDiscount]];
     } else if([service_name isEqualToString:@"floodcleanup"]){
         discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self floodDiscount]];
+    } else if([service_name isEqualToString:@"autoSpa"]){
+        discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", [self autospaDiscount]];
     } else {
         discountToDisplay = [NSString stringWithFormat:@"-$%.02f ", 0.0f];
     }
-    
     
     [discountLabel setText:discountToDisplay];
     [self drawText:discountToDisplay inFrame:discountLabelpdf.frame withFontSize:subserviceFontSize];
@@ -489,6 +496,8 @@
     //[serviceNameLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
     
     NSString *servicetype = [data_cell serviceType];
+    NSLog(@"THE SERVICE TYPE IS %@", servicetype);
+    
     if ([servicetype isEqualToString:@"carpet"]){
         subtotalCarpetPrice += [data_cell price];   // add price to subtotal
         discountedCarpetPrice = subtotalCarpetPrice - carpetDiscount;
@@ -551,7 +560,23 @@
             
             [self drawText:[NSString stringWithFormat: @"Item: %@, Rate per hr: %.02f\n# of hours: %u",[data_cell name], [data_cell ratePerHr], [data_cell quantity] ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
         }
+    } else if ([servicetype isEqualToString:@"autoSpa"]){
+        subtotalAutospaPrice += [data_cell price];     // add price to subtotal
+        discountedAutospaPrice = subtotalAutospaPrice - autospaDiscount;
+        [serviceDataLabel setText:[NSString stringWithFormat: @"Package: %@, Car Type: %@\nquantity: %u",[data_cell name] , [data_cell itemAttribute], [data_cell quantity] ]];
+        
+        [self drawText:[NSString stringWithFormat: @"Package: %@, Car Type: %@\nquantity: %u",[data_cell name] , [data_cell itemAttribute], [data_cell quantity] ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        //[self drawText:[NSString stringWithFormat: @"Item: %@, Material: %@\nquantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell materialType], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        
     }
+    
+    /*name = package name ( Bronze, Silver, Gold, Platinum )
+    itemAttribute = car type ( SUV, Compact, Midsize )
+    quantity = # of cars
+    price = price
+    priceRate = price per one car
+    notes = ..*/
+    
     
     // add the subview to the screen
     [mainView addSubview:serviceDataLabel];
@@ -758,7 +783,14 @@
             } else if ([discountType_arg isEqualToString:@"amount"]){
                 [self setFloodDiscount:amount_arg];
             }
+        } else if ([service_name_arg isEqualToString:@"autoSpa"]){
+            if ([discountType_arg isEqualToString:@"percent"]){
+                [self setAutospaDiscount:((amount_arg / 100.0) * subtotalAutospaPrice)];
+            } else if ([discountType_arg isEqualToString:@"amount"]){
+                [self setAutospaDiscount:amount_arg];
+            }
         }
+        
         [self clearView];
         [self createInvoice];
         
