@@ -739,7 +739,10 @@
         popoverController = [[UIPopoverController alloc] initWithContentViewController:signatureVC];
     }
     signatureVC.signatureDelegate = self;
+    // set the popover vc's content size
+    [popoverController setPopoverContentSize:CGSizeMake(657, 515)];
     [popoverController presentPopoverFromRect:[signaturebtn frame] inView:mainView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    //[popoverController presentPopoverFromRect:[signaturebtn frame] inView:[self view] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)updateDiscount:(InvoiceDiscountVC *)optionsVS updateType:(NSString*)update_type discountType: (NSString *) discountType_arg amount: (float) amount_arg forService: (NSString*) service_name_arg {
@@ -815,6 +818,7 @@
     
     discountVC.discountDelegate = self;
     [discountVC setServiceName:[sender restorationIdentifier]];
+    [popoverController setPopoverContentSize:CGSizeMake(657, 188)];
     [popoverController presentPopoverFromRect:[sender frame] inView:mainView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
