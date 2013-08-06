@@ -123,16 +123,16 @@
     
     ///pdfData = [NSMutableData dataWithCapacit
     
-    if (pdfData){
+    /*if (pdfData){
         UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
     } else {
         pdfData = [NSMutableData data];
         UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
     }
-    [pdfData retain];
+    [pdfData retain];*/
     
     // start drawing in pdf context
-    //UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/MightyCleanInvoice.pdf", CGRectZero, nil);
+    UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/MightyCleanInvoice.pdf", CGRectZero, nil);
     
     
     //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 1753, 1240), nil);
@@ -214,7 +214,17 @@
             ServiceDataCell *data_cell = [dataCellArray objectAtIndex:j];
             [self printSubservice:data_cell PosX:posX PosY:posY PdfX:pdfX PdfY:pdfY];
             posY += 75.0;
-            pdfY += 50.0;
+            pdfY += 20.0;
+            
+            [self printSubserviceNotes:data_cell PosX:posX PosY:&posY PdfX:pdfX PdfY:&pdfY];
+            
+            pdfY += 20.0;
+            
+            /*[label sizeToFit];
+            int numLines = (int)(label.frame.size.height/label.font.leading);
+            
+            posY += 75.0;
+            pdfY += 50.0;*/
             
             // adjust the scroll view / extend if necessary
             [self adjustScreenSize_CurrentY:posY];
@@ -233,6 +243,16 @@
             [self adjustScreenSize_CurrentY:posY];
             // adjust the pdf pages, if necessary
             [self adjustPdfPages_currentPdfY:&pdfY];
+            
+            //posY += 25.0;
+            //pdfY += 20.0;
+            
+            // adjust the scroll view / extend if necessary
+            //[self adjustScreenSize_CurrentY:posY];
+            // adjust the pdf pages, if necessary
+            //[self adjustPdfPages_currentPdfY:&pdfY];
+            
+            
         }
         
         // if there are any subservices, print their subtotal and increase y
@@ -481,6 +501,40 @@
     [mainView addSubview:discountLabel];
 }
 
+-(void) printSubserviceNotes: (ServiceDataCell*) data_cell PosX: (CGFloat) posx PosY: (CGFloat*) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat*) pdfy {
+    UILabel *serviceDataNotes = [[UILabel alloc] initWithFrame:CGRectMake(posx, *posy, 670.0f, 100.0f)];
+    
+    //*pdfy += 20.0;
+    
+    UILabel *serviceDataNotesPdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfx, *pdfy, 670.0f, 50.0f)];
+    
+    [invoiceSubviews addObject:serviceDataNotes];
+    [serviceDataNotes setNumberOfLines:0];  // allows for multiline
+    [serviceDataNotes setFont:[UIFont systemFontOfSize:17.0f]];
+    
+    CGFloat subserviceFontSize = 13.0f;
+    
+    NSLog(@"notes are: %@", [data_cell notes]);
+    [serviceDataNotes setText:[NSString stringWithFormat:@"Notes: %@", [data_cell notes]]];
+    
+    [serviceDataNotes sizeToFit];
+     int numLines = (int)(serviceDataNotes.frame.size.height/serviceDataNotes.font.leading);
+    NSLog(@"# of lines = %d", numLines);
+    
+
+    
+    
+    // add the subview to the screen
+    [mainView addSubview:serviceDataNotes];
+    
+    [self drawText:[NSString stringWithFormat:@"Notes: %@", [data_cell notes]] inFrame:serviceDataNotesPdf.frame withFontSize:subserviceFontSize];
+    
+    *posy += 25.0 * numLines;
+    *pdfy += 35.0 * numLines;
+    
+    //*pdfy += 20.0;
+}
+
 -(void) printSubservice: (ServiceDataCell*) data_cell PosX: (CGFloat) posx PosY: (CGFloat) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat) pdfy {
     UILabel *serviceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 400.0f, 70.0f)];
     UILabel *serviceDataLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfx, pdfy, 400.0f, 70.0f)];
@@ -589,7 +643,6 @@
     UILabel *priceDataLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfx, pdfy, 400.0f, 70.0f)];
     
     [priceDataLabel setFont:[UIFont systemFontOfSize:17.0f]];
-    //[priceDataLabel setTextAlignment:NSTextAlignmentCenter];
     [priceDataLabel setText:[NSString stringWithFormat:@"$%.02f ", [data_cell price]]];
     
     //[priceDataLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];

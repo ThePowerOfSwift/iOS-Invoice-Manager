@@ -31,5 +31,6 @@
 -(IBAction) gotoNextView;
 -(IBAction) gotoLastView;
 -(IBAction) onChoosingGreenProducts: (id) sender;
+-(IBAction) onCustomEditingDone:(id) sender;
 
 @end

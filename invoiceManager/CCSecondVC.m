@@ -173,13 +173,16 @@
 // - - - - - - START of IBActions
 // - - - - - - - - - - - - - - - -
 -(IBAction) onCustomEditingDone:(id) sender {
+    NSLog(@"haaas");
     InvoiceManager *invoiceMngr = [InvoiceManager sharedInvoiceManager];
     if ([[sender restorationIdentifier] isEqualToString:@"estimateDate"]){
         invoiceMngr.estimateDate = estimationDate.text;
         // NSLog(@"est is %@", invoiceMngr.estimateDate);
     } else if ([[sender restorationIdentifier] isEqualToString:@"priceRate"]){
-        invoiceMngr.ratePerSquareFeet = [ratePerSqFeet.text floatValue];
-        // NSLog(@"rate is %f", invoiceMngr.ratePerSquareFeet);
+        UITextField* rateSQ = (UITextField*) sender;
+        //invoiceMngr.ratePerSquareFeet = [ratePerSqFeet.text floatValue];
+        invoiceMngr.ratePerSquareFeet = [rateSQ.text floatValue];
+        NSLog(@"rate is %f", invoiceMngr.ratePerSquareFeet);
     }
 }
 

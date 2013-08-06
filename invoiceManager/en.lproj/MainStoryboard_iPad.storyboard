@@ -561,7 +561,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="onCustomEditingDone:" destination="nw3-dJ-PuC" eventType="editingDidEnd" id="5lv-nU-d1O"/>
+                                    <action selector="onCustomEditingDone:" destination="nw3-dJ-PuC" eventType="editingChanged" id="SLi-Cu-0ch"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" restorationIdentifier="carpet" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sxt-3x-oKg" customClass="CustomUIButton">
@@ -733,13 +733,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="priceRate" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="rate / sq ft" minimumFontSize="17" id="YY5-Pd-nzB">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="priceRate" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="rate / sq ft" minimumFontSize="17" id="YY5-Pd-nzB">
                                 <rect key="frame" x="84" y="625" width="239" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="onCustomEditingDone:" destination="nw3-dJ-PuC" eventType="editingDidEnd" id="hZW-lk-hOW"/>
+                                    <action selector="onCustomEditingDone:" destination="nw3-dJ-PuC" eventType="editingChanged" id="amD-Q2-10I"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -747,6 +747,7 @@
                     </view>
                     <connections>
                         <outlet property="estimationDate" destination="YBs-ll-PaI" id="5PA-Mv-T6t"/>
+                        <outlet property="ratePerSqFeet" destination="YY5-Pd-nzB" id="4Tc-VD-uWC"/>
                         <outlet property="selectedBtnBgThree" destination="FJT-LU-Ggq" id="pSU-8X-MQ7"/>
                     </connections>
                 </viewController>
@@ -4844,6 +4845,7 @@
                 <relationship kind="action" name="gotoLastView"/>
                 <relationship kind="action" name="gotoNextView"/>
                 <relationship kind="action" name="onChoosingGreenProducts:"/>
+                <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="outlet" name="estimationDate" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="hey" candidateClass="UIView"/>
                 <relationship kind="outlet" name="ratePerSqFeet" candidateClass="UITextField"/>
