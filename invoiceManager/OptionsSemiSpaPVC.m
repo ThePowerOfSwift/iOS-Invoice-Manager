@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Mihai. All rights reserved.
 //
 
-#import "OptionsAutoSpaPopoverVC.h"
+#import "OptionsAutoSpaPVC.h"
 
-@interface OptionsAutoSpaPopoverVC ()
+@interface OptionsSemiSpaPVC ()
 
 @end
 
-@implementation OptionsAutoSpaPopoverVC
+@implementation OptionsSemiSpaPVC
 
 @synthesize selectedCarBg;
 @synthesize ASVCDelegate;
@@ -31,7 +31,7 @@
     return self;
 }
 
--(void) viewDidAppear:(BOOL)animated {    
+-(void) viewDidAppear:(BOOL)animated {
     if ([self editMode]){
         [saveOrEditBtn setRestorationIdentifier:@"edit"];
         [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
@@ -205,7 +205,7 @@
         
         NSLog(@"SENT UPDATE ?");
         [ASVCDelegate updateAutoSpaDataTable:self editType:@"add" withServiceCell:newCell];
-
+        
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
         
         [[self editingCell] setServiceType:@"autoSpa"];

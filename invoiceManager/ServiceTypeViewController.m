@@ -16,6 +16,7 @@
 
 //@synthesize tableMode;
 //@synthesize listOfTableCells;
+@synthesize addServiceBtn;
 @synthesize uilabelsArray;
 @synthesize serviceDataCellArray;
 @synthesize selectedType;
@@ -24,7 +25,7 @@
 @synthesize SVCdelegate;
 @synthesize backBtn;
 @synthesize popover;
-@synthesize examp;
+@synthesize addServiceLabel;
 @synthesize carpetTypeSelection;
 @synthesize col1Name, col2Name, col3Name, col4Name;
 
@@ -54,7 +55,7 @@
     //NSLog(@" --->> current service name: %@", VCServiceNameType);
     InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
     invMngr.currActiveVCName = self.VCServiceNameType;
-    examp.text = VCServiceNameType;
+    //examp.text = VCServiceNameType;
     //dataTableNoOfRows = [serviceDataCellArray count];
     //[dataTable reloadData];
     
@@ -66,16 +67,16 @@
     //if (!col1Name){
     col1Name = [[[UILabel alloc] initWithFrame:CGRectMake(78.0f, 324.0f, 161.0f, 21.0f)] autorelease];
     //[col1Name setText:@"room name / stairs"];
-    [self.view addSubview:col1Name];
+    //[self.view addSubview:col1Name];
     
     col2Name = [[[UILabel alloc] initWithFrame:CGRectMake(247.0f, 324.0f, 170.0f, 21.0f)] autorelease];
-    [self.view addSubview:col2Name];
+    //[self.view addSubview:col2Name];
     
     col3Name = [[[UILabel alloc] initWithFrame:CGRectMake(425.0f, 324.0f, 131.0f, 21.0f)] autorelease];
-    [self.view addSubview:col3Name];
+    //[self.view addSubview:col3Name];
     
     col4Name = [[[UILabel alloc] initWithFrame:CGRectMake(564.0f, 324.0f, 86.0, 21.0f)] autorelease];
-    [self.view addSubview:col4Name];
+    //[self.view addSubview:col4Name];
     //}
     
     NSLog(@"VCServiceNameType is %@", VCServiceNameType);
@@ -83,42 +84,56 @@
     if ([VCServiceNameType isEqualToString:@"carpet"]){
         [carpetTypeSelection setHidden:FALSE];
         
-        [col1Name setText:@"room name / stairs"];
+        /*[col1Name setText:@"room name / stairs"];
         [col2Name setText:@"length x width"];
         [col3Name setText:@"area (sq.ft)"];
-        [col4Name setText:@"price"];
+        [col4Name setText:@"price"];*/
         //UILabel *col1 = [[UILabel alloc] initWithFrame:CGRectMake(39.0f, 310.0f, 147.0f, 21.0f)];
         
         //[col1 setText:@"room name / stairs"];
         
         //[self.view addSubview:col1];
     } else if ([VCServiceNameType isEqualToString:@"upholstery"]){
-        [col1Name setText:@"product name"];
+        /*[col1Name setText:@"product name"];
         [col2Name setText:@"clean type/material"];
         [col3Name setText:@"quantity"];
-        [col4Name setText:@"price"];
+        [col4Name setText:@"price"];*/
     } else if ([VCServiceNameType isEqualToString:@"mattress"]){
-        [col1Name setText:@"product name"];
+        /*[col1Name setText:@"product name"];
         [col2Name setText:@"clean type"];
         [col3Name setText:@"quantity"];
-        [col4Name setText:@"price"];
+        [col4Name setText:@"price"];*/
     } else if ([VCServiceNameType isEqualToString:@"miscellaneous"]){
-        [col1Name setText:@"product name"];
+        /*[col1Name setText:@"product name"];
         [col2Name setText:@"price rate"];
         [col3Name setText:@"quantity"];
-        [col4Name setText:@"price"];
+        [col4Name setText:@"price"];*/
     } else if ([VCServiceNameType isEqualToString:@"areaRugs"]){
-        [col1Name setText:@"product name"];
+        /*[col1Name setText:@"product name"];
         [col2Name setText:@"material type"];
         [col3Name setText:@""];
-        [col4Name setText:@"price"];
+        [col4Name setText:@"price"];*/
     } else if ([VCServiceNameType isEqualToString:@"floodcleanup"]){
-        [col1Name setText:@"service name"];
+        /*[col1Name setText:@"service name"];
         [col2Name setText:@"rate price"];
         [col3Name setText:@""];
-        [col4Name setText:@"price"];
+        [col4Name setText:@"price"];*/
     } else if ([VCServiceNameType isEqualToString:@"autoSpa"]){
-        // AUTO SPA STUFF !!
+        UIButton* addSemiServiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [addSemiServiceBtn setFrame:CGRectMake(394.0, 296.0, 49.0f, 49.0)];
+        [addSemiServiceBtn setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [addSemiServiceBtn addTarget:self action:@selector(displayOptionsPopoverVC:) forControlEvents:UIControlEventTouchUpInside];
+        [addSemiServiceBtn setRestorationIdentifier:@"semi"];
+        [self.view addSubview:addSemiServiceBtn];
+        
+        UILabel* addSemiServiceLabel = [[[UILabel alloc] initWithFrame:CGRectMake(458.0, 297.0, 217.0, 43.0)] autorelease];
+        [addSemiServiceLabel setText:@"Add Semi Service"];
+        [addSemiServiceLabel setFont:[UIFont systemFontOfSize:27.0]];
+        
+        [self.view addSubview:addSemiServiceLabel];
+        
+        [addServiceLabel setText:@"Add Auto Service"];
+        
     }
     
     NSLog(@"size of data table: %f, %f", [dataTable contentSize].height, [dataTable bounds].size.width );
@@ -433,20 +448,32 @@
         optionsVC.MIVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         [popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else if ([VCServiceNameType isEqualToString:@"autoSpa"]){
-        OptionsAutoSpaPopoverVC *optionsVC = (OptionsAutoSpaPopoverVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPopoverVC"];
         
-        if (popover){
-            [popover setContentViewController:optionsVC];
-        }else {
-            popover = [[UIPopoverController alloc] initWithContentViewController:optionsVC];
+        if ([[sender restorationIdentifier] isEqualToString:@"semi"]){
+            OptionsSemiSpaPVC *optionsVC = (OptionsSemiSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsSemiSpaPVC"];
+            
+            if (popover){
+                [popover setContentViewController:optionsVC];
+            }else {
+                popover = [[UIPopoverController alloc] initWithContentViewController:optionsVC];
+            }
+            
+            optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+        } else {
+            OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
+            
+            if (popover){
+                [popover setContentViewController:optionsVC];
+            }else {
+                popover = [[UIPopoverController alloc] initWithContentViewController:optionsVC];
+            }
+            
+            optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         }
         
-        optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         //optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
-        [popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popover presentPopoverFromRect:addServiceBtn.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-    
-    
     
 }
 
@@ -529,8 +556,23 @@
     }
 }
 
-- (void)updateAutoSpaDataTable:(OptionsAutoSpaPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
-    NSLog(@"GIT YODATE?");
+- (void)updateAutoSpaDataTable:(OptionsAutoSpaPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
+    if ([editType isEqualToString:@"add"]){
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
+        [serviceDataCellArray addObject:cell_arg];
+        dataTableNoOfRows++;
+        [dataTable reloadData];
+        [popover dismissPopoverAnimated:NO];
+    } else if ([editType isEqualToString:@"edit"]){
+        [dataTable reloadData];
+        [popover dismissPopoverAnimated:NO];
+    } else if ([editType isEqualToString:@"cancel"]){
+        [popover dismissPopoverAnimated:NO];
+    }
+}
+
+- (void)updateSemiSpaDataTable:(OptionsSemiSpaPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     if ([editType isEqualToString:@"add"]){
         [optionsVS retain];
         [cell_arg setPopoverVC:optionsVS];

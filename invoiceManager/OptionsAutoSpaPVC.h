@@ -10,16 +10,16 @@
 #import "ServiceDataCell.h"
 #import "BasePopoverVC.h"
 
-@class OptionsAutoSpaPopoverVC;
+@class OptionsAutoSpaPVC;
 
-@protocol OptionsAutoSpaPopoverVCDelegate <NSObject>
-- (void)updateAutoSpaDataTable:(OptionsAutoSpaPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
+@protocol OptionsAutoSpaPVCdelegate <NSObject>
+- (void)updateAutoSpaDataTable:(OptionsAutoSpaPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsAutoSpaPopoverVC : BasePopoverVC <UITextViewDelegate> {
+@interface OptionsAutoSpaPVC : BasePopoverVC <UITextViewDelegate> {
     
     // delegate variables
-    id <OptionsAutoSpaPopoverVCDelegate> ASVCDelegate;  // options view controller delegate
+    id <OptionsAutoSpaPVCdelegate> ASVCDelegate;  // options view controller delegate
     
     // variables
     NSString *packageType;
@@ -37,7 +37,7 @@
     IBOutlet UIScrollView *scrollViewer;
 }
 
-@property (nonatomic, assign) id <OptionsAutoSpaPopoverVCDelegate> ASVCDelegate;
+@property (nonatomic, assign) id <OptionsAutoSpaPVCdelegate> ASVCDelegate;
 
 @property (assign, readwrite) NSInteger quantity;
 @property (assign, readwrite) float price, priceRate;

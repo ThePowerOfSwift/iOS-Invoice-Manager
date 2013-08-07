@@ -13,7 +13,8 @@
 #import "OptionsFloodPopoverVC.h"
 #import "OptionsAreaRugsPopoverVC.h"
 #import "OptionsMiscellaneousPopoverVC.h"
-#import "OptionsAutoSpaPopoverVC.h"
+#import "OptionsAutoSpaPVC.h"
+#import "OptionsSemiSpaPVC.h"
 
 //#import "ServiceDataCell.h"
 
@@ -23,7 +24,7 @@
 - (void)updateTableSVC:(ServiceTypeViewController *)ServiceTypeViewController;
 @end
 
-@interface ServiceTypeViewController : UIViewController <OptionsAutoSpaPopoverVCDelegate, OptionsPopoverVCDelegate, OptionsMiscellaneousPopoverVCDelegate, OptionsAreaRugsPopoverVCDelegate, OptionsFloodPopoverVCDelegate, OptionsMatressPopoverVCDelegate, OptionsUpholsteryPopoverVCDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface ServiceTypeViewController : UIViewController <OptionsSemiSpaPVCdelegate, OptionsAutoSpaPVCdelegate, OptionsPopoverVCDelegate, OptionsMiscellaneousPopoverVCDelegate, OptionsAreaRugsPopoverVCDelegate, OptionsFloodPopoverVCDelegate, OptionsMatressPopoverVCDelegate, OptionsUpholsteryPopoverVCDelegate, UITableViewDataSource, UITableViewDelegate> {
     // delegate vars
     id <SecondViewControllerDelegate> SVCdelegate;
     
@@ -36,9 +37,10 @@
     // outlets
     IBOutlet UIView *carpetTypeSelection;
     IBOutlet UITableView *dataTable;
-    IBOutlet UILabel *examp;
+    IBOutlet UILabel *addServiceLabel;
     IBOutlet UIButton *backBtn;
     IBOutlet UIImageView *selectedType;
+    IBOutlet UIButton *addServiceBtn;
     
     NSMutableArray *uilabelsArray;
     
@@ -54,8 +56,9 @@
 @property (nonatomic, assign) UIPopoverController *popover;
 @property (nonatomic, assign) UIButton *backBtn;
 
+@property (assign, readwrite) IBOutlet UIButton *addServiceBtn;
 @property (assign, readwrite) IBOutlet UIView *carpetTypeSelection;
-@property (assign, readwrite) IBOutlet UILabel *examp;
+@property (assign, readwrite) IBOutlet UILabel *addServiceLabel;
 @property (assign, readwrite) IBOutlet UILabel *col1Name, *col2Name, *col3Name, *col4Name;
 @property (assign, readwrite) IBOutlet UIImageView *selectedType;
 
