@@ -55,7 +55,7 @@
 	// Do any additional setup after loading the view.
     
     [scrollViewer setScrollEnabled:YES];
-    [scrollViewer setContentSize:CGSizeMake(614, 3100)];
+    [scrollViewer setContentSize:CGSizeMake(614, 3850)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,18 +65,18 @@
 }
 
 -(IBAction) onChoosingPackageType:(id) sender {
-    if ([[sender restorationIdentifier] isEqualToString:@"bronze"]){
-        [packageTypeLabel setText:@"Bronze"];
-        [self setPackageType:@"Bronze"];
-    } else if ([[sender restorationIdentifier] isEqualToString:@"silver"]){
-        [packageTypeLabel setText:@"Silver"];
-        [self setPackageType:@"Silver"];
-    } else if ([[sender restorationIdentifier] isEqualToString:@"gold"]){
-        [packageTypeLabel setText:@"Gold"];
-        [self setPackageType:@"Gold"];
-    } else if ([[sender restorationIdentifier] isEqualToString:@"platinum"]){
-        [packageTypeLabel setText:@"Platinum"];
-        [self setPackageType:@"Platinum"];
+    if ([[sender restorationIdentifier] isEqualToString:@"completeExtWash"]){
+        [packageTypeLabel setText:@"Complete Exterior Wash"];
+        [self setPackageType:@"completeExtWash"];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"completeExtDetail"]){
+        [packageTypeLabel setText:@"Complete Exterior Detail"];
+        [self setPackageType:@"completeExtDetail"];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"completeIntDetail"]){
+        [packageTypeLabel setText:@"Complete Interior Detail"];
+        [self setPackageType:@"completeIntDetail"];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"completeFullDetail"]){
+        [packageTypeLabel setText:@"Complete Full Detail"];
+        [self setPackageType:@"completeFullDetail"];
     }
     [self doCalculations];
 }
@@ -101,6 +101,7 @@
 
 // only supports UIButton's right now
 -(IBAction) onChoosingCarType: (id) sender {
+    NSLog(@"HELLLOO");
     // set last selected back to normal
     for (UIButton *aSubview in self.view.subviews){
         //for (id aSubview in aSubview2.subviews){
@@ -111,6 +112,7 @@
                 
                 [aSubview setTag:0];
             }
+            NSLog(@"ID: %@", [aSubview restorationIdentifier]);
         }
         //}
     }
@@ -119,17 +121,15 @@
     UIButton *btn = (UIButton*)sender;
     NSString *senderID = [btn restorationIdentifier];
     
-    if ([senderID isEqualToString:@"SUV"]){
-        [selectedCarBg setFrame:CGRectMake(466.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
-        [self setCarType:@"SUV"];
-    } else if ([senderID isEqualToString:@"Compact"]){
+    if ([senderID isEqualToString:@"dayCab"]){
         [selectedCarBg setFrame:CGRectMake(75.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
-        [self setCarType:@"Compact"];
-    } else if ([senderID isEqualToString:@"Midsize"]){
-        [selectedCarBg setFrame:CGRectMake(272.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
-        [self setCarType:@"Midsize"];
+        [self setCarType:@"dayCab"];
+    } else if ([senderID isEqualToString:@"sleeperUnit"]){
+        [selectedCarBg setFrame:CGRectMake(468.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
+        [self setCarType:@"sleeperUnit"];
     }
     [btn setTag:10];
+    //NSLog(@"%@ has tag 10 !", );
     
     [self doCalculations];
 }
@@ -144,39 +144,29 @@
 -(void) doCalculations {
     // if quantity is > 0
     if ([self quantity] && [self packageType] && [self carType]){
-        if ([[self packageType] isEqualToString:@"Bronze"]){
-            if ([[self carType] isEqualToString:@"Compact"]){
-                [self setPriceRate:49.95f];
-            } else if ([[self carType] isEqualToString:@"Midsize"]){
-                // N/A
-                [self setPriceRate:0.0f];
-            } else if ([[self carType] isEqualToString:@"SUV"]){
-                [self setPriceRate:69.95f];
-            }
-        } else if ([[self packageType] isEqualToString:@"Silver"]){
-            if ([[self carType] isEqualToString:@"Compact"]){
-                [self setPriceRate:99.95f];
-            } else if ([[self carType] isEqualToString:@"Midsize"]){
-                // N/A
-                [self setPriceRate:0.0f];
-            } else if ([[self carType] isEqualToString:@"SUV"]){
-                [self setPriceRate:129.95f];
-            }
-        } else if ([[self packageType] isEqualToString:@"Gold"]){
-            if ([[self carType] isEqualToString:@"Compact"]){
-                [self setPriceRate:199.95f];
-            } else if ([[self carType] isEqualToString:@"Midsize"]){
-                [self setPriceRate:249.95f];
-            } else if ([[self carType] isEqualToString:@"SUV"]){
-                [self setPriceRate:289.95f];
-            }
-        } else if ([[self packageType] isEqualToString:@"Platinum"]){
-            if ([[self carType] isEqualToString:@"Compact"]){
-                [self setPriceRate:349.95f];
-            } else if ([[self carType] isEqualToString:@"Midsize"]){
+        if ([[self packageType] isEqualToString:@"completeExtWash"]){
+            if ([[self carType] isEqualToString:@"dayCab"]){
+                [self setPriceRate:299.95f];
+            } else if ([[self carType] isEqualToString:@"sleeperUnit"]){
                 [self setPriceRate:399.95f];
-            } else if ([[self carType] isEqualToString:@"SUV"]){
-                [self setPriceRate:449.95f];
+            }
+        } else if ([[self packageType] isEqualToString:@"completeExtDetail"]){
+            if ([[self carType] isEqualToString:@"dayCab"]){
+                [self setPriceRate:349.95f];
+            } else if ([[self carType] isEqualToString:@"sleeperUnit"]){
+                [self setPriceRate:499.95f];
+            }
+        } else if ([[self packageType] isEqualToString:@"completeIntDetail"]){
+            if ([[self carType] isEqualToString:@"dayCab"]){
+                [self setPriceRate:349.95f];
+            } else if ([[self carType] isEqualToString:@"sleeperUnit"]){
+                [self setPriceRate:499.95f];
+            }
+        } else if ([[self packageType] isEqualToString:@"completeFullDetail"]){
+            if ([[self carType] isEqualToString:@"dayCab"]){
+                [self setPriceRate:599.95f];
+            } else if ([[self carType] isEqualToString:@"sleeperUnit"]){
+                [self setPriceRate:899.95f];
             }
         }
         [self setPrice: ([self priceRate] * [self quantity]) ];
