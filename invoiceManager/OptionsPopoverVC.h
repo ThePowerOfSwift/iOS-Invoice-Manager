@@ -18,7 +18,7 @@
 - (void)updateDataTable:(OptionsPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsPopoverVC : BasePopoverVC <UITextViewDelegate> {
+@interface OptionsPopoverVC : BasePopoverVC {
     
     // delegate variables
     id <OptionsPopoverVCDelegate> OVCDelegate;  // options view controller delegate
@@ -42,7 +42,7 @@
     IBOutlet UILabel *priceLabel;
     IBOutlet UITextField *lengthField;
     IBOutlet UITextField *widthField;
-    IBOutlet UITextView *notesField;
+    //IBOutlet UITextView *notesField;
     
     IBOutlet UITextField *stairsField, *landingsField;
     
@@ -55,7 +55,7 @@
 @property (assign, readwrite) NSString *roomName, *notesAboutRoom;
 @property (assign, readwrite) NSInteger stairs, landings;
 
-@property (nonatomic, assign) IBOutlet UITextView *notesField;
+//@property (nonatomic, assign) IBOutlet UITextView *notesField;
 @property (nonatomic, assign) IBOutlet UITextField *lengthField, *widthField, *stairsField, *landingsField;
 //@property (nonatomic, assign) IBOutlet UIButton *saveOrEditBtn;
 

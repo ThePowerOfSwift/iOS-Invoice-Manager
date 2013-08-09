@@ -16,7 +16,7 @@
 - (void)updateAutoSpaDataTable:(OptionsAutoSpaPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsAutoSpaPVC : BasePopoverVC <UITextViewDelegate> {
+@interface OptionsAutoSpaPVC : BasePopoverVC {
     
     // delegate variables
     id <OptionsAutoSpaPVCdelegate> ASVCDelegate;  // options view controller delegate
@@ -32,7 +32,8 @@
     IBOutlet UIImageView *selectedCarBg;
     IBOutlet UILabel *packageTypeLabel;
     IBOutlet UILabel *priceLabel;
-    IBOutlet UITextView *notesField;
+    IBOutlet UITextField *quantityField;
+    //IBOutlet UITextView *notesField;
     
     IBOutlet UIScrollView *scrollViewer;
 }
@@ -44,8 +45,8 @@
 @property (assign, readwrite) NSString *packageType, *carType, *notesAboutRoom;
 
 @property (assign, nonatomic) IBOutlet UIScrollView *scrollViewer;
-@property (nonatomic, assign) IBOutlet UITextView *notesField;
-@property (nonatomic, assign) IBOutlet UITextField *lengthField, *widthField, *stairsField, *landingsField;
+//@property (nonatomic, assign) IBOutlet UITextView *notesField;
+@property (nonatomic, assign) IBOutlet UITextField *lengthField, *widthField, *stairsField, *landingsField, *quantityField;
 @property (nonatomic, assign) IBOutlet UILabel *packageTypeLabel, *priceLabel;
 @property (nonatomic, assign) IBOutlet UIImageView *selectedCarBg;
 

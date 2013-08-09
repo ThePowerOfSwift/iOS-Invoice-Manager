@@ -15,7 +15,8 @@
 @implementation OptionsMiscellaneousPopoverVC
 
 @synthesize MIVCDelegate;
-@synthesize itemNameField, quantityField, notesField, pricePerItemField;
+//@synthesize notesField;
+@synthesize itemNameField, quantityField, pricePerItemField;
 @synthesize priceLabel;
 @synthesize itemName, itemPrice, notes, quantity, price;
 
@@ -33,6 +34,7 @@
     if ([self editMode]){
         [saveOrEditBtn setRestorationIdentifier:@"edit"];
         [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
+        [self restoreSavedSelections];
     } else {
         // set up the notes field
         notesField.text = @"Place notes and comments here";
@@ -60,23 +62,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-// ------------------------ UITextView procol implementation BELOW
-// when the text view is getting edited, this will be called
-
--(BOOL)textViewShouldBeginEditing: (UITextView*)textView {
-    notesField.text = @"";
-    notesField.textColor = [UIColor blackColor];
-    return YES;
+// restore the selected gui buttons to the ones saved in the 'editingCell'
+-(void) restoreSavedSelections {
+    
+    [itemNameField setText:[editingCell name]];
+    [pricePerItemField setText:[NSString stringWithFormat:@"%.02f", [editingCell priceRate]]];
+    // restore the quantity saved
+    [quantityField setText:[NSString stringWithFormat:@"%ld", (long)[editingCell quantity]]];
+    // restore the price label
+    [priceLabel setText:[NSString stringWithFormat:@"$%.02f", [editingCell price]]];
+    // restore the notes saved
+    [notesField setText:[editingCell notes]];
 }
-
--(void) textViewDidChange: (UITextView*) textView {
-    if (notesField.text.length == 0){
-        notesField.textColor = [UIColor lightGrayColor];
-        notesField.text = @"Place notes and comments here";
-        [notesField resignFirstResponder];
-    }
-}
-// ------------------------ UITextView procol implementation ABOVE
 
 -(IBAction) onCustomEditingDone: (id) sender {
     if ([[sender restorationIdentifier] isEqualToString:@"itemName"]){

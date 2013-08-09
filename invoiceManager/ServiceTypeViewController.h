@@ -37,7 +37,7 @@
     // outlets
     IBOutlet UIView *carpetTypeSelection;
     IBOutlet UITableView *dataTable;
-    IBOutlet UILabel *addServiceLabel;
+    IBOutlet UILabel *addServiceLabel, *serviceTitleLabel;
     IBOutlet UIButton *backBtn;
     IBOutlet UIImageView *selectedType;
     IBOutlet UIButton *addServiceBtn;
@@ -58,7 +58,7 @@
 
 @property (assign, readwrite) IBOutlet UIButton *addServiceBtn;
 @property (assign, readwrite) IBOutlet UIView *carpetTypeSelection;
-@property (assign, readwrite) IBOutlet UILabel *addServiceLabel;
+@property (assign, readwrite) IBOutlet UILabel *addServiceLabel, *serviceTitleLabel;
 @property (assign, readwrite) IBOutlet UILabel *col1Name, *col2Name, *col3Name, *col4Name;
 @property (assign, readwrite) IBOutlet UIImageView *selectedType;
 

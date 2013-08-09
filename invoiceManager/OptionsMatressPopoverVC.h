@@ -16,7 +16,7 @@
 - (void)updateMatressDataTable:(OptionsMatressPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsMatressPopoverVC : BasePopoverVC <UITextViewDelegate> {
+@interface OptionsMatressPopoverVC : BasePopoverVC {
     
     id <OptionsMatressPopoverVCDelegate> MVCDelegate;  // options view controller delegate
     
@@ -29,13 +29,13 @@
     
     IBOutlet UITextField *quantityField;
     IBOutlet UILabel *priceLabel;
-    IBOutlet UITextView *notesField;
+    //IBOutlet UITextView *notesField;
 }
 
 @property (assign, readwrite) bool addonDeodorizer, addonFabricProtector, addonBiocide;
 @property (assign, readwrite) NSInteger quantity;
 @property (assign, readwrite) NSString *vacOrFull;
-@property (assign) IBOutlet UITextView *notesField;
+//@property (assign) IBOutlet UITextView *notesField;
 @property (nonatomic, assign) IBOutlet UITextField *quantityField;
 @property (assign, readwrite) NSString *itemName, *notes;
 @property (assign, readwrite) float price;

@@ -28,6 +28,7 @@
 @synthesize addServiceLabel;
 @synthesize carpetTypeSelection;
 @synthesize col1Name, col2Name, col3Name, col4Name;
+@synthesize serviceTitleLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +47,10 @@
         NSLog(@"DO I GEEEEET HEREEEE");
     }
     return self;
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [serviceTitleLabel setText:[NSString stringWithFormat:@"%@ Service", VCServiceNameType]];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -458,7 +463,7 @@
                 popover = [[UIPopoverController alloc] initWithContentViewController:optionsVC];
             }
             
-            optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+            optionsVC.SSVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         } else {
             OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
             
@@ -573,6 +578,7 @@
 }
 
 - (void)updateSemiSpaDataTable:(OptionsSemiSpaPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
+    NSLog(@"heeey yo !");
     if ([editType isEqualToString:@"add"]){
         [optionsVS retain];
         [cell_arg setPopoverVC:optionsVS];
@@ -588,23 +594,9 @@
     }
 }
 
-//- (void)updateUpholsteryDataTable:(OptionsUpholsteryPopoverVC *)optionsVS editType:(NSString*) editType withItemName: (NSString*) item_name_arg withMaterialType: (NSString*) item_material_arg withCleanType: (NSString*) vac_or_full_arg andQuantity: (NSInteger) quantity_arg andPrice: (float) item_price_arg andNotes: (NSString*) notes_arg {
 - (void)updateUpholsteryDataTable:(OptionsUpholsteryPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     
     if ([editType isEqualToString:@"add"]){
-        // save popover info into a Service data cell
-        /*ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
-         
-         newCell.serviceType = @"upholstery";
-         newCell.notes = notes_arg;
-         newCell.name = item_name_arg;
-         newCell.materialType = item_material_arg;
-         newCell.vacOrFull = vac_or_full_arg;
-         newCell.quantity = quantity_arg;
-         newCell.price = item_price_arg;*/
-        
-        // save the service data cell to an array ( which will be called upon by table view delegate funcs )
-        //[serviceDataCellArray addObject:newCell];
         [optionsVS retain];
         [cell_arg setPopoverVC:optionsVS];
         [serviceDataCellArray addObject:cell_arg];
@@ -622,20 +614,7 @@
 
 - (void)updateAreaRugsDataTable:(OptionsUpholsteryPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     if ([editType isEqualToString:@"add"]){
-        // save popover info into a Service data cell
-        /*ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
-         
-         newCell.serviceType = @"upholstery";
-         newCell.notes = notes_arg;
-         newCell.name = item_name_arg;
-         newCell.materialType = item_material_arg;
-         newCell.vacOrFull = vac_or_full_arg;
-         newCell.quantity = quantity_arg;
-         newCell.price = item_price_arg;*/
-        
-        // save the service data cell to an array ( which will be called upon by table view delegate funcs )
-        //[serviceDataCellArray addObject:newCell];
-        
+        // save popover info into a Service data cell, which is then saved into the array 'serviceDataCellArray'   
         [optionsVS retain];
         [cell_arg setPopoverVC:optionsVS];
         [serviceDataCellArray addObject:cell_arg];
@@ -650,7 +629,6 @@
     }
 }
 
-//-(void)updateFloodDataTable:(OptionsFloodPopoverVC *)optionsFVC editType: (NSString*) editType withItemName: (NSString *) item_name_arg withRate: (float) rate_arg withQuantity: (float) quantity_arg withQuantity2: (float) quantity2_arg withPrice:(float)price_arg andNotes: (NSString *) notes_arg {
 - (void)updateFloodServicesDataTable:(OptionsFloodPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     
     if ([editType isEqualToString:@"add"]){
@@ -682,7 +660,6 @@
     
 }
 
-//- (void)updateMiscellaneousDataTable:(OptionsMiscellaneousPopoverVC *)optionsVS editType:(NSString*) editType withItemName: (NSString *) itemName_arg withItemPrice: (float) itemPrice_arg withQuantity: (NSInteger) quantity_arg withSubtotalPrice: (float) price_arg andNotes: (NSString*) notes_arg {
 - (void)updateMiscellaneousDataTable:(OptionsMiscellaneousPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     if ([editType isEqualToString:@"add"]){
         // save popover info into a Service data cell

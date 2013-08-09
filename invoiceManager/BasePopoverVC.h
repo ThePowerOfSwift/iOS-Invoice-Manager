@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BasePopoverVC : UIViewController {
+@interface BasePopoverVC : UIViewController <UITextViewDelegate> {
     bool editMode;
     ServiceDataCell* editingCell;
     
     IBOutlet UIButton *saveOrEditBtn;
+    IBOutlet UITextView *notesField;
 }
 
+@property (nonatomic, assign) IBOutlet UITextView *notesField;
 @property (nonatomic, assign) IBOutlet UIButton *saveOrEditBtn;
 @property (assign, readwrite) bool editMode;
 @property (assign, readwrite) ServiceDataCell* editingCell;

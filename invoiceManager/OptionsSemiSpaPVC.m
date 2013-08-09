@@ -15,11 +15,13 @@
 @implementation OptionsSemiSpaPVC
 
 @synthesize selectedCarBg;
-@synthesize ASVCDelegate;
+@synthesize SSVCDelegate;
 @synthesize scrollViewer;
-@synthesize price, notesAboutRoom, notesField, priceRate, priceLabel, carType, packageType;
+@synthesize price, notesAboutRoom, priceRate, priceLabel, carType, packageType;
+//@synthesize notesField;
 @synthesize packageTypeLabel;
 @synthesize quantity;
+@synthesize quantityField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +38,7 @@
         [saveOrEditBtn setRestorationIdentifier:@"edit"];
         [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
         //[self doCalculations];  // do calculations in case some variables changes ( rate per square feet )
+        [self restoreSavedSelections];
     } else {
         // set up the notes field
         notesField.text = @"Place notes and comments here";
@@ -44,9 +47,10 @@
         
         // init vars in case error occurs
         price = 0;
-        
     }
-    // NSLog(@"title of uivc is %@", [self title]);
+
+    // set initial selected options
+    [self setCarType:@"dayCab"];
 }
 
 - (void)viewDidLoad
@@ -62,6 +66,43 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// restore the selected gui buttons to the ones saved in the 'editingCell'
+-(void) restoreSavedSelections {
+    
+    // de-select all buttons with a specific tag and select the ones that were saved
+    for (UIButton *v in self.view.subviews) {
+        for (UIButton *btn in v.subviews){
+            if ([btn isKindOfClass:[UIButton class]]){
+                NSLog(@"Attribute is %@", [editingCell itemAttribute]);
+                if ([[btn restorationIdentifier] isEqualToString:[editingCell itemAttribute]]){
+                    [btn setTag:10];
+                    if ([[editingCell itemAttribute] isEqualToString:@"dayCab"]){
+                        [selectedCarBg setFrame:CGRectMake(75.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
+                    } else if ([[editingCell itemAttribute] isEqualToString:@"sleeperUnit"]){
+                        [selectedCarBg setFrame:CGRectMake(468.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
+                    }
+                }
+            }
+        }
+    }
+    
+    [packageTypeLabel setText:[editingCell name]];
+    if ([[editingCell name] isEqualToString:@"completeExtWash"]){
+        [packageTypeLabel setText:@"Complete Exterior Wash"];
+    } else if ([[editingCell name] isEqualToString:@"completeExtDetail"]){
+        [packageTypeLabel setText:@"Complete Exterior Detail"];
+    } else if ([[editingCell name] isEqualToString:@"completeIntDetail"]){
+        [packageTypeLabel setText:@"Complete Interior Detail"];
+    } else if ([[editingCell name] isEqualToString:@"completeFullDetail"]){
+        [packageTypeLabel setText:@"Complete Full Detail"];
+    }
+    
+    [priceLabel setText:[NSString stringWithFormat:@"%.02f", [editingCell price]]];
+    [quantityField setText:[NSString stringWithFormat:@"%d", [editingCell quantity]]];
+    // restore the notes saved
+    [notesField setText:[editingCell notes]];
 }
 
 -(IBAction) onChoosingPackageType:(id) sender {
@@ -81,27 +122,8 @@
     [self doCalculations];
 }
 
-// ------------------------ UITextView procol implementation BELOW
-// when the text view is getting edited, this will be called
-
--(BOOL)textViewShouldBeginEditing: (UITextView*)textView {
-    notesField.text = @"";
-    notesField.textColor = [UIColor blackColor];
-    return YES;
-}
-
--(void) textViewDidChange: (UITextView*) textView {
-    if (notesField.text.length == 0){
-        notesField.textColor = [UIColor lightGrayColor];
-        notesField.text = @"Place notes and comments here";
-        [notesField resignFirstResponder];
-    }
-}
-// ------------------------ UITextView procol implementation ABOVE
-
 // only supports UIButton's right now
 -(IBAction) onChoosingCarType: (id) sender {
-    NSLog(@"HELLLOO");
     // set last selected back to normal
     for (UIButton *aSubview in self.view.subviews){
         //for (id aSubview in aSubview2.subviews){
@@ -193,8 +215,7 @@
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
         
-        NSLog(@"SENT UPDATE ?");
-        [ASVCDelegate updateAutoSpaDataTable:self editType:@"add" withServiceCell:newCell];
+        [SSVCDelegate updateSemiSpaDataTable:self editType:@"add" withServiceCell:newCell];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
         
@@ -206,10 +227,10 @@
         [[self editingCell] setPrice:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
         
-        [ASVCDelegate updateAutoSpaDataTable:self editType:@"edit" withServiceCell:nil];
+        [SSVCDelegate updateSemiSpaDataTable:self editType:@"edit" withServiceCell:nil];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
-        [ASVCDelegate updateAutoSpaDataTable:self editType:@"cancel" withServiceCell:nil];
+        [SSVCDelegate updateSemiSpaDataTable:self editType:@"cancel" withServiceCell:nil];
     }
 }
 

@@ -16,7 +16,7 @@
 - (void)updateFloodServicesDataTable:(OptionsFloodPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsFloodPopoverVC : BasePopoverVC <UITextViewDelegate> {
+@interface OptionsFloodPopoverVC : BasePopoverVC {
     
     id <OptionsFloodPopoverVCDelegate> FVCDelegate;  // options view controller delegate
     
@@ -28,7 +28,7 @@
     float rate_price;
     
     
-    IBOutlet UITextView *notesField;
+    //IBOutlet UITextView *notesField;
     
     IBOutlet UITextField *quantityField;
     IBOutlet UILabel *quantityLabel;
@@ -43,7 +43,7 @@
 @property (assign, readwrite) NSString *itemName, *notes, *vacOrFull;
 @property (assign, readwrite) float price, rate_price;
 
-@property (assign, readwrite) IBOutlet UITextView *notesField;
+//@property (assign, readwrite) IBOutlet UITextView *notesField;
 @property (assign, readwrite) IBOutlet UILabel *priceRateLabel, *quantityLabel, *quantityLabel2, *priceLabel;
 @property (nonatomic, assign) IBOutlet UITextField *quantityField, *priceRateField, *quantityField2;
 

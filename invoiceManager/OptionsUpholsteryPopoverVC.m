@@ -16,7 +16,8 @@
 
 @synthesize UVCDelegate;
 @synthesize notes, vacOrFull, materialType, quantity, price, itemName;
-@synthesize notesField, priceLabel;
+@synthesize priceLabel;
+//@synthesize notesField;
 @synthesize addonBiocide, addonFabricSoftener, addonDeodorizer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,6 +34,7 @@
     if ([self editMode]){
         [saveOrEditBtn setRestorationIdentifier:@"edit"];
         [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
+        [self restoreSavedSelections];
     } else {
         // set up the notes field
         notesField.text = @"Place notes and comments here";
@@ -58,6 +60,95 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// restore the selected gui buttons to the ones saved in the 'editingCell'
+-(void) restoreSavedSelections {
+    
+    // de-select all buttons with a specific tag and select the ones that were saved
+    for (UIButton *v in self.view.subviews) {
+        for (UIButton *btn in v.subviews){
+            if ([btn isKindOfClass:[UIButton class]]){
+                if ([btn tag] == 5){    // TAG = 5 means that this button is SELECTED
+                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                    [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    [btn setTag:0];
+                }
+                
+                // select the room name/ stairs button which is set in the editing cell
+                if ([[[btn titleLabel] text] isEqualToString:[editingCell name]]){
+                    [btn setTag:5];
+                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                }
+                
+                if ([btn tag] == 25){    // TAG = 5 means that this button is SELECTED
+                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                    [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    [btn setTag:20];
+                }
+                
+                // select the room name/ stairs button which is set in the editing cell
+                if ([[[btn titleLabel] text] isEqualToString:[editingCell materialType]]){
+                    [btn setTag:25];
+                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                }
+                
+                if ([btn tag] == 35){    // TAG = 5 means that this button is SELECTED
+                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                    [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    [btn setTag:30];
+                }
+                
+                // select the room name/ stairs button which is set in the editing cell
+                if ([[[btn titleLabel] text] isEqualToString:[editingCell vacOrFull]]){
+                    [btn setTag:35];
+                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                }
+                
+                // restore the addon's ( as selected or not ) based on the editing cell
+                if ([[btn restorationIdentifier] isEqualToString:@"deodorizer"]){
+                    if ([editingCell addonDeodorizer]){
+                        addonDeodorizer = TRUE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    } else {
+                        addonDeodorizer = FALSE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    }
+                } else if ([[btn restorationIdentifier] isEqualToString:@"fabricProtector"]){
+                    if ([editingCell addonFabricProtector]){
+                        addonFabricSoftener = TRUE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    } else {
+                        addonFabricSoftener = FALSE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    }
+                } else if ([[btn restorationIdentifier] isEqualToString:@"biocide"]){
+                    if ([editingCell addonBiocide]){
+                        addonBiocide = TRUE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    } else {
+                        addonBiocide = FALSE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    }
+                }
+            }
+        }
+    }
+    
+    // restore the quantity saved
+    [quantityField setText:[NSString stringWithFormat:@"%ld",(long)[editingCell quantity] ]];
+    
+    // restore the notes saved
+    [notesField setText:[editingCell notes]];
 }
 
 -(IBAction) onClickingBtn: (id) sender {
@@ -151,24 +242,6 @@
     vacOrFull = [[btnEx titleLabel] text];
     [self doCalculations];
 }
-
-// ------------------------ UITextView procol implementation BELOW
-// when the text view is getting edited, this will be called
-
--(BOOL)textViewShouldBeginEditing: (UITextView*)textView {
-    notesField.text = @"";
-    notesField.textColor = [UIColor blackColor];
-    return YES;
-}
-
--(void) textViewDidChange: (UITextView*) textView {
-    if (notesField.text.length == 0){
-        notesField.textColor = [UIColor lightGrayColor];
-        notesField.text = @"Place notes and comments here";
-        [notesField resignFirstResponder];
-    }
-}
-// ------------------------ UITextView procol implementation ABOVE
 
 -(IBAction) onCustomEditingDone: (id) sender {
     quantity = [[quantityField text] integerValue];

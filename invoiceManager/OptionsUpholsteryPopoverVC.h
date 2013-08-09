@@ -17,7 +17,7 @@
 - (void)updateUpholsteryDataTable:(OptionsUpholsteryPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsUpholsteryPopoverVC : BasePopoverVC <UITextViewDelegate> {
+@interface OptionsUpholsteryPopoverVC : BasePopoverVC {
     
     // delegate variables
     id <OptionsUpholsteryPopoverVCDelegate> UVCDelegate;  // options view controller delegate
@@ -35,7 +35,7 @@
     // outlets
     IBOutlet UITextField *quantityField;
     IBOutlet UILabel *priceLabel;
-    IBOutlet UITextView *notesField;
+    //IBOutlet UITextView *notesField;
     IBOutlet UIButton *powerVacBtn;
 }
 
@@ -46,7 +46,7 @@
 @property (assign, readwrite) NSString *itemName, *notes, *vacOrFull, *materialType;
 @property (assign, readwrite) bool addonDeodorizer, addonFabricSoftener, addonBiocide;
 
-@property (nonatomic, assign) IBOutlet UITextView *notesField;
+//@property (nonatomic, assign) IBOutlet UITextView *notesField;
 @property (nonatomic, assign) IBOutlet UILabel *priceLabel;
 @property (nonatomic, assign) IBOutlet UIButton *powerVacBtn;
 

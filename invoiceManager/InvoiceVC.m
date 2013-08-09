@@ -214,7 +214,7 @@
             ServiceDataCell *data_cell = [dataCellArray objectAtIndex:j];
             [self printSubservice:data_cell PosX:posX PosY:posY PdfX:pdfX PdfY:pdfY];
             posY += 75.0;
-            pdfY += 20.0;
+            pdfY += 30.0;
             
             [self printSubserviceNotes:data_cell PosX:posX PosY:&posY PdfX:pdfX PdfY:&pdfY];
             

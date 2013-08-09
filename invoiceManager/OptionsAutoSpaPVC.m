@@ -17,9 +17,10 @@
 @synthesize selectedCarBg;
 @synthesize ASVCDelegate;
 @synthesize scrollViewer;
-@synthesize price, notesAboutRoom, notesField, priceRate, priceLabel, carType, packageType;
+@synthesize price, notesAboutRoom, priceRate, priceLabel, carType, packageType;
+//@synthesize notesField;
 @synthesize packageTypeLabel;
-@synthesize quantity;
+@synthesize quantity, quantityField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +37,7 @@
         [saveOrEditBtn setRestorationIdentifier:@"edit"];
         [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
         //[self doCalculations];  // do calculations in case some variables changes ( rate per square feet )
+        [self restoreSavedSelections];
     } else {
         // set up the notes field
         notesField.text = @"Place notes and comments here";
@@ -46,7 +48,9 @@
         price = 0;
         
     }
-    // NSLog(@"title of uivc is %@", [self title]);
+    
+    // set initial selected options
+    [self setCarType:@"Compact"];
 }
 
 - (void)viewDidLoad
@@ -54,6 +58,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // set up the scroll view
     [scrollViewer setScrollEnabled:YES];
     [scrollViewer setContentSize:CGSizeMake(614, 3100)];
 }
@@ -62,6 +67,45 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// restore the selected gui buttons to the ones saved in the 'editingCell'
+-(void) restoreSavedSelections {
+    
+    // de-select all buttons with a specific tag and select the ones that were saved
+    for (UIButton *v in self.view.subviews) {
+        for (UIButton *btn in v.subviews){
+            if ([btn isKindOfClass:[UIButton class]]){
+                NSLog(@"Attribute is %@", [editingCell itemAttribute]);
+                if ([[btn restorationIdentifier] isEqualToString:[editingCell itemAttribute]]){
+                    [btn setTag:10];
+                    if ([[editingCell itemAttribute] isEqualToString:@"SUV"]){
+                        [selectedCarBg setFrame:CGRectMake(466.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
+                    } else if ([[editingCell itemAttribute] isEqualToString:@"Compact"]){
+                        [selectedCarBg setFrame:CGRectMake(75.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
+                    } else if ([[editingCell itemAttribute] isEqualToString:@"Midsize"]){
+                        [selectedCarBg setFrame:CGRectMake(75.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
+                    }
+                }
+            }
+        }
+    }
+    
+    [packageTypeLabel setText:[editingCell name]];
+    /*if ([[editingCell name] isEqualToString:@"bronze"]){
+        [packageTypeLabel setText:@"Bronze"];
+    } else if ([[editingCell name] isEqualToString:@"silver"]){
+        [packageTypeLabel setText:@"Silver"];
+    } else if ([[editingCell name] isEqualToString:@"gold"]){
+        [packageTypeLabel setText:@"Gold"];
+    } else if ([[editingCell name] isEqualToString:@"platinum"]){
+        [packageTypeLabel setText:@"Platinum"];
+    }*/
+    
+    [priceLabel setText:[NSString stringWithFormat:@"%.02f", [editingCell price]]];
+    [quantityField setText:[NSString stringWithFormat:@"%d", [editingCell quantity]]];
+    // restore the notes saved
+    [notesField setText:[editingCell notes]];
 }
 
 -(IBAction) onChoosingPackageType:(id) sender {
@@ -81,38 +125,16 @@
     [self doCalculations];
 }
 
-// ------------------------ UITextView procol implementation BELOW
-// when the text view is getting edited, this will be called
-
--(BOOL)textViewShouldBeginEditing: (UITextView*)textView {
-    notesField.text = @"";
-    notesField.textColor = [UIColor blackColor];
-    return YES;
-}
-
--(void) textViewDidChange: (UITextView*) textView {
-    if (notesField.text.length == 0){
-        notesField.textColor = [UIColor lightGrayColor];
-        notesField.text = @"Place notes and comments here";
-        [notesField resignFirstResponder];
-    }
-}
-// ------------------------ UITextView procol implementation ABOVE
-
 // only supports UIButton's right now
 -(IBAction) onChoosingCarType: (id) sender {
     // set last selected back to normal
     for (UIButton *aSubview in self.view.subviews){
         //for (id aSubview in aSubview2.subviews){
         if ([aSubview isKindOfClass:[UIButton class]]){
-            if ([aSubview tag] == 10){
-                //NSLog(@"hi, %@, %u", [aSubview restorationIdentifier], [aSubview tag]);
-                //[aSubview setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                
+            if ([aSubview tag] == 10){                
                 [aSubview setTag:0];
             }
         }
-        //}
     }
     
     // put background image view under the newly selected button

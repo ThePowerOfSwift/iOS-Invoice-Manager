@@ -14,9 +14,10 @@
 
 @implementation OptionsPopoverVC
 
+//@synthesize notesField;
 @synthesize OVCDelegate;
 @synthesize rWidth, rLength, roomName, squareFeet, price, notesAboutRoom;
-@synthesize lengthField, widthField, notesField, stairsField, landingsField;
+@synthesize lengthField, widthField, stairsField, landingsField;
 @synthesize addonDeodorizer, addonFabricProtector, addonBiocide;
 @synthesize priceRate;
 @synthesize stairs, landings, stairsService;
@@ -36,6 +37,9 @@
     if ([self editMode]){
         [saveOrEditBtn setRestorationIdentifier:@"edit"];
         [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
+        
+        [self restoreSavedSelections];    
+        
         [self doCalculations];  // do calculations in case some variables changes ( rate per square feet )
     } else {
         // set up the notes field
@@ -70,8 +74,77 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction) onClickingBtn: (id) sender {
+// restore the selected gui buttons to the ones saved in the 'editingCell'
+-(void) restoreSavedSelections {
     
+    // de-select all buttons with a specific tag and select the ones that were saved
+    for (UIButton *v in self.view.subviews) {
+        for (UIButton *btn in v.subviews){
+            if ([btn isKindOfClass:[UIButton class]]){
+                if ([btn tag] == 5){    // TAG = 5 means that this button is SELECTED
+                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                    [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    //[btn setTitleColor:[UIColor colorWithWhite:94.0/255.0 alpha:100.0] forState:UIControlStateNormal];
+                    [btn setTag:0];
+                }
+                
+                // select the room name/ stairs button which is set in the editing cell
+                if ([[[btn titleLabel] text] isEqualToString:[editingCell name]]){
+                    [btn setTag:5];
+                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    
+                }
+                
+                // restore the addon's ( as selected or not ) based on the editing cell
+                if ([[btn restorationIdentifier] isEqualToString:@"deodorizer"]){
+                    if ([editingCell addonDeodorizer]){
+                        addonDeodorizer = TRUE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    } else {
+                        addonDeodorizer = FALSE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    }
+                } else if ([[btn restorationIdentifier] isEqualToString:@"fabricProtector"]){
+                    if ([editingCell addonFabricProtector]){
+                        addonFabricProtector = TRUE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    } else {
+                        addonFabricProtector = FALSE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    }
+                } else if ([[btn restorationIdentifier] isEqualToString:@"biocide"]){
+                    if ([editingCell addonBiocide]){
+                        addonBiocide = TRUE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    } else {
+                        addonBiocide = FALSE;
+                        [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                        [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    }
+                }                
+            } else if ([btn isKindOfClass:[UITextField class]]){
+                // restore the width and length saved
+                UITextField* someField = (UITextField*) btn;
+                if ([[btn restorationIdentifier] isEqualToString:@"length"]){
+                    [someField setText:[NSString stringWithFormat:@"%f", [editingCell rlength]]];
+                } else if ([[btn restorationIdentifier] isEqualToString:@"width"]){
+                    [someField setText:[NSString stringWithFormat:@"%f", [editingCell rwidth]]];
+                }
+            }
+        }
+    }
+    
+    // restore the notes saved
+    [notesField setText:[editingCell notes]];
+}
+
+-(IBAction) onClickingBtn: (id) sender {
     // de-select all buttons with a specific tag
     for (UIButton *v in self.view.subviews) {
         for (UIButton *btn in v.subviews){
@@ -103,24 +176,6 @@
     }
     [self doCalculations];
 }
-
-// ------------------------ UITextView procol implementation BELOW
-// when the text view is getting edited, this will be called
-
--(BOOL)textViewShouldBeginEditing: (UITextView*)textView {
-    notesField.text = @"";
-    notesField.textColor = [UIColor blackColor];
-    return YES;
-}
-
--(void) textViewDidChange: (UITextView*) textView {
-    if (notesField.text.length == 0){
-        notesField.textColor = [UIColor lightGrayColor];
-        notesField.text = @"Place notes and comments here";
-        [notesField resignFirstResponder];
-    }
-}
-// ------------------------ UITextView procol implementation ABOVE
 
 -(IBAction) onCustomEditingDone: (id) sender {
     if ([[sender restorationIdentifier] isEqualToString:@"length"]){

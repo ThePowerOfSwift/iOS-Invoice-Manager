@@ -15,7 +15,7 @@
 - (void)updateMiscellaneousDataTable:(OptionsMiscellaneousPopoverVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsMiscellaneousPopoverVC : BasePopoverVC <UITextViewDelegate> {
+@interface OptionsMiscellaneousPopoverVC : BasePopoverVC {
     
     // delegate variables
     id <OptionsMiscellaneousPopoverVCDelegate> MIVCDelegate;  // options view controller delegate
@@ -32,7 +32,7 @@
     IBOutlet UILabel *priceLabel;
     IBOutlet UITextField *itemNameField, *pricePerItemField;
     IBOutlet UITextField *quantityField;
-    IBOutlet UITextView *notesField;
+    //IBOutlet UITextView *notesField;
 }
 
 @property (nonatomic, assign) id <OptionsMiscellaneousPopoverVCDelegate> MIVCDelegate;
@@ -42,7 +42,7 @@
 @property (assign, readwrite) NSInteger quantity;
 
 @property (nonatomic, assign) IBOutlet UILabel *priceLabel;
-@property (nonatomic, assign) IBOutlet UITextView *notesField;
+//@property (nonatomic, assign) IBOutlet UITextView *notesField;
 @property (nonatomic, assign) IBOutlet UITextField *itemNameField, *quantityField, *pricePerItemField;
 
 -(BOOL)textViewShouldBeginEditing: (UITextView*)textView;

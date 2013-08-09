@@ -16,7 +16,7 @@
 - (void)updateSemiSpaDataTable:(OptionsSemiSpaPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsSemiSpaPVC : BasePopoverVC <UITextViewDelegate> {
+@interface OptionsSemiSpaPVC : BasePopoverVC {
     
     // delegate variables
     id <OptionsSemiSpaPVCdelegate> SSVCDelegate;  // options view controller delegate
@@ -32,20 +32,21 @@
     IBOutlet UIImageView *selectedCarBg;
     IBOutlet UILabel *packageTypeLabel;
     IBOutlet UILabel *priceLabel;
-    IBOutlet UITextView *notesField;
+    //IBOutlet UITextView *notesField;
+    IBOutlet UITextField *quantityField;
     
     IBOutlet UIScrollView *scrollViewer;
 }
 
-@property (nonatomic, assign) id <OptionsSemiSpaPVCdelegate> ASVCDelegate;
+@property (nonatomic, assign) id <OptionsSemiSpaPVCdelegate> SSVCDelegate;
 
 @property (assign, readwrite) NSInteger quantity;
 @property (assign, readwrite) float price, priceRate;
 @property (assign, readwrite) NSString *packageType, *carType, *notesAboutRoom;
 
 @property (assign, nonatomic) IBOutlet UIScrollView *scrollViewer;
-@property (nonatomic, assign) IBOutlet UITextView *notesField;
-@property (nonatomic, assign) IBOutlet UITextField *lengthField, *widthField, *stairsField, *landingsField;
+//@property (nonatomic, assign) IBOutlet UITextView *notesField;
+@property (nonatomic, assign) IBOutlet UITextField *lengthField, *widthField, *stairsField, *landingsField, *quantityField;
 @property (nonatomic, assign) IBOutlet UILabel *packageTypeLabel, *priceLabel;
 @property (nonatomic, assign) IBOutlet UIImageView *selectedCarBg;
 

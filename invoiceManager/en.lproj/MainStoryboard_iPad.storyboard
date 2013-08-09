@@ -1105,8 +1105,10 @@
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="614" height="3001"/>
                     <connections>
+                        <outlet property="notesField" destination="rdN-ci-LbY" id="JhB-jh-Ub2"/>
                         <outlet property="packageTypeLabel" destination="Uo2-F5-JdG" id="wU0-oQ-TH5"/>
                         <outlet property="priceLabel" destination="2NF-A9-Orn" id="xpk-vA-fjm"/>
+                        <outlet property="quantityField" destination="1kd-Ma-Kd7" id="IpQ-Ph-i28"/>
                         <outlet property="saveOrEditBtn" destination="hN8-xV-ezS" id="j8r-UX-qF8"/>
                         <outlet property="scrollViewer" destination="e87-6o-mxQ" id="fOF-JF-YlQ"/>
                         <outlet property="selectedCarBg" destination="Gjc-6E-xj8" id="mJq-Nm-aYI"/>
@@ -1421,6 +1423,7 @@
                         <outlet property="carpetTypeSelection" destination="bUy-aP-SKg" id="0Oq-Vi-7U0"/>
                         <outlet property="dataTable" destination="JiO-Dz-0NQ" id="YST-kF-Ptu"/>
                         <outlet property="selectedType" destination="W6J-CB-t5G" id="ERt-Nr-nEC"/>
+                        <outlet property="serviceTitleLabel" destination="dMb-AV-8SJ" id="lro-Vb-qs3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXM-ae-3Pb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1735,6 +1738,7 @@
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="657" height="695"/>
                     <connections>
+                        <outlet property="notesField" destination="rqd-xf-Cih" id="ubh-kR-3s1"/>
                         <outlet property="priceLabel" destination="Ur2-1A-HCo" id="xfg-1n-OhO"/>
                         <outlet property="quantityField" destination="9Oi-lg-Uhm" id="jKw-SF-Yhn"/>
                         <outlet property="saveOrEditBtn" destination="1o8-iR-kf2" id="GGG-os-zv7"/>
@@ -4435,6 +4439,7 @@
                         <outlet property="priceLabel" destination="tpo-C2-9kg" id="dGg-PR-LXC"/>
                         <outlet property="pricePerItemField" destination="Cfb-No-Jk4" id="Nbo-ET-6Ps"/>
                         <outlet property="quantityField" destination="cr2-Cq-c9b" id="GUQ-pY-qwo"/>
+                        <outlet property="saveOrEditBtn" destination="9zV-zR-Azh" id="KQY-Hx-pzu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IM-0W-bZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4756,7 +4761,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ZEg-hY-bKd">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="2423"/>
+                                <rect key="frame" x="0.0" y="-943" width="768" height="2423"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="bgCommercialResidential.png" id="G41-ss-s5a">
@@ -4989,8 +4994,10 @@
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="614" height="3001"/>
                     <connections>
+                        <outlet property="notesField" destination="DEW-iz-U1o" id="Cf5-wH-n6I"/>
                         <outlet property="packageTypeLabel" destination="Hn3-0R-Gk4" id="MPp-TK-Xod"/>
                         <outlet property="priceLabel" destination="bIV-To-Yww" id="0zx-6t-KK9"/>
+                        <outlet property="quantityField" destination="Lwi-ts-wUq" id="Mam-YH-IXk"/>
                         <outlet property="saveOrEditBtn" destination="JeN-cW-UoA" id="2Dz-Kt-X18"/>
                         <outlet property="scrollViewer" destination="ZEg-hY-bKd" id="qnz-T4-0qq"/>
                         <outlet property="selectedCarBg" destination="G41-ss-s5a" id="n0K-iy-OnL"/>
@@ -5064,6 +5071,7 @@
         <class className="BasePopoverVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BasePopoverVC.h"/>
             <relationships>
+                <relationship kind="outlet" name="notesField" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="saveOrEditBtn" candidateClass="UIButton"/>
             </relationships>
         </class>
@@ -5142,7 +5150,6 @@
                 <relationship kind="action" name="onSelectingType:"/>
                 <relationship kind="action" name="saveAddon:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
-                <relationship kind="outlet" name="notesField" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="priceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="priceRateField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="priceRateLabel" candidateClass="UILabel"/>
@@ -5164,9 +5171,9 @@
                 <relationship kind="action" name="saveOrCancel:"/>
                 <relationship kind="outlet" name="landingsField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="lengthField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="notesField" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="packageTypeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="priceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="quantityField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="scrollViewer" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="selectedCarBg" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="stairsField" candidateClass="UITextField"/>
@@ -5179,7 +5186,6 @@
                 <relationship kind="action" name="onClickingBtn:"/>
                 <relationship kind="action" name="onSelectingType:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
-                <relationship kind="outlet" name="notesField" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="priceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="priceRateField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="priceRateLabel" candidateClass="UILabel"/>
@@ -5196,7 +5202,6 @@
                 <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="action" name="saveAddon:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
-                <relationship kind="outlet" name="notesField" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="priceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="quantityField" candidateClass="UITextField"/>
             </relationships>
@@ -5208,7 +5213,6 @@
                 <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
                 <relationship kind="outlet" name="itemNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="notesField" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="priceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="pricePerItemField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="quantityField" candidateClass="UITextField"/>
@@ -5224,7 +5228,6 @@
                 <relationship kind="action" name="saveOrCancel:"/>
                 <relationship kind="outlet" name="landingsField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="lengthField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="notesField" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="priceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="sqfeetLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="stairsField" candidateClass="UITextField"/>
@@ -5243,9 +5246,9 @@
                 <relationship kind="action" name="saveOrCancel:"/>
                 <relationship kind="outlet" name="landingsField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="lengthField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="notesField" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="packageTypeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="priceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="quantityField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="scrollViewer" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="selectedCarBg" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="stairsField" candidateClass="UITextField"/>
@@ -5259,7 +5262,6 @@
                 <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="action" name="saveAddon:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
-                <relationship kind="outlet" name="notesField" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="powerVacBtn" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="priceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="quantityField" candidateClass="UITextField"/>
@@ -5284,6 +5286,7 @@
                 <relationship kind="outlet" name="col4Name" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dataTable" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="selectedType" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="serviceTitleLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="SettingsPopoverVC" superclassName="UIViewController">

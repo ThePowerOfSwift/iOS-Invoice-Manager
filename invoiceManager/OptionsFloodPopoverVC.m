@@ -16,7 +16,7 @@
 
 @synthesize quantity, quantity2, itemName, notes, vacOrFull, price, rate_price;
 @synthesize priceRateLabel, quantityLabel, quantityLabel2;
-@synthesize notesField;
+//@synthesize notesField;
 @synthesize priceRateField, quantityField, quantityField2, priceLabel;
 @synthesize FVCDelegate;
 
@@ -34,6 +34,7 @@
     if ([self editMode]){
         [saveOrEditBtn setRestorationIdentifier:@"edit"];
         [saveOrEditBtn setTitle:@"Edit" forState:UIControlStateNormal];
+        [self restoreSavedSelections];
     } else {
         notesField.text = @"Place notes and comments here";
         notesField.textColor = [UIColor lightGrayColor];
@@ -59,6 +60,44 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// restore the selected gui buttons to the ones saved in the 'editingCell'
+-(void) restoreSavedSelections {
+    
+    // de-select all buttons with a specific tag and select the ones that were saved
+    for (UIButton *v in self.view.subviews) {
+        for (UIButton *btn in v.subviews){
+            if ([btn isKindOfClass:[UIButton class]]){
+                if ([btn tag] == 5){    // TAG = 5 means that this button is SELECTED
+                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5.png"] forState:UIControlStateNormal];
+                    [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+                    [btn setTag:0];
+                }
+                
+                // select the room name/ stairs button which is set in the editing cell
+                if ([[[btn titleLabel] text] isEqualToString:[editingCell name]]){
+                    [btn setTag:5];
+                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+                    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    itemName = [editingCell name];
+                    
+                    if ([itemName isEqualToString:@"Blowers"] || [itemName isEqualToString:@"Dehumidifiers"]){
+                        [quantityLabel2 setHidden:FALSE];
+                        [quantityField2 setHidden:FALSE];
+                    }
+                }
+            }
+        }
+    }
+    
+    // restore the quantities and price rates saved
+    [priceRateField setText:[NSString stringWithFormat:@"%.0f",[editingCell ratePerHr] ]];
+    [quantityField setText:[NSString stringWithFormat:@"%ld",(long)[editingCell quantity] ]];
+    [quantityField2 setText:[NSString stringWithFormat:@"%ld",(long)[editingCell quantity2] ]];
+    
+    // restore the notes saved
+    [notesField setText:[editingCell notes]];
 }
 
 /*
@@ -137,48 +176,6 @@
     itemName = [[btnEx titleLabel] text];
     NSLog(@"%@", itemName);
     [self doCalculations];
-}
-
-// used to choose vac only or full clean
--(IBAction) onClickingBtnTwo: (id) sender {
-    
-    for (UIButton *v in self.view.subviews) {
-        for (UIButton *btn in v.subviews){
-            if ([btn isKindOfClass:[UIButton class]]){
-                if ([btn tag] == 25){    // TAG = 25 means that this button is SELECTED
-                    [btn setBackgroundImage:[UIImage imageNamed:@"btnBackground2.png"] forState:UIControlStateNormal];
-                    [btn setTitleColor:[UIColor colorWithRed:94.0/255.0 green:94.0/255.0 blue:94.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-                    //[btn setTitleColor:[UIColor colorWithWhite:94.0/255.0 alpha:100.0] forState:UIControlStateNormal];
-                    [btn setTag:20];
-                }
-            }
-        }
-    }
-    
-    UIButton *btnEx = (UIButton*) sender;
-    NSLog(@"title is: %@", [[btnEx titleLabel] text]);
-    //NSString *btnTitle = [[btnEx titleLabel] text];
-    //[btnEx setImage:[UIImage imageNamed:@"btnBackground2Sel.png" ] forState:UIControlStateNormal];
-    [btnEx setBackgroundImage:[UIImage imageNamed:@"btnBackground2Sel.png"] forState:UIControlStateNormal];
-    [btnEx setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnEx setTag:25];           // TAG = 25 means that this button is SELECTED
-    
-    vacOrFull = [[btnEx titleLabel] text];
-    [self doCalculations];
-}
-
--(BOOL)textViewShouldBeginEditing: (UITextView*)textView {
-    notesField.text = @"";
-    notesField.textColor = [UIColor blackColor];
-    return YES;
-}
-
--(void) textViewDidChange: (UITextView*) textView {
-    if (notesField.text.length == 0){
-        notesField.textColor = [UIColor lightGrayColor];
-        notesField.text = @"Place notes and comments here";
-        [notesField resignFirstResponder];
-    }
 }
 
 -(IBAction) doCalculations {
