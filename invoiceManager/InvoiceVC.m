@@ -108,6 +108,52 @@
     discountedAutospaPrice = 0;
     
     [self createInvoice];
+    
+    [self saveInvoiceToDatabase];
+}
+
+-(IBAction) saveInvoiceToDatabase {
+    NSURL *url = [NSURL URLWithString:@"http://pokemonpacific.com/"];
+    NSString* height = @"aha";
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            height, @"blah",
+                            height, @"user[weight]",
+                            nil];
+    [httpClient postPath:@"/funcsPHP/test.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Request Successful, response '%@'", responseStr);
+        [responseStr release];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+    }];
+    
+    //[httpClient release];
+    
+    
+    //httpClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.mysite.com"]];
+    
+    NSURLRequest *request =
+    [httpClient multipartFormRequestWithMethod:@"POST"
+                                      path:@"/funcsPHP/test.php"
+                                parameters:nil
+                 constructingBodyWithBlock: ^(id<AFMultipartFormData> formData) {
+                     [formData appendPartWithFileData:pdfData name:@"pdfData" fileName:@"someInvoice.pdf" mimeType:@"application/pdf"];
+                     [formData appendPartWithFormData:[[NSNumber numberWithInt:pdfData.length].stringValue dataUsingEncoding:NSUTF8StringEncoding] name:@"filelength"];
+                 }];
+    
+    AFHTTPRequestOperation *operation =
+    [httpClient HTTPRequestOperationWithRequest:request
+                                    success:^(AFHTTPRequestOperation *operation, id json) {
+                                        NSString *responseStr = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+                                        NSLog(@"All OK, %@", responseStr);
+                                    }
+                                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                        NSLog(@"All failed, %@", error);
+                                    }];
+    
+    [httpClient enqueueHTTPRequestOperation:operation];
+    
 }
 
 -(IBAction) createInvoice {
@@ -123,16 +169,16 @@
     
     ///pdfData = [NSMutableData dataWithCapacit
     
-    /*if (pdfData){
+    if (pdfData){
         UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
     } else {
         pdfData = [NSMutableData data];
         UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
     }
-    [pdfData retain];*/
+    [pdfData retain];
     
     // start drawing in pdf context
-    UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/MightyCleanInvoice.pdf", CGRectZero, nil);
+    //UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/MightyCleanInvoice.pdf", CGRectZero, nil);
     
     
     //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 1753, 1240), nil);

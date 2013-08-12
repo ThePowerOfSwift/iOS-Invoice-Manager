@@ -86,5 +86,6 @@
 -(IBAction) gotoLastView;
 -(IBAction) createInvoice;
 -(IBAction) displayDiscountPopover: (id) sender;
+-(IBAction) saveInvoiceToDatabase;
 
 @end
