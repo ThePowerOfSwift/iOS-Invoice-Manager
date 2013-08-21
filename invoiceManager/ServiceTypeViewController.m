@@ -27,8 +27,10 @@
 @synthesize popover;
 @synthesize addServiceLabel;
 @synthesize carpetTypeSelection;
+@synthesize subserviceSelectionLabel;
 @synthesize col1Name, col2Name, col3Name, col4Name;
 @synthesize serviceTitleLabel;
+@synthesize selectedAutoSpaTypeBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -124,20 +126,110 @@
         [col3Name setText:@""];
         [col4Name setText:@"price"];*/
     } else if ([VCServiceNameType isEqualToString:@"autoSpa"]){
-        UIButton* addSemiServiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [addSemiServiceBtn setFrame:CGRectMake(394.0, 296.0, 49.0f, 49.0)];
-        [addSemiServiceBtn setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
-        [addSemiServiceBtn addTarget:self action:@selector(displayOptionsPopoverVC:) forControlEvents:UIControlEventTouchUpInside];
-        [addSemiServiceBtn setRestorationIdentifier:@"semi"];
-        [self.view addSubview:addSemiServiceBtn];
+        //[carpetTypeSelection removeFromSuperview];
+        UILabel* serviceTypeSel = [[[UILabel alloc] initWithFrame:CGRectMake(40.0, 130.0, 306.0, 39.0)] autorelease];
+        [serviceTypeSel setText:@"Choose Service Type"];
+        [serviceTypeSel setFont:[UIFont systemFontOfSize:23.0]];
+        [self.view addSubview:serviceTypeSel];
         
-        UILabel* addSemiServiceLabel = [[[UILabel alloc] initWithFrame:CGRectMake(458.0, 297.0, 217.0, 43.0)] autorelease];
-        [addSemiServiceLabel setText:@"Add Semi Service"];
-        [addSemiServiceLabel setFont:[UIFont systemFontOfSize:27.0]];
+        selectedAutoSpaTypeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [selectedAutoSpaTypeBtn setFrame:CGRectMake(470.0, 112.0, 264.0, 37.0)];
+        [selectedAutoSpaTypeBtn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+        [self.view addSubview:selectedAutoSpaTypeBtn];
         
-        [self.view addSubview:addSemiServiceLabel];
+        UIButton* btnSel1 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel1 setFrame:CGRectMake(21.0, 172.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel1 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel1 setRestorationIdentifier:@"Auto Detailing"];
+        [btnSel1 setTitle:@"Auto Detailing" forState:UIControlStateNormal];
+        [btnSel1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
-        [addServiceLabel setText:@"Add Auto Service"];
+        [btnSel1 setTag:20];
+        [self.view addSubview:btnSel1];
+        
+        UIButton* btnSel2 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel2 setFrame:CGRectMake(270.0, 172.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel2 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel2 setRestorationIdentifier:@"Semi Detailing"];
+        [btnSel2 setTitle:@"Semi Detailing" forState:UIControlStateNormal];
+        [btnSel2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnSel2 setTag:0];
+        [self.view addSubview:btnSel2];
+        
+        UIButton* btnSel3 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel3 setFrame:CGRectMake(520.0, 172.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel3 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel3 setRestorationIdentifier:@"Aluminum Polishing"];
+        [btnSel3 setTitle:@"Aluminum Polishing" forState:UIControlStateNormal];
+        [btnSel3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnSel3 setTag:0];
+        [self.view addSubview:btnSel3];
+        
+        UIButton* btnSel4 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel4 setFrame:CGRectMake(20.0, 220.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel4 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel4 setRestorationIdentifier:@"Windshield & RockChip Repair"];
+        [btnSel4 setTitle:@"Windshield&RockChip Repair" forState:UIControlStateNormal];
+        [btnSel4 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnSel4 setTag:0];
+        [self.view addSubview:btnSel4];
+        
+        UIButton* btnSel5 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel5 setFrame:CGRectMake(269.0, 220.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel5 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel5 setRestorationIdentifier:@"Auto Package"];
+        [btnSel5 setTitle:@"Auto Package" forState:UIControlStateNormal];
+        [btnSel5 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnSel5 setTag:0];
+        [self.view addSubview:btnSel5];
+        
+        UIButton* btnSel6 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel6 setFrame:CGRectMake(519.0, 220.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel6 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel6 setRestorationIdentifier:@"Semi Truck Package"];
+        [btnSel6 setTitle:@"Semi Truck Package" forState:UIControlStateNormal];
+        [btnSel6 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnSel6 setTag:0];
+        [self.view addSubview:btnSel6];
+        
+        
+        //[carpetTypeSelection setHidden:FALSE];
+        /*
+        // above the 'addServiceLabel'
+        UIButton* addAutoDetailServiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [addAutoDetailServiceBtn setFrame:CGRectMake(38.0, 232.0, 49.0f, 49.0)];
+        [addAutoDetailServiceBtn setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [addAutoDetailServiceBtn addTarget:self action:@selector(displayOptionsPopoverVC:) forControlEvents:UIControlEventTouchUpInside];
+        [addAutoDetailServiceBtn setRestorationIdentifier:@"autoDetailService"];
+        [self.view addSubview:addAutoDetailServiceBtn];
+        
+        UILabel* addAutoDetailServiceLabel = [[[UILabel alloc] initWithFrame:CGRectMake(99.0, 289.0, 247.0, 43.0)] autorelease];
+        [addAutoDetailServiceLabel setText:@"Add Auto Detail Service"];
+        [addAutoDetailServiceLabel setFont:[UIFont systemFontOfSize:24.0]];
+        [self.view addSubview:addAutoDetailServiceLabel];
+        
+        // to the right of the 'addServiceLabel'
+        UIButton* addSemiPackageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [addSemiPackageBtn setFrame:CGRectMake(394.0, 288.0, 49.0f, 49.0)];
+        [addSemiPackageBtn setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [addSemiPackageBtn addTarget:self action:@selector(displayOptionsPopoverVC:) forControlEvents:UIControlEventTouchUpInside];
+        [addSemiPackageBtn setRestorationIdentifier:@"semi"];
+        [self.view addSubview:addSemiPackageBtn];
+        
+        UILabel* addSemiPackageLabel = [[[UILabel alloc] initWithFrame:CGRectMake(458.0, 289.0, 247.0, 43.0)] autorelease];
+        [addSemiPackageLabel setText:@"Add Semi Package"];
+        [addSemiPackageLabel setFont:[UIFont systemFontOfSize:27.0]];
+        [self.view addSubview:addSemiPackageLabel];
+        */
+        
+        // change the text of the iboutlet addServiceLabel
+        [addServiceLabel setText:@"Add Auto Package"];
         
     }
     
@@ -302,6 +394,8 @@
                     
                     [aSubview setTag:0];
                 }
+                
+                
             }
         }
     }
@@ -322,6 +416,7 @@
     } else if ([senderID isEqualToString:@"cutpile"]){
         [selectedType setFrame:CGRectMake(626.0f, selectedType.frame.origin.y, selectedType.frame.size.width, selectedType.frame.size.height)];
     }
+    
     [btn setTag:10];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
