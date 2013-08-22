@@ -31,6 +31,7 @@
 @synthesize col1Name, col2Name, col3Name, col4Name;
 @synthesize serviceTitleLabel;
 @synthesize selectedAutoSpaTypeBtn;
+@synthesize selectedAutoSpaType;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -133,23 +134,24 @@
         [self.view addSubview:serviceTypeSel];
         
         selectedAutoSpaTypeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [selectedAutoSpaTypeBtn setFrame:CGRectMake(470.0, 112.0, 264.0, 37.0)];
-        [selectedAutoSpaTypeBtn setBackgroundImage:[UIImage imageNamed:@"btnBackground5Sel.png"] forState:UIControlStateNormal];
+        [selectedAutoSpaTypeBtn setFrame:CGRectMake(17.0, 180.0, 248.0, 37.0)];
+        [selectedAutoSpaTypeBtn setBackgroundImage:[UIImage imageNamed:@"btnBackgroundSel7.png"] forState:UIControlStateNormal];
         [self.view addSubview:selectedAutoSpaTypeBtn];
-        
+
         UIButton* btnSel1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnSel1 setFrame:CGRectMake(21.0, 172.0, 235.0f, 37.0)];
+        [btnSel1 setFrame:CGRectMake(21.0, 182.0, 235.0f, 37.0)];
         //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
         [btnSel1 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
         [btnSel1 setRestorationIdentifier:@"Auto Detailing"];
         [btnSel1 setTitle:@"Auto Detailing" forState:UIControlStateNormal];
-        [btnSel1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
+        // this is the selected one initially
+        [btnSel1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        selectedAutoSpaType = [btnSel1 restorationIdentifier];
         [btnSel1 setTag:20];
         [self.view addSubview:btnSel1];
         
         UIButton* btnSel2 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnSel2 setFrame:CGRectMake(270.0, 172.0, 235.0f, 37.0)];
+        [btnSel2 setFrame:CGRectMake(270.0, 182.0, 235.0f, 37.0)];
         //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
         [btnSel2 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
         [btnSel2 setRestorationIdentifier:@"Semi Detailing"];
@@ -159,7 +161,7 @@
         [self.view addSubview:btnSel2];
         
         UIButton* btnSel3 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnSel3 setFrame:CGRectMake(520.0, 172.0, 235.0f, 37.0)];
+        [btnSel3 setFrame:CGRectMake(520.0, 182.0, 235.0f, 37.0)];
         //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
         [btnSel3 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
         [btnSel3 setRestorationIdentifier:@"Aluminum Polishing"];
@@ -169,17 +171,17 @@
         [self.view addSubview:btnSel3];
         
         UIButton* btnSel4 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnSel4 setFrame:CGRectMake(20.0, 220.0, 235.0f, 37.0)];
+        [btnSel4 setFrame:CGRectMake(20.0, 230.0, 255.0f, 37.0)];
         //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
         [btnSel4 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
-        [btnSel4 setRestorationIdentifier:@"Windshield & RockChip Repair"];
-        [btnSel4 setTitle:@"Windshield&RockChip Repair" forState:UIControlStateNormal];
+        [btnSel4 setRestorationIdentifier:@"WindshieldRockChipRepair"];
+        [btnSel4 setTitle:@"Windshield RockChip Repair" forState:UIControlStateNormal];
         [btnSel4 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btnSel4 setTag:0];
         [self.view addSubview:btnSel4];
         
         UIButton* btnSel5 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnSel5 setFrame:CGRectMake(269.0, 220.0, 235.0f, 37.0)];
+        [btnSel5 setFrame:CGRectMake(269.0, 230.0, 235.0f, 37.0)];
         //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
         [btnSel5 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
         [btnSel5 setRestorationIdentifier:@"Auto Package"];
@@ -189,7 +191,7 @@
         [self.view addSubview:btnSel5];
         
         UIButton* btnSel6 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnSel6 setFrame:CGRectMake(519.0, 220.0, 235.0f, 37.0)];
+        [btnSel6 setFrame:CGRectMake(519.0, 230.0, 235.0f, 37.0)];
         //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
         [btnSel6 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
         [btnSel6 setRestorationIdentifier:@"Semi Truck Package"];
@@ -391,12 +393,15 @@
                 if ([aSubview tag] == 10){
                     NSLog(@"hi, %@, %u", [aSubview restorationIdentifier], [aSubview tag]);
                     [aSubview setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                    
                     [aSubview setTag:0];
                 }
                 
-                
             }
+        }
+        if ([aSubview2 tag] == 20){
+            NSLog(@"SET IT TO BLACK !");
+            [aSubview2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [aSubview2 setTag:0];
         }
     }
     
@@ -405,19 +410,49 @@
     NSString *senderID = [btn restorationIdentifier];
     if ([senderID isEqualToString:@"nylon"]){
         [selectedType setFrame:CGRectMake(66.0f, selectedType.frame.origin.y, selectedType.frame.size.width, selectedType.frame.size.height)];
+        [btn setTag:10];
     } else if ([senderID isEqualToString:@"polyester"]){
         [selectedType setFrame:CGRectMake(186.0f, selectedType.frame.origin.y, selectedType.frame.size.width, selectedType.frame.size.height)];
+        [btn setTag:10];
     } else if ([senderID isEqualToString:@"olefin"]){
         [selectedType setFrame:CGRectMake(304.0f, selectedType.frame.origin.y, selectedType.frame.size.width, selectedType.frame.size.height)];
+        [btn setTag:10];
     } else if ([senderID isEqualToString:@"wool"]){
         [selectedType setFrame:CGRectMake(417.0f, selectedType.frame.origin.y, selectedType.frame.size.width, selectedType.frame.size.height)];
+        [btn setTag:10];
     } else if ([senderID isEqualToString:@"berber"]){
         [selectedType setFrame:CGRectMake(523.0f, selectedType.frame.origin.y, selectedType.frame.size.width, selectedType.frame.size.height)];
+        [btn setTag:10];
     } else if ([senderID isEqualToString:@"cutpile"]){
         [selectedType setFrame:CGRectMake(626.0f, selectedType.frame.origin.y, selectedType.frame.size.width, selectedType.frame.size.height)];
-    }
+        [btn setTag:10];
+    } else if ([senderID isEqualToString:@"Auto Detailing"]){
+        [selectedAutoSpaTypeBtn setFrame:CGRectMake(17.0, 180.0, selectedAutoSpaTypeBtn.frame.size.width, selectedAutoSpaTypeBtn.frame.size.height)];
+        [btn setTag:20];
+        selectedAutoSpaType = senderID;
+    } else if ([senderID isEqualToString:@"Semi Detailing"]){
+        [selectedAutoSpaTypeBtn setFrame:CGRectMake(266.0, 180.0, selectedAutoSpaTypeBtn.frame.size.width, selectedAutoSpaTypeBtn.frame.size.height)];
+        [btn setTag:20];
+        selectedAutoSpaType = senderID;
+    } else if ([senderID isEqualToString:@"Aluminum Polishing"]){
+        [selectedAutoSpaTypeBtn setFrame:CGRectMake(516.0, 180.0, selectedAutoSpaTypeBtn.frame.size.width, selectedAutoSpaTypeBtn.frame.size.height)];
+        [btn setTag:20];
+        selectedAutoSpaType = senderID;
+    } else if ([senderID isEqualToString:@"WindshieldRockChipRepair"]){
+        [selectedAutoSpaTypeBtn setFrame:CGRectMake(17.0, 230.0, selectedAutoSpaTypeBtn.frame.size.width, selectedAutoSpaTypeBtn.frame.size.height)];
+        [btn setTag:20];
+        selectedAutoSpaType = senderID;
+    } else if ([senderID isEqualToString:@"Auto Package"]){
+        [selectedAutoSpaTypeBtn setFrame:CGRectMake(266.0, 230.0, selectedAutoSpaTypeBtn.frame.size.width, selectedAutoSpaTypeBtn.frame.size.height)];
+        [btn setTag:20];
+        selectedAutoSpaType = senderID;
+    } else if ([senderID isEqualToString:@"Semi Truck Package"]){
+        [selectedAutoSpaTypeBtn setFrame:CGRectMake(516.0, 230.0, selectedAutoSpaTypeBtn.frame.size.width, selectedAutoSpaTypeBtn.frame.size.height)];
+        [btn setTag:20];
+        selectedAutoSpaType = senderID;
+    }    
     
-    [btn setTag:10];
+    // set the font color as white for the selected button
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
@@ -548,30 +583,46 @@
         optionsVC.MIVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         [popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else if ([VCServiceNameType isEqualToString:@"autoSpa"]){
+        id theOptionsVC;
         
-        if ([[sender restorationIdentifier] isEqualToString:@"semi"]){
+        if ([selectedAutoSpaType isEqualToString:@"Auto Detailing"]){
             OptionsSemiSpaPVC *optionsVC = (OptionsSemiSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsSemiSpaPVC"];
             
-            if (popover){
-                [popover setContentViewController:optionsVC];
-            }else {
-                popover = [[UIPopoverController alloc] initWithContentViewController:optionsVC];
-            }
-            
+            theOptionsVC = optionsVC;
             optionsVC.SSVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
-        } else {
+        } else if ([selectedAutoSpaType isEqualToString:@"Semi Detailing"]){
             OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
             
-            if (popover){
-                [popover setContentViewController:optionsVC];
-            }else {
-                popover = [[UIPopoverController alloc] initWithContentViewController:optionsVC];
-            }
+            theOptionsVC = optionsVC;
+            optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+        } else if ([selectedAutoSpaType isEqualToString:@"Aluminum Polishing"]){
+            OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
             
+            theOptionsVC = optionsVC;
+            optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+        } else if ([selectedAutoSpaType isEqualToString:@"WindshieldRockChipRepair"]){
+            OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
+            
+            theOptionsVC = optionsVC;
+            optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+        } else if ([selectedAutoSpaType isEqualToString:@"Auto Package"]){
+            OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
+            
+            theOptionsVC = optionsVC;
+            optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+        } else if ([selectedAutoSpaType isEqualToString:@"Semi Truck Package"]){
+            OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
+            
+            theOptionsVC = optionsVC;
             optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         }
         
-        //optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+        if (popover){
+            [popover setContentViewController:theOptionsVC];
+        }else {
+            popover = [[UIPopoverController alloc] initWithContentViewController:theOptionsVC];
+        }
+
         [popover presentPopoverFromRect:addServiceBtn.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     

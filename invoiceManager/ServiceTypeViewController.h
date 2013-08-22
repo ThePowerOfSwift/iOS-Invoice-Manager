@@ -33,6 +33,7 @@
     NSInteger dataTableNoOfRows;
     UIPopoverController *popover;
     NSMutableArray *serviceDataCellArray;
+    NSString *selectedAutoSpaType;
     
     // outlets
     IBOutlet UIView *carpetTypeSelection;
@@ -54,7 +55,7 @@
 @property (assign, readwrite) NSMutableArray *uilabelsArray;
 @property (assign, readwrite) NSMutableArray *serviceDataCellArray;
 @property (assign, readwrite) NSInteger dataTableNoOfRows;
-@property (assign, readwrite) NSString *VCServiceNameType;
+@property (assign, readwrite) NSString *VCServiceNameType, *selectedAutoSpaType;
 @property (nonatomic, assign) UIPopoverController *popover;
 @property (nonatomic, assign) UIButton *backBtn;
 
