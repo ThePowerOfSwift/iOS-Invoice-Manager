@@ -596,10 +596,10 @@
             theOptionsVC = optionsVC;
             optionsVC.ADelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         } else if ([selectedAutoSpaType isEqualToString:@"Aluminum Polishing"]){
-            OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
+            OptionsAluminumMetalPVC *optionsVC = (OptionsAluminumMetalPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAluminumMetalPVC"];
             
             theOptionsVC = optionsVC;
-            optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+            optionsVC.ADelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         } else if ([selectedAutoSpaType isEqualToString:@"WindshieldRockChipRepair"]){
             OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
             

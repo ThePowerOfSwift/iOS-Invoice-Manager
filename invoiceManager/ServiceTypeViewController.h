@@ -17,6 +17,8 @@
 #import "OptionsSemiSpaPVC.h"
 #import "OptionsAutoDetailPVC.h"
 #import "OptionsSemiDetailPVC.h"
+#import "OptionsAluminumMetalPVC.h"
+#import "OptionsWindshieldCrackPVC.h"
 
 //#import "ServiceDataCell.h"
 
@@ -26,7 +28,7 @@
 - (void)updateTableSVC:(ServiceTypeViewController *)ServiceTypeViewController;
 @end
 
-@interface ServiceTypeViewController : UIViewController <OptionsAutoDetailPVCDelegate, OptionsSemiSpaPVCdelegate, OptionsAutoSpaPVCdelegate, OptionsPopoverVCDelegate, OptionsMiscellaneousPopoverVCDelegate, OptionsAreaRugsPopoverVCDelegate, OptionsFloodPopoverVCDelegate, OptionsMatressPopoverVCDelegate, OptionsUpholsteryPopoverVCDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface ServiceTypeViewController : UIViewController <OptionsWindshieldCrackPVCDelegate, OptionsAluminumMetalPVCDelegate, OptionsAutoDetailPVCDelegate, OptionsSemiDetailPVCDelegate, OptionsSemiSpaPVCdelegate, OptionsAutoSpaPVCdelegate, OptionsPopoverVCDelegate, OptionsMiscellaneousPopoverVCDelegate, OptionsAreaRugsPopoverVCDelegate, OptionsFloodPopoverVCDelegate, OptionsMatressPopoverVCDelegate, OptionsUpholsteryPopoverVCDelegate, UITableViewDataSource, UITableViewDelegate> {
     // delegate vars
     id <SecondViewControllerDelegate> SVCdelegate;
     
