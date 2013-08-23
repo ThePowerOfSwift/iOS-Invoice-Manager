@@ -1,4 +1,5 @@
-//  OptionsAutoDetailPVC.h
+//
+//  OptionsSemiDetailPVC.h
 //  invoiceManager
 //
 //  Created by Mihai on 2013-05-20.
@@ -9,16 +10,16 @@
 #import "ServiceDataCell.h"
 #import "BasePopoverVC.h"
 
-@class OptionsAutoDetailPVC;
+@class OptionsSemiDetailPVC;
 
-@protocol OptionsAutoDetailPVCDelegate <NSObject>
-- (void)updateSpaAutoDetailDataTable:(OptionsAutoDetailPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
+@protocol OptionsSemiDetailPVCDelegate <NSObject>
+- (void)updateSpaSemiDetailDataTable:(OptionsSemiDetailPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
-@interface OptionsAutoDetailPVC : BasePopoverVC {
+@interface OptionsSemiDetailPVC : BasePopoverVC {
     
     // delegate variables
-    id <OptionsAutoDetailPVCDelegate> ADelegate;  // options view controller delegate
+    id <OptionsSemiDetailPVCDelegate> ADelegate;  // options view controller delegate
     
     // variables
     NSString *serviceType, *serviceTypeRestorationID;
@@ -34,7 +35,7 @@
     IBOutlet UIScrollView *scrollViewer;
 }
 
-@property (nonatomic, assign) id <OptionsAutoDetailPVCDelegate> ADelegate;
+@property (nonatomic, assign) id <OptionsSemiDetailPVCDelegate> ADelegate;
 
 @property (assign, readwrite) NSInteger quantity;
 @property (assign, readwrite) float price, priceRate;

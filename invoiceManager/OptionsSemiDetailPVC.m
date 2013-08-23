@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Mihai. All rights reserved.
 //
 
-#import "OptionsAutoDetailPVC.h"
+#import "OptionsSemiDetailPVC.h"
 
-@interface OptionsAutoDetailPVC ()
+@interface OptionsSemiDetailPVC ()
 
 @end
 
-@implementation OptionsAutoDetailPVC
+@implementation OptionsSemiDetailPVC
 
 @synthesize ADelegate;
 @synthesize scrollViewer;
@@ -53,7 +53,7 @@
 	// Do any additional setup after loading the view.
     
     [scrollViewer setScrollEnabled:YES];
-    [scrollViewer setContentSize:CGSizeMake(614, 3310)];
+    [scrollViewer setContentSize:CGSizeMake(614, 2540)];
 }
 
 - (void)didReceiveMemoryWarning

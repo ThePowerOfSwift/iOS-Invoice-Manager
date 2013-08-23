@@ -72,6 +72,7 @@
 		898994561742A4D7004D0A85 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 898994541742A4D7004D0A85 /* InfoPlist.strings */; };
 		898994591742A4D7004D0A85 /* invoiceManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 898994581742A4D7004D0A85 /* invoiceManagerTests.m */; };
 		898994681742BBF3004D0A85 /* ServiceTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 898994671742BBF3004D0A85 /* ServiceTypeViewController.m */; };
+		898E35DA17C73313006B2EFC /* OptionsSemiDetailPVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 898E35D917C73313006B2EFC /* OptionsSemiDetailPVC.m */; };
 		89906A3A17A792D3002C3A20 /* plusIcon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 89906A3817A792D3002C3A20 /* plusIcon2.png */; };
 		89906A3B17A792D3002C3A20 /* plusIcon2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89906A3917A792D3002C3A20 /* plusIcon2@2x.png */; };
 		89906A3D17A7A9BB002C3A20 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 89906A3C17A7A9BB002C3A20 /* close.png */; };
@@ -271,6 +272,8 @@
 		898994581742A4D7004D0A85 /* invoiceManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = invoiceManagerTests.m; sourceTree = "<group>"; };
 		898994661742BBF3004D0A85 /* ServiceTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTypeViewController.h; sourceTree = "<group>"; };
 		898994671742BBF3004D0A85 /* ServiceTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTypeViewController.m; sourceTree = "<group>"; };
+		898E35D817C73312006B2EFC /* OptionsSemiDetailPVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsSemiDetailPVC.h; sourceTree = "<group>"; };
+		898E35D917C73313006B2EFC /* OptionsSemiDetailPVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsSemiDetailPVC.m; sourceTree = "<group>"; };
 		89906A3817A792D3002C3A20 /* plusIcon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plusIcon2.png; sourceTree = "<group>"; };
 		89906A3917A792D3002C3A20 /* plusIcon2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plusIcon2@2x.png"; sourceTree = "<group>"; };
 		89906A3C17A7A9BB002C3A20 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
@@ -432,6 +435,8 @@
 				891E2E3617B2A58300FDF9CA /* OptionsSemiSpaPVC.m */,
 				89969E2817C68A1300A51D48 /* OptionsAutoDetailPVC.h */,
 				89969E2917C68A1300A51D48 /* OptionsAutoDetailPVC.m */,
+				898E35D817C73312006B2EFC /* OptionsSemiDetailPVC.h */,
+				898E35D917C73313006B2EFC /* OptionsSemiDetailPVC.m */,
 			);
 			name = "auto spa popover(s)";
 			sourceTree = "<group>";
@@ -1041,6 +1046,7 @@
 				892995A217AAE79E00C61483 /* OptionsAutoSpaPVC.m in Sources */,
 				891E2E3717B2A58300FDF9CA /* OptionsSemiSpaPVC.m in Sources */,
 				89969E2A17C68A1300A51D48 /* OptionsAutoDetailPVC.m in Sources */,
+				898E35DA17C73313006B2EFC /* OptionsSemiDetailPVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -55,10 +55,29 @@
  notes = ..
  addons..
  
- -------------------------------------------
- auto spa:
+ ------------------------------------------- *** NEEDS UPDATE
+ auto spa auto package:
  name = package name ( Bronze, Silver, Gold, Platinum )
  itemAttribute = car type ( SUV, Compact, Midsize )
+ quantity = # of cars
+ price = price
+ priceRate = price per one car
+ notes = ..
+ 
+ ------------------------------------------- *** NEEDS UPDATE
+ auto spa semi package:
+ name = package name ( Bronze, Silver, Gold, Platinum )
+ itemAttribute = car type ( SUV, Compact, Midsize )
+ quantity = # of cars
+ price = price
+ priceRate = price per one car
+ notes = ..
+ 
+ ------------------------------------------- *** NEEDS UPDATE
+ auto spa auto detailing service:
+ name = package name ( Bronze, Silver, Gold, Platinum )
+ itemAttribute = car type ( SUV, Compact, Midsize )
+ 
  quantity = # of cars
  price = price
  priceRate = price per one car
