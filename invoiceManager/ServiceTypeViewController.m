@@ -601,20 +601,20 @@
             theOptionsVC = optionsVC;
             optionsVC.ADelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         } else if ([selectedAutoSpaType isEqualToString:@"WindshieldRockChipRepair"]){
-            OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
+            OptionsWindshieldCrackPVC *optionsVC = (OptionsWindshieldCrackPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsWindshieldCrackPVC"];
             
             theOptionsVC = optionsVC;
-            optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+            optionsVC.ADelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         } else if ([selectedAutoSpaType isEqualToString:@"Auto Package"]){
             OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
             
             theOptionsVC = optionsVC;
             optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         } else if ([selectedAutoSpaType isEqualToString:@"Semi Truck Package"]){
-            OptionsAutoSpaPVC *optionsVC = (OptionsAutoSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsAutoSpaPVC"];
+            OptionsSemiSpaPVC *optionsVC = (OptionsSemiSpaPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsSemiSpaPVC"];
             
             theOptionsVC = optionsVC;
-            optionsVC.ASVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+            optionsVC.SSVCDelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
         }
         
         if (popover){
@@ -828,6 +828,28 @@
 }
 
 - (void)updateSpaAutoDetailDataTable:(OptionsAutoDetailPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
+    if ([editType isEqualToString:@"add"]){
+        // save popover info into a Service data cell
+        
+        
+        // save the service data cell to an array ( which will be called upon by table view delegate funcs )
+        
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
+        [serviceDataCellArray addObject:cell_arg];
+        dataTableNoOfRows++;                    // increase the data table view's # of rows
+        [dataTable reloadData];                 // reload table view data
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
+    } else if ([editType isEqualToString:@"edit"]){
+        [dataTable reloadData];                 // update table
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
+    } else if ([editType isEqualToString:@"cancel"]){
+        [popover dismissPopoverAnimated:NO];
+    }
+}
+
+- (void)updateSpaWindshieldDataTable:
+    (OptionsWindshieldCrackPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     if ([editType isEqualToString:@"add"]){
         // save popover info into a Service data cell
         

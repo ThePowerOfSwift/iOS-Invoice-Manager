@@ -137,7 +137,7 @@
 
 -(void) doCalculations {
     // if quantity is > 0
-    if ([self quantity] && [self carType]){
+    if ([self quantity] && [self serviceType]){
         NSLog(@"GOT HERE? price rate is %f", [self priceRate]);
         [self setPrice: ([self priceRate] * [self quantity]) ];
         [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price] ]];
@@ -156,32 +156,29 @@
     if ([[sender restorationIdentifier] isEqualToString:@"save"]){
         ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
         newCell.serviceType = @"autoSpa";
-        newCell.name = [self serviceType];  // 'Interior Vacuum' or 'Fabric Guard' or etc..
-        newCell.itemAttribute = [self carType]; // 'Car' or 'SUV'
+        newCell.name = [self serviceType];  // '1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..
         newCell.materialType = [self serviceTypeRestorationID]; // 'intVacuumCar' or intOzoneDeodorizingSUV' or etc..
         newCell.quantity = [self quantity];
         newCell.priceRate = [self priceRate];
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
         
-        [ADelegate updateSpaAutoDetailDataTable:self editType:@"add" withServiceCell:newCell];
-        
+        [ADelegate updateSpaWindshieldDataTable:self editType:@"add" withServiceCell:newCell];
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
         
         [[self editingCell] setServiceType:@"autoSpa"];
         [[self editingCell] setName:[self serviceType]];
         [[self editingCell] setMaterialType:[self serviceTypeRestorationID]];
-        [[self editingCell] setItemAttribute:[self carType]];
         [[self editingCell] setQuantity:[self quantity]];
         [[self editingCell] setPriceRate:[self priceRate]];
         [[self editingCell] setPrice:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
         
-        [ADelegate updateSpaAutoDetailDataTable:self editType:@"edit" withServiceCell:nil];
+        [ADelegate updateSpaWindshieldDataTable:self editType:@"edit" withServiceCell:nil];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
-        NSLog(@"quantity is %d", [self quantity]);
-        [ADelegate updateSpaAutoDetailDataTable:self editType:@"cancel" withServiceCell:nil];
+        // NSLog(@"quantity is %d", [self quantity]);
+        [ADelegate updateSpaWindshieldDataTable:self editType:@"cancel" withServiceCell:nil];
     }
 }
 

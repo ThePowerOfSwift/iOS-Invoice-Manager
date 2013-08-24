@@ -23,7 +23,7 @@
     
     // variables
     NSString *serviceType, *serviceTypeRestorationID;
-    NSString *carType;      // 'Car' or 'SUV'
+    NSString *carType;      // 'DayCab' or 'SleeperUnit'
     NSString *notesAboutRoom;
     float price, priceRate;
     NSInteger quantity;

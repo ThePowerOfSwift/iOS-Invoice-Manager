@@ -12,7 +12,7 @@
 @class OptionsWindshieldCrackPVC;
 
 @protocol OptionsWindshieldCrackPVCDelegate <NSObject>
-- (void)updateSpaSemiDetailDataTable:(OptionsWindshieldCrackPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
+- (void)updateSpaWindshieldDataTable:(OptionsWindshieldCrackPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
 @interface OptionsWindshieldCrackPVC : BasePopoverVC {

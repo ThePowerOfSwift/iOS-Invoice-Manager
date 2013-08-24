@@ -107,30 +107,30 @@
     // save the restoration id of the button selected
     [self setServiceTypeRestorationID:senderID];
     
-    if ([senderID isEqualToString:@"extWashDryCar"]){
-        [self setPriceRate:14.95f];
+    if ([senderID isEqualToString:@"extWashWipeWindowsTireShineCar"]){
+        [self setPriceRate:119.95f];
         [self setCarType:@"Car"];
-        [self setServiceType:@"Exterior Wash and Dry"];
-    } else if ([senderID isEqualToString:@"extWashDrySUV"]){
-        [self setPriceRate:19.95f];
+        [self setServiceType:@"Wash, Wipe Windows & Tire Shine (Car)"];
+    } else if ([senderID isEqualToString:@"extWashWipeWindowsTireShineSUV"]){
+        [self setPriceRate:149.95f];
         [self setCarType:@"SUV"];
-        [self setServiceType:@"Exterior Wash and Dry"];
-    } else if ([senderID isEqualToString:@"extHandWashDryCar"]){
-        [self setPriceRate:29.95f];
+        [self setServiceType:@"Wash, Wipe Windows & Tire Shine (SUV)"];
+    } else if ([senderID isEqualToString:@"extWashCar"]){
+        [self setPriceRate:79.95f];
         [self setCarType:@"Car"];
-        [self setServiceType:@"Hand Wash and Dry"];
-    } else if ([senderID isEqualToString:@"extHandWashDrySUV"]){
-        [self setPriceRate:39.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Hand Wash and Dry"];
-    } else if ([senderID isEqualToString:@"extBugSapTarRemovalCar"]){
-        [self setPriceRate:49.95f];
+        [self setServiceType:@"Exterior Wash (Car)"];
+    } else if ([senderID isEqualToString:@"extWashSUV"]){
+        [self setPriceRate:99.95f];
+        [self setCarType:@"SleeperUnit"];
+        [self setServiceType:@"Exterior Wash (SUV)"];
+    } else if ([senderID isEqualToString:@"extEngineShampooCar"]){
+        [self setPriceRate:149.95f];
         [self setCarType:@"Car"];
-        [self setServiceType:@"Bug/Sap/Tar Removal"];
-    } else if ([senderID isEqualToString:@"extBugSapTarRemovalSUV"]){
-        [self setPriceRate:69.95f];
+        [self setServiceType:@"Engine Shampoo (Car)"];
+    } else if ([senderID isEqualToString:@"extEngineShampooSUV"]){
+        [self setPriceRate:149.95f];
         [self setCarType:@"SUV"];
-        [self setServiceType:@"Bug/Sap/Tar Removal"];
+        [self setServiceType:@"Engine Shampoo (SUV)"];
     } else if ([senderID isEqualToString:@"extEngineShampooCar"]){
         [self setPriceRate:79.95f];
         [self setCarType:@"Car"];

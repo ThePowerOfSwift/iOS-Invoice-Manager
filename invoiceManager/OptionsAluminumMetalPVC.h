@@ -47,5 +47,6 @@
 -(IBAction) saveOrCancel: (id) sender;
 -(IBAction) onChoosingServiceType: (id) sender;
 -(IBAction) quantityChanged: (id) sender;
+-(IBAction) clearAllSelections;
 
 @end
