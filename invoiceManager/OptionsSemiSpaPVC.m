@@ -99,7 +99,7 @@
         [packageTypeLabel setText:@"Complete Full Detail"];
     }
     
-    [priceLabel setText:[NSString stringWithFormat:@"%.02f", [editingCell price]]];
+    [priceLabel setText:[NSString stringWithFormat:@"$%.02f", [editingCell price]]];
     [quantityField setText:[NSString stringWithFormat:@"%d", [editingCell quantity]]];
     // restore the notes saved
     [notesField setText:[editingCell notes]];
@@ -192,11 +192,11 @@
             }
         }
         [self setPrice: ([self priceRate] * [self quantity]) ];
-        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price] ]];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price] ]];
     } else {
         [self setPriceRate:0.0f];
         [self setPrice:0.0f];
-        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price]]];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price]]];
     }
     
 }

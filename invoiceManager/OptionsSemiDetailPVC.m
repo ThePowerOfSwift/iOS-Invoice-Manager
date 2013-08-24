@@ -53,7 +53,7 @@
 	// Do any additional setup after loading the view.
     
     [scrollViewer setScrollEnabled:YES];
-    [scrollViewer setContentSize:CGSizeMake(614, 2540)];
+    [scrollViewer setContentSize:CGSizeMake(614, 2570)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,7 +80,7 @@
     
     [self setQuantity:[editingCell quantity]];
     [self setNotesAboutRoom:[editingCell notes]];
-    [priceLabel setText:[NSString stringWithFormat:@"%.02f", [editingCell price]]];
+    [priceLabel setText:[NSString stringWithFormat:@"$%.02f", [editingCell price]]];
     [quantityField setText:[NSString stringWithFormat:@"%d", [editingCell quantity]]];
     
     // restore the notes saved
@@ -109,172 +109,129 @@
     
     if ([senderID isEqualToString:@"extWashWipeWindowsTireShineCar"]){
         [self setPriceRate:119.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Wash, Wipe Windows & Tire Shine (Car)"];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Wash, Wipe Windows & Tire Shine (Day Cab) (Exterior)"];
     } else if ([senderID isEqualToString:@"extWashWipeWindowsTireShineSUV"]){
         [self setPriceRate:149.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Wash, Wipe Windows & Tire Shine (SUV)"];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Wash, Wipe Windows & Tire Shine (Sleeper Unit) (Exterior)"];
     } else if ([senderID isEqualToString:@"extWashCar"]){
         [self setPriceRate:79.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Exterior Wash (Car)"];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Exterior Wash (Day Cab) (Exterior)"];
     } else if ([senderID isEqualToString:@"extWashSUV"]){
         [self setPriceRate:99.95f];
-        [self setCarType:@"SleeperUnit"];
-        [self setServiceType:@"Exterior Wash (SUV)"];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Exterior Wash (Sleeper Unit) (Exterior)"];
     } else if ([senderID isEqualToString:@"extEngineShampooCar"]){
         [self setPriceRate:149.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Engine Shampoo (Car)"];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Engine Shampoo (Day Cab) (Exterior)"];
     } else if ([senderID isEqualToString:@"extEngineShampooSUV"]){
         [self setPriceRate:149.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Engine Shampoo (SUV)"];
-    } else if ([senderID isEqualToString:@"extEngineShampooCar"]){
-        [self setPriceRate:79.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Engine Shampoo"];
-    } else if ([senderID isEqualToString:@"extEngineShampooSUV"]){
-        [self setPriceRate:99.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Engine Shampoo"];
-    } else if ([senderID isEqualToString:@"extWetWaxCar"]){
-        [self setPriceRate:49.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Wet Wax"];
-    } else if ([senderID isEqualToString:@"extWetWaxSUV"]){
-        [self setPriceRate:49.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Wet Wax"];
-    } else if ([senderID isEqualToString:@"extHandWaxCar"]){
-        [self setPriceRate:149.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Hand Wax"];
-    } else if ([senderID isEqualToString:@"extHandWaxSUV"]){
-        [self setPriceRate:189.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Hand Wax"];
-    } else if ([senderID isEqualToString:@"extClayBarPolishCar"]){
-        [self setPriceRate:249.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Clay Bar & Polish"];
-    } else if ([senderID isEqualToString:@"extClayBarPolishSUV"]){
-        [self setPriceRate:249.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Clay Bar & Polish"];
-    } else if ([senderID isEqualToString:@"extPaintSealerCar"]){
-        [self setPriceRate:349.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Paint Sealer"];
-    } else if ([senderID isEqualToString:@"extPaintSealerSUV"]){
-        [self setPriceRate:399.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Paint Sealer"];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Engine Shampoo (Sleeper Unit) (Exterior)"];
     } else if ([senderID isEqualToString:@"extPowerPolishCar"]){
-        [self setPriceRate:259.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Power Polish"];
-    } else if ([senderID isEqualToString:@"extPowerPolishSUV"]){
         [self setPriceRate:299.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Power Polish"];
-    } else if ([senderID isEqualToString:@"extRimsWheelsCleanPolishCar"]){
-        [self setPriceRate:44.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Rims/Wheels Clean & Polish"];
-    } else if ([senderID isEqualToString:@"extRimsWheelsCleanPolishSUV"]){
-        [self setPriceRate:44.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Rims/Wheels Clean & Polish"];
-    } else if ([senderID isEqualToString:@"extTireShineCar"]){
-        [self setPriceRate:9.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Tire Shine"];
-    } else if ([senderID isEqualToString:@"extTireShineSUV"]){
-        [self setPriceRate:9.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Tire Shine"];
-    } else if ([senderID isEqualToString:@"intVacuumCar"]){
-        [self setPriceRate:24.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Interior Vacuum"];
-    } else if ([senderID isEqualToString:@"intVacuumSUV"]){
-        [self setPriceRate:29.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Interior Vacuum"];
-    } else if ([senderID isEqualToString:@"intCarpetShampooSteamCleanCar"]){
-        [self setPriceRate:49.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Carpet Shampoo & Steam Clean"];
-    } else if ([senderID isEqualToString:@"intCarpetShampooSteamCleanSUV"]){
-        [self setPriceRate:59.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Carpet Shampoo & Steam Clean"];
-    } else if ([senderID isEqualToString:@"intClothSeatSteamCleanCar"]){
-        [self setPriceRate:99.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Cloth Seat Shampoo & Steam Clean"];
-    } else if ([senderID isEqualToString:@"intClothSeatSteamCleanSUV"]){
-        [self setPriceRate:119.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Cloth Seat Shampoo & Steam Clean"];
-    } else if ([senderID isEqualToString:@"intTrunkShampooSteamCleanCar"]){
-        [self setPriceRate:49.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Trunk Shampoo & Steam Clean"];
-    } else if ([senderID isEqualToString:@"intTrunkShampooSteamCleanSUV"]){
-        [self setPriceRate:59.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Trunk Shampoo & Steam Clean"];
-    } else if ([senderID isEqualToString:@"intFabricGuardCar"]){
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Power Polish (Day Cab) (Exterior)"];
+    } else if ([senderID isEqualToString:@"extPowerPolishSUV"]){
+        [self setPriceRate:399.95f];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Power Polish (Sleeper Unit) (Exterior)"];
+    } else if ([senderID isEqualToString:@"extClayBarPolishCar"]){
+        [self setPriceRate:349.95f];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Clay Bar & Polish (Day Cab) (Exterior)"];
+    } else if ([senderID isEqualToString:@"extClayBarPolishSUV"]){
+        [self setPriceRate:349.95f];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Clay Bar & Polish (Sleeper Unit) (Exterior)"];
+    } else if ([senderID isEqualToString:@"extWetWaxCar"]){
+        [self setPriceRate:69.95f];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Wet Wax (Day Cab) (Exterior)"];
+    } else if ([senderID isEqualToString:@"extWetWaxSUV"]){
+        [self setPriceRate:89.95f];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Wet Wax (Sleeper Unit) (Exterior)"];
+    }  else if ([senderID isEqualToString:@"extBugSapTarRemovalCar"]){
         [self setPriceRate:79.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Fabric Guard"];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Bug/Sap/Tar Removal (Day Cab) (Exterior)"];
+    } else if ([senderID isEqualToString:@"extBugSapTarRemovalSUV"]){
+        [self setPriceRate:99.95f];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Bug/Sap/Tar Removal (Sleeper Unit) (Exterior)"];
+    } else if ([senderID isEqualToString:@"extRainXGlassTreatmentCar"]){
+        [self setPriceRate:39.95f];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Rain-X Glass Treatment (Day Cab) (Exterior)"];
+    } else if ([senderID isEqualToString:@"extRainXGlassTreatmentSUV"]){
+        [self setPriceRate:39.95f];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Rain-X Glass Treatment (Sleeper Unit) (Exterior)"];
+        // Interior services below:
+    } else if ([senderID isEqualToString:@"intCarpetUpholsteryShampooCar"]){
+        [self setPriceRate:149.95f];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Carpet & Upholstery Shampoo (Day Cab) (Interior)"];
+    } else if ([senderID isEqualToString:@"intCarpetUpholsteryShampooSUV"]){
+        [self setPriceRate:199.95f];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Carpet & Upholstery Shampoo (Sleeper Unit) (Interior)"];
+    } else if ([senderID isEqualToString:@"intFabricGuardCar"]){
+        [self setPriceRate:99.95f];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Fabric Guard (Day Cab) (Interior)"];
     } else if ([senderID isEqualToString:@"intFabricGuardSUV"]){
         [self setPriceRate:99.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Fabric Guard"];
-    } else if ([senderID isEqualToString:@"intLeatherCleanConditionCar"]){
-        [self setPriceRate:79.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Leather Clean & Conditioning"];
-    } else if ([senderID isEqualToString:@"intLeatherCleanConditionSUV"]){
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Fabric Guard (Sleeper Unit) (Interior)"];
+    } else if ([senderID isEqualToString:@"intHeadlinerCleaningCar"]){
         [self setPriceRate:99.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Leather Clean & Conditioning"];
-    } else if ([senderID isEqualToString:@"intHeadlinerVisorCleanCar"]){
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Headliner Cleaning (Day Cab) (Interior)"];
+    } else if ([senderID isEqualToString:@"intHeadlinerCleaningSUV"]){
         [self setPriceRate:99.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Headline/Visor Cleaning"];
-    } else if ([senderID isEqualToString:@"intHeadlinerVisorCleanSUV"]){
-        [self setPriceRate:99.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Headline/Visor Cleaning"];
-    } else if ([senderID isEqualToString:@"intPetHairRemoveCar"]){
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Headliner Cleaning (Sleeper Unit) (Interior)"];
+    } else if ([senderID isEqualToString:@"intPetHairRemovalCar"]){
+        [self setPriceRate:49.95f];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Pet Hair Removal (Day Cab) (Interior)"];
+    } else if ([senderID isEqualToString:@"intPetHairRemovalSUV"]){
         [self setPriceRate:69.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Pet Hair Removal"];
-    } else if ([senderID isEqualToString:@"intPetHairRemoveSUV"]){
-        [self setPriceRate:69.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Pet Hair Removal"];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Pet Hair Removal (Sleeper Unit) (Interior)"];
+    } else if ([senderID isEqualToString:@"intLeatherCleanConditioningCar"]){
+        [self setPriceRate:149.95f];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Leather Clean & Conditioning (Day Cab) (Interior)"];
+    } else if ([senderID isEqualToString:@"intLeatherCleanConditioningSUV"]){
+        [self setPriceRate:149.95f];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Leather Clean & Conditioning (Sleeper Unit) (Interior)"];
+    } else if ([senderID isEqualToString:@"intBenefectDisinfectantCar"]){
+        [self setPriceRate:99.95f];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Benefect Disinfectant (Day Cab) (Interior)"];
+    } else if ([senderID isEqualToString:@"intBenefectDisinfectantSUV"]){
+        [self setPriceRate:99.95f];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Benefect Disinfectant (Sleeper Unit) (Interior)"];
     } else if ([senderID isEqualToString:@"intOzoneDeodorizingCar"]){
-        [self setPriceRate:99.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Ozone Deodorizing"];
+        [self setPriceRate:149.95f];
+        [self setCarType:@"Day Cab"];
+        [self setServiceType:@"Ozone Deodorizing (Day Cab) (Interior)"];
     } else if ([senderID isEqualToString:@"intOzoneDeodorizingSUV"]){
-        [self setPriceRate:99.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Ozone Deodorizing"];
-    } else if ([senderID isEqualToString:@"intBenefactDisinfectantCar"]){
-        [self setPriceRate:99.95f];
-        [self setCarType:@"Car"];
-        [self setServiceType:@"Benefect Disinfectant"];
-    } else if ([senderID isEqualToString:@"intBenefactDisinfectantSUV"]){
-        [self setPriceRate:99.95f];
-        [self setCarType:@"SUV"];
-        [self setServiceType:@"Benefect Disinfectant"];
+        [self setPriceRate:149.95f];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Ozone Deodorizing (Sleeper Unit) (Interior)"];
+    } else if ([senderID isEqualToString:@"intTwinMattressSUV"]){
+        [self setPriceRate:79.95f];
+        [self setCarType:@"Sleeper Unit"];
+        [self setServiceType:@"Twin Mattress (Sleeper Unit) (Interior)"];
     }
     
     [btn setTag:10];
@@ -295,11 +252,11 @@
     if ([self quantity] && [self carType]){
         NSLog(@"GOT HERE? price rate is %f", [self priceRate]);
         [self setPrice: ([self priceRate] * [self quantity]) ];
-        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price] ]];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price] ]];
     } else {
         
         [self setPrice:0.0f];
-        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price]]];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price]]];
     }
     
 }
@@ -312,14 +269,15 @@
         ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
         newCell.serviceType = @"autoSpa";
         newCell.name = [self serviceType];  // 'Interior Vacuum' or 'Fabric Guard' or etc..
-        newCell.itemAttribute = [self carType]; // 'Car' or 'SUV'
+        newCell.itemAttribute = [self carType]; // 'Day Cab' or 'Sleeper Unit'
         newCell.materialType = [self serviceTypeRestorationID]; // 'intVacuumCar' or intOzoneDeodorizingSUV' or etc..
         newCell.quantity = [self quantity];
         newCell.priceRate = [self priceRate];
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
         
-        [ADelegate updateSpaAutoDetailDataTable:self editType:@"add" withServiceCell:newCell];
+        
+        [ADelegate updateSpaSemiDetailDataTable:self editType:@"add" withServiceCell:newCell];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
         
@@ -332,11 +290,10 @@
         [[self editingCell] setPrice:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
         
-        [ADelegate updateSpaAutoDetailDataTable:self editType:@"edit" withServiceCell:nil];
+        [ADelegate updateSpaSemiDetailDataTable:self editType:@"edit" withServiceCell:nil];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
-        NSLog(@"quantity is %d", [self quantity]);
-        [ADelegate updateSpaAutoDetailDataTable:self editType:@"cancel" withServiceCell:nil];
+        [ADelegate updateSpaSemiDetailDataTable:self editType:@"cancel" withServiceCell:nil];
     }
 }
 

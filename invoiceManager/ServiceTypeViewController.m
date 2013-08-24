@@ -128,7 +128,7 @@
         [col4Name setText:@"price"];*/
     } else if ([VCServiceNameType isEqualToString:@"autoSpa"]){
         //[carpetTypeSelection removeFromSuperview];
-        UILabel* serviceTypeSel = [[[UILabel alloc] initWithFrame:CGRectMake(40.0, 130.0, 306.0, 39.0)] autorelease];
+        /*UILabel* serviceTypeSel = [[[UILabel alloc] initWithFrame:CGRectMake(40.0, 130.0, 306.0, 39.0)] autorelease];
         [serviceTypeSel setText:@"Choose Service Type"];
         [serviceTypeSel setFont:[UIFont systemFontOfSize:23.0]];
         [self.view addSubview:serviceTypeSel];
@@ -200,39 +200,8 @@
         [btnSel6 setTag:0];
         [self.view addSubview:btnSel6];
         
-        
-        //[carpetTypeSelection setHidden:FALSE];
-        /*
-        // above the 'addServiceLabel'
-        UIButton* addAutoDetailServiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [addAutoDetailServiceBtn setFrame:CGRectMake(38.0, 232.0, 49.0f, 49.0)];
-        [addAutoDetailServiceBtn setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
-        [addAutoDetailServiceBtn addTarget:self action:@selector(displayOptionsPopoverVC:) forControlEvents:UIControlEventTouchUpInside];
-        [addAutoDetailServiceBtn setRestorationIdentifier:@"autoDetailService"];
-        [self.view addSubview:addAutoDetailServiceBtn];
-        
-        UILabel* addAutoDetailServiceLabel = [[[UILabel alloc] initWithFrame:CGRectMake(99.0, 289.0, 247.0, 43.0)] autorelease];
-        [addAutoDetailServiceLabel setText:@"Add Auto Detail Service"];
-        [addAutoDetailServiceLabel setFont:[UIFont systemFontOfSize:24.0]];
-        [self.view addSubview:addAutoDetailServiceLabel];
-        
-        // to the right of the 'addServiceLabel'
-        UIButton* addSemiPackageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [addSemiPackageBtn setFrame:CGRectMake(394.0, 288.0, 49.0f, 49.0)];
-        [addSemiPackageBtn setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
-        [addSemiPackageBtn addTarget:self action:@selector(displayOptionsPopoverVC:) forControlEvents:UIControlEventTouchUpInside];
-        [addSemiPackageBtn setRestorationIdentifier:@"semi"];
-        [self.view addSubview:addSemiPackageBtn];
-        
-        UILabel* addSemiPackageLabel = [[[UILabel alloc] initWithFrame:CGRectMake(458.0, 289.0, 247.0, 43.0)] autorelease];
-        [addSemiPackageLabel setText:@"Add Semi Package"];
-        [addSemiPackageLabel setFont:[UIFont systemFontOfSize:27.0]];
-        [self.view addSubview:addSemiPackageLabel];
-        */
-        
         // change the text of the iboutlet addServiceLabel
-        [addServiceLabel setText:@"Add Auto Package"];
-        
+        [addServiceLabel setText:@"Add Auto Package"];*/
     }
     
     NSLog(@"size of data table: %f, %f", [dataTable contentSize].height, [dataTable bounds].size.width );
@@ -244,11 +213,86 @@
     
 }
 
-- (void)viewDidLoad
-{
-    //InvoiceManager *invoiceMngr = [InvoiceManager sharedInvoiceManager];
-    //[invoiceMngr printOut];
+- (void)viewDidLoad{
     [super viewDidLoad];
+    
+    if ([VCServiceNameType isEqualToString:@"autoSpa"]){
+        UILabel* serviceTypeSel = [[[UILabel alloc] initWithFrame:CGRectMake(40.0, 130.0, 306.0, 39.0)] autorelease];
+        [serviceTypeSel setText:@"Choose Service Type"];
+        [serviceTypeSel setFont:[UIFont systemFontOfSize:23.0]];
+        [self.view addSubview:serviceTypeSel];
+        
+        selectedAutoSpaTypeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [selectedAutoSpaTypeBtn setFrame:CGRectMake(17.0, 180.0, 248.0, 37.0)];
+        [selectedAutoSpaTypeBtn setBackgroundImage:[UIImage imageNamed:@"btnBackgroundSel7.png"] forState:UIControlStateNormal];
+        [self.view addSubview:selectedAutoSpaTypeBtn];
+        
+        UIButton* btnSel1 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel1 setFrame:CGRectMake(21.0, 182.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel1 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel1 setRestorationIdentifier:@"Auto Detailing"];
+        [btnSel1 setTitle:@"Auto Detailing" forState:UIControlStateNormal];
+        // this is the selected one initially
+        [btnSel1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        selectedAutoSpaType = [btnSel1 restorationIdentifier];
+        [btnSel1 setTag:20];
+        [self.view addSubview:btnSel1];
+        
+        UIButton* btnSel2 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel2 setFrame:CGRectMake(270.0, 182.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel2 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel2 setRestorationIdentifier:@"Semi Detailing"];
+        [btnSel2 setTitle:@"Semi Detailing" forState:UIControlStateNormal];
+        [btnSel2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnSel2 setTag:0];
+        [self.view addSubview:btnSel2];
+        
+        UIButton* btnSel3 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel3 setFrame:CGRectMake(520.0, 182.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel3 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel3 setRestorationIdentifier:@"Aluminum Polishing"];
+        [btnSel3 setTitle:@"Aluminum Polishing" forState:UIControlStateNormal];
+        [btnSel3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnSel3 setTag:0];
+        [self.view addSubview:btnSel3];
+        
+        UIButton* btnSel4 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel4 setFrame:CGRectMake(20.0, 230.0, 255.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel4 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel4 setRestorationIdentifier:@"WindshieldRockChipRepair"];
+        [btnSel4 setTitle:@"Windshield RockChip Repair" forState:UIControlStateNormal];
+        [btnSel4 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnSel4 setTag:0];
+        [self.view addSubview:btnSel4];
+        
+        UIButton* btnSel5 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel5 setFrame:CGRectMake(269.0, 230.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel5 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel5 setRestorationIdentifier:@"Auto Package"];
+        [btnSel5 setTitle:@"Auto Package" forState:UIControlStateNormal];
+        [btnSel5 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnSel5 setTag:0];
+        [self.view addSubview:btnSel5];
+        
+        UIButton* btnSel6 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSel6 setFrame:CGRectMake(519.0, 230.0, 235.0f, 37.0)];
+        //[btnSel1 setBackgroundImage:[UIImage imageNamed:@"plusIcon2.png"] forState:UIControlStateNormal];
+        [btnSel6 addTarget:self action:@selector(onChoosingType:) forControlEvents:UIControlEventTouchUpInside];
+        [btnSel6 setRestorationIdentifier:@"Semi Truck Package"];
+        [btnSel6 setTitle:@"Semi Truck Package" forState:UIControlStateNormal];
+        [btnSel6 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btnSel6 setTag:0];
+        [self.view addSubview:btnSel6];
+        
+        // change the text of the iboutlet addServiceLabel
+        [addServiceLabel setText:@"Add Auto Package"];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -848,8 +892,50 @@
     }
 }
 
+- (void)updateSpaSemiDetailDataTable:(OptionsSemiDetailPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
+    if ([editType isEqualToString:@"add"]){
+        // save popover info into a Service data cell
+        
+        
+        // save the service data cell to an array ( which will be called upon by table view delegate funcs )
+        
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
+        [serviceDataCellArray addObject:cell_arg];
+        dataTableNoOfRows++;                    // increase the data table view's # of rows
+        [dataTable reloadData];                 // reload table view data
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
+    } else if ([editType isEqualToString:@"edit"]){
+        [dataTable reloadData];                 // update table
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
+    } else if ([editType isEqualToString:@"cancel"]){
+        [popover dismissPopoverAnimated:NO];
+    }
+}
+
 - (void)updateSpaWindshieldDataTable:
     (OptionsWindshieldCrackPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
+    if ([editType isEqualToString:@"add"]){
+        // save popover info into a Service data cell
+        
+        
+        // save the service data cell to an array ( which will be called upon by table view delegate funcs )
+        
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
+        [serviceDataCellArray addObject:cell_arg];
+        dataTableNoOfRows++;                    // increase the data table view's # of rows
+        [dataTable reloadData];                 // reload table view data
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
+    } else if ([editType isEqualToString:@"edit"]){
+        [dataTable reloadData];                 // update table
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
+    } else if ([editType isEqualToString:@"cancel"]){
+        [popover dismissPopoverAnimated:NO];
+    }
+}
+
+- (void)updateSpaAluminumMetalDataTable:(OptionsAluminumMetalPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     if ([editType isEqualToString:@"add"]){
         // save popover info into a Service data cell
         

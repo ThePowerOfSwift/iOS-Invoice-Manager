@@ -12,7 +12,7 @@
 @class OptionsAluminumMetalPVC;
 
 @protocol OptionsAluminumMetalPVCDelegate <NSObject>
-- (void)updateSpaSemiDetailDataTable:(OptionsAluminumMetalPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
+- (void)updateSpaAluminumMetalDataTable:(OptionsAluminumMetalPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg;
 @end
 
 @interface OptionsAluminumMetalPVC : BasePopoverVC {

@@ -102,7 +102,7 @@
         [packageTypeLabel setText:@"Platinum"];
     }*/
     
-    [priceLabel setText:[NSString stringWithFormat:@"%.02f", [editingCell price]]];
+    [priceLabel setText:[NSString stringWithFormat:@"$%.02f", [editingCell price]]];
     [quantityField setText:[NSString stringWithFormat:@"%d", [editingCell quantity]]];
     // restore the notes saved
     [notesField setText:[editingCell notes]];
@@ -158,7 +158,7 @@
 
 -(IBAction) quantityChanged: (id) sender {
     UITextField* qField = (UITextField*) sender;
-    NSLog(@"the quantity is %ld", (long)[[qField text] integerValue]);
+    //NSLog(@"the quantity is %ld", (long)[[qField text] integerValue]);
     [self setQuantity:[[qField text] integerValue]];
     [self doCalculations];
 }
@@ -202,11 +202,11 @@
             }
         }
         [self setPrice: ([self priceRate] * [self quantity]) ];
-        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price] ]];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price] ]];
     } else {
         [self setPriceRate:0.0f];
         [self setPrice:0.0f];
-        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price]]];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price]]];
     }
     
 }

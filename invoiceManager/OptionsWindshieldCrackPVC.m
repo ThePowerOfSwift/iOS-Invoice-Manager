@@ -79,7 +79,7 @@
     
     [self setQuantity:[editingCell quantity]];
     [self setNotesAboutRoom:[editingCell notes]];
-    [priceLabel setText:[NSString stringWithFormat:@"%.02f", [editingCell price]]];
+    [priceLabel setText:[NSString stringWithFormat:@"$%.02f", [editingCell price]]];
     [quantityField setText:[NSString stringWithFormat:@"%d", [editingCell quantity]]];
     
     // restore the notes saved
@@ -138,13 +138,13 @@
 -(void) doCalculations {
     // if quantity is > 0
     if ([self quantity] && [self serviceType]){
-        NSLog(@"GOT HERE? price rate is %f", [self priceRate]);
+        //NSLog(@"GOT HERE? price rate is %f", [self priceRate]);
         [self setPrice: ([self priceRate] * [self quantity]) ];
-        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price] ]];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price] ]];
     } else {
         
         [self setPrice:0.0f];
-        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price]]];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price]]];
     }
     
 }
@@ -157,7 +157,7 @@
         ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
         newCell.serviceType = @"autoSpa";
         newCell.name = [self serviceType];  // '1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..
-        newCell.materialType = [self serviceTypeRestorationID]; // 'intVacuumCar' or intOzoneDeodorizingSUV' or etc..
+        newCell.materialType = [self serviceTypeRestorationID]; // 'firstRockChip', 'secondRockChip', etc
         newCell.quantity = [self quantity];
         newCell.priceRate = [self priceRate];
         newCell.price = [self price];
@@ -177,7 +177,6 @@
         [ADelegate updateSpaWindshieldDataTable:self editType:@"edit" withServiceCell:nil];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
-        // NSLog(@"quantity is %d", [self quantity]);
         [ADelegate updateSpaWindshieldDataTable:self editType:@"cancel" withServiceCell:nil];
     }
 }

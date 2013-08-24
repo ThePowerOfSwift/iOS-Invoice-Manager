@@ -79,7 +79,7 @@
     
     [self setQuantity:[editingCell quantity]];
     [self setNotesAboutRoom:[editingCell notes]];
-    [priceLabel setText:[NSString stringWithFormat:@"%.02f", [editingCell price]]];
+    [priceLabel setText:[NSString stringWithFormat:@"$%.02f", [editingCell price]]];
     [quantityField setText:[NSString stringWithFormat:@"%d", [editingCell quantity]]];
     
     // restore the notes saved
@@ -131,10 +131,10 @@
     // Aluminum Semi-Truck ones first 
     if ([senderID isEqualToString:@"aluminumRimsOneSide"]){
         [self getValueFromFieldWithId:[NSString stringWithFormat:@"%@Value", senderID]];
-        [self setServiceType:@"Rims ( One Side ) (Semi-Truck)"];
+        [self setServiceType:@"Aluminum Rims ( One Side ) (Semi-Truck)"];
     } else if ([senderID isEqualToString:@"aluminumFuelTank"]){
         [self getValueFromFieldWithId:[NSString stringWithFormat:@"%@Value", senderID]];
-        [self setServiceType:@"Fuel Tank ( Mounted ) (Semi-Truck)"];
+        [self setServiceType:@"Aluminum Fuel Tank ( Mounted ) (Semi-Truck)"];
     } else if ([senderID isEqualToString:@"aluminumBatteryUtilityBox"]){
         [self getValueFromFieldWithId:[NSString stringWithFormat:@"%@Value", senderID]];
         [self setServiceType:@"Aluminum Battery/Utility Box (Semi-Truck)"];
@@ -181,11 +181,11 @@
         [self setServiceType:@"Clutch Cover (Snowmobiles)"];
     } else if ([senderID isEqualToString:@"snowmobilesOtherAccess"]){
         [self getValueFromFieldWithId:[NSString stringWithFormat:@"%@Value", senderID]];
-        [self setServiceType:@"Other Accessory"];
+        [self setServiceType:@"Other Accessory (Snowmobiles)"];
         // Boats Recreational
     } else if ([senderID isEqualToString:@"boatsPolishingFT"]){
         [self setPriceRate:50.00f];
-        [self setServiceType:@"Polishing /FT"];
+        [self setServiceType:@"Polishing /FT (Boats)"];
         // Trailers Recreational
     } else if ([senderID isEqualToString:@"trailersOther"]){
         [self getValueFromFieldWithId:[NSString stringWithFormat:@"%@Value", senderID]];
@@ -199,10 +199,10 @@
         [self setServiceType:@"Step Sides (Auto)"];
     } else if ([senderID isEqualToString:@"autoBushGuards"]){
         [self setPriceRate:120.00f];
-        [self setServiceType:@"Bush Guards"];
+        [self setServiceType:@"Bush Guards (Auto)"];
     } else if ([senderID isEqualToString:@"autoToolUtilityBoxes"]){
         [self setPriceRate:100.00f];
-        [self setServiceType:@"Tool/Utility Boxes"];
+        [self setServiceType:@"Tool/Utility Boxes (Auto)"];
     }
     
     [btn setTag:10];
@@ -223,11 +223,11 @@
     if ([self quantity] && [self serviceType]){
         NSLog(@"GOT HERE? price rate is %f", [self priceRate]);
         [self setPrice: ([self priceRate] * [self quantity]) ];
-        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price] ]];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price] ]];
     } else {
         
         [self setPrice:0.0f];
-        [[self priceLabel] setText:[NSString stringWithFormat:@"%.02f", [self price]]];
+        [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price]]];
     }
     
 }
@@ -239,15 +239,14 @@
     if ([[sender restorationIdentifier] isEqualToString:@"save"]){
         ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
         newCell.serviceType = @"autoSpa";
-        newCell.name = [self serviceType];  // 'Interior Vacuum' or 'Fabric Guard' or etc..
-        newCell.itemAttribute = [self carType]; // 'Car' or 'SUV'
+        newCell.name = [self serviceType];  // 'Aluminum Rims ( One Side ) (Semi-Truck)' or 'Aluminum Fuel Tank ( Mounted ) (Semi-Truck)' or etc..
         newCell.materialType = [self serviceTypeRestorationID]; // 'intVacuumCar' or intOzoneDeodorizingSUV' or etc..
         newCell.quantity = [self quantity];
         newCell.priceRate = [self priceRate];
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
-        
-        [ADelegate updateSpaAutoDetailDataTable:self editType:@"add" withServiceCell:newCell];
+
+        [ADelegate updateSpaAluminumMetalDataTable:self editType:@"add" withServiceCell:newCell];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
         
@@ -260,11 +259,11 @@
         [[self editingCell] setPrice:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
         
-        [ADelegate updateSpaAutoDetailDataTable:self editType:@"edit" withServiceCell:nil];
+        [ADelegate updateSpaAluminumMetalDataTable:self editType:@"edit" withServiceCell:nil];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
         NSLog(@"quantity is %d", [self quantity]);
-        [ADelegate updateSpaAutoDetailDataTable:self editType:@"cancel" withServiceCell:nil];
+        [ADelegate updateSpaAluminumMetalDataTable:self editType:@"cancel" withServiceCell:nil];
     }
 }
 
