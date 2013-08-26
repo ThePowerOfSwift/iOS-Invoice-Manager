@@ -19,6 +19,7 @@
 #import "OptionsSemiDetailPVC.h"
 #import "OptionsAluminumMetalPVC.h"
 #import "OptionsWindshieldCrackPVC.h"
+#import "OptionsDuctFurnaceCleanPVC.h"
 
 //#import "ServiceDataCell.h"
 
@@ -28,7 +29,7 @@
 - (void)updateTableSVC:(ServiceTypeViewController *)ServiceTypeViewController;
 @end
 
-@interface ServiceTypeViewController : UIViewController <OptionsWindshieldCrackPVCDelegate, OptionsAluminumMetalPVCDelegate, OptionsAutoDetailPVCDelegate, OptionsSemiDetailPVCDelegate, OptionsSemiSpaPVCdelegate, OptionsAutoSpaPVCdelegate, OptionsPopoverVCDelegate, OptionsMiscellaneousPopoverVCDelegate, OptionsAreaRugsPopoverVCDelegate, OptionsFloodPopoverVCDelegate, OptionsMatressPopoverVCDelegate, OptionsUpholsteryPopoverVCDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface ServiceTypeViewController : UIViewController <OptionsDuctFurnaceCleanPVCDelegate, OptionsWindshieldCrackPVCDelegate, OptionsAluminumMetalPVCDelegate, OptionsAutoDetailPVCDelegate, OptionsSemiDetailPVCDelegate, OptionsSemiSpaPVCdelegate, OptionsAutoSpaPVCdelegate, OptionsPopoverVCDelegate, OptionsMiscellaneousPopoverVCDelegate, OptionsAreaRugsPopoverVCDelegate, OptionsFloodPopoverVCDelegate, OptionsMatressPopoverVCDelegate, OptionsUpholsteryPopoverVCDelegate, UITableViewDataSource, UITableViewDelegate> {
     // delegate vars
     id <SecondViewControllerDelegate> SVCdelegate;
     
@@ -72,7 +73,6 @@
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 //-(IBAction) goBackCUSTOMACTION;
 -(IBAction) removeRow: (id)sender;
--(IBAction) helloWorld: (id) sender;
 -(IBAction) onChoosingType: (id) sender;
 -(IBAction) displayOptionsPopoverVC: (id) sender;
 -(IBAction) gotoNextView;

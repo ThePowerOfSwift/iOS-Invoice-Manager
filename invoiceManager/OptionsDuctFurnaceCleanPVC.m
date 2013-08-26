@@ -163,7 +163,7 @@
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
         
-        [ADelegate updateSpaWindshieldDataTable:self editType:@"add" withServiceCell:newCell];
+        [ADelegate updateDuctFurnaceCleanDataTable:self editType:@"add" withServiceCell:newCell];
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
         
         [[self editingCell] setServiceType:@"autoSpa"];
@@ -174,10 +174,10 @@
         [[self editingCell] setPrice:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
         
-        [ADelegate updateSpaWindshieldDataTable:self editType:@"edit" withServiceCell:nil];
+        [ADelegate updateDuctFurnaceCleanDataTable:self editType:@"edit" withServiceCell:nil];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"cancel"]){
-        [ADelegate updateSpaWindshieldDataTable:self editType:@"cancel" withServiceCell:nil];
+        [ADelegate updateDuctFurnaceCleanDataTable:self editType:@"cancel" withServiceCell:nil];
     }
 }
 

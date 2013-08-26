@@ -50,7 +50,6 @@
 @property (nonatomic, assign) IBOutlet UILabel *priceLabel;
 @property (nonatomic, assign) IBOutlet UIButton *powerVacBtn;
 
--(BOOL)textViewShouldBeginEditing: (UITextView*)textView;
 -(IBAction) saveOrCancel: (id) sender;
 -(IBAction) onClickingBtn: (id) sender;
 -(IBAction) onCustomEditingDone: (id) sender;

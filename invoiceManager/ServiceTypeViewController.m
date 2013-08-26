@@ -346,9 +346,11 @@
         if ([[serviceCell itemAttribute] isEqualToString:@"Room"]){
             float rl = [serviceCell rlength];
             float rw = [serviceCell rwidth];
-            cell.colOne.text = [serviceCell name];
-            cell.colThree.text = [NSString stringWithFormat:@"%0.02f", (rl * rw) ];
-            cell.colTwo.text = [NSString stringWithFormat:@"%0.02f x %0.02f", rl, rw ];
+            //cell.colOne.text = [serviceCell name];
+            //cell.colThree.text = [NSString stringWithFormat:@"%0.02f", (rl * rw) ];
+            //cell.colTwo.text = [NSString stringWithFormat:@"%0.02f x %0.02f", rl, rw ];
+            
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, %.01fx%.01f, Price Rate: $%.02f", [serviceCell name], [serviceCell rlength], [serviceCell rwidth], [serviceCell priceRate]]];
             
             // get the user-inputted rate per sq feet (invoiceMngr ratePerSquareFeet)
             // CGFloat priceUpdate = [invoiceMngr ratePerSquareFeet] * rl * rw;
@@ -376,51 +378,110 @@
             [serviceCell setPriceRate:currentPriceRate];
             [serviceCell setPrice:priceUpdate];
             
-            cell.colFour.text = [NSString stringWithFormat:@"%.02f", [serviceCell price] ];
+            cell.colFour.text = [NSString stringWithFormat:@"$%.02f", [serviceCell price] ];
             //cell.colFour.text = [NSString stringWithFormat:@"%0.02f", ([invoiceMngr ratePerSquareFeet] * rl * rw) ];
         } else if ([[serviceCell itemAttribute] isEqualToString:@"Stairs"]){
-            cell.colOne.text = [serviceCell name];
-            cell.colTwo.text = [NSString stringWithFormat: @"stairs:%u", [serviceCell quantity]];
-            cell.colThree.text = [NSString stringWithFormat: @"landings:%u", [serviceCell quantity2]];
+            //cell.colOne.text = [serviceCell name];
+            //cell.colTwo.text = [NSString stringWithFormat: @"stairs:%u", [serviceCell quantity]];
+            //cell.colThree.text = [NSString stringWithFormat: @"landings:%u", [serviceCell quantity2]];
             //cell.colFour.text = [NSString stringWithFormat:@"%.02f", [serviceCell price]];
+            
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, Stairs: %u, Landings: %u", [serviceCell name], [serviceCell quantity], [serviceCell quantity2] ]];
+            
             CGFloat priceUpdate = [serviceCell quantity] * 5.0f + [serviceCell quantity2] * 10.0f;
             [serviceCell setPrice:priceUpdate];
-            cell.colFour.text = [NSString stringWithFormat:@"%.02f", [serviceCell price]];
+            cell.colFour.text = [NSString stringWithFormat:@"$%.02f", [serviceCell price]];
         }
         
     } else if ([VCServiceNameType isEqualToString:@"mattress"]){                // Mattress service
         cell.colOne.text = [serviceCell name];
-        cell.colTwo.text = [serviceCell vacOrFull];
-        cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
-        cell.colFour.text = [NSString stringWithFormat:@"%0.02f",[serviceCell price]];
+        //cell.colTwo.text = [serviceCell vacOrFull];
+        //cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
+        cell.colFour.text = [NSString stringWithFormat:@"$%0.02f",[serviceCell price]];
+        [cell.colOne setText:[NSString stringWithFormat:@"%@, %@,Quantity: %u", [serviceCell name], [serviceCell vacOrFull], [serviceCell quantity] ]];
+        
+        /*
+         
+         ------------------------------------------- OptionsMatressPopoverVC
+         matress service:
+         name - item name (King size, queen size, double)
+         vacOrFull - (power-vac only | full clean)
+         quantity - ..
+         notes - ..
+         addonBiocide, addonDeodorizer, addonFabricProtector - booleans
+         
+         */
+        
     } else if ([VCServiceNameType isEqualToString:@"upholstery"]){              // Upholstery service
         cell.colOne.text = [serviceCell name];
-        NSString *vacAndMat = [NSString stringWithFormat:@"%@, %@", [serviceCell vacOrFull], [serviceCell materialType]];
-        cell.colTwo.text = vacAndMat;
-        cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
-        cell.colFour.text = [NSString stringWithFormat:@"%0.02f",[serviceCell price]];
-    } else if ([VCServiceNameType isEqualToString:@"floodcleanup"]){              // Flood Cleanup service
-        cell.colOne.text = [serviceCell name];
         //NSString *vacAndMat = [NSString stringWithFormat:@"%@, %@", [serviceCell vacOrFull], [serviceCell materialType]];
-        cell.colTwo.text = [NSString stringWithFormat:@"%f", [serviceCell ratePerHr]];
-        cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
-        cell.colFour.text = [NSString stringWithFormat:@"%0.02f",[serviceCell price]];
-    } else if ([VCServiceNameType isEqualToString:@"miscellaneous"]){
-        // ************ TO BE COMPLETED
-        cell.colOne.text = [serviceCell name];
-        cell.colTwo.text = [NSString stringWithFormat:@"%f",[serviceCell priceRate]];
-        cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
-        cell.colFour.text = [NSString stringWithFormat:@"%0.02f",[serviceCell price]];
-    } else if ([VCServiceNameType isEqualToString:@"areaRugs"]){
-        cell.colOne.text = [serviceCell name];
-        //NSString *vacAndMat = [NSString stringWithFormat:@"%@, %@", [serviceCell vacOrFull], [serviceCell materialType]];
-        cell.colTwo.text = [serviceCell materialType];
+        //cell.colTwo.text = vacAndMat;
         //cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
-        cell.colFour.text = [NSString stringWithFormat:@"%0.02f",[serviceCell price]];
+        [cell.colOne setText:[NSString stringWithFormat:@"%@, %@, %@, Quantity: %u", [serviceCell name], [serviceCell vacOrFull], [serviceCell materialType], [serviceCell quantity]]];
+        cell.colFour.text = [NSString stringWithFormat:@"$%0.02f",[serviceCell price]];
+    } else if ([VCServiceNameType isEqualToString:@"floodcleanup"]){              // Flood Cleanup service
+        //cell.colOne.text = [serviceCell name];
+        //NSString *vacAndMat = [NSString stringWithFormat:@"%@, %@", [serviceCell vacOrFull], [serviceCell materialType]];
+        //cell.colTwo.text = [NSString stringWithFormat:@"%f", [serviceCell ratePerHr]];
+        //cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
+        //[cell.colOne setText:[NSString stringWithFormat:@"%@,%@,%@, %f,Quantity:%u", [serviceCell name], [serviceCell vacOrFull], [serviceCell materialType], [serviceCell ratePerHr], [serviceCell quantity]]];
+        
+        if ([[serviceCell name] isEqualToString:@"Blowers"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, Days: %u, Blowers: %u, Rate/Day: $%.02f", [serviceCell name], [serviceCell quantity], [serviceCell quantity2], [serviceCell ratePerHr]]];
+        } else if ([[serviceCell name] isEqualToString:@"Dehumidifiers"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, Days: %u, Dehumidifiers: %u, Rate/Day: $%.02f", [serviceCell name], [serviceCell quantity], [serviceCell quantity2], [serviceCell ratePerHr] ]];
+        } else if ([[serviceCell name] isEqualToString:@"Biocide Application"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, Square Feet: %u, Rate/Sq.Ft.: $%.02f", [serviceCell name], [serviceCell quantity], [serviceCell ratePerHr]]];
+        } else if ([[serviceCell name] isEqualToString:@"Demolition"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, # of Hours: %u, Rate/hour: $%.02f", [serviceCell name], [serviceCell quantity], [serviceCell ratePerHr]]];
+        } else if ([[serviceCell name] isEqualToString:@"Water Extraction"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, # of Hours: %u, Rate/hour: $%.02f", [serviceCell name], [serviceCell quantity], [serviceCell ratePerHr]]];
+        }
+        
+        cell.colFour.text = [NSString stringWithFormat:@"$%0.02f",[serviceCell price]];
+    } else if ([VCServiceNameType isEqualToString:@"miscellaneous"]){
+        [cell.colOne setText:[NSString stringWithFormat:@"%@, Price Rate: %.02f, Quantity: %u", [serviceCell name], [serviceCell ratePerHr], [serviceCell quantity]]];
+        cell.colFour.text = [NSString stringWithFormat:@"$%0.02f",[serviceCell price]];
+    } else if ([VCServiceNameType isEqualToString:@"areaRugs"]){
+        //cell.colOne.text = [serviceCell name];
+        //NSString *vacAndMat = [NSString stringWithFormat:@"%@, %@", [serviceCell vacOrFull], [serviceCell materialType]];
+        //cell.colTwo.text = [serviceCell materialType];
+        //cell.colThree.text = [NSString stringWithFormat:@"%u",[serviceCell quantity]];
+        
+        [cell.colOne setText:[NSString stringWithFormat:@"%@ area rug, Material: %@, Quantity: %u", [serviceCell name], [serviceCell materialType], [serviceCell quantity]]];
+        
+        cell.colFour.text = [NSString stringWithFormat:@"$%0.02f",[serviceCell price]];
     } else if ([VCServiceNameType isEqualToString:@"autoSpa"]){
-        cell.colOne.text = [serviceCell name];
-        cell.colTwo.text = [serviceCell itemAttribute];
+        //cell.colOne.text = [serviceCell name];
+        //cell.colTwo.text = [serviceCell itemAttribute];
+        
+        if ([[serviceCell vacOrFull] isEqualToString:@"Auto Package"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@ Package, %@, Quantity: %u", [serviceCell name], [serviceCell itemAttribute], [serviceCell quantity]]];
+        } else if ([[serviceCell vacOrFull] isEqualToString:@"Semi Package"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@ Package, %@, Quantity: %u", [serviceCell name], [serviceCell itemAttribute], [serviceCell quantity]]];
+        } else if ([[serviceCell vacOrFull] isEqualToString:@"Auto Detail"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, Quantity: %u", [serviceCell name], [serviceCell quantity]]];
+        } else if ([[serviceCell vacOrFull] isEqualToString:@"Semi Detail"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, Quantity: %u", [serviceCell name], [serviceCell quantity]]];
+        } else if ([[serviceCell vacOrFull] isEqualToString:@"Aluminum Metal"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, Quantity: %u", [serviceCell name], [serviceCell quantity]]];
+        } else if ([[serviceCell vacOrFull] isEqualToString:@"Windshield Crack"]){
+            [cell.colOne setText:[NSString stringWithFormat:@"%@, Quantity: %u", [serviceCell name], [serviceCell quantity]]];
+        }
+        
+        [cell.colFour setText:[NSString stringWithFormat:@"$%.02f", [serviceCell price]]];
+        
     }
+    /*
+    name = package name ('1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..)
+    materialType = service type restoration id (serviceTypeRestorationID)
+    
+    vacOrFull = 'Windshield Crack'
+    quantity = # of cars
+    price = price
+    priceRate = price per one car
+    notes = ..
+    */
     
     // add a delete button for each cell
     [[cell deleteBtn] setCellIndex:indexPath.row];
@@ -445,7 +506,7 @@
             }
         }
         if ([aSubview2 tag] == 20){
-            NSLog(@"SET IT TO BLACK !");
+            // NSLog(@"SET IT TO BLACK !");
             [aSubview2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [aSubview2 setTag:0];
         }
@@ -938,6 +999,27 @@
 }
 
 - (void)updateSpaAluminumMetalDataTable:(OptionsAluminumMetalPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
+    if ([editType isEqualToString:@"add"]){
+        // save popover info into a Service data cell
+        
+        
+        // save the service data cell to an array ( which will be called upon by table view delegate funcs )
+        
+        [optionsVS retain];
+        [cell_arg setPopoverVC:optionsVS];
+        [serviceDataCellArray addObject:cell_arg];
+        dataTableNoOfRows++;                    // increase the data table view's # of rows
+        [dataTable reloadData];                 // reload table view data
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
+    } else if ([editType isEqualToString:@"edit"]){
+        [dataTable reloadData];                 // update table
+        [popover dismissPopoverAnimated:NO];    // dismiss popover
+    } else if ([editType isEqualToString:@"cancel"]){
+        [popover dismissPopoverAnimated:NO];
+    }
+}
+
+- (void)updateDuctFurnaceCleanDataTable:(OptionsDuctFurnaceCleanPVC *)optionsVS editType:(NSString*) editType withServiceCell: (ServiceDataCell*) cell_arg {
     if ([editType isEqualToString:@"add"]){
         // save popover info into a Service data cell
         

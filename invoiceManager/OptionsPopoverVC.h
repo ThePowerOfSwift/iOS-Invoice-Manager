@@ -59,7 +59,6 @@
 @property (nonatomic, assign) IBOutlet UITextField *lengthField, *widthField, *stairsField, *landingsField;
 //@property (nonatomic, assign) IBOutlet UIButton *saveOrEditBtn;
 
--(BOOL)textViewShouldBeginEditing: (UITextView*)textView;
 -(IBAction) saveOrCancel: (id) sender;
 -(IBAction) onClickingBtn: (id) sender;
 -(IBAction) onCustomEditingDone: (id) sender;

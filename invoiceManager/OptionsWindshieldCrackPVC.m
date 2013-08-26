@@ -161,6 +161,7 @@
         newCell.quantity = [self quantity];
         newCell.priceRate = [self priceRate];
         newCell.price = [self price];
+        newCell.vacOrFull = @"Windshield Crack";
         newCell.notes = [self notesAboutRoom];
         
         [ADelegate updateSpaWindshieldDataTable:self editType:@"add" withServiceCell:newCell];
@@ -173,6 +174,7 @@
         [[self editingCell] setPriceRate:[self priceRate]];
         [[self editingCell] setPrice:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
+        [[self editingCell] setVacOrFull:@"Windshield Crack"];
         
         [ADelegate updateSpaWindshieldDataTable:self editType:@"edit" withServiceCell:nil];
         

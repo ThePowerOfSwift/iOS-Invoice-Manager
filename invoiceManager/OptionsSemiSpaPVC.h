@@ -50,11 +50,7 @@
 @property (nonatomic, assign) IBOutlet UILabel *packageTypeLabel, *priceLabel;
 @property (nonatomic, assign) IBOutlet UIImageView *selectedCarBg;
 
--(BOOL)textViewShouldBeginEditing: (UITextView*)textView;
 -(IBAction) saveOrCancel: (id) sender;
--(IBAction) onClickingBtn: (id) sender;
--(IBAction) onCustomEditingDone: (id) sender;
--(IBAction) saveAddon:(id) sender;
 -(IBAction) onChoosingPackageType:(id) sender;
 -(IBAction) onChoosingCarType: (id) sender;
 -(IBAction) quantityChanged: (id) sender;

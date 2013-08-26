@@ -245,7 +245,8 @@
         newCell.priceRate = [self priceRate];
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
-
+        newCell.vacOrFull = @"Aluminum Metal";
+        
         [ADelegate updateSpaAluminumMetalDataTable:self editType:@"add" withServiceCell:newCell];
         
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
@@ -258,6 +259,7 @@
         [[self editingCell] setPriceRate:[self priceRate]];
         [[self editingCell] setPrice:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
+        [[self editingCell] setVacOrFull:@"Aluminum Metal"];
         
         [ADelegate updateSpaAluminumMetalDataTable:self editType:@"edit" withServiceCell:nil];
         

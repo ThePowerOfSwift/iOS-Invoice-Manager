@@ -184,14 +184,14 @@
             //pricePerItem = 30.0f;
             rate_price = [[priceRateField text] floatValue];
             quantity = [[quantityField text] integerValue];     // # of days
-            quantity2 = [[quantityField2 text] integerValue];   // # of blowers/humidifiers
+            quantity2 = [[quantityField2 text] integerValue];   // # of blowers
             price = rate_price * quantity * quantity2;
             //rate_price = 30.0f;
         } else if ([itemName isEqualToString:@"Dehumidifiers"]){
             //pricePerItem = 100.0f;
             rate_price = [[priceRateField text] floatValue];
             quantity = [[quantityField text] integerValue];     // # of days
-            quantity2 = [[quantityField2 text] integerValue];   // # of blowers/humidifiers
+            quantity2 = [[quantityField2 text] integerValue];   // # of dehumidifiers
             price = rate_price * quantity * quantity2;
         } else if ([itemName isEqualToString:@"Biocide Application"]){
             rate_price = [[priceRateField text] floatValue];

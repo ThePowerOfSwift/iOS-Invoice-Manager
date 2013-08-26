@@ -224,6 +224,7 @@
         newCell.priceRate = [self priceRate];
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
+        newCell.vacOrFull = @"Auto Package";
         
         NSLog(@"SENT UPDATE ?");
         [ASVCDelegate updateAutoSpaDataTable:self editType:@"add" withServiceCell:newCell];
@@ -237,6 +238,7 @@
         [[self editingCell] setPriceRate:[self priceRate]];
         [[self editingCell] setPrice:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
+        [[self editingCell] setVacOrFull:@"Auto Package"];
         
         [ASVCDelegate updateAutoSpaDataTable:self editType:@"edit" withServiceCell:nil];
         

@@ -50,7 +50,7 @@
     }
 
     // set initial selected options
-    [self setCarType:@"dayCab"];
+    [self setCarType:@"Day Cab"];
 }
 
 - (void)viewDidLoad
@@ -78,9 +78,9 @@
                 NSLog(@"Attribute is %@", [editingCell itemAttribute]);
                 if ([[btn restorationIdentifier] isEqualToString:[editingCell itemAttribute]]){
                     [btn setTag:10];
-                    if ([[editingCell itemAttribute] isEqualToString:@"dayCab"]){
+                    if ([[editingCell itemAttribute] isEqualToString:@"Day Cab"]){
                         [selectedCarBg setFrame:CGRectMake(75.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
-                    } else if ([[editingCell itemAttribute] isEqualToString:@"sleeperUnit"]){
+                    } else if ([[editingCell itemAttribute] isEqualToString:@"Sleeper Unit"]){
                         [selectedCarBg setFrame:CGRectMake(468.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
                     }
                 }
@@ -89,13 +89,13 @@
     }
     
     [packageTypeLabel setText:[editingCell name]];
-    if ([[editingCell name] isEqualToString:@"completeExtWash"]){
+    if ([[editingCell name] isEqualToString:@"Complete Exterior Wash"]){
         [packageTypeLabel setText:@"Complete Exterior Wash"];
-    } else if ([[editingCell name] isEqualToString:@"completeExtDetail"]){
+    } else if ([[editingCell name] isEqualToString:@"Complete Exterior Detail"]){
         [packageTypeLabel setText:@"Complete Exterior Detail"];
-    } else if ([[editingCell name] isEqualToString:@"completeIntDetail"]){
+    } else if ([[editingCell name] isEqualToString:@"Complete Interior Detail"]){
         [packageTypeLabel setText:@"Complete Interior Detail"];
-    } else if ([[editingCell name] isEqualToString:@"completeFullDetail"]){
+    } else if ([[editingCell name] isEqualToString:@"Complete Full Detail"]){
         [packageTypeLabel setText:@"Complete Full Detail"];
     }
     
@@ -108,16 +108,16 @@
 -(IBAction) onChoosingPackageType:(id) sender {
     if ([[sender restorationIdentifier] isEqualToString:@"completeExtWash"]){
         [packageTypeLabel setText:@"Complete Exterior Wash"];
-        [self setPackageType:@"completeExtWash"];
+        [self setPackageType:@"Complete Exterior Wash"];
     } else if ([[sender restorationIdentifier] isEqualToString:@"completeExtDetail"]){
         [packageTypeLabel setText:@"Complete Exterior Detail"];
-        [self setPackageType:@"completeExtDetail"];
+        [self setPackageType:@"Complete Exterior Detail"];
     } else if ([[sender restorationIdentifier] isEqualToString:@"completeIntDetail"]){
         [packageTypeLabel setText:@"Complete Interior Detail"];
-        [self setPackageType:@"completeIntDetail"];
+        [self setPackageType:@"Complete Interior Detail"];
     } else if ([[sender restorationIdentifier] isEqualToString:@"completeFullDetail"]){
         [packageTypeLabel setText:@"Complete Full Detail"];
-        [self setPackageType:@"completeFullDetail"];
+        [self setPackageType:@"Complete Full Detail"];
     }
     [self doCalculations];
 }
@@ -145,10 +145,10 @@
     
     if ([senderID isEqualToString:@"dayCab"]){
         [selectedCarBg setFrame:CGRectMake(75.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
-        [self setCarType:@"dayCab"];
+        [self setCarType:@"Day Cab"];
     } else if ([senderID isEqualToString:@"sleeperUnit"]){
         [selectedCarBg setFrame:CGRectMake(468.0f, selectedCarBg.frame.origin.y, selectedCarBg.frame.size.width, selectedCarBg.frame.size.height)];
-        [self setCarType:@"sleeperUnit"];
+        [self setCarType:@"Sleeper Unit"];
     }
     [btn setTag:10];
     //NSLog(@"%@ has tag 10 !", );
@@ -158,7 +158,6 @@
 
 -(IBAction) quantityChanged: (id) sender {
     UITextField* qField = (UITextField*) sender;
-    NSLog(@"the quantity is %ld", (long)[[qField text] integerValue]);
     [self setQuantity:[[qField text] integerValue]];
     [self doCalculations];
 }
@@ -167,27 +166,27 @@
     // if quantity is > 0
     if ([self quantity] && [self packageType] && [self carType]){
         if ([[self packageType] isEqualToString:@"completeExtWash"]){
-            if ([[self carType] isEqualToString:@"dayCab"]){
+            if ([[self carType] isEqualToString:@"Day Cab"]){
                 [self setPriceRate:299.95f];
-            } else if ([[self carType] isEqualToString:@"sleeperUnit"]){
+            } else if ([[self carType] isEqualToString:@"Sleeper Unit"]){
                 [self setPriceRate:399.95f];
             }
         } else if ([[self packageType] isEqualToString:@"completeExtDetail"]){
-            if ([[self carType] isEqualToString:@"dayCab"]){
+            if ([[self carType] isEqualToString:@"Day Cab"]){
                 [self setPriceRate:349.95f];
-            } else if ([[self carType] isEqualToString:@"sleeperUnit"]){
+            } else if ([[self carType] isEqualToString:@"Sleeper Unit"]){
                 [self setPriceRate:499.95f];
             }
         } else if ([[self packageType] isEqualToString:@"completeIntDetail"]){
-            if ([[self carType] isEqualToString:@"dayCab"]){
+            if ([[self carType] isEqualToString:@"Day Cab"]){
                 [self setPriceRate:349.95f];
-            } else if ([[self carType] isEqualToString:@"sleeperUnit"]){
+            } else if ([[self carType] isEqualToString:@"Sleeper Unit"]){
                 [self setPriceRate:499.95f];
             }
         } else if ([[self packageType] isEqualToString:@"completeFullDetail"]){
-            if ([[self carType] isEqualToString:@"dayCab"]){
+            if ([[self carType] isEqualToString:@"Day Cab"]){
                 [self setPriceRate:599.95f];
-            } else if ([[self carType] isEqualToString:@"sleeperUnit"]){
+            } else if ([[self carType] isEqualToString:@"Sleeper Unit"]){
                 [self setPriceRate:899.95f];
             }
         }
@@ -214,6 +213,7 @@
         newCell.priceRate = [self priceRate];
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
+        newCell.vacOrFull = @"Semi Package";
         
         [SSVCDelegate updateSemiSpaDataTable:self editType:@"add" withServiceCell:newCell];
         
@@ -226,6 +226,7 @@
         [[self editingCell] setPriceRate:[self priceRate]];
         [[self editingCell] setPrice:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
+        [[self editingCell] setVacOrFull:@"Semi Package"];
         
         [SSVCDelegate updateSemiSpaDataTable:self editType:@"edit" withServiceCell:nil];
         

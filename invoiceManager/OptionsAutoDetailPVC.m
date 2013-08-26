@@ -318,6 +318,7 @@
         newCell.priceRate = [self priceRate];
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
+        newCell.vacOrFull = @"Auto Detail";
         
         [ADelegate updateSpaAutoDetailDataTable:self editType:@"add" withServiceCell:newCell];
         
@@ -331,6 +332,7 @@
         [[self editingCell] setPriceRate:[self priceRate]];
         [[self editingCell] setPrice:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
+        [[self editingCell] setVacOrFull:@"Auto Detail"];
         
         [ADelegate updateSpaAutoDetailDataTable:self editType:@"edit" withServiceCell:nil];
         

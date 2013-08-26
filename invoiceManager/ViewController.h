@@ -38,7 +38,6 @@
 
 -(IBAction) textFieldDidEndEditing:(UITextField *)textField;
 -(IBAction) onTouchDownIcon;
--(IBAction) onChoosingGreenProducts: (id) sender;
 -(IBAction) gotoNextView;
 -(IBAction) gotoLastView;
 

@@ -158,7 +158,7 @@
 
 -(IBAction) createInvoice {
     
-    float subtotal = 0;
+    //float subtotal = 0;
     InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
     
     CGFloat posX = 53.0;
@@ -188,7 +188,7 @@
     //[self drawImage:@"invoice_image" withRect:CGRectMake(40.0, 40.0, 174.0f, 35.0f)];
     [self drawText:[NSString stringWithFormat:@"Invoice "] inFrame:CGRectMake(39.0, 132.0, 300.0f, 100.0f) withFontSize:60.0];
     
-    CGFloat fontSize = 33.0f;
+    // CGFloat fontSize = 33.0f;
     //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(0.0, 100.0, 300.0f, 100.0f) withFontSize:fontSize];
     //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(200.0, 1115.0, 300.0f, 100.0f) withFontSize:35.0f];
     //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(400.0, 1114.0, 300.0f, 100.0f) withFontSize:35.0f];
@@ -845,7 +845,6 @@
 }
 
 - (void)updateDiscount:(InvoiceDiscountVC *)optionsVS updateType:(NSString*)update_type discountType: (NSString *) discountType_arg amount: (float) amount_arg forService: (NSString*) service_name_arg {
-    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
     
     if ([update_type isEqualToString:@"save"]){
         
@@ -1217,7 +1216,7 @@
 //==================================== FOR SIGNATURE CAPTURE ABOVE
 
 -(IBAction) gotoLastView {
-    NSArray *viewsToRemove = [mainView subviews];
+    //NSArray *viewsToRemove = [mainView subviews];
     for (UIView *v in invoiceSubviews){
         [v removeFromSuperview];
     }

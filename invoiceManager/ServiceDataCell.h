@@ -41,6 +41,31 @@
  price = full price ( quantity * price per item, which is hardcoded )
  notes - ..
  
+ ------------------------------------------- OptionsFloodPopoverVC:
+ flood service:
+ name = item name (blowers, dehumidifiers, Water Extraction, etc)
+ 
+ if item name is 'blowers':
+ ratePerHr = price rate per day
+ quantity = # of days
+ quantity2 = # of blowers
+ if item name is 'dehumifiers':
+ ratePerHr = price rate per day
+ quantity = # of days
+ quantity2 = # of dehumidifiers
+ if item name is 'biocide application':
+ ratePerHr = price rate per sq feet ($/sq feet)
+ quantity = square feet
+ if item name is 'demolition':
+ ratePerHr = price rate per hour ($/hr)
+ quantity = # of hours
+ if item name is 'water extraction':
+ ratePerHr = price rate per hour ($/hr)
+ quantity = # of hours
+ 
+ price = full price ( quantity * price per item, which is hardcoded )
+ notes - ..
+ 
  -------------------------------------------OptionsMiscellaneousPopoverVC:
  
  miscellaneous:
@@ -60,6 +85,8 @@
  auto spa - auto package:
  name = package name ( Bronze, Silver, Gold, Platinum )
  itemAttribute = car type ( SUV, Compact, Midsize )
+ 
+ vacOrFull = 'Auto Package'
  quantity = # of cars
  price = price
  priceRate = price per one car
@@ -69,6 +96,8 @@
  auto spa - semi package:
  name = package name ( 'Complete Exterior Wash', 'Complete Exterior Detail', etc )
  itemAttribute = car type ( SUV, Compact, Midsize )
+ 
+ vacOrFull = 'Semi Package'
  quantity = # of cars
  price = price
  priceRate = price per one car
@@ -80,6 +109,7 @@
  itemAttribute = car type ( Car, SUV )
  materialType = service type restoration id (serviceTypeRestorationID) ('Interior Vacuum' or 'Fabric Guard' or etc..)
  
+ vacOrFull = 'Auto Detail'
  quantity = # of cars
  price = price
  priceRate = price per one car
@@ -91,6 +121,7 @@
  itemAttribute = car type ( 'Day Cab' or 'Sleeper Unit' )
  materialType = service type restoration id (serviceTypeRestorationID)
  
+ vacOrFull = 'Semi Detail'
  quantity = # of cars
  price = price
  priceRate = price per one car
@@ -101,6 +132,7 @@
  name = package name ( 'Exterior Wash (Day Cab)' or 'Engine Shampoo (Sleeper Unit)' or etc.. )
  materialType = service type restoration id (serviceTypeRestorationID)
  
+ vacOrFull = 'Aluminum Metal'
  quantity = # of cars
  price = price
  priceRate = price per one car
@@ -111,6 +143,7 @@
  name = package name ('1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..)
  materialType = service type restoration id (serviceTypeRestorationID)
  
+ vacOrFull = 'Windshield Crack'
  quantity = # of cars
  price = price
  priceRate = price per one car

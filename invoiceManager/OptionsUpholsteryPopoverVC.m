@@ -14,6 +14,7 @@
 
 @implementation OptionsUpholsteryPopoverVC
 
+@synthesize powerVacBtn;
 @synthesize UVCDelegate;
 @synthesize notes, vacOrFull, materialType, quantity, price, itemName;
 @synthesize priceLabel;

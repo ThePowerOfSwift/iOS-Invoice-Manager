@@ -45,8 +45,6 @@
 //@property (nonatomic, assign) IBOutlet UITextView *notesField;
 @property (nonatomic, assign) IBOutlet UITextField *itemNameField, *quantityField, *pricePerItemField;
 
--(BOOL)textViewShouldBeginEditing: (UITextView*)textView;
 -(IBAction) saveOrCancel: (id) sender;
--(IBAction) onClickingBtn: (id) sender;
 -(IBAction) onCustomEditingDone: (id) sender;
 @end

@@ -15,11 +15,11 @@
 @end
 
 @interface SettingsPopoverVC : UIViewController {
-    id <SettingsPopoverVCDelegate> settingsVCdelegate;
+    //id <SettingsPopoverVCDelegate> settingsVCdelegate;
     
 }
 
-@property (nonatomic, assign) id <SettingsPopoverVCDelegate> settingsVCdelegate;
+//@property (nonatomic, assign) id <SettingsPopoverVCDelegate> settingsVCdelegate;
 
 -(IBAction)selectCompany:(id)sender;
 

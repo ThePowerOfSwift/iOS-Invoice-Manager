@@ -81,8 +81,6 @@
 -(IBAction)displaySigPopover: (id) sender;
 -(IBAction) makeMeAPDF;
 -(IBAction) sendMail;
-- (void) drawImage: (NSString*) image_name withRect: (CGRect) rect_arg withFontSize: (CGFloat) fontSize_arg;
-- (IBAction)pencilPressed:(id)sender;
 -(IBAction) gotoLastView;
 -(IBAction) createInvoice;
 -(IBAction) displayDiscountPopover: (id) sender;

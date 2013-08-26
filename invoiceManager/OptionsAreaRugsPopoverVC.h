@@ -55,7 +55,6 @@
 -(IBAction) saveOrCancel: (id) sender;
 -(IBAction) onClickingBtn: (id) sender;
 -(IBAction) onSelectingType:(id)sender;
--(BOOL) textViewShouldBeginEditing: (UITextView*)textView;
 -(IBAction) saveAddon:(id)sender;
 -(IBAction)onCustomEditingDone:(id)sender;
 
