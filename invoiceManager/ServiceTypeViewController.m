@@ -291,6 +291,8 @@
         
         // change the text of the iboutlet addServiceLabel
         [addServiceLabel setText:@"Add Auto Package"];
+    } else if ([VCServiceNameType isEqualToString:@"ductFurnaceCleaning"]){
+        NSLog(@"HELLOO WORLDDD !");
     }
     
 }

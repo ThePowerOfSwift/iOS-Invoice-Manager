@@ -48,6 +48,7 @@
 		893A488C1754905E00CD1209 /* btnBackground5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 893A488B1754905E00CD1209 /* btnBackground5@2x.png */; };
 		893A488F1754906600CD1209 /* btnBackground5Sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 893A488D1754906600CD1209 /* btnBackground5Sel.png */; };
 		893A48901754906600CD1209 /* btnBackground5Sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 893A488E1754906600CD1209 /* btnBackground5Sel@2x.png */; };
+		893D68A217CA8F2E00C0F37E /* OptionsDuctFurnaceCleanPVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 893D68A117CA8F2E00C0F37E /* OptionsDuctFurnaceCleanPVC.m */; };
 		8946358D174421DE00CF60B8 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8946358C174421DE00CF60B8 /* CustomTableViewCell.m */; };
 		8952344E17C80A6700201FFC /* OptionsWindshieldCrackPVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8952344D17C80A6700201FFC /* OptionsWindshieldCrackPVC.m */; };
 		89674AD617572AB600461BC3 /* SignaturePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89674AD517572AB600461BC3 /* SignaturePopoverVC.m */; };
@@ -241,6 +242,8 @@
 		893A488B1754905E00CD1209 /* btnBackground5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnBackground5@2x.png"; sourceTree = "<group>"; };
 		893A488D1754906600CD1209 /* btnBackground5Sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnBackground5Sel.png; sourceTree = "<group>"; };
 		893A488E1754906600CD1209 /* btnBackground5Sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnBackground5Sel@2x.png"; sourceTree = "<group>"; };
+		893D68A017CA8F2E00C0F37E /* OptionsDuctFurnaceCleanPVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsDuctFurnaceCleanPVC.h; sourceTree = "<group>"; };
+		893D68A117CA8F2E00C0F37E /* OptionsDuctFurnaceCleanPVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsDuctFurnaceCleanPVC.m; sourceTree = "<group>"; };
 		8946358B174421DE00CF60B8 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		8946358C174421DE00CF60B8 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		8952344C17C80A6700201FFC /* OptionsWindshieldCrackPVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsWindshieldCrackPVC.h; sourceTree = "<group>"; };
@@ -454,6 +457,8 @@
 		892995A317AAE7A200C61483 /* duct and furnace cleaning popover(s) */ = {
 			isa = PBXGroup;
 			children = (
+				893D68A017CA8F2E00C0F37E /* OptionsDuctFurnaceCleanPVC.h */,
+				893D68A117CA8F2E00C0F37E /* OptionsDuctFurnaceCleanPVC.m */,
 			);
 			name = "duct and furnace cleaning popover(s)";
 			sourceTree = "<group>";
@@ -1059,6 +1064,7 @@
 				898E35DA17C73313006B2EFC /* OptionsSemiDetailPVC.m in Sources */,
 				896D045B17C8059E000FBDB6 /* OptionsAluminumMetalPVC.m in Sources */,
 				8952344E17C80A6700201FFC /* OptionsWindshieldCrackPVC.m in Sources */,
+				893D68A217CA8F2E00C0F37E /* OptionsDuctFurnaceCleanPVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

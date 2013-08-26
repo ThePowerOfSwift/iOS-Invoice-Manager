@@ -391,7 +391,7 @@
             [self.navigationController pushViewController:[invMngr invoiceVC] animated:YES];
         }
         
-    }else if ([[invMngr currCompanyName] isEqualToString:@"ductFurnaceCleaning"]){
+    } else if ([[invMngr currCompanyName] isEqualToString:@"ductFurnaceCleaning"]){
         
         if (![invMngr existsServiceName:@"ductFurnaceCleaning"]) {
             // create service item
