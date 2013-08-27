@@ -14,10 +14,10 @@
 @implementation OptionsDuctFurnaceCleanPVC
 
 @synthesize ADelegate;
-@synthesize scrollViewer;
+@synthesize scrollViewer, furnacesScroller;
 @synthesize price, notesAboutRoom, priceRate, priceLabel, serviceType, serviceTypeRestorationID;
 @synthesize quantity;
-@synthesize quantityField;
+@synthesize quantityField, numberOfFurnacesField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,7 +52,11 @@
 	// Do any additional setup after loading the view.
     
     [scrollViewer setScrollEnabled:YES];
-    [scrollViewer setContentSize:CGSizeMake(614, 2540)];
+    [scrollViewer setContentSize:CGSizeMake(614, 6540)];
+    
+    [furnacesScroller setScrollEnabled:YES];
+    [furnacesScroller setContentSize:CGSizeMake(358, 564)];
+    [furnacesScroller flashScrollIndicators];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,6 +89,27 @@
     // restore the notes saved
     [notesField setText:[editingCell notes]];
 }
+
+// tag = 20 for the selected one, tag = 19 for the unselected ones
+-(IBAction) onChoosingNumberOfFurnaces: (id) sender {
+    // set last selected back to normal
+    for (UIButton *aSubview in scrollViewer.subviews){
+        if ([aSubview isKindOfClass:[UIButton class]]){
+            if ([aSubview tag] == 20){
+                [aSubview setTag:19];
+                [aSubview setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            }
+        }
+    }
+    
+    UIButton *btn = (UIButton*)sender;
+    NSString *senderID = [btn restorationIdentifier];
+    [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+
+    
+}
+
+
 
 // only supports UIButton's right now
 -(IBAction) onChoosingServiceType: (id) sender {

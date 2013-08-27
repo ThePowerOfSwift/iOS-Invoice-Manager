@@ -731,6 +731,17 @@
         }
 
         [popover presentPopoverFromRect:addServiceBtn.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else if ([VCServiceNameType isEqualToString:@"ductFurnaceCleaning"]){
+        OptionsDuctFurnaceCleanPVC *optionsVC = (OptionsDuctFurnaceCleanPVC*) [storyboard instantiateViewControllerWithIdentifier:@"OptionsDuctFurnaceCleanPVC"];
+        
+        if (popover){
+            [popover setContentViewController:optionsVC];
+        }else {
+            popover = [[UIPopoverController alloc] initWithContentViewController:optionsVC];
+        }
+        
+        optionsVC.ADelegate = self;     // set the popover's delegate to this ui vc (IMPORTANT!)
+        [popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     
 }

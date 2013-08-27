@@ -29,9 +29,9 @@
     
     // outlets
     IBOutlet UILabel *priceLabel;
-    IBOutlet UITextField *quantityField;
+    IBOutlet UITextField *quantityField, *numberOfFurnacesField;
     
-    IBOutlet UIScrollView *scrollViewer;
+    IBOutlet UIScrollView *scrollViewer, *furnacesScroller;
 }
 
 @property (nonatomic, assign) id <OptionsDuctFurnaceCleanPVCDelegate> ADelegate;
@@ -40,8 +40,8 @@
 @property (assign, readwrite) float price, priceRate;
 @property (assign, readwrite) NSString *serviceType, *serviceTypeRestorationID, *notesAboutRoom;
 
-@property (assign, nonatomic) IBOutlet UIScrollView *scrollViewer;
-@property (nonatomic, assign) IBOutlet UITextField *quantityField;
+@property (assign, nonatomic) IBOutlet UIScrollView *scrollViewer, *furnacesScroller;
+@property (nonatomic, assign) IBOutlet UITextField *quantityField, *numberOfFurnacesField;
 @property (nonatomic, assign) IBOutlet UILabel *priceLabel;
 
 -(IBAction) saveOrCancel: (id) sender;

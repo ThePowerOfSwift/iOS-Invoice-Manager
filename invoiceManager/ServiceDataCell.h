@@ -174,6 +174,7 @@
     
     NSInteger noOfHours;
     float ratePerHr;
+    NSMutableArray* attributesList;
     
     UIViewController* popoverVC;    // keep track of each UIViewController so it can be displayed for 'editing' purposes
 }
@@ -185,6 +186,7 @@
 @property (copy, readwrite) NSString *name, *materialType, *itemAttribute;
 @property (copy, readwrite) NSString *notes;
 @property (assign, readwrite) float rlength, rwidth, price, ratePerHr, priceRate;
+@property (assign, readwrite) NSMutableArray *attributesList;
 
 @property (assign, readwrite) UIViewController* popoverVC;
 @property (copy) NSString *vacOrFull;
