@@ -26,26 +26,39 @@
     NSString *notesAboutRoom;
     float price, priceRate;
     NSInteger quantity;
+    float houseAreaPrice, houseArea;   // 'houseAreaPrice' holds the value of the house area
+    NSInteger numberOfFurnaces;
+    BOOL brushCleanAddon;
     
     // outlets
     IBOutlet UILabel *priceLabel;
-    IBOutlet UITextField *quantityField, *numberOfFurnacesField;
+    IBOutlet UITextField *quantityField, *numberOfFurnacesField, *houseAreaField, *houseAreaCustomPrice;
     
+    IBOutlet UIButton *houseAreaOneBtn, *houseAreaTwoBtn, *houseAreaThreeBtn, *houseAreaFourBtn, *numberOfFurnacesCustomBtn;
     IBOutlet UIScrollView *scrollViewer, *furnacesScroller;
 }
 
 @property (nonatomic, assign) id <OptionsDuctFurnaceCleanPVCDelegate> ADelegate;
 
 @property (assign, readwrite) NSInteger quantity;
-@property (assign, readwrite) float price, priceRate;
+@property (assign, readwrite) float price, priceRate, houseArea, houseAreaPrice;
 @property (assign, readwrite) NSString *serviceType, *serviceTypeRestorationID, *notesAboutRoom;
+@property (assign, readwrite) NSInteger numberOfFurnaces;
+@property (assign, readwrite) BOOL brushCleanAddon;
 
 @property (assign, nonatomic) IBOutlet UIScrollView *scrollViewer, *furnacesScroller;
-@property (nonatomic, assign) IBOutlet UITextField *quantityField, *numberOfFurnacesField;
+@property (nonatomic, assign) IBOutlet UITextField *quantityField, *numberOfFurnacesField, *houseAreaField, *houseAreaCustomPrice;
 @property (nonatomic, assign) IBOutlet UILabel *priceLabel;
+@property (nonatomic, assign) IBOutlet UIButton *houseAreaOneBtn, *houseAreaTwoBtn, *houseAreaThreeBtn, *houseAreaFourBtn, *numberOfFurnacesCustomBtn;
 
 -(IBAction) saveOrCancel: (id) sender;
 -(IBAction) onChoosingServiceType: (id) sender;
 -(IBAction) quantityChanged: (id) sender;
+-(IBAction) addFurnace: (id) sender;
+-(IBAction) onChangeHouseAreaField: (id) sender;
+-(IBAction) onChoosingHouseAreaBtn: (id) sender;
+-(IBAction) onChoosingNumberOfFurnaces: (id) sender;
+-(IBAction) onChangeNumberOfFurnacesField: (id) sender;
+-(IBAction)onChoosingAnyBtn:(id)sender;
 
 @end

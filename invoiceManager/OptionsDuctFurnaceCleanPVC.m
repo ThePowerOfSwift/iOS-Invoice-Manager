@@ -16,8 +16,12 @@
 @synthesize ADelegate;
 @synthesize scrollViewer, furnacesScroller;
 @synthesize price, notesAboutRoom, priceRate, priceLabel, serviceType, serviceTypeRestorationID;
-@synthesize quantity;
-@synthesize quantityField, numberOfFurnacesField;
+@synthesize quantity, houseArea, houseAreaPrice;
+@synthesize quantityField, numberOfFurnacesField, houseAreaField, houseAreaCustomPrice;
+@synthesize numberOfFurnaces;
+@synthesize houseAreaOneBtn, houseAreaTwoBtn, houseAreaThreeBtn, houseAreaFourBtn;
+@synthesize numberOfFurnacesCustomBtn;
+@synthesize brushCleanAddon;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,6 +61,9 @@
     [furnacesScroller setScrollEnabled:YES];
     [furnacesScroller setContentSize:CGSizeMake(358, 564)];
     [furnacesScroller flashScrollIndicators];
+    
+    [self setNumberOfFurnaces:1];
+    [self setBrushCleanAddon:FALSE];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,6 +97,7 @@
     [notesField setText:[editingCell notes]];
 }
 
+// action for choosing a number of furnaces, either selecting a button or writing a number in the custom textfield
 // tag = 20 for the selected one, tag = 19 for the unselected ones
 -(IBAction) onChoosingNumberOfFurnaces: (id) sender {
     // set last selected back to normal
@@ -104,12 +112,134 @@
     
     UIButton *btn = (UIButton*)sender;
     NSString *senderID = [btn restorationIdentifier];
-    [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
-
     
+    [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+    [sender setTag:20];
+    
+    if ([[sender restorationIdentifier] isEqualToString:@"oneFurnace"]){
+        [self setNumberOfFurnaces:1];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"twoFurnace"]){
+        [self setNumberOfFurnaces:2];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"threeFurnace"]){
+        [self setNumberOfFurnaces:3];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"fourFurnace"]){
+        [self setNumberOfFurnaces:[[numberOfFurnacesField text] integerValue]];
+    }
+    
+    NSLog(@"number of furnaces is %u", [self numberOfFurnaces]);
 }
 
+-(IBAction) onChangeNumberOfFurnacesField: (id) sender {
+    for (UIButton *aSubview in scrollViewer.subviews){
+        if ([aSubview isKindOfClass:[UIButton class]]){
+            if ([aSubview tag] == 20){
+                [aSubview setTag:19];
+                [aSubview setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            }
+        }
+    }
+     
+    [numberOfFurnacesCustomBtn setTag:20];
+    [numberOfFurnacesCustomBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+    [self setNumberOfFurnaces:[[numberOfFurnacesField text] integerValue]];
+    
+    NSLog(@"number of furnaces is %u", [self numberOfFurnaces]);
+}
 
+// brush clean addon button (if selected, tag = 9, if not selected, tag = 8)
+-(IBAction)onChoosingAnyBtn:(id)sender {
+    if ([[sender restorationIdentifier] isEqualToString:@"brushCleanBtn"]){
+        if ([sender tag] == 8){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:9];
+            [self setBrushCleanAddon:TRUE];
+        } else if ([sender tag] == 9){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:8];
+            [self setBrushCleanAddon:FALSE];
+        }
+    }
+}
+
+// House Area, selecting a button (price), entering a custom price, or entering the house's square feet ( which will auto select )
+-(IBAction) onChoosingHouseAreaBtn: (id) sender {
+    if ([[sender restorationIdentifier] isEqualToString:@"houseAreaOne"]){
+        
+        [self setHouseAreaPrice:249.95f];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"houseAreaTwo"]){
+        [self setHouseAreaPrice:279.95f];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"houseAreaThree"]){
+        [self setHouseAreaPrice:309.95f];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"houseAreaFour"]){
+        [self setHouseAreaPrice:[[houseAreaCustomPrice text] floatValue]];
+    }
+    
+    [houseAreaOneBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+    [houseAreaTwoBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+    [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+    [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+    
+    [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+    NSLog(@"THE PRICE IS %f", [self houseAreaPrice]);
+}
+
+-(IBAction) onChangeHouseAreaField: (id) sender {
+    UITextField *houseAreaCustomField = (UITextField *) sender;
+    
+    if ([[sender restorationIdentifier] isEqualToString:@"houseAreaSquareFeet"]){
+        [self setHouseArea:[[houseAreaCustomField text] floatValue]];
+        
+        if ([self houseArea] < 1600){
+            [houseAreaOneBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [houseAreaTwoBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [self setHouseAreaPrice:249.95f];
+        } else if ( ([self houseArea] > 1599) && ([self houseArea] < 2300)){
+            [houseAreaOneBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [houseAreaTwoBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [self setHouseAreaPrice:279.95f];
+        } else if ([self houseArea] > 2299){
+            [houseAreaOneBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [houseAreaTwoBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [self setHouseAreaPrice:309.95f];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"houseAreaCustomPrice"]){
+        [houseAreaOneBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+        [houseAreaTwoBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+        [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+        [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+        [self setHouseAreaPrice:[[houseAreaCustomPrice text] floatValue]];
+    }
+    NSLog(@"THE PRICE IS %f", [self houseAreaPrice]);
+}
+
+-(IBAction) addFurnace: (id) sender {
+    [self setNumberOfFurnaces:([self numberOfFurnaces] + 1)];
+    NSInteger tagForFurnace = 100 + 10 * [self numberOfFurnaces];
+    
+    UILabel* furnaceTitle = [[[UILabel alloc] initWithFrame:CGRectMake(31, 55, 128, 36)] autorelease];
+    [furnaceTitle setText:@"Furnace 1"];
+    [furnaceTitle setBackgroundColor:[UIColor clearColor]];
+    [furnaceTitle setTag:tagForFurnace];
+    [furnacesScroller addSubview:furnaceTitle];
+    
+    UIImageView *horizLine = [[[UIImageView alloc] initWithFrame:CGRectMake(24, 87, 556, 4)] autorelease];
+    [horizLine setImage:[UIImage imageNamed:@"horizontalLine.png"]];
+    [horizLine setBackgroundColor:[UIColor clearColor]];
+    [horizLine setTag:tagForFurnace];
+    [furnacesScroller addSubview:horizLine];
+    
+    UILabel *makeLabel = [[[UILabel alloc] initWithFrame:CGRectMake(31, 55, 128, 36)] autorelease];
+    [furnaceTitle setText:@"Make"];
+    [furnaceTitle setBackgroundColor:[UIColor clearColor]];
+    [furnaceTitle setTag:tagForFurnace];
+    [furnacesScroller addSubview:furnaceTitle];
+}
 
 // only supports UIButton's right now
 -(IBAction) onChoosingServiceType: (id) sender {
