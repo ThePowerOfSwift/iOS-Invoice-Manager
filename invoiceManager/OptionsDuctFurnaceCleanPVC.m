@@ -22,6 +22,7 @@
 @synthesize houseAreaOneBtn, houseAreaTwoBtn, houseAreaThreeBtn, houseAreaFourBtn;
 @synthesize numberOfFurnacesCustomBtn;
 @synthesize brushCleanAddon;
+@synthesize furnaceInformation, addonList, selectedAddonsList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +32,12 @@
         
     }
     return self;
+}
+
+- (void) dealloc {
+    [addonList dealloc];
+    [furnaceInformation dealloc];
+    [super dealloc];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -54,7 +61,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
     [scrollViewer setScrollEnabled:YES];
     [scrollViewer setContentSize:CGSizeMake(614, 6540)];
     
@@ -62,8 +68,28 @@
     [furnacesScroller setContentSize:CGSizeMake(358, 564)];
     [furnacesScroller flashScrollIndicators];
     
-    [self setNumberOfFurnaces:1];
-    [self setBrushCleanAddon:FALSE];
+    
+    if (!furnaceInformation){
+        
+    }
+    if (!addonList) {
+        furnaceInformation = [[NSMutableArray alloc] initWithCapacity:1];
+        addonList = [[NSMutableArray alloc] initWithCapacity:20];       // have to init at least 16; inserting objects at certain indices
+        selectedAddonsList = [[NSMutableArray alloc] initWithCapacity:20];
+        for (NSInteger i = 0; i < 20; i++){
+            [addonList addObject:[NSNull null]];
+            [selectedAddonsList addObject:[NSNull null]];
+        }
+        
+    }
+    //[self setNumberOfFurnaces:1];
+    //[self setBrushCleanAddon:FALSE];
+    /*if ([self brushCleanAddon]){
+        NSLog(@"brush clean is TRUE");
+    } else {
+        NSLog(@"brush clean is NOT TRUE");
+    }*/
+    NSLog(@"haha %u", [self numberOfFurnaces]);
 }
 
 - (void)didReceiveMemoryWarning
@@ -281,6 +307,172 @@
     [btn setTag:10];
     
     [self doCalculations];
+}
+
+// all addon buttons have tag = 21 when not selected and tag = 22 when selected
+-(IBAction) onSelectingAddon: (id) sender {
+    if ([[sender restorationIdentifier] isEqualToString:@"dryerVentBtn"]){
+        if ([sender tag] == 21){    // select this addon
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {                    // deselect this addon
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"hotWaterTankBtn"]){
+        if ([sender tag] == 21){    
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacBtn"]){
+        if ([sender tag] == 21){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacDryerVentBtn"]){
+        if ([sender tag] == 21){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"HeatRecoverVentilationBoxBtn"]){
+        if ([sender tag] == 21){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"humidifierBtn"]){
+        if ([sender tag] == 21){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"sanitizerBtn"]){
+        if ([sender tag] == 21){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"airConditionerBtn"]){
+        if ([sender tag] == 21){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"firePlaceBtn"]){
+        if ([sender tag] == 21){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"chimneyBtn"]){
+        if ([sender tag] == 21){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"crawlSpaceBtn"]){
+        if ([sender tag] == 21){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"miscellaneousBtn"]){
+        if ([sender tag] == 21){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:22];
+        } else {
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:21];
+        }
+    }
+    
+}
+
+// selectedAddonsList: [0] = dryer vent; [1] = hot water tank; [2] = central vac; [3] = central vac & dryer vent; [4] = heat recover ventilation box; [5] = humidifier;
+// [6] = sanitizer; [7] = air conditioner; [8] = fire place; [9] = chimney; [10] = crawl space; [11] = miscellaneous
+
+-(IBAction) onEnteringInformation: (id) sender {
+    
+    // furnaceInformation: [0] = furnace Make; [1] = Filter No; [2] = Serial No; [3] = Model; [4] = Last Serviced; [5] = Fan Belt
+
+    // addonList: [0] = main lines quantity; [1] = addtn. main lines quantity; [2] = hot vents quantity; [3] = cold vents quantity; [4] = addtn vents quantity;
+    // [5] = dryer vent quantity; [6] = hot water tank quantity; [7] = central vac quantity; [8] = central vac & dryer vent quantity;
+    // [9] = heat recover ventilation box quantity; [10] = humidifier quantity; [11] = sanitizer quantity; [12] = air conditioner quantity; [13] = fire place quantity;
+    // [14] = chimney quantity; [15] = crawl space quantity; [16] = miscellaneous quantity;
+    //
+    
+    UITextField *info = (UITextField *) sender;
+    if ([[sender restorationIdentifier] isEqualToString:@"furnace1Make"]){
+        [furnaceInformation insertObject:[info text] atIndex:0];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"furnace1Filter"]){
+        [furnaceInformation insertObject:[info text] atIndex:1];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"furnace1SerialNo"]){
+        [furnaceInformation insertObject:[info text] atIndex:2];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"furnace1Model"]){
+        [furnaceInformation insertObject:[info text] atIndex:3];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"furnace1LastServiced"]){
+        [furnaceInformation insertObject:[info text] atIndex:4];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"furnace1FanBelt"]){
+        [furnaceInformation insertObject:[info text] atIndex:5];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"mainLinesQuantity"]){
+        [addonList insertObject:[info text] atIndex:0];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"additionalLinesQuantity"]){
+        [addonList insertObject:[info text] atIndex:1];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"hotVentsQuantity"]){
+        [addonList insertObject:[info text] atIndex:2];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"coldVentsQuantity"]){
+        [addonList insertObject:[info text] atIndex:3];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"additionalVentsQuantity"]){
+        [addonList insertObject:[info text] atIndex:4];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"dryerVentQuantity"]){
+        [addonList insertObject:[info text] atIndex:5];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"hotWaterTankQuantity"]){
+        [addonList insertObject:[info text] atIndex:6];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacQuantity"]){
+        [addonList insertObject:[info text] atIndex:7];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacDryerVentQuantity"]){
+        [addonList insertObject:[info text] atIndex:8];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"HeatRecoverVentilationBoxQuantity"]){
+        [addonList insertObject:[info text] atIndex:9];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"humidifierQuantity"]){
+        [addonList insertObject:[info text] atIndex:10];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"sanitizerQuantity"]){
+        [addonList insertObject:[info text] atIndex:11];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"airConditionerQuantity"]){
+        [addonList insertObject:[info text] atIndex:12];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"firePlaceQuantity"]){
+        [addonList insertObject:[info text] atIndex:13];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"chimneyQuantity"]){
+        [addonList insertObject:[info text] atIndex:14];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"crawlSpaceQuantity"]){
+        [addonList insertObject:[info text] atIndex:15];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"miscellaneousQuantity"]){
+        [addonList insertObject:[info text] atIndex:16];
+    }
+    
 }
 
 -(IBAction) quantityChanged: (id) sender {

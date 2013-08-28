@@ -29,6 +29,10 @@
     float houseAreaPrice, houseArea;   // 'houseAreaPrice' holds the value of the house area
     NSInteger numberOfFurnaces;
     BOOL brushCleanAddon;
+    NSMutableArray *furnaceInformation;
+    // NSMutableArray *listOfFurnacesInformation; // implement this later for more furnaces. this will hold 'NSMutableArray *furnaceInformation' objects;
+    NSMutableArray *addonList;
+    NSMutableArray *selectedAddonsList;
     
     // outlets
     IBOutlet UILabel *priceLabel;
@@ -45,6 +49,7 @@
 @property (assign, readwrite) NSString *serviceType, *serviceTypeRestorationID, *notesAboutRoom;
 @property (assign, readwrite) NSInteger numberOfFurnaces;
 @property (assign, readwrite) BOOL brushCleanAddon;
+@property (assign, readwrite) NSMutableArray *furnaceInformation, *addonList, *selectedAddonsList;
 
 @property (assign, nonatomic) IBOutlet UIScrollView *scrollViewer, *furnacesScroller;
 @property (nonatomic, assign) IBOutlet UITextField *quantityField, *numberOfFurnacesField, *houseAreaField, *houseAreaCustomPrice;
@@ -59,6 +64,8 @@
 -(IBAction) onChoosingHouseAreaBtn: (id) sender;
 -(IBAction) onChoosingNumberOfFurnaces: (id) sender;
 -(IBAction) onChangeNumberOfFurnacesField: (id) sender;
--(IBAction)onChoosingAnyBtn:(id)sender;
+-(IBAction) onChoosingAnyBtn:(id)sender;
+-(IBAction) onEnteringInformation: (id) sender;
+-(IBAction) onSelectingAddon: (id) sender;
 
 @end
