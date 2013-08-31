@@ -23,6 +23,9 @@
 @synthesize numberOfFurnacesCustomBtn;
 @synthesize brushCleanAddon;
 @synthesize furnaceInformation, addonList, selectedAddonsList;
+@synthesize intChimneyBtn;
+@synthesize extChimneyBtn;
+@synthesize chimneyAccess;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -241,6 +244,10 @@
         [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
         [self setHouseAreaPrice:[[houseAreaCustomPrice text] floatValue]];
     }
+    
+    // add this to the price 
+    [self setPrice:([self price] + [self houseAreaPrice])];
+    
     NSLog(@"THE PRICE IS %f", [self houseAreaPrice]);
 }
 
@@ -312,10 +319,10 @@
 // all addon buttons have tag = 21 when not selected and tag = 22 when selected
 -(IBAction) onSelectingAddon: (id) sender {
     if ([[sender restorationIdentifier] isEqualToString:@"dryerVentBtn"]){
-        if ([sender tag] == 21){    // select this addon
+        if ([sender tag] == 21){             // select this addon
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {                    // deselect this addon
+        } else if ([sender tag] == 22){      // deselect this addon
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -323,7 +330,7 @@
         if ([sender tag] == 21){    
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -331,7 +338,7 @@
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -339,7 +346,7 @@
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -347,7 +354,7 @@
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -355,7 +362,7 @@
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -363,7 +370,7 @@
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -371,7 +378,7 @@
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -379,7 +386,7 @@
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -387,7 +394,7 @@
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -395,7 +402,7 @@
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
         }
@@ -403,9 +410,41 @@
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-        } else {
+        } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"chimneyInteriorAccessBtn"]){
+        // for 'interior chimney access' or 'exterior ..', the selected one has tag = 24 and the other has tag = 23
+        
+        if ([sender tag] == 24){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:23];
+            [extChimneyBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [extChimneyBtn setTag:23];
+            [self setChimneyAccess:@"none"];
+        } else if ([sender tag] == 23){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:24];
+            [extChimneyBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [extChimneyBtn setTag:23];
+            [self setChimneyAccess:@"interior"];
+        }
+    } else if ([[sender restorationIdentifier] isEqualToString:@"chimneyExteriorAccessBtn"]){
+        // for 'interior chimney access' or 'exterior ..', the selected one has tag = 24 and the other has tag = 23
+        
+        if ([sender tag] == 24){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [sender setTag:23];
+            [intChimneyBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [intChimneyBtn setTag:23];
+            [self setChimneyAccess:@"none"];
+        } else if ([sender tag] == 23){
+            [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+            [sender setTag:24];
+            [intChimneyBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [intChimneyBtn setTag:23];
+            [self setChimneyAccess:@"exterior"];
         }
     }
     
@@ -484,7 +523,7 @@
 
 -(void) doCalculations {
     // if quantity is > 0
-    if ([self quantity] && [self serviceType]){
+    /*if ([self quantity] && [self serviceType]){
         //NSLog(@"GOT HERE? price rate is %f", [self priceRate]);
         [self setPrice: ([self priceRate] * [self quantity]) ];
         [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price] ]];
@@ -492,7 +531,13 @@
         
         [self setPrice:0.0f];
         [[self priceLabel] setText:[NSString stringWithFormat:@"$%.02f", [self price]]];
-    }
+    }*/
+    
+    
+    
+    //[self setPrice:0.0];
+    
+    
     
 }
 

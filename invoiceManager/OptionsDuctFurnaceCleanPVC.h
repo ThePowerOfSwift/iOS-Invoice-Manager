@@ -33,12 +33,13 @@
     // NSMutableArray *listOfFurnacesInformation; // implement this later for more furnaces. this will hold 'NSMutableArray *furnaceInformation' objects;
     NSMutableArray *addonList;
     NSMutableArray *selectedAddonsList;
+    NSString *chimneyAccess;
     
     // outlets
     IBOutlet UILabel *priceLabel;
     IBOutlet UITextField *quantityField, *numberOfFurnacesField, *houseAreaField, *houseAreaCustomPrice;
     
-    IBOutlet UIButton *houseAreaOneBtn, *houseAreaTwoBtn, *houseAreaThreeBtn, *houseAreaFourBtn, *numberOfFurnacesCustomBtn;
+    IBOutlet UIButton *houseAreaOneBtn, *houseAreaTwoBtn, *houseAreaThreeBtn, *houseAreaFourBtn, *numberOfFurnacesCustomBtn, *intChimneyBtn, *extChimneyBtn;
     IBOutlet UIScrollView *scrollViewer, *furnacesScroller;
 }
 
@@ -46,7 +47,7 @@
 
 @property (assign, readwrite) NSInteger quantity;
 @property (assign, readwrite) float price, priceRate, houseArea, houseAreaPrice;
-@property (assign, readwrite) NSString *serviceType, *serviceTypeRestorationID, *notesAboutRoom;
+@property (assign, readwrite) NSString *serviceType, *serviceTypeRestorationID, *notesAboutRoom, *chimneyAccess;
 @property (assign, readwrite) NSInteger numberOfFurnaces;
 @property (assign, readwrite) BOOL brushCleanAddon;
 @property (assign, readwrite) NSMutableArray *furnaceInformation, *addonList, *selectedAddonsList;
@@ -54,7 +55,8 @@
 @property (assign, nonatomic) IBOutlet UIScrollView *scrollViewer, *furnacesScroller;
 @property (nonatomic, assign) IBOutlet UITextField *quantityField, *numberOfFurnacesField, *houseAreaField, *houseAreaCustomPrice;
 @property (nonatomic, assign) IBOutlet UILabel *priceLabel;
-@property (nonatomic, assign) IBOutlet UIButton *houseAreaOneBtn, *houseAreaTwoBtn, *houseAreaThreeBtn, *houseAreaFourBtn, *numberOfFurnacesCustomBtn;
+@property (nonatomic, assign) IBOutlet UIButton *houseAreaOneBtn, *houseAreaTwoBtn, *houseAreaThreeBtn, *houseAreaFourBtn, *numberOfFurnacesCustomBtn, *intChimneyBtn;
+@property (nonatomic, assign) IBOutlet UIButton *extChimneyBtn;
 
 -(IBAction) saveOrCancel: (id) sender;
 -(IBAction) onChoosingServiceType: (id) sender;
