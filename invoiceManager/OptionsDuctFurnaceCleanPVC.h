@@ -24,7 +24,7 @@
     NSString *serviceType;  // '1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..
     NSString *serviceTypeRestorationID;
     NSString *notesAboutRoom;
-    float price, priceRate;
+    float price, priceRate, addonsOverallPrice;
     NSInteger quantity;
     float houseAreaPrice, houseArea;   // 'houseAreaPrice' holds the value of the house area
     NSInteger numberOfFurnaces;
@@ -46,7 +46,7 @@
 @property (nonatomic, assign) id <OptionsDuctFurnaceCleanPVCDelegate> ADelegate;
 
 @property (assign, readwrite) NSInteger quantity;
-@property (assign, readwrite) float price, priceRate, houseArea, houseAreaPrice;
+@property (assign, readwrite) float price, priceRate, houseArea, houseAreaPrice, addonsOverallPrice;
 @property (assign, readwrite) NSString *serviceType, *serviceTypeRestorationID, *notesAboutRoom, *chimneyAccess;
 @property (assign, readwrite) NSInteger numberOfFurnaces;
 @property (assign, readwrite) BOOL brushCleanAddon;

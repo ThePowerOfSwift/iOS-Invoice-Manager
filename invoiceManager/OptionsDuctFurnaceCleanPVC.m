@@ -16,7 +16,7 @@
 @synthesize ADelegate;
 @synthesize scrollViewer, furnacesScroller;
 @synthesize price, notesAboutRoom, priceRate, priceLabel, serviceType, serviceTypeRestorationID;
-@synthesize quantity, houseArea, houseAreaPrice;
+@synthesize quantity, houseArea, houseAreaPrice, addonsOverallPrice;
 @synthesize quantityField, numberOfFurnacesField, houseAreaField, houseAreaCustomPrice;
 @synthesize numberOfFurnaces;
 @synthesize houseAreaOneBtn, houseAreaTwoBtn, houseAreaThreeBtn, houseAreaFourBtn;
@@ -56,7 +56,8 @@
         [notesField setDelegate:self];
         
         // init vars in case error occurs
-        price = 0;
+        [self setPrice:0];
+        [self setAddonsOverallPrice:0];
     }
 }
 
@@ -129,32 +130,43 @@
 // action for choosing a number of furnaces, either selecting a button or writing a number in the custom textfield
 // tag = 20 for the selected one, tag = 19 for the unselected ones
 -(IBAction) onChoosingNumberOfFurnaces: (id) sender {
-    // set last selected back to normal
-    for (UIButton *aSubview in scrollViewer.subviews){
-        if ([aSubview isKindOfClass:[UIButton class]]){
-            if ([aSubview tag] == 20){
-                [aSubview setTag:19];
-                [aSubview setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+    NSLog(@"I SHOULD BE UNSELECTED ! my tag is %u", [sender tag]);
+    // if the button clicked is already 'selected' ( has tag = 20 ), then un-select it
+    if ([sender tag] == 20){
+        [self setNumberOfFurnaces:0];
+        [(UIButton*) sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+        [sender setTag:19];
+    } else {
+        
+        // set last selected back to normal
+        for (UIButton *aSubview in scrollViewer.subviews){
+            if ([aSubview isKindOfClass:[UIButton class]]){
+                if ([aSubview tag] == 20){
+                    [aSubview setTag:19];
+                    [aSubview setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+                }
+                
             }
+        }
+        
+        UIButton *btn = (UIButton*)sender;
+        
+        [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+        [sender setTag:20];
+        NSLog(@"tag is %u", [sender tag]);
+        
+        if ([[sender restorationIdentifier] isEqualToString:@"oneFurnace"]){
+            [self setNumberOfFurnaces:1];
+        } else if ([[sender restorationIdentifier] isEqualToString:@"twoFurnace"]){
+            [self setNumberOfFurnaces:2];
+        } else if ([[sender restorationIdentifier] isEqualToString:@"threeFurnace"]){
+            [self setNumberOfFurnaces:3];
+        } else if ([[sender restorationIdentifier] isEqualToString:@"fourFurnace"]){
+            [self setNumberOfFurnaces:[[numberOfFurnacesField text] integerValue]];
         }
     }
     
-    UIButton *btn = (UIButton*)sender;
-    NSString *senderID = [btn restorationIdentifier];
-    
-    [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
-    [sender setTag:20];
-    
-    if ([[sender restorationIdentifier] isEqualToString:@"oneFurnace"]){
-        [self setNumberOfFurnaces:1];
-    } else if ([[sender restorationIdentifier] isEqualToString:@"twoFurnace"]){
-        [self setNumberOfFurnaces:2];
-    } else if ([[sender restorationIdentifier] isEqualToString:@"threeFurnace"]){
-        [self setNumberOfFurnaces:3];
-    } else if ([[sender restorationIdentifier] isEqualToString:@"fourFurnace"]){
-        [self setNumberOfFurnaces:[[numberOfFurnacesField text] integerValue]];
-    }
-    
+    [self calculateOverallPrice];
     NSLog(@"number of furnaces is %u", [self numberOfFurnaces]);
 }
 
@@ -172,6 +184,7 @@
     [numberOfFurnacesCustomBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
     [self setNumberOfFurnaces:[[numberOfFurnacesField text] integerValue]];
     
+    [self calculateOverallPrice];
     NSLog(@"number of furnaces is %u", [self numberOfFurnaces]);
 }
 
@@ -188,12 +201,17 @@
             [self setBrushCleanAddon:FALSE];
         }
     }
+    
+    [self calculateOverallPrice];
 }
 
 // House Area, selecting a button (price), entering a custom price, or entering the house's square feet ( which will auto select )
+// tag = 6 is button is not selected, tag = 7 if it is selected
 -(IBAction) onChoosingHouseAreaBtn: (id) sender {
+    
+    UIButton *houseAreaBtn = (UIButton*) sender;
+    
     if ([[sender restorationIdentifier] isEqualToString:@"houseAreaOne"]){
-        
         [self setHouseAreaPrice:249.95f];
     } else if ([[sender restorationIdentifier] isEqualToString:@"houseAreaTwo"]){
         [self setHouseAreaPrice:279.95f];
@@ -208,47 +226,134 @@
     [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
     [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
     
-    [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+    if ([houseAreaBtn tag] == 6){
+        [houseAreaOneBtn setTag:6];
+        [houseAreaTwoBtn setTag:6];
+        [houseAreaThreeBtn setTag:6];
+        [houseAreaFourBtn setTag:6];
+        [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+        [houseAreaBtn setTag:7];
+    } else if ([houseAreaBtn tag] == 7){
+        [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+        [houseAreaBtn setTag:6];
+        [self setHouseAreaPrice:0];
+    }
     NSLog(@"THE PRICE IS %f", [self houseAreaPrice]);
+    
+    [self calculateOverallPrice];
 }
 
 -(IBAction) onChangeHouseAreaField: (id) sender {
     UITextField *houseAreaCustomField = (UITextField *) sender;
+    
+    // unselect all buttons, set their background image to 'UnSel', and set all their tags to 6
+    [houseAreaOneBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+    [houseAreaTwoBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+    [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+    [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+    [houseAreaOneBtn setTag:6];
+    [houseAreaTwoBtn setTag:6];
+    [houseAreaThreeBtn setTag:6];
+    [houseAreaFourBtn setTag:6];
     
     if ([[sender restorationIdentifier] isEqualToString:@"houseAreaSquareFeet"]){
         [self setHouseArea:[[houseAreaCustomField text] floatValue]];
         
         if ([self houseArea] < 1600){
             [houseAreaOneBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
-            [houseAreaTwoBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
-            [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
-            [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [houseAreaOneBtn setTag:7];
             [self setHouseAreaPrice:249.95f];
         } else if ( ([self houseArea] > 1599) && ([self houseArea] < 2300)){
-            [houseAreaOneBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [houseAreaTwoBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
-            [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
-            [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [houseAreaTwoBtn setTag:7];
             [self setHouseAreaPrice:279.95f];
         } else if ([self houseArea] > 2299){
-            [houseAreaOneBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
-            [houseAreaTwoBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
-            [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
+            [houseAreaThreeBtn setTag:7];
             [self setHouseAreaPrice:309.95f];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"houseAreaCustomPrice"]){
-        [houseAreaOneBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
-        [houseAreaTwoBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
-        [houseAreaThreeBtn setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
         [houseAreaFourBtn setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
+        [houseAreaFourBtn setTag:7];
         [self setHouseAreaPrice:[[houseAreaCustomPrice text] floatValue]];
     }
     
     // add this to the price 
-    [self setPrice:([self price] + [self houseAreaPrice])];
+    //[self setPrice:([self price] + [self houseAreaPrice])];
+    
+    [self calculateOverallPrice];
     
     NSLog(@"THE PRICE IS %f", [self houseAreaPrice]);
+}
+
+// calculate the overall price !
+-(void) calculateOverallPrice {
+    // set price to 0 initially
+    [self setPrice:0.0];
+    
+    // adding the price of the house area ( if the 'whip clean' package is selected - otherwise, just addons should be considered )
+    if ([self houseAreaPrice]){
+        [self setPrice:([self price] + [self houseAreaPrice])];
+    }
+    
+    // adding the price of any extra furnaces ( if any )
+    if ([self numberOfFurnaces] > 0){   // first furnace included in the package for free; any additional furnace is +$49.95.
+        float furnacesExtraCost = ( [self numberOfFurnaces] - 1 ) * 49.95;
+        [self setPrice:([self price] + furnacesExtraCost)];
+    }
+    
+    // adding the price of the 'brush clean addon' ( if selected )
+    if ([self brushCleanAddon]){
+        [self setPrice:([self price] + 49.95)];
+    }
+    
+    // selectedAddonsList: [0] = dryer vent; [1] = hot water tank; [2] = central vac; [3] = central vac & dryer vent; [4] = heat recover ventilation box; [5] = humidifier;
+    // [6] = sanitizer; [7] = air conditioner; [8] = fire place; [9] = chimney; [10] = crawl space; [11] = miscellaneous
+    // adding the prices of addons ( the ones that have 'true' booleans in the 'selectedAddonsList' array
+    addonsOverallPrice = 0; // set it to 0 initially, then check and add up each addon price ( if selected )
+    if ([[selectedAddonsList objectAtIndex:0] boolValue]){
+        addonsOverallPrice += 19.95;
+    }
+    if ([[selectedAddonsList objectAtIndex:1] boolValue]){
+        addonsOverallPrice += 19.95;
+    }
+    if ([[selectedAddonsList objectAtIndex:2] boolValue]){
+        //addonsOverallPrice += 49.95;
+        //if ([addonList objectAtIndex:6]){
+            addonsOverallPrice += [addonList objectAtIndex:6];
+        //}
+        
+    }
+    if ([[selectedAddonsList objectAtIndex:3] boolValue]){
+        addonsOverallPrice += 39.95;
+    }
+    if ([[selectedAddonsList objectAtIndex:4] boolValue]){
+        addonsOverallPrice += 49.95;
+    }
+    if ([[selectedAddonsList objectAtIndex:5] boolValue]){
+        addonsOverallPrice += 39.95;
+    }
+    if ([[selectedAddonsList objectAtIndex:6] boolValue]){
+        addonsOverallPrice += 49.95;
+    }
+    if ([[selectedAddonsList objectAtIndex:7] boolValue]){
+        addonsOverallPrice += 49.95;
+    }
+    if ([[selectedAddonsList objectAtIndex:8] boolValue]){
+        addonsOverallPrice += 49.95;
+    }
+    if ([[selectedAddonsList objectAtIndex:9] boolValue]){
+        addonsOverallPrice += 49.95;
+    }
+    if ([[selectedAddonsList objectAtIndex:10] boolValue]){
+        addonsOverallPrice += 49.95;
+    }
+    if ([[selectedAddonsList objectAtIndex:11] boolValue]){
+        addonsOverallPrice += 49.95;
+    }
+    
+    // set price to the priceLabel's text
+    [priceLabel setText:[NSString stringWithFormat:@"$%f", [self price]]];
 }
 
 -(IBAction) addFurnace: (id) sender {
@@ -316,103 +421,129 @@
     [self doCalculations];
 }
 
+// selectedAddonsList: [0] = dryer vent; [1] = hot water tank; [2] = central vac; [3] = central vac & dryer vent; [4] = heat recover ventilation box; [5] = humidifier;
+// [6] = sanitizer; [7] = air conditioner; [8] = fire place; [9] = chimney; [10] = crawl space; [11] = miscellaneous
 // all addon buttons have tag = 21 when not selected and tag = 22 when selected
 -(IBAction) onSelectingAddon: (id) sender {
     if ([[sender restorationIdentifier] isEqualToString:@"dryerVentBtn"]){
         if ([sender tag] == 21){             // select this addon
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:0];
         } else if ([sender tag] == 22){      // deselect this addon
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:0];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"hotWaterTankBtn"]){
         if ([sender tag] == 21){    
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:1];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:1];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacBtn"]){
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:2];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:2];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacDryerVentBtn"]){
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:3];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:3];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"HeatRecoverVentilationBoxBtn"]){
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:4];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:4];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"humidifierBtn"]){
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:5];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:5];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"sanitizerBtn"]){
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:6];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:6];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"airConditionerBtn"]){
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:7];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:7];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"firePlaceBtn"]){
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:8];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:8];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"chimneyBtn"]){
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:9];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:9];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"crawlSpaceBtn"]){
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:10];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:10];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"miscellaneousBtn"]){
         if ([sender tag] == 21){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:11];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
+            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:11];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"chimneyInteriorAccessBtn"]){
         // for 'interior chimney access' or 'exterior ..', the selected one has tag = 24 and the other has tag = 23
@@ -448,10 +579,14 @@
         }
     }
     
+    if ([[selectedAddonsList objectAtIndex:0] boolValue]){
+        NSLog(@"Dryer Vent addon is TRUE;");
+    } else {
+        NSLog(@"Dryer Vent addon is FALSE;");
+    }
+    
+    [self calculateOverallPrice];
 }
-
-// selectedAddonsList: [0] = dryer vent; [1] = hot water tank; [2] = central vac; [3] = central vac & dryer vent; [4] = heat recover ventilation box; [5] = humidifier;
-// [6] = sanitizer; [7] = air conditioner; [8] = fire place; [9] = chimney; [10] = crawl space; [11] = miscellaneous
 
 -(IBAction) onEnteringInformation: (id) sender {
     
@@ -478,6 +613,7 @@
         [furnaceInformation insertObject:[info text] atIndex:5];
     } else if ([[sender restorationIdentifier] isEqualToString:@"mainLinesQuantity"]){
         [addonList insertObject:[info text] atIndex:0];
+        // NSLog(@"addon list %@", [addonList objectAtIndex:0]);
     } else if ([[sender restorationIdentifier] isEqualToString:@"additionalLinesQuantity"]){
         [addonList insertObject:[info text] atIndex:1];
     } else if ([[sender restorationIdentifier] isEqualToString:@"hotVentsQuantity"]){
@@ -485,11 +621,11 @@
     } else if ([[sender restorationIdentifier] isEqualToString:@"coldVentsQuantity"]){
         [addonList insertObject:[info text] atIndex:3];
     } else if ([[sender restorationIdentifier] isEqualToString:@"additionalVentsQuantity"]){
-        [addonList insertObject:[info text] atIndex:4];
+        [addonList insertObject:[[info text] integerValue] atIndex:4];
     } else if ([[sender restorationIdentifier] isEqualToString:@"dryerVentQuantity"]){
         [addonList insertObject:[info text] atIndex:5];
     } else if ([[sender restorationIdentifier] isEqualToString:@"hotWaterTankQuantity"]){
-        [addonList insertObject:[info text] atIndex:6];
+        [addonList insertObject:[[info text] integerValue] atIndex:6];
     } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacQuantity"]){
         [addonList insertObject:[info text] atIndex:7];
     } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacDryerVentQuantity"]){
@@ -510,6 +646,18 @@
         [addonList insertObject:[info text] atIndex:15];
     } else if ([[sender restorationIdentifier] isEqualToString:@"miscellaneousQuantity"]){
         [addonList insertObject:[info text] atIndex:16];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"hotWaterTankPrice"]){
+        [addonList insertObject:[info text] atIndex:17];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"sanitizerPrice"]){
+        [addonList insertObject:[info text] atIndex:18];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"firePlacePrice"]){
+        [addonList insertObject:[info text] atIndex:19];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"chimneyPrice"]){
+        [addonList insertObject:[info text] atIndex:20];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"crawlSpacePrice"]){
+        [addonList insertObject:[info text] atIndex:21];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"miscellaneousPrice"]){
+        [addonList insertObject:[info text] atIndex:22];
     }
     
 }
