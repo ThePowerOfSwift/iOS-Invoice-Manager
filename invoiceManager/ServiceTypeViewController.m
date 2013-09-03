@@ -471,6 +471,8 @@
         
         [cell.colFour setText:[NSString stringWithFormat:@"$%.02f", [serviceCell price]]];
         
+    } else if ([VCServiceNameType isEqualToString:@"ductFurnaceCleaning"]){
+        
     }
     /*
     name = package name ('1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..)

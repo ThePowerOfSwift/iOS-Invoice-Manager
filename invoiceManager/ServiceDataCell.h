@@ -149,6 +149,16 @@
  priceRate = price per one car
  notes = ..
  
+ ------------------------------------------- OptionsDuctFurnaceCleanPVC:
+ auto spa - Windshield & Rock Chip Repair:
+ name = package name ('1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..)
+ materialType = service type restoration id (serviceTypeRestorationID)
+ 
+ vacOrFull = 'Windshield Crack'
+ quantity = # of cars
+ price = price
+ priceRate = price per one car
+ notes = ..
  */
 
 @interface ServiceDataCell : NSObject {

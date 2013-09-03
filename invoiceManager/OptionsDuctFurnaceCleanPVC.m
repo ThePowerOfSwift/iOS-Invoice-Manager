@@ -40,6 +40,7 @@
 - (void) dealloc {
     [addonList dealloc];
     [furnaceInformation dealloc];
+    [selectedAddonsList dealloc];
     [super dealloc];
 }
 
@@ -66,23 +67,23 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [scrollViewer setScrollEnabled:YES];
-    [scrollViewer setContentSize:CGSizeMake(614, 6540)];
+    [scrollViewer setContentSize:CGSizeMake(614, 4660)];
     
     [furnacesScroller setScrollEnabled:YES];
     [furnacesScroller setContentSize:CGSizeMake(358, 564)];
     [furnacesScroller flashScrollIndicators];
     
-    
-    if (!furnaceInformation){
-        
-    }
     if (!addonList) {
         furnaceInformation = [[NSMutableArray alloc] initWithCapacity:1];
+        for (NSInteger i = 0; i < 6; i++){
+            [furnaceInformation addObject:[NSString stringWithFormat:@""]];
+        }
+        
         addonList = [[NSMutableArray alloc] initWithCapacity:20];       // have to init at least 16; inserting objects at certain indices
         selectedAddonsList = [[NSMutableArray alloc] initWithCapacity:20];
-        for (NSInteger i = 0; i < 20; i++){
-            [addonList addObject:[NSNull null]];
-            [selectedAddonsList addObject:[NSNull null]];
+        for (NSInteger i = 0; i < 23; i++){
+            [addonList addObject:[NSString stringWithFormat:@""]];
+            [selectedAddonsList addObject:[NSNumber numberWithBool:FALSE]];
         }
         
     }
@@ -304,56 +305,65 @@
     
     // adding the price of the 'brush clean addon' ( if selected )
     if ([self brushCleanAddon]){
-        [self setPrice:([self price] + 49.95)];
+        [self setPrice:([self price] + 99.95)];
     }
+    
+    // addonList: [0] = main lines quantity; [1] = addtn. main lines quantity; [2] = hot vents quantity; [3] = cold vents quantity; [4] = addtn vents quantity;
+    // [5] = dryer vent quantity; [6] = hot water tank quantity; [7] = central vac quantity; [8] = central vac & dryer vent quantity;
+    // [9] = heat recover ventilation box quantity; [10] = humidifier quantity; [11] = sanitizer quantity; [12] = air conditioner quantity; [13] = fire place quantity;
+    // [14] = chimney quantity; [15] = crawl space quantity; [16] = miscellaneous quantity; [17] = hot water tank price; [18] = sanitizer price; [19] = fire place price;
+    // [20] = chimney price; [21] = crawl space price; [22] = miscellaneous price;
     
     // selectedAddonsList: [0] = dryer vent; [1] = hot water tank; [2] = central vac; [3] = central vac & dryer vent; [4] = heat recover ventilation box; [5] = humidifier;
     // [6] = sanitizer; [7] = air conditioner; [8] = fire place; [9] = chimney; [10] = crawl space; [11] = miscellaneous
     // adding the prices of addons ( the ones that have 'true' booleans in the 'selectedAddonsList' array
     addonsOverallPrice = 0; // set it to 0 initially, then check and add up each addon price ( if selected )
     if ([[selectedAddonsList objectAtIndex:0] boolValue]){
-        addonsOverallPrice += 19.95;
-    }
-    if ([[selectedAddonsList objectAtIndex:1] boolValue]){
-        addonsOverallPrice += 19.95;
-    }
-    if ([[selectedAddonsList objectAtIndex:2] boolValue]){
-        //addonsOverallPrice += 49.95;
-        //if ([addonList objectAtIndex:6]){
-            addonsOverallPrice += [addonList objectAtIndex:6];
-        //}
-        
-    }
-    if ([[selectedAddonsList objectAtIndex:3] boolValue]){
-        addonsOverallPrice += 39.95;
-    }
-    if ([[selectedAddonsList objectAtIndex:4] boolValue]){
-        addonsOverallPrice += 49.95;
-    }
-    if ([[selectedAddonsList objectAtIndex:5] boolValue]){
-        addonsOverallPrice += 39.95;
-    }
-    if ([[selectedAddonsList objectAtIndex:6] boolValue]){
-        addonsOverallPrice += 49.95;
-    }
-    if ([[selectedAddonsList objectAtIndex:7] boolValue]){
-        addonsOverallPrice += 49.95;
-    }
-    if ([[selectedAddonsList objectAtIndex:8] boolValue]){
-        addonsOverallPrice += 49.95;
-    }
-    if ([[selectedAddonsList objectAtIndex:9] boolValue]){
-        addonsOverallPrice += 49.95;
-    }
-    if ([[selectedAddonsList objectAtIndex:10] boolValue]){
-        addonsOverallPrice += 49.95;
-    }
-    if ([[selectedAddonsList objectAtIndex:11] boolValue]){
-        addonsOverallPrice += 49.95;
+        addonsOverallPrice += 19.95;    // dryer vent addon price
     }
     
+    if ([[selectedAddonsList objectAtIndex:1] boolValue]){  // hot water tank addon price
+        addonsOverallPrice += [[addonList objectAtIndex:6] integerValue] * [[addonList objectAtIndex:17] floatValue];
+        //NSLog(@" ! ! ! ! ! it is %f", ( [[addonList objectAtIndex:6] integerValue] * [[addonList objectAtIndex:17] floatValue] ) );
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:2] boolValue]){  // central vac addon price
+        addonsOverallPrice += 49.95  * [[addonList objectAtIndex:7] integerValue];
+    }
+    if ([[selectedAddonsList objectAtIndex:3] boolValue]){  // central vac & dryer vent addon price
+        addonsOverallPrice += 39.95 * [[addonList objectAtIndex:8] integerValue];
+    }
+    if ([[selectedAddonsList objectAtIndex:4] boolValue]){  // heat recover ventilation box addon price
+        addonsOverallPrice += 49.95 * [[addonList objectAtIndex:9] integerValue];
+    }
+    if ([[selectedAddonsList objectAtIndex:5] boolValue]){  // humidifier addon price
+        addonsOverallPrice += 39.95 * [[addonList objectAtIndex:10] integerValue];
+    }
+    if ([[selectedAddonsList objectAtIndex:6] boolValue]){  // sanitizer addon price
+        addonsOverallPrice += [[addonList objectAtIndex:11] integerValue] * [[addonList objectAtIndex:18] floatValue];
+    }
+    if ([[selectedAddonsList objectAtIndex:7] boolValue]){  // air conditioner addon price
+        addonsOverallPrice += 49.95 * [[addonList objectAtIndex:12] integerValue];
+    }
+    if ([[selectedAddonsList objectAtIndex:8] boolValue]){  // fire place addon price
+        addonsOverallPrice += [[addonList objectAtIndex:13] integerValue] * [[addonList objectAtIndex:19] floatValue];
+    }
+    if ([[selectedAddonsList objectAtIndex:9] boolValue]){  // chimney addon price
+        addonsOverallPrice += [[addonList objectAtIndex:14] integerValue] * [[addonList objectAtIndex:20] floatValue];
+    }
+    if ([[selectedAddonsList objectAtIndex:10] boolValue]){ // crawl space addon price
+        addonsOverallPrice += [[addonList objectAtIndex:15] integerValue] * [[addonList objectAtIndex:21] floatValue];
+    }
+    if ([[selectedAddonsList objectAtIndex:11] boolValue]){ // miscellaneous addon price
+        addonsOverallPrice += [[addonList objectAtIndex:16] integerValue] * [[addonList objectAtIndex:22] floatValue];
+        NSLog(@" ! ! ! ! ! it is %f", ( [[addonList objectAtIndex:16] integerValue] * [[addonList objectAtIndex:22] floatValue] ) );
+    }
+    
+    // add the overall addons price to the price
+    [self setPrice:([self price] + addonsOverallPrice)];
+    
     // set price to the priceLabel's text
-    [priceLabel setText:[NSString stringWithFormat:@"$%f", [self price]]];
+    [priceLabel setText:[NSString stringWithFormat:@"$%.02f", [self price]]];
 }
 
 -(IBAction) addFurnace: (id) sender {
@@ -429,21 +439,25 @@
         if ([sender tag] == 21){             // select this addon
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:0];
+            //[selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:0];
+            [selectedAddonsList replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:TRUE]];
         } else if ([sender tag] == 22){      // deselect this addon
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
-            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:0];
+            //[selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:0];
+            [selectedAddonsList replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:FALSE]];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"hotWaterTankBtn"]){
         if ([sender tag] == 21){    
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletSel.png"] forState:UIControlStateNormal];
             [sender setTag:22];
-            [selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:1];
+            //[selectedAddonsList insertObject:[NSNumber numberWithBool:TRUE] atIndex:1];
+            [selectedAddonsList replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:TRUE]];
         } else if ([sender tag] == 22){
             [sender setBackgroundImage:[UIImage imageNamed:@"bulletUnSel.png"] forState:UIControlStateNormal];
             [sender setTag:21];
-            [selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:1];
+            //[selectedAddonsList insertObject:[NSNumber numberWithBool:FALSE] atIndex:1];
+            [selectedAddonsList replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:FALSE]];
         }
     } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacBtn"]){
         if ([sender tag] == 21){
@@ -579,12 +593,6 @@
         }
     }
     
-    if ([[selectedAddonsList objectAtIndex:0] boolValue]){
-        NSLog(@"Dryer Vent addon is TRUE;");
-    } else {
-        NSLog(@"Dryer Vent addon is FALSE;");
-    }
-    
     [self calculateOverallPrice];
 }
 
@@ -595,70 +603,72 @@
     // addonList: [0] = main lines quantity; [1] = addtn. main lines quantity; [2] = hot vents quantity; [3] = cold vents quantity; [4] = addtn vents quantity;
     // [5] = dryer vent quantity; [6] = hot water tank quantity; [7] = central vac quantity; [8] = central vac & dryer vent quantity;
     // [9] = heat recover ventilation box quantity; [10] = humidifier quantity; [11] = sanitizer quantity; [12] = air conditioner quantity; [13] = fire place quantity;
-    // [14] = chimney quantity; [15] = crawl space quantity; [16] = miscellaneous quantity;
+    // [14] = chimney quantity; [15] = crawl space quantity; [16] = miscellaneous quantity; [17] = hot water tank price; [18] = sanitizer price; [19] = fire place price;
+    // [20] = chimney price; [21] = crawl space price; [22] = miscellaneous price;
     //
     
     UITextField *info = (UITextField *) sender;
     if ([[sender restorationIdentifier] isEqualToString:@"furnace1Make"]){
-        [furnaceInformation insertObject:[info text] atIndex:0];
+        [furnaceInformation replaceObjectAtIndex:0 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"furnace1Filter"]){
-        [furnaceInformation insertObject:[info text] atIndex:1];
+        [furnaceInformation replaceObjectAtIndex:1 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"furnace1SerialNo"]){
-        [furnaceInformation insertObject:[info text] atIndex:2];
+        [furnaceInformation replaceObjectAtIndex:2 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"furnace1Model"]){
-        [furnaceInformation insertObject:[info text] atIndex:3];
+        [furnaceInformation replaceObjectAtIndex:3 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"furnace1LastServiced"]){
-        [furnaceInformation insertObject:[info text] atIndex:4];
+        [furnaceInformation replaceObjectAtIndex:4 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"furnace1FanBelt"]){
-        [furnaceInformation insertObject:[info text] atIndex:5];
+        [furnaceInformation replaceObjectAtIndex:5 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"mainLinesQuantity"]){
-        [addonList insertObject:[info text] atIndex:0];
-        // NSLog(@"addon list %@", [addonList objectAtIndex:0]);
+        [addonList replaceObjectAtIndex:0 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"additionalLinesQuantity"]){
-        [addonList insertObject:[info text] atIndex:1];
+        [addonList replaceObjectAtIndex:1 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"hotVentsQuantity"]){
-        [addonList insertObject:[info text] atIndex:2];
+        [addonList replaceObjectAtIndex:2 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"coldVentsQuantity"]){
-        [addonList insertObject:[info text] atIndex:3];
+        [addonList replaceObjectAtIndex:3 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"additionalVentsQuantity"]){
-        [addonList insertObject:[[info text] integerValue] atIndex:4];
+        [addonList replaceObjectAtIndex:4 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"dryerVentQuantity"]){
-        [addonList insertObject:[info text] atIndex:5];
+        [addonList replaceObjectAtIndex:5 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"hotWaterTankQuantity"]){
-        [addonList insertObject:[[info text] integerValue] atIndex:6];
+        [addonList replaceObjectAtIndex:6 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacQuantity"]){
-        [addonList insertObject:[info text] atIndex:7];
+        [addonList replaceObjectAtIndex:7 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"centralVacDryerVentQuantity"]){
-        [addonList insertObject:[info text] atIndex:8];
+        [addonList replaceObjectAtIndex:8 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"HeatRecoverVentilationBoxQuantity"]){
-        [addonList insertObject:[info text] atIndex:9];
+        [addonList replaceObjectAtIndex:9 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"humidifierQuantity"]){
-        [addonList insertObject:[info text] atIndex:10];
+        [addonList replaceObjectAtIndex:10 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"sanitizerQuantity"]){
-        [addonList insertObject:[info text] atIndex:11];
+        [addonList replaceObjectAtIndex:11 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"airConditionerQuantity"]){
-        [addonList insertObject:[info text] atIndex:12];
+        [addonList replaceObjectAtIndex:12 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"firePlaceQuantity"]){
-        [addonList insertObject:[info text] atIndex:13];
+        [addonList replaceObjectAtIndex:13 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"chimneyQuantity"]){
-        [addonList insertObject:[info text] atIndex:14];
+        [addonList replaceObjectAtIndex:14 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"crawlSpaceQuantity"]){
-        [addonList insertObject:[info text] atIndex:15];
+        [addonList replaceObjectAtIndex:15 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"miscellaneousQuantity"]){
-        [addonList insertObject:[info text] atIndex:16];
+        [addonList replaceObjectAtIndex:16 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"hotWaterTankPrice"]){
-        [addonList insertObject:[info text] atIndex:17];
+        [addonList replaceObjectAtIndex:17 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"sanitizerPrice"]){
-        [addonList insertObject:[info text] atIndex:18];
+        [addonList replaceObjectAtIndex:18 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"firePlacePrice"]){
-        [addonList insertObject:[info text] atIndex:19];
+        [addonList replaceObjectAtIndex:19 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"chimneyPrice"]){
-        [addonList insertObject:[info text] atIndex:20];
+        [addonList replaceObjectAtIndex:20 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"crawlSpacePrice"]){
-        [addonList insertObject:[info text] atIndex:21];
+        [addonList replaceObjectAtIndex:21 withObject:[info text]];
     } else if ([[sender restorationIdentifier] isEqualToString:@"miscellaneousPrice"]){
-        [addonList insertObject:[info text] atIndex:22];
+        [addonList replaceObjectAtIndex:22 withObject:[info text]];
     }
+    
+    [self calculateOverallPrice];
     
 }
 
@@ -702,6 +712,21 @@
         newCell.priceRate = [self priceRate];
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
+        
+        newCell.attributesList = [self addonList];
+        
+        /*------------------------------------------- OptionsWindshieldCrackPVC:
+        auto spa - Windshield & Rock Chip Repair:
+        name = package name ('1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..)
+        materialType = service type restoration id (serviceTypeRestorationID)
+        
+        vacOrFull = 'Windshield Crack'
+        quantity = # of cars
+        price = price
+        priceRate = price per one car
+        notes = ..
+        */
+        
         
         [ADelegate updateDuctFurnaceCleanDataTable:self editType:@"add" withServiceCell:newCell];
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
