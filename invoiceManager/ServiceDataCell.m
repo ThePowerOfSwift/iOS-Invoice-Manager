@@ -18,7 +18,7 @@
 @synthesize vacOrFull;
 @synthesize addonFabricProtector, addonDeodorizer, addonBiocide;
 @synthesize popoverVC;
-@synthesize attributesList;
+@synthesize attributesList, attributesListTwo, attributesListThree;
 
 -(id) init {
     if (self = [super init]){

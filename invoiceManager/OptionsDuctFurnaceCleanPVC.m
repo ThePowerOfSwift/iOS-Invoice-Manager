@@ -704,20 +704,49 @@
     notesAboutRoom = notesField.text;
     
     if ([[sender restorationIdentifier] isEqualToString:@"save"]){
+        
+        // To save:
+        
+        // furnaceInformation: [0] = furnace Make; [1] = Filter No; [2] = Serial No; [3] = Model; [4] = Last Serviced; [5] = Fan Belt
+        
+        // addonList: [0] = main lines quantity; [1] = addtn. main lines quantity; [2] = hot vents quantity; [3] = cold vents quantity; [4] = addtn vents quantity;
+        // [5] = dryer vent quantity; [6] = hot water tank quantity; [7] = central vac quantity; [8] = central vac & dryer vent quantity;
+        // [9] = heat recover ventilation box quantity; [10] = humidifier quantity; [11] = sanitizer quantity; [12] = air conditioner quantity; [13] = fire place quantity;
+        // [14] = chimney quantity; [15] = crawl space quantity; [16] = miscellaneous quantity; [17] = hot water tank price; [18] = sanitizer price; [19] = fire place price;
+        // [20] = chimney price; [21] = crawl space price; [22] = miscellaneous price;
+        
+        // selectedAddonsList: [0] = dryer vent; [1] = hot water tank; [2] = central vac; [3] = central vac & dryer vent; [4] = heat recover ventilation box; [5] = humidifier;
+        // [6] = sanitizer; [7] = air conditioner; [8] = fire place; [9] = chimney; [10] = crawl space; [11] = miscellaneous
+       
+        // [self houseArea], [self houseAreaPrice];
+        // [self numberOfFurnaces]
+        // [self furnaceInformation] objectAtIndex:<#(NSUInteger)#>];
+        // [self brushCleanAddon]
+        // [self addonList] objectAtIndex:<#(NSUInteger)#>]
+        // [self chimneyAccess];
+        
         ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
-        newCell.serviceType = @"autoSpa";
-        newCell.name = [self serviceType];  // '1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..
-        newCell.materialType = [self serviceTypeRestorationID]; // 'firstRockChip', 'secondRockChip', etc
-        newCell.quantity = [self quantity];
-        newCell.priceRate = [self priceRate];
+        newCell.serviceType = @"ductFurnaceCleaning";
+        newCell.rlength = [self houseArea];  // house area
+        newCell.priceRate = [self houseAreaPrice]; // house area price
+        newCell.quantity = [self numberOfFurnaces]; // number of furnaces
+        newCell.vacOrFull = [self chimneyAccess];   // chimney access
+        newCell.addonDeodorizer = [self brushCleanAddon]; // brush clean addon
         newCell.price = [self price];
         newCell.notes = [self notesAboutRoom];
         
-        newCell.attributesList = [self addonList];
+        [newCell setAttributesList:furnaceInformation];
+        [newCell setAttributesListTwo:addonList];
+        [newCell setAttributesListThree:selectedAddonsList];
         
-        /*------------------------------------------- OptionsWindshieldCrackPVC:
-        auto spa - Windshield & Rock Chip Repair:
-        name = package name ('1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..)
+        /*------------------------------------------- OptionsDuctFurnaceCleanPVC:
+        ductFurnaceCleaning - Duct & Furnace Cleaning:
+        service type = ductFurnaceCleaning
+        rlength = house area
+        priceRate = house area price
+        quantity = number of furnaces
+        vacOrFull = chimney access ('exterior' or 'interior')
+        addonDeodorizer = brush clean addon bool
         materialType = service type restoration id (serviceTypeRestorationID)
         
         vacOrFull = 'Windshield Crack'
@@ -725,19 +754,25 @@
         price = price
         priceRate = price per one car
         notes = ..
+         
         */
-        
         
         [ADelegate updateDuctFurnaceCleanDataTable:self editType:@"add" withServiceCell:newCell];
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
         
-        [[self editingCell] setServiceType:@"autoSpa"];
-        [[self editingCell] setName:[self serviceType]];
-        [[self editingCell] setMaterialType:[self serviceTypeRestorationID]];
-        [[self editingCell] setQuantity:[self quantity]];
-        [[self editingCell] setPriceRate:[self priceRate]];
-        [[self editingCell] setPrice:[self price]];
+        [[self editingCell] setServiceType:@"ductFurnaceCleaning"];
+        [[self editingCell] setRlength:[self houseArea]];
+        [[self editingCell] setPriceRate:[self houseAreaPrice]];
+        [[self editingCell] setQuantity:[self numberOfFurnaces]];
+        [[self editingCell] setVacOrFull:[self chimneyAccess]];
+        [[self editingCell] setAddonDeodorizer:[self brushCleanAddon]];
+        [[self editingCell] setPriceRate:[self price]];
         [[self editingCell] setNotes:[self notesAboutRoom]];
+        
+        
+        [[self editingCell] setAttributesList:furnaceInformation];
+        [[self editingCell] setAttributesListTwo:addonList];
+        [[self editingCell] setAttributesListThree:selectedAddonsList];
         
         [ADelegate updateDuctFurnaceCleanDataTable:self editType:@"edit" withServiceCell:nil];
         

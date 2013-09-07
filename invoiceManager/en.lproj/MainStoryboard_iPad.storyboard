@@ -10264,7 +10264,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsMatressPopoverVC.h"/>
             <relationships>
                 <relationship kind="action" name="onClickingBtn:"/>
-                <relationship kind="action" name="onClickingBtnTwo:"/>
                 <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="action" name="saveAddon:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
@@ -10332,8 +10331,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsUpholsteryPopoverVC.h"/>
             <relationships>
                 <relationship kind="action" name="onClickingBtn:"/>
-                <relationship kind="action" name="onClickingBtnThree:"/>
-                <relationship kind="action" name="onClickingBtnTwo:"/>
                 <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="action" name="saveAddon:"/>
                 <relationship kind="action" name="saveOrCancel:"/>
@@ -10395,9 +10392,6 @@
             <relationships>
                 <relationship kind="action" name="gotoLastView"/>
                 <relationship kind="action" name="gotoNextView"/>
-                <relationship kind="action" name="onChoosingBuildingBtn:"/>
-                <relationship kind="action" name="onChoosingBuildingBtnTwo:"/>
-                <relationship kind="action" name="onCustomEditingDone:"/>
                 <relationship kind="action" name="onTouchDownIcon"/>
                 <relationship kind="action" name="textFieldDidEndEditing:" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="carpetCareOptionsView" candidateClass="UIView"/>
