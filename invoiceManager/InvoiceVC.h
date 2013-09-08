@@ -44,9 +44,9 @@
     CGFloat opacity;
     BOOL mouseSwiped;
     
-    float carpetDiscount, upholsteryDiscount, mattressDiscount, miscellaneousDiscount, areaRugsDiscount, floodDiscount;
-    float discountedCarpetPrice, discountedUpholsteryPrice, discountedMattressPrice, discountedMiscePrice, discountedAreaRugsPrice, discountedFloodPrice;
-    float subtotalCarpetPrice, subtotalUpholsteryPrice, subtotalMattressPrice, subtotalMiscePrice, subtotalAreaRugsPrice, subtotalFloodPrice;
+    float carpetDiscount, upholsteryDiscount, mattressDiscount, miscellaneousDiscount, areaRugsDiscount, floodDiscount, ductFurnaceDiscount;
+    float discountedCarpetPrice, discountedUpholsteryPrice, discountedMattressPrice, discountedMiscePrice, discountedAreaRugsPrice, discountedFloodPrice, discountedDuctFurnace;
+    float subtotalCarpetPrice, subtotalUpholsteryPrice, subtotalMattressPrice, subtotalMiscePrice, subtotalAreaRugsPrice, subtotalFloodPrice, subtotalDuctFurnace;
     
     float autospaDiscount;
     float discountedAutospaPrice;
@@ -62,9 +62,9 @@
 @property (assign, readwrite) NSMutableData* pdfData;
 
 @property (assign, nonatomic) float autospaDiscount, discountedAutospaPrice, subtotalAutospaPrice;
-@property (assign, nonatomic) float carpetDiscount, upholsteryDiscount, mattressDiscount, miscellaneousDiscount, areaRugsDiscount, floodDiscount;
-@property (assign, nonatomic) float discountedCarpetPrice, discountedUpholsteryPrice, discountedMattressPrice, discountedMiscePrice, discountedAreaRugsPrice, discountedFloodPrice;
-@property (assign, nonatomic) float subtotalCarpetPrice, subtotalUpholsteryPrice, subtotalMattressPrice, subtotalMiscePrice, subtotalAreaRugsPrice, subtotalFloodPrice;
+@property (assign, nonatomic) float carpetDiscount, upholsteryDiscount, mattressDiscount, miscellaneousDiscount, areaRugsDiscount, floodDiscount, ductFurnaceDiscount;
+@property (assign, nonatomic) float discountedCarpetPrice, discountedUpholsteryPrice, discountedMattressPrice, discountedMiscePrice, discountedAreaRugsPrice, discountedFloodPrice, discountedDuctFurnace;
+@property (assign, nonatomic) float subtotalCarpetPrice, subtotalUpholsteryPrice, subtotalMattressPrice, subtotalMiscePrice, subtotalAreaRugsPrice, subtotalFloodPrice, subtotalDuctFurnace;
 
 @property (assign, nonatomic) bool writePDF;
 @property (assign, nonatomic) NSMutableArray *invoiceSubviews;

@@ -185,7 +185,7 @@
     NSInteger noOfHours;
     float ratePerHr;
     
-    NSMutableArray* attributesList, *attributesListTwo, attributesListThree;
+    NSMutableArray* attributesList, *attributesListTwo, *attributesListThree;
     
     UIViewController* popoverVC;    // keep track of each UIViewController so it can be displayed for 'editing' purposes
 }

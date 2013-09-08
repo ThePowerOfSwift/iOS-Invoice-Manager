@@ -26,6 +26,7 @@
 @synthesize intChimneyBtn;
 @synthesize extChimneyBtn;
 @synthesize chimneyAccess;
+@synthesize itemDescrip;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,6 +57,7 @@
         notesField.textColor = [UIColor lightGrayColor];
         [notesField setDelegate:self];
         
+        itemDescrip = @"hello world !";
         // init vars in case error occurs
         [self setPrice:0];
         [self setAddonsOverallPrice:0];
@@ -87,6 +89,7 @@
         }
         
     }
+    
     //[self setNumberOfFurnaces:1];
     //[self setBrushCleanAddon:FALSE];
     /*if ([self brushCleanAddon]){
@@ -295,6 +298,8 @@
     // adding the price of the house area ( if the 'whip clean' package is selected - otherwise, just addons should be considered )
     if ([self houseAreaPrice]){
         [self setPrice:([self price] + [self houseAreaPrice])];
+        [self setItemDescrip:[NSString stringWithFormat:@"House Area: %f", 5.0]];
+        NSLog(@"ITEM NAME IS %@", [self itemDescrip]);
     }
     
     // adding the price of any extra furnaces ( if any )
@@ -724,9 +729,12 @@
         // [self brushCleanAddon]
         // [self addonList] objectAtIndex:<#(NSUInteger)#>]
         // [self chimneyAccess];
+        // [self itemName];
         
         ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
         newCell.serviceType = @"ductFurnaceCleaning";
+        NSLog(@"item name is %@", [self itemDescrip]);
+        newCell.name = [self itemDescrip];      // name, description, all info of this service to be written on the invoice
         newCell.rlength = [self houseArea];  // house area
         newCell.priceRate = [self houseAreaPrice]; // house area price
         newCell.quantity = [self numberOfFurnaces]; // number of furnaces
@@ -761,6 +769,7 @@
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
         
         [[self editingCell] setServiceType:@"ductFurnaceCleaning"];
+        [[self editingCell] setName:[self itemDescrip]];
         [[self editingCell] setRlength:[self houseArea]];
         [[self editingCell] setPriceRate:[self houseAreaPrice]];
         [[self editingCell] setQuantity:[self numberOfFurnaces]];

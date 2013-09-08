@@ -21,6 +21,7 @@
     id <OptionsDuctFurnaceCleanPVCDelegate> ADelegate;  // options view controller delegate
     
     // variables
+    NSString *itemDescrip;
     NSString *serviceType;  // '1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..
     NSString *serviceTypeRestorationID;
     NSString *notesAboutRoom;
@@ -47,7 +48,7 @@
 
 @property (assign, readwrite) NSInteger quantity;
 @property (assign, readwrite) float price, priceRate, houseArea, houseAreaPrice, addonsOverallPrice;
-@property (assign, readwrite) NSString *serviceType, *serviceTypeRestorationID, *notesAboutRoom, *chimneyAccess;
+@property (assign, readwrite) NSString *serviceType, *serviceTypeRestorationID, *notesAboutRoom, *chimneyAccess, *itemDescrip;
 @property (assign, readwrite) NSInteger numberOfFurnaces;
 @property (assign, readwrite) BOOL brushCleanAddon;
 @property (assign, readwrite) NSMutableArray *furnaceInformation, *addonList, *selectedAddonsList;
