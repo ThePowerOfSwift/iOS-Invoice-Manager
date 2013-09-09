@@ -47,7 +47,7 @@
 
 - (void)viewDidLoad
 {
-    NSLog(@"setting scrollviewer");
+    //NSLog(@"setting scrollviewer");
     [scrollViewer setScrollEnabled:YES];
     [scrollViewer setContentSize:CGSizeMake(768, 1024)];
     
@@ -59,7 +59,7 @@
     
     if (!invoiceSubviews){
         invoiceSubviews = [[NSMutableArray alloc] initWithCapacity:2];
-        NSLog(@"initiating mutable array..");
+        //NSLog(@"initiating mutable array..");
     }
     writePDF = false;
     
@@ -111,7 +111,7 @@
     
     [self createInvoice];
     
-    [self saveInvoiceToDatabase];
+    //[self saveInvoiceToDatabase];
 }
 
 -(IBAction) saveInvoiceToDatabase {
@@ -171,16 +171,16 @@
     
     ///pdfData = [NSMutableData dataWithCapacit
     
-    if (pdfData){
+    /*if (pdfData){
         UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
     } else {
         pdfData = [NSMutableData data];
         UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
     }
-    [pdfData retain];
+    [pdfData retain];*/
     
     // start drawing in pdf context
-    //UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/MightyCleanInvoice.pdf", CGRectZero, nil);
+    UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/MightyCleanInvoice.pdf", CGRectZero, nil);
     
     
     //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 1753, 1240), nil);
@@ -260,9 +260,13 @@
         // for each data cell of service 'i'
         for (int j = 0; j < [dataCellArray count]; j++){
             ServiceDataCell *data_cell = [dataCellArray objectAtIndex:j];
-            [self printSubservice:data_cell PosX:posX PosY:posY PdfX:pdfX PdfY:pdfY];
-            posY += 75.0;
-            pdfY += 30.0;
+            [self printSubservice:data_cell PosX:&posX PosY:&posY PdfX:&pdfX PdfY:&pdfY];
+            /*if ([[data_cell serviceType] isEqualToString:@"ductFurnaceCleaning"]){
+                posY += 600.0;
+                pdfY += 600.0;
+            }
+            posY += 135.0;
+            pdfY += 130.0;*/
             
             [self printSubserviceNotes:data_cell PosX:posX PosY:&posY PdfX:pdfX PdfY:&pdfY];
             
@@ -566,15 +570,12 @@
     
     CGFloat subserviceFontSize = 13.0f;
     
-    NSLog(@"notes are: %@", [data_cell notes]);
+    //NSLog(@"notes are: %@", [data_cell notes]);
     [serviceDataNotes setText:[NSString stringWithFormat:@"Notes: %@", [data_cell notes]]];
     
     [serviceDataNotes sizeToFit];
     int numLines = (int)(serviceDataNotes.frame.size.height/serviceDataNotes.font.leading);
-    NSLog(@"# of lines = %d", numLines);
-    
-
-    
+    //NSLog(@"# of lines = %d", numLines);
     
     // add the subview to the screen
     [mainView addSubview:serviceDataNotes];
@@ -587,9 +588,9 @@
     //*pdfy += 20.0;
 }
 
--(void) printSubservice: (ServiceDataCell*) data_cell PosX: (CGFloat) posx PosY: (CGFloat) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat) pdfy {
-    UILabel *serviceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 400.0f, 70.0f)];
-    UILabel *serviceDataLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfx, pdfy, 400.0f, 70.0f)];
+-(void) printSubservice: (ServiceDataCell*) data_cell PosX: (CGFloat*) posx PosY: (CGFloat*) posy PdfX: (CGFloat*) pdfx PdfY: (CGFloat*) pdfy {
+    UILabel *serviceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(*posx, *posy, 400.0f, 70.0f)];
+    UILabel *serviceDataLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(*pdfx, *pdfy, 400.0f, 70.0f)];
     
     [invoiceSubviews addObject:serviceDataLabel];
     [invoiceSubviews addObject:serviceDataLabelpdf];
@@ -601,8 +602,11 @@
     //[serviceNameLabelpdf setNumberOfLines:0];
     //[serviceNameLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
     
+    float extraPosy = 0;
+    float extraPdfy = 0;
+    
     NSString *servicetype = [data_cell serviceType];
-    NSLog(@"THE SERVICE TYPE IS %@", servicetype);
+    // NSLog(@"THE SERVICE TYPE IS %@", servicetype);
     
     if ([servicetype isEqualToString:@"carpet"]){
         subtotalCarpetPrice += [data_cell price];   // add price to subtotal
@@ -677,9 +681,33 @@
     } else if ([servicetype isEqualToString:@"ductFurnaceCleaning"]){
         subtotalDuctFurnace += [data_cell price];     // add price to subtotal
         discountedDuctFurnace = subtotalDuctFurnace - ductFurnaceDiscount;
-        [serviceDataLabel setText:[data_cell name]];
         
-        [self drawText:[NSString stringWithFormat: @"Package: %@, Car Type: %@\nquantity: %u",[data_cell name] , [data_cell itemAttribute], [data_cell quantity] ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        //UILabel *serviceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 400.0f, 70.0f)];
+        //[serviceDataLabel setFrame:CGRectMake(posx, posy, 400.0f, 180.0f)];
+        
+        [serviceDataLabel setText:[[data_cell attributesListTwo] objectAtIndex:23]];
+        [serviceDataLabel sizeToFit];
+        //[serviceDataLabelpdf setText:[[data_cell attributesListTwo] objectAtIndex:23]];
+        //[serviceDataLabelpdf sizeToFit];
+        int numLines = (int)(serviceDataLabel.frame.size.height/serviceDataLabel.font.leading);
+        
+        extraPosy = numLines * 15.0f;
+        extraPdfy = numLines * 13.0f;
+        //[serviceDataLabel sizeToFit];
+        NSLog(@"num of lines IS %u", numLines);
+        
+        //float extraHeight = 50.0f;
+        
+        [serviceDataLabelpdf setFrame:CGRectMake(*pdfx, (*pdfy + extraPdfy), serviceDataLabelpdf.frame.size.width, 70.0f + extraPdfy)];
+        
+        //NSLog(@"SCREEN: width, height, x, y of screen is %.02f, %.02f, %.02f, %.02f", serviceDataLabel.frame.size.width, serviceDataLabel.frame.size.height, serviceDataLabel.frame.origin.x, serviceDataLabel.frame.origin.y);
+        
+        //NSLog(@"PDF: width, height, x, y of screen is %.02f, %.02f, %.02f, %.02f", serviceDataLabelpdf.frame.size.width, serviceDataLabelpdf.frame.size.height, serviceDataLabelpdf.frame.origin.x, serviceDataLabelpdf.frame.origin.y);
+        
+        
+        [self drawText:[[data_cell attributesListTwo] objectAtIndex:23] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        //[self drawText:@"THIS IS THE START AND NOW ITS IN THE MIDDLE TWO THREE FOUR BLAH BLAH HEY DUDE FIFTH SIX SEVEN EIGHT NINE TEN ELEVEN TWELVE AND SO ON AND SO FORTH AND WE GO ON AND ON BLAH BLAH THIS IS ANOTHER TARPY PARAGRAPH, ENGLISH OH ENGLISH ! LETS KEEP GOING SEE WHERE EAT CAT DOG BAHAHA MINORITY ANOTHER REPORT TOM CRUISE SOME OTHER GUY WITH EYES, SCANNERS< ALLARRRMS LARGE MEN WITH GUNS SOME ROSE ANESTEHSIA IS SHE SUPPOSED TO BE DANGEROUS COMPARED TO THE GUY WHO SEEMS VERY CREEPY !" inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
+        //[serviceDataLabelpdf sizeToFit];
     }
     
     /*name = package name ( Bronze, Silver, Gold, Platinum )
@@ -693,15 +721,22 @@
     // add the subview to the screen
     [mainView addSubview:serviceDataLabel];
     
-    posx += 600.0;
-    pdfx += 625.0;
+    // *posx += 600.0;
+    // *pdfx += 625.0;
+    float pricePosx = *posx + 600.0;
+    float pricePdfx = *pdfx + 625.0;
     
     /* Print/draw the price of the subservice */
-    UILabel *priceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 150.0f, 70.0f)];
-    UILabel *priceDataLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfx, pdfy, 400.0f, 70.0f)];
+    UILabel *priceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(pricePosx, *posy, 150.0f, 70.0f)];
+    UILabel *priceDataLabelpdf = [[UILabel alloc] initWithFrame:CGRectMake(pricePdfx, *pdfy, 400.0f, 70.0f)];
     
     [priceDataLabel setFont:[UIFont systemFontOfSize:17.0f]];
     [priceDataLabel setText:[NSString stringWithFormat:@"$%.02f ", [data_cell price]]];
+    
+    if ([servicetype isEqualToString:@"ductFurnaceCleaning"]){
+        //[priceDataLabel setFrame:CGRectMake(posx, posy, 150.0f, 180.0f)];
+        [priceDataLabel sizeToFit];
+    }
     
     //[priceDataLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
     //[priceDataLabelpdf setTextAlignment:NSTextAlignmentCenter];
@@ -711,15 +746,17 @@
     [invoiceSubviews addObject:priceDataLabelpdf];
     
     [mainView addSubview:priceDataLabel];
-    [self drawText:[NSString stringWithFormat:@"$%.02f ", [data_cell price]] inFrame:CGRectMake(pdfx, pdfy, priceDataLabelpdf.frame.size.width, priceDataLabelpdf.frame.size.height) withFontSize:subserviceFontSize];
+    [self drawText:[NSString stringWithFormat:@"$%.02f ", [data_cell price]] inFrame:priceDataLabelpdf.frame withFontSize:subserviceFontSize];
+    
+    *posy += 135.0 + extraPosy;
+    *pdfy += 40.0 + extraPdfy;
 }
 
 /* if current y ( posy ) is 200 pixels within the signatureImageView, then the 'mainView' needs to be extended. */
 -(void) adjustScreenSize_CurrentY: (CGFloat) posy {
     if ((posy + 200) > signatureImageView.frame.size.height){
-        NSLog(@" ++ INCREASING SCROLLVIEWER HEIGHT ++ ");
+        //NSLog(@" ++ INCREASING SCROLLVIEWER HEIGHT ++ ");
         [mainView setContentSize:CGSizeMake(mainView.frame.size.width, posy + 600)];
-        //[signatureImageView setFrame:CGRectMake(28.0f, posY + 200, 331.0f, 257.0f)];
         CGFloat maxY = posy + 600;
         [signatureImageView setFrame:CGRectMake(28.0f, maxY - 446.0f,331.0f, 257.0f)];
         [signaturebtn setFrame:CGRectMake(28.0f + 331.0f + 30.0f, maxY - 246.0f, 190.0f, 43.0f)];
@@ -779,7 +816,7 @@
     [addDiscount setFrame:CGRectMake(px, py, 139.0f, 43.0f)];
     [addDiscount setTitle:@"Add Discount" forState:UIControlStateNormal];
     [addDiscount setRestorationIdentifier:service_name];
-    NSLog(@"()()()ADD DISCOUNT restoration id is %@", service_name);
+    //NSLog(@"()()()ADD DISCOUNT restoration id is %@", service_name);
     [addDiscount addTarget:self action:@selector(displayDiscountPopover:)
           forControlEvents:UIControlEventTouchDown];
     [mainView addSubview:addDiscount];  // add the uibutton to the 'mainView'
@@ -968,7 +1005,7 @@
     
     //Draw some text for the page.
     //[self drawText];
-    NSLog(@"width: %f, %f", pageSize.width, pageSize.height);
+    //NSLog(@"width: %f, %f", pageSize.width, pageSize.height);
     [self drawText:@"Hello world2s" inFrame:CGRectMake(40, 80, 100, 50) withFontSize:23.0f];
     UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 500, 1000), nil);
     [self drawText:@"Hello world" inFrame:CGRectMake(40, 80, 100, 80) withFontSize:23.0f];

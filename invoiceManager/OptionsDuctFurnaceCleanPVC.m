@@ -53,11 +53,11 @@
         [self restoreSavedSelections];
     } else {
         // set up the notes field
+        [self setItemDescrip:@"initial !"];
         notesField.text = @"Place notes and comments here";
         notesField.textColor = [UIColor lightGrayColor];
         [notesField setDelegate:self];
         
-        itemDescrip = @"hello world !";
         // init vars in case error occurs
         [self setPrice:0];
         [self setAddonsOverallPrice:0];
@@ -81,9 +81,9 @@
             [furnaceInformation addObject:[NSString stringWithFormat:@""]];
         }
         
-        addonList = [[NSMutableArray alloc] initWithCapacity:20];       // have to init at least 16; inserting objects at certain indices
-        selectedAddonsList = [[NSMutableArray alloc] initWithCapacity:20];
-        for (NSInteger i = 0; i < 23; i++){
+        addonList = [[NSMutableArray alloc] initWithCapacity:23];       // have to init at least 16; inserting objects at certain indices
+        selectedAddonsList = [[NSMutableArray alloc] initWithCapacity:23];
+        for (NSInteger i = 0; i < 24; i++){
             [addonList addObject:[NSString stringWithFormat:@""]];
             [selectedAddonsList addObject:[NSNumber numberWithBool:FALSE]];
         }
@@ -104,6 +104,7 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    NSLog(@"PROBLEMS  WITH MEMOR Y!@!!");
 }
 
 // restore the selected gui buttons to the ones saved in the 'editingCell'
@@ -294,30 +295,35 @@
 -(void) calculateOverallPrice {
     // set price to 0 initially
     [self setPrice:0.0];
+    [self setItemDescrip:@""];
     
     // adding the price of the house area ( if the 'whip clean' package is selected - otherwise, just addons should be considered )
     if ([self houseAreaPrice]){
         [self setPrice:([self price] + [self houseAreaPrice])];
-        [self setItemDescrip:[NSString stringWithFormat:@"House Area: %f", 5.0]];
-        NSLog(@"ITEM NAME IS %@", [self itemDescrip]);
+        //[self setItemDescrip:[NSString stringWithFormat:@"This is the startwef awef awe fawe faw efawe fawe fawf wef awef awe fawe faw efawe fawe fawf wef awef awe fawe faw efawe fawe fawf wef awef awe fawe faw efawe fawe fawf  wef awef awe fawe faw efawe fawe fawf awf wae fwf23fa32f a23f a23f a23f 23a f3a2  32fHouse Area: %f and this is the end of THE Long long long paragraph which is supposed to determine the length of my label's frame. get it ? now blah blah and lets go hey dude cmon go ha ha ter rradactil pterdor", [self houseArea]]];
+        [self setItemDescrip:[NSString stringWithFormat:@"House Area: %.02f square feet", [self houseArea]]];
+        
+        NSLog(@"ITEM NAME IS %@, %f", [self itemDescrip], [self houseArea]);
     }
     
     // adding the price of any extra furnaces ( if any )
     if ([self numberOfFurnaces] > 0){   // first furnace included in the package for free; any additional furnace is +$49.95.
         float furnacesExtraCost = ( [self numberOfFurnaces] - 1 ) * 49.95;
         [self setPrice:([self price] + furnacesExtraCost)];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nNumber of Furnaces: %u", [self itemDescrip], [self numberOfFurnaces]]];
     }
     
     // adding the price of the 'brush clean addon' ( if selected )
     if ([self brushCleanAddon]){
         [self setPrice:([self price] + 99.95)];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nBrush Clean Addon (+$99.95)", [self itemDescrip]]];
     }
     
     // addonList: [0] = main lines quantity; [1] = addtn. main lines quantity; [2] = hot vents quantity; [3] = cold vents quantity; [4] = addtn vents quantity;
     // [5] = dryer vent quantity; [6] = hot water tank quantity; [7] = central vac quantity; [8] = central vac & dryer vent quantity;
     // [9] = heat recover ventilation box quantity; [10] = humidifier quantity; [11] = sanitizer quantity; [12] = air conditioner quantity; [13] = fire place quantity;
     // [14] = chimney quantity; [15] = crawl space quantity; [16] = miscellaneous quantity; [17] = hot water tank price; [18] = sanitizer price; [19] = fire place price;
-    // [20] = chimney price; [21] = crawl space price; [22] = miscellaneous price;
+    // [20] = chimney price; [21] = crawl space price; [22] = miscellaneous price; [23] = full item description
     
     // selectedAddonsList: [0] = dryer vent; [1] = hot water tank; [2] = central vac; [3] = central vac & dryer vent; [4] = heat recover ventilation box; [5] = humidifier;
     // [6] = sanitizer; [7] = air conditioner; [8] = fire place; [9] = chimney; [10] = crawl space; [11] = miscellaneous
@@ -325,44 +331,134 @@
     addonsOverallPrice = 0; // set it to 0 initially, then check and add up each addon price ( if selected )
     if ([[selectedAddonsList objectAtIndex:0] boolValue]){
         addonsOverallPrice += 19.95;    // dryer vent addon price
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Dryer Vent Addon(s) (+$19.95)", [self itemDescrip], [[addonList objectAtIndex:5] integerValue]]];
     }
     
     if ([[selectedAddonsList objectAtIndex:1] boolValue]){  // hot water tank addon price
         addonsOverallPrice += [[addonList objectAtIndex:6] integerValue] * [[addonList objectAtIndex:17] floatValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Hot Water Tank Addon(s) (+$%.02f)", [self itemDescrip], [[addonList objectAtIndex:6] integerValue], [[addonList objectAtIndex:17] floatValue] ]];
         //NSLog(@" ! ! ! ! ! it is %f", ( [[addonList objectAtIndex:6] integerValue] * [[addonList objectAtIndex:17] floatValue] ) );
     }
     
     if ([[selectedAddonsList objectAtIndex:2] boolValue]){  // central vac addon price
         addonsOverallPrice += 49.95  * [[addonList objectAtIndex:7] integerValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Central Vac Addon(s) (+$49.95)", [self itemDescrip], [[addonList objectAtIndex:7] integerValue]]];
     }
     if ([[selectedAddonsList objectAtIndex:3] boolValue]){  // central vac & dryer vent addon price
         addonsOverallPrice += 39.95 * [[addonList objectAtIndex:8] integerValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Central Vac & Dryer Vent Addon(s) (+$39.95)", [self itemDescrip], [[addonList objectAtIndex:8] integerValue]]];
     }
     if ([[selectedAddonsList objectAtIndex:4] boolValue]){  // heat recover ventilation box addon price
         addonsOverallPrice += 49.95 * [[addonList objectAtIndex:9] integerValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Heat Recover Ventilation Box Addon(s) (+$49.95)", [self itemDescrip], [[addonList objectAtIndex:9] integerValue]]];
     }
     if ([[selectedAddonsList objectAtIndex:5] boolValue]){  // humidifier addon price
         addonsOverallPrice += 39.95 * [[addonList objectAtIndex:10] integerValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Humidifier Addon(s) (+$39.95)", [self itemDescrip], [[addonList objectAtIndex:10] integerValue]]];
     }
     if ([[selectedAddonsList objectAtIndex:6] boolValue]){  // sanitizer addon price
         addonsOverallPrice += [[addonList objectAtIndex:11] integerValue] * [[addonList objectAtIndex:18] floatValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Sanitizer Addon(s) (+$%.02f)", [self itemDescrip], [[addonList objectAtIndex:11] integerValue], [[addonList objectAtIndex:18] floatValue]]];
     }
     if ([[selectedAddonsList objectAtIndex:7] boolValue]){  // air conditioner addon price
         addonsOverallPrice += 49.95 * [[addonList objectAtIndex:12] integerValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Air Conditioner Addon(s) (+$49.95)", [self itemDescrip], [[addonList objectAtIndex:12] integerValue]]];
     }
     if ([[selectedAddonsList objectAtIndex:8] boolValue]){  // fire place addon price
         addonsOverallPrice += [[addonList objectAtIndex:13] integerValue] * [[addonList objectAtIndex:19] floatValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Fire Place Addon(s) (+$%.02f)", [self itemDescrip], [[addonList objectAtIndex:13] integerValue], [[addonList objectAtIndex:19] floatValue]]];
     }
     if ([[selectedAddonsList objectAtIndex:9] boolValue]){  // chimney addon price
         addonsOverallPrice += [[addonList objectAtIndex:14] integerValue] * [[addonList objectAtIndex:20] floatValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Chimney Addon(s) (%@) (+$%.02f)", [self itemDescrip], [[addonList objectAtIndex:14] integerValue], [self chimneyAccess], [[addonList objectAtIndex:20] floatValue]]];
     }
     if ([[selectedAddonsList objectAtIndex:10] boolValue]){ // crawl space addon price
         addonsOverallPrice += [[addonList objectAtIndex:15] integerValue] * [[addonList objectAtIndex:21] floatValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Crawl Space Addon(s) (+$%.02f)", [self itemDescrip], [[addonList objectAtIndex:15] integerValue], [[addonList objectAtIndex:21] floatValue]]];
     }
     if ([[selectedAddonsList objectAtIndex:11] boolValue]){ // miscellaneous addon price
         addonsOverallPrice += [[addonList objectAtIndex:16] integerValue] * [[addonList objectAtIndex:22] floatValue];
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\n%u Miscellaneous Addon(s) (+$%.02f)", [self itemDescrip], [[addonList objectAtIndex:16] integerValue], [[addonList objectAtIndex:22] floatValue]]];
         NSLog(@" ! ! ! ! ! it is %f", ( [[addonList objectAtIndex:16] integerValue] * [[addonList objectAtIndex:22] floatValue] ) );
     }
+    
+    // addonList: [0] = main lines quantity; [1] = addtn. main lines quantity; [2] = hot vents quantity; [3] = cold vents quantity; [4] = addtn vents quantity;
+    // [5] = dryer vent quantity; [6] = hot water tank quantity; [7] = central vac quantity; [8] = central vac & dryer vent quantity;
+    // [9] = heat recover ventilation box quantity; [10] = humidifier quantity; [11] = sanitizer quantity; [12] = air conditioner quantity; [13] = fire place quantity;
+    // [14] = chimney quantity; [15] = crawl space quantity; [16] = miscellaneous quantity; [17] = hot water tank price; [18] = sanitizer price; [19] = fire place price;
+    // [20] = chimney price; [21] = crawl space price; [22] = miscellaneous price; [23] = full item description
+    
+    [self setItemDescrip:[NSString stringWithFormat:@"%@\n\nFurnace Make: %@, Filter: %@, Serial No: %@, Model: %@, Last Serviced: %@, Fan Belt: %@ \n", [self itemDescrip], [furnaceInformation objectAtIndex:0], [furnaceInformation objectAtIndex:1], [furnaceInformation objectAtIndex:2], [furnaceInformation objectAtIndex:3], [furnaceInformation objectAtIndex:4], [furnaceInformation objectAtIndex:5]]];
+    
+    // furnaceInformation: [0] = furnace Make; [1] = Filter No; [2] = Serial No; [3] = Model; [4] = Last Serviced; [5] = Fan Belt
+    if ([[addonList objectAtIndex:0] integerValue] > 0){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nMain Lines: %u", [self itemDescrip], [[addonList objectAtIndex:0] integerValue]]];
+    }
+    
+    if ([[addonList objectAtIndex:1] integerValue] > 0){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nAddtn. Main Lines: %u", [self itemDescrip], [[addonList objectAtIndex:1] integerValue]]];
+    }
+    
+    if ( ([[addonList objectAtIndex:2] integerValue] > 0 ) || ([[addonList objectAtIndex:3] integerValue] > 0 ) ){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nHot Vents: %u, Cold Vents: %u", [self itemDescrip], [[addonList objectAtIndex:2] integerValue], [[addonList objectAtIndex:3] integerValue]]];
+    }
+    
+    if ([[addonList objectAtIndex:4] integerValue] > 0){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nAddtn. Vents: %u", [self itemDescrip], [[addonList objectAtIndex:4] integerValue]]];
+    }
+    
+    // selectedAddonsList: [0] = dryer vent; [1] = hot water tank; [2] = central vac; [3] = central vac & dryer vent; [4] = heat recover ventilation box; [5] = humidifier;
+    // [6] = sanitizer; [7] = air conditioner; [8] = fire place; [9] = chimney; [10] = crawl space; [11] = miscellaneous
+    
+    /*if ([[selectedAddonsList objectAtIndex:0] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nDryer Vents: %u", [self itemDescrip], [[addonList objectAtIndex:5] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:1] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nHot Water Tanks: %u", [self itemDescrip], [[addonList objectAtIndex:6] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:2] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nCentral Vac: %u", [self itemDescrip], [[addonList objectAtIndex:7] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:3] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nCentral Vac & Dryer Vents: %u", [self itemDescrip], [[addonList objectAtIndex:8] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:4] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nHeat Recover Ventilation Box(es): %u", [self itemDescrip], [[addonList objectAtIndex:9] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:5] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nHumidifiers: %u", [self itemDescrip], [[addonList objectAtIndex:10] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:6] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nSanitizers: %u", [self itemDescrip], [[addonList objectAtIndex:11] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:7] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nAir Conditioners: %u", [self itemDescrip], [[addonList objectAtIndex:12] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:8] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nFire Places: %u", [self itemDescrip], [[addonList objectAtIndex:13] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:9] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nChimneys: %u", [self itemDescrip], [[addonList objectAtIndex:14] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:10] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nCrawl Spaces: %u", [self itemDescrip], [[addonList objectAtIndex:15] integerValue]]];
+    }
+    
+    if ([[selectedAddonsList objectAtIndex:11] boolValue]){
+        [self setItemDescrip:[NSString stringWithFormat:@"%@\nMiscellaneous Quantity: %u", [self itemDescrip], [[addonList objectAtIndex:16] integerValue]]];
+    }*/
+    
+    [addonList replaceObjectAtIndex:23 withObject:itemDescrip];
     
     // add the overall addons price to the price
     [self setPrice:([self price] + addonsOverallPrice)];
@@ -609,7 +705,7 @@
     // [5] = dryer vent quantity; [6] = hot water tank quantity; [7] = central vac quantity; [8] = central vac & dryer vent quantity;
     // [9] = heat recover ventilation box quantity; [10] = humidifier quantity; [11] = sanitizer quantity; [12] = air conditioner quantity; [13] = fire place quantity;
     // [14] = chimney quantity; [15] = crawl space quantity; [16] = miscellaneous quantity; [17] = hot water tank price; [18] = sanitizer price; [19] = fire place price;
-    // [20] = chimney price; [21] = crawl space price; [22] = miscellaneous price;
+    // [20] = chimney price; [21] = crawl space price; [22] = miscellaneous price; [23] = full item description
     //
     
     UITextField *info = (UITextField *) sender;
@@ -718,7 +814,7 @@
         // [5] = dryer vent quantity; [6] = hot water tank quantity; [7] = central vac quantity; [8] = central vac & dryer vent quantity;
         // [9] = heat recover ventilation box quantity; [10] = humidifier quantity; [11] = sanitizer quantity; [12] = air conditioner quantity; [13] = fire place quantity;
         // [14] = chimney quantity; [15] = crawl space quantity; [16] = miscellaneous quantity; [17] = hot water tank price; [18] = sanitizer price; [19] = fire place price;
-        // [20] = chimney price; [21] = crawl space price; [22] = miscellaneous price;
+        // [20] = chimney price; [21] = crawl space price; [22] = miscellaneous price; [23] = full item description
         
         // selectedAddonsList: [0] = dryer vent; [1] = hot water tank; [2] = central vac; [3] = central vac & dryer vent; [4] = heat recover ventilation box; [5] = humidifier;
         // [6] = sanitizer; [7] = air conditioner; [8] = fire place; [9] = chimney; [10] = crawl space; [11] = miscellaneous
@@ -733,8 +829,8 @@
         
         ServiceDataCell *newCell = [[ServiceDataCell alloc] init];
         newCell.serviceType = @"ductFurnaceCleaning";
-        NSLog(@"item name is %@", [self itemDescrip]);
-        newCell.name = [self itemDescrip];      // name, description, all info of this service to be written on the invoice
+        NSLog(@"item name is %@", [addonList objectAtIndex:23]);
+        // newCell.name = [self itemDescrip];      // name, description, all info of this service to be written on the invoice
         newCell.rlength = [self houseArea];  // house area
         newCell.priceRate = [self houseAreaPrice]; // house area price
         newCell.quantity = [self numberOfFurnaces]; // number of furnaces
@@ -769,7 +865,7 @@
     } else if ([[sender restorationIdentifier] isEqualToString:@"edit"]){
         
         [[self editingCell] setServiceType:@"ductFurnaceCleaning"];
-        [[self editingCell] setName:[self itemDescrip]];
+        //[[self editingCell] setName:[self itemDescrip]];
         [[self editingCell] setRlength:[self houseArea]];
         [[self editingCell] setPriceRate:[self houseAreaPrice]];
         [[self editingCell] setQuantity:[self numberOfFurnaces]];
@@ -789,7 +885,5 @@
         [ADelegate updateDuctFurnaceCleanDataTable:self editType:@"cancel" withServiceCell:nil];
     }
 }
-
-
 
 @end
