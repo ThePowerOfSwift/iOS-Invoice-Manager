@@ -52,6 +52,10 @@
 		8946358D174421DE00CF60B8 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8946358C174421DE00CF60B8 /* CustomTableViewCell.m */; };
 		8952344E17C80A6700201FFC /* OptionsWindshieldCrackPVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8952344D17C80A6700201FFC /* OptionsWindshieldCrackPVC.m */; };
 		89674AD617572AB600461BC3 /* SignaturePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89674AD517572AB600461BC3 /* SignaturePopoverVC.m */; };
+		896BF29917DEF8BA005E2631 /* introAutoSpaBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BF29517DEF8BA005E2631 /* introAutoSpaBtn.png */; };
+		896BF29A17DEF8BA005E2631 /* introAutoSpaBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BF29617DEF8BA005E2631 /* introAutoSpaBtn@2x.png */; };
+		896BF29B17DEF8BA005E2631 /* introCarpetCleaningBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BF29717DEF8BA005E2631 /* introCarpetCleaningBtn.png */; };
+		896BF29C17DEF8BA005E2631 /* introCarpetCleaningBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BF29817DEF8BA005E2631 /* introCarpetCleaningBtn@2x.png */; };
 		896D045B17C8059E000FBDB6 /* OptionsAluminumMetalPVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 896D045A17C8059E000FBDB6 /* OptionsAluminumMetalPVC.m */; };
 		898994251742A4D7004D0A85 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 898994241742A4D7004D0A85 /* UIKit.framework */; };
 		898994271742A4D7004D0A85 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 898994261742A4D7004D0A85 /* Foundation.framework */; };
@@ -250,6 +254,10 @@
 		8952344D17C80A6700201FFC /* OptionsWindshieldCrackPVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsWindshieldCrackPVC.m; sourceTree = "<group>"; };
 		89674AD417572AB500461BC3 /* SignaturePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignaturePopoverVC.h; sourceTree = "<group>"; };
 		89674AD517572AB600461BC3 /* SignaturePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignaturePopoverVC.m; sourceTree = "<group>"; };
+		896BF29517DEF8BA005E2631 /* introAutoSpaBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = introAutoSpaBtn.png; sourceTree = "<group>"; };
+		896BF29617DEF8BA005E2631 /* introAutoSpaBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "introAutoSpaBtn@2x.png"; sourceTree = "<group>"; };
+		896BF29717DEF8BA005E2631 /* introCarpetCleaningBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = introCarpetCleaningBtn.png; sourceTree = "<group>"; };
+		896BF29817DEF8BA005E2631 /* introCarpetCleaningBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "introCarpetCleaningBtn@2x.png"; sourceTree = "<group>"; };
 		896D045917C8059E000FBDB6 /* OptionsAluminumMetalPVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsAluminumMetalPVC.h; sourceTree = "<group>"; };
 		896D045A17C8059E000FBDB6 /* OptionsAluminumMetalPVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsAluminumMetalPVC.m; sourceTree = "<group>"; };
 		898994201742A4D7004D0A85 /* invoiceManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = invoiceManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -568,6 +576,10 @@
 		8989D25F17431419000F11BF /* images */ = {
 			isa = PBXGroup;
 			children = (
+				896BF29517DEF8BA005E2631 /* introAutoSpaBtn.png */,
+				896BF29617DEF8BA005E2631 /* introAutoSpaBtn@2x.png */,
+				896BF29717DEF8BA005E2631 /* introCarpetCleaningBtn.png */,
+				896BF29817DEF8BA005E2631 /* introCarpetCleaningBtn@2x.png */,
 				8999597F17C7FD24005F2CF9 /* checkboxNo6.png */,
 				8999598017C7FD24005F2CF9 /* checkboxNo6@2x.png */,
 				8999598117C7FD24005F2CF9 /* checkboxYes6.png */,
@@ -969,6 +981,10 @@
 				8999598417C7FD24005F2CF9 /* checkboxNo6@2x.png in Resources */,
 				8999598517C7FD24005F2CF9 /* checkboxYes6.png in Resources */,
 				8999598617C7FD24005F2CF9 /* checkboxYes6@2x.png in Resources */,
+				896BF29917DEF8BA005E2631 /* introAutoSpaBtn.png in Resources */,
+				896BF29A17DEF8BA005E2631 /* introAutoSpaBtn@2x.png in Resources */,
+				896BF29B17DEF8BA005E2631 /* introCarpetCleaningBtn.png in Resources */,
+				896BF29C17DEF8BA005E2631 /* introCarpetCleaningBtn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
