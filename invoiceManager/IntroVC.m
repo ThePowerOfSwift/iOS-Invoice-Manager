@@ -14,6 +14,8 @@
 
 @implementation IntroVC
 
+@synthesize serviceSelected;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,6 +29,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [self setServiceSelected:@"carpet"];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -37,6 +41,35 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// tag = 2 for the carpet buttons, tag = 3 for autospa, tag = 4 for duct furnace buttons ( the arrow and the specific service image
+-(IBAction)selectService:(id)sender {
+    // save the selected service type
+    [self setServiceSelected:[sender restorationIdentifier]];
+    for (UIImageView *aSubview2 in self.view.subviews){
+        if ([aSubview2 isKindOfClass:[UIImageView class]]){            
+            if ([[sender restorationIdentifier] isEqualToString:@"carpetCare"]){
+                if ([aSubview2 tag] == 2){
+                    [aSubview2 setHidden:FALSE];
+                } else if ( ([aSubview2 tag] == 3) || ([aSubview2 tag] == 4) ){
+                    [aSubview2 setHidden:TRUE];
+                }
+            } else if ([[sender restorationIdentifier] isEqualToString:@"autoSpa"]){
+                if ([aSubview2 tag] == 3){
+                    [aSubview2 setHidden:FALSE];
+                } else if ( ([aSubview2 tag] == 2) || ([aSubview2 tag] == 4) ){
+                    [aSubview2 setHidden:TRUE];
+                }
+            } else if ([[sender restorationIdentifier] isEqualToString:@"ductFurnaceCleaning"]){
+                if ([aSubview2 tag] == 4){
+                    [aSubview2 setHidden:FALSE];
+                } else if ( ([aSubview2 tag] == 2) || ([aSubview2 tag] == 3) ){
+                    [aSubview2 setHidden:TRUE];
+                }
+            }
+        }
+    }
 }
 
 -(IBAction) goToNextVC:(id)sender {
@@ -56,7 +89,7 @@
     }
     
     // can be one of the three: 'carpetCare', 'autoSpa' or 'ductFurnaceCleaning'
-    [invMngr setCurrCompanyName:[sender restorationIdentifier]];
+    [invMngr setCurrCompanyName:[self serviceSelected]];
     
     [self.navigationController pushViewController:[invMngr firstVC] animated:YES];
     
