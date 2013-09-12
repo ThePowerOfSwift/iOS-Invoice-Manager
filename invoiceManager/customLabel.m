@@ -29,7 +29,6 @@
 */
 
 -(void) drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
-    NSLog(@"DOOES IT EVER GET HERE???");
     BOOL isPDF = !CGRectIsEmpty(UIGraphicsGetPDFContextBounds());
     if (!layer.shouldRasterize && isPDF){
         [self drawRect: self.bounds];

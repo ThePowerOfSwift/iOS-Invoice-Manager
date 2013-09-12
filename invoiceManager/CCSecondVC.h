@@ -21,12 +21,12 @@
 	BOOL mouseSwiped;
 	int mouseMoved;
     
-    UIPopoverController *popover;
+    UIPopoverController *popoverController;
 }
 
 @property (assign, readwrite) IBOutlet UIView *hey;
 @property (assign, readwrite) IBOutlet UIImageView *selectedBtnBgThree;
-@property (nonatomic, assign) UIPopoverController *popover;
+@property (nonatomic, assign) UIPopoverController *popoverController;
 
 -(IBAction) gotoNextView;
 -(IBAction) gotoLastView;

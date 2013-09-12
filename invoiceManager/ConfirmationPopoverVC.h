@@ -22,6 +22,6 @@
 @property (assign, readwrite) id serviceSender;
 @property (nonatomic, assign) id <ConfirmationPopoverVCDelegate> confirmationDelegate;
 
--(IBAction)selectAction:(id)sender;
+-(IBAction) selectAction:(id)sender;
 
 @end

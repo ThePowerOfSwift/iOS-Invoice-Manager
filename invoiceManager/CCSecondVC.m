@@ -16,7 +16,7 @@
 
 @synthesize hey;
 @synthesize selectedBtnBgThree;
-@synthesize popover;
+@synthesize popoverController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,7 +30,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     
     // load saved values (IF ANY)
     InvoiceManager *invoiceMngr = [InvoiceManager sharedInvoiceManager];
@@ -51,7 +50,7 @@
     
 }
 
-- (void)didReceiveMemoryWarning
+-(void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -62,7 +61,7 @@
     //NSLog(@"dismiss keyboard?");
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	
 	mouseSwiped = NO;
 	UITouch *touch = [touches anyObject];
@@ -77,14 +76,12 @@
     
 }
 
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	mouseSwiped = YES;
 	
 	UITouch *touch = [touches anyObject];
 	CGPoint currentPoint = [touch locationInView:self.view];
 	currentPoint.y -= 20;
-	
 	
 	UIGraphicsBeginImageContext(self.view.frame.size);
 	[drawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -116,8 +113,7 @@
 		drawImage.image = nil;
 		return;
 	}
-	
-	
+
 	if(!mouseSwiped) {
 		UIGraphicsBeginImageContext(self.view.frame.size);
 		[drawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -132,7 +128,6 @@
 		UIGraphicsEndImageContext();
 	}
 }
-
 
 // only supports UIButton's right now
 -(IBAction) onChoosingGreenProducts: (id) sender {
@@ -182,16 +177,11 @@
         UITextField* rateSQ = (UITextField*) sender;
         //invoiceMngr.ratePerSquareFeet = [ratePerSqFeet.text floatValue];
         invoiceMngr.ratePerSquareFeet = [rateSQ.text floatValue];
-        NSLog(@"rate is %f", invoiceMngr.ratePerSquareFeet);
     }
 }
 
 // change button background when user clicks it
 -(IBAction)onCustomTouchDown:(id)sender {
-    /*NSLog(@"creating pdf..");
-     InvoiceManager *blah = [InvoiceManager sharedInvoiceManager];
-     [blah createPDFfromUIView:hey saveToDocumentsWithFileName:@"justASimplePdf.pdf"];
-     */
     InvoiceManager *invoiceMngr = [InvoiceManager sharedInvoiceManager];    // get invoice manager instance ( will be used to add/remove data )
     if ([sender activeBtn] == 0){
         [sender setBackgroundImage:[UIImage imageNamed:@"checkboxYes6.png"] forState:UIControlStateNormal];
@@ -214,19 +204,20 @@
         
         ConfirmationPopoverVC *confirmPopover = (ConfirmationPopoverVC*) [storyboard instantiateViewControllerWithIdentifier:@"ConfirmationPopoverVC"];
         
-        if (popover){
+        if (popoverController){
             //NSLog(@"popover EXISTS !");
-            [popover setContentViewController:confirmPopover];
+            [popoverController setContentViewController:confirmPopover];
         }else {
             //NSLog(@"popover getting INITIALIZED ! !");
-            popover = [[UIPopoverController alloc] initWithContentViewController:confirmPopover];
+            popoverController = [[UIPopoverController alloc] initWithContentViewController:confirmPopover];
         }
         
         confirmPopover.confirmationDelegate = self; // set the popover's delegate to this ui vc (IMPORTANT!)
         //confirmPopover.serviceSender = sender;
         [confirmPopover setServiceSender:sender];
         //NSLog(@"AAAAAAAAA %@", [[confirmPopover serviceSender] restorationIdentifier]);
-        [popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popoverController setPopoverContentSize:CGSizeMake(400, 140)];
+        [popoverController presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         
         /*[sender setBackgroundImage:[UIImage imageNamed:@"checkboxNo6.png"] forState:UIControlStateNormal];
          
@@ -254,7 +245,7 @@
         // do nothing
     }
     
-    [popover dismissPopoverAnimated:NO];
+    [popoverController dismissPopoverAnimated:NO];
 }
 
 // saves the data currently displayed on the page

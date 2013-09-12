@@ -79,7 +79,7 @@
 @property (nonatomic, assign) IBOutlet UIView *signatureView;
 
 
--(IBAction)displaySigPopover: (id) sender;
+-(IBAction) displaySigPopover: (id) sender;
 -(IBAction) makeMeAPDF;
 -(IBAction) sendMail;
 -(IBAction) gotoLastView;

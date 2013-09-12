@@ -15,6 +15,6 @@
 @property (assign, readwrite) NSString *serviceSelected;
 
 -(IBAction) goToNextVC:(id)sender;
--(IBAction)selectService:(id)sender;
+-(IBAction) selectService:(id)sender;
 
 @end

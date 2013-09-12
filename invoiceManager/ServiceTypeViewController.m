@@ -507,6 +507,7 @@
                 
             }
         }
+        
         if ([aSubview2 tag] == 20){
             // NSLog(@"SET IT TO BLACK !");
             [aSubview2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -603,7 +604,7 @@
     //OptionsPopoverVC *blah = (OptionsPopoverVC*) popoverToEdit;
     //[blah setEditMode:true];
     
-    NSLog(@"RESTORATION ID is %@", [popoverToEdit restorationIdentifier]);
+    //NSLog(@"RESTORATION ID is %@", [popoverToEdit restorationIdentifier]);
     if (popover){
         [popover setContentViewController:popovervcEdit];
     }else {

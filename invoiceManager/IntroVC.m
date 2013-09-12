@@ -34,7 +34,8 @@
 }
 
 -(void) viewDidAppear:(BOOL)animated {
-
+    InvoiceManager* invMngr = [InvoiceManager sharedInvoiceManager];
+    NSLog(@"curr company: %@", [invMngr currCompanyName]);
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +80,7 @@
         // NSLog(@">>> its already initiated !");
         // [self.navigationController pushViewController:[invMngr firstVC] animated:YES];
     } else {
-        NSLog(@">>> it's NOT initiated !");
+        // NSLog(@">>> it's NOT initiated !");
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil];
         ViewController *firstVCinst = (ViewController*) [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
         [invMngr setFirstVC:firstVCinst];
@@ -89,6 +90,10 @@
     }
     
     // can be one of the three: 'carpetCare', 'autoSpa' or 'ductFurnaceCleaning'
+    if (![[invMngr currCompanyName] isEqualToString:[self serviceSelected]] ){
+        NSLog(@"reset all !");
+        [invMngr resetAllServices];
+    }
     [invMngr setCurrCompanyName:[self serviceSelected]];
     
     [self.navigationController pushViewController:[invMngr firstVC] animated:YES];

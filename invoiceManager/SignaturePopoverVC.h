@@ -33,9 +33,8 @@
 
 @property (assign, nonatomic) IBOutlet UIImageView *mainImage;
 @property (assign, nonatomic) IBOutlet UIImageView *tempDrawImage;
-
 @property (nonatomic, assign) id <SignaturePopoverVCDelegate> signatureDelegate;
 
-
 -(IBAction) saveOrCancel:(id) sender;
+
 @end

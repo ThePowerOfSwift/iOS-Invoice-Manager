@@ -36,7 +36,7 @@ static InvoiceManager *shared = NULL;
         [self setCustomerPhoneNoTwo:@"(Empty)"];
         [self setCustomerReferredBy:@"(Empty)"];
         
-        [self setBuildingState:@"Vacant State"];          // 'Furnished State', 'Vacant State' or 'Mobile State'
+        [self setBuildingState:@"Vacant State"];             // 'Furnished State', 'Vacant State' or 'Mobile State'
         [self setUsingProductType:@"Normal Products"];       // 'Normal Products' or 'Green Products' products
         [self setTypeOfBuilding:@"Residential Building"];    // 'Residential Building', 'Commercial Building' or other
         [self setInvoiceNo:@"(Empty)"];
@@ -93,6 +93,10 @@ static InvoiceManager *shared = NULL;
     [listOfServices sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
     return item;
+}
+
+-(void) resetAllServices {
+    [listOfServices removeAllObjects];
 }
 
 // remove service item with name 'serviceTypeName' from the 'listOfServices' array

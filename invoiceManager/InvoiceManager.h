@@ -15,8 +15,6 @@
  #ifndef invoiceManager_asdasd_h
  #define invoiceManager_asdasd_h
  
- 
- 
  #endif
  
  */
@@ -86,5 +84,6 @@
 -(void) printOut;
 -(NSMutableData *)createPDFDatafromUIView:(UIView*)aView;
 -(NSString*)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename;
+-(void) resetAllServices;
 
 @end

@@ -70,7 +70,7 @@
 @property (assign, readwrite) IBOutlet UILabel *col1Name, *col2Name, *col3Name, *col4Name;
 @property (assign, readwrite) IBOutlet UIImageView *selectedType;
 
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 //-(IBAction) goBackCUSTOMACTION;
 -(IBAction) removeRow: (id)sender;
 -(IBAction) onChoosingType: (id) sender;

@@ -21,6 +21,6 @@
 
 //@property (nonatomic, assign) id <SettingsPopoverVCDelegate> settingsVCdelegate;
 
--(IBAction)selectCompany:(id)sender;
+-(IBAction) selectCompany:(id)sender;
 
 @end

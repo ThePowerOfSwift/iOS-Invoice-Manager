@@ -240,9 +240,11 @@
     } else if ([[sender restorationIdentifier] isEqualToString:@"customerReferredBy"]){
         [invoiceMngr setCustomerReferredBy:inputtedText];
         [[invoiceMngr customerReferredBy] retain];
+    } else if ([[sender restorationIdentifier] isEqualToString:@"otherBuildingType"]){
+        [invoiceMngr setTypeOfBuilding:inputtedText];
+        [[invoiceMngr typeOfBuilding] retain];
+        [selectedBtnBg setHidden:true];
     }
-    
-    NSLog(@"cust last nameis %@", [invoiceMngr customerLastName]);
 }
 
 // only supports UIButton's right now
@@ -268,7 +270,6 @@
     InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
     
     if ([senderID isEqualToString:@"residential"]){
-        NSLog(@"resssiiiident");
         [selectedBtnBg setFrame:CGRectMake(70.0f, selectedBtnBg.frame.origin.y, selectedBtnBg.frame.size.width, selectedBtnBg.frame.size.height)];
         [customerFirstNameField setPlaceholder:@"customer first name"];
         [customerLastNameField setPlaceholder:@"customer last name"];
@@ -283,6 +284,7 @@
         // save the type of building selected in the invoice manager singleton
         [invMngr setTypeOfBuilding:@"Commercial Building"];
     }
+    [selectedBtnBg setHidden:false];
     [btn setTag:10];
     
     //[btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

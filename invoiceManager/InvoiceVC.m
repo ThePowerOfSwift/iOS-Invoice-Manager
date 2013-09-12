@@ -111,16 +111,17 @@
     
     [self createInvoice];
     
-    //[self saveInvoiceToDatabase];
+    [self saveInvoiceToDatabase];
 }
 
 -(IBAction) saveInvoiceToDatabase {
+    
+    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
     NSURL *url = [NSURL URLWithString:@"http://pokemonpacific.com/"];
-    NSString* height = @"aha";
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            height, @"blah",
-                            height, @"user[weight]",
+                            [invMngr customerFirstName], @"custFirstName",
+                            [invMngr customerLastName], @"custLastName",
                             nil];
     [httpClient postPath:@"/funcsPHP/test.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -138,7 +139,7 @@
     NSURLRequest *request =
     [httpClient multipartFormRequestWithMethod:@"POST"
                                       path:@"/funcsPHP/test.php"
-                                parameters:nil
+                                parameters:params
                  constructingBodyWithBlock: ^(id<AFMultipartFormData> formData) {
                      [formData appendPartWithFileData:pdfData name:@"pdfData" fileName:@"someInvoice.pdf" mimeType:@"application/pdf"];
                      [formData appendPartWithFormData:[[NSNumber numberWithInt:pdfData.length].stringValue dataUsingEncoding:NSUTF8StringEncoding] name:@"filelength"];
@@ -155,7 +156,6 @@
                                     }];
     
     [httpClient enqueueHTTPRequestOperation:operation];
-    
 }
 
 -(IBAction) createInvoice {
@@ -169,19 +169,22 @@
     CGFloat pdfX = 53.0;
     CGFloat pdfY = 382.0;
     
+    bool saveToFile = false; // if true, saves to a local file; if false, saves as nsdata, to be emailed
+    
     ///pdfData = [NSMutableData dataWithCapacit
     
-    /*if (pdfData){
-        UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
+    if (saveToFile){
+        // start drawing in pdf context
+        UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/MightyCleanInvoice.pdf", CGRectZero, nil);
     } else {
-        pdfData = [NSMutableData data];
-        UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
+        if (pdfData){
+            UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
+        } else {
+            pdfData = [NSMutableData data];
+            UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
+        }
+        [pdfData retain];
     }
-    [pdfData retain];*/
-    
-    // start drawing in pdf context
-    UIGraphicsBeginPDFContextToFile(@"Users/Oprescu/MightyCleanInvoice.pdf", CGRectZero, nil);
-    
     
     //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 1753, 1240), nil);
     UIGraphicsBeginPDFPageWithInfo(CGRectMake(0.0, 0.0, 768.0, 1024.0), nil);
