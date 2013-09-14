@@ -807,7 +807,6 @@
     if ([[sender restorationIdentifier] isEqualToString:@"save"]){
         
         // To save:
-        
         // furnaceInformation: [0] = furnace Make; [1] = Filter No; [2] = Serial No; [3] = Model; [4] = Last Serviced; [5] = Fan Belt
         
         // addonList: [0] = main lines quantity; [1] = addtn. main lines quantity; [2] = hot vents quantity; [3] = cold vents quantity; [4] = addtn vents quantity;

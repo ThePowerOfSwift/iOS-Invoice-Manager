@@ -20,8 +20,7 @@
     IBOutlet UISegmentedControl *segmentedControl;
     IBOutlet UIButton *testBtn;
     
-    IBOutlet UIImageView *selectedBtnBg;
-    IBOutlet UIImageView *selectedBtnBgTwo;
+    IBOutlet UIImageView *selectedBtnBg, *selectedBtnBgTwo, *companyLogo;
     
     IBOutlet UITextField *invoiceField, *poField, *currentDateField, *techNameField, *customerFirstNameField, *customerLastNameField, *customerAddressOneField, *customerAddressTwoField, *customerPhoneField, *customerEmailField, *customerReferredField;
     NSArray *pickerViewArray;
@@ -34,7 +33,7 @@
 //@property (retain) UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollViewer;
-@property (assign, readwrite) IBOutlet UIImageView *selectedBtnBg, *selectedBtnBgTwo;
+@property (assign, readwrite) IBOutlet UIImageView *selectedBtnBg, *selectedBtnBgTwo, *companyLogo;
 
 -(IBAction) textFieldDidEndEditing:(UITextField *)textField;
 -(IBAction) onTouchDownIcon;

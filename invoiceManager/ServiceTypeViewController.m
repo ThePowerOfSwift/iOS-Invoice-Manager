@@ -53,7 +53,24 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
-    [serviceTitleLabel setText:[NSString stringWithFormat:@"%@ Service", VCServiceNameType]];
+    //[serviceTitleLabel setText:[NSString stringWithFormat:@"%@ Service", VCServiceNameType]];
+    if ([VCServiceNameType isEqualToString:@"carpet"]){
+        [serviceTitleLabel setText:@"Carpet Service"];
+    } else if ([VCServiceNameType isEqualToString:@"upholstery"]){
+        [serviceTitleLabel setText:@"Upholstery Service"];
+    } else if ([VCServiceNameType isEqualToString:@"mattress"]){
+        [serviceTitleLabel setText:@"Mattress Service"];
+    } else if ([VCServiceNameType isEqualToString:@"miscellaneous"]){
+        [serviceTitleLabel setText:@"Miscellaneous Service"];
+    } else if ([VCServiceNameType isEqualToString:@"areaRugs"]){
+        [serviceTitleLabel setText:@"Area Rugs Service"];
+    } else if ([VCServiceNameType isEqualToString:@"floodcleanup"]){
+        [serviceTitleLabel setText:@"Flood Cleanup Service"];
+    } else if ([VCServiceNameType isEqualToString:@"autoSpa"]){
+        [serviceTitleLabel setText:@"Auto Spa Service"];
+    } else if ([VCServiceNameType isEqualToString:@"ductFurnaceCleaning"]){
+        [serviceTitleLabel setText:@"Duct and Furnace Cleaning Service"];
+    }
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -293,6 +310,7 @@
         [addServiceLabel setText:@"Add Auto Package"];
     } else if ([VCServiceNameType isEqualToString:@"ductFurnaceCleaning"]){
         NSLog(@"HELLOO WORLDDD !");
+        
     }
     
 }
@@ -472,7 +490,7 @@
         [cell.colFour setText:[NSString stringWithFormat:@"$%.02f", [serviceCell price]]];
         
     } else if ([VCServiceNameType isEqualToString:@"ductFurnaceCleaning"]){
-        [cell.colOne setText:[NSString stringWithFormat:@"Dude: %@", [[serviceCell attributesList] objectAtIndex:0]]];
+        [cell.colOne setText:[NSString stringWithFormat:@"Furnaces: %u, addons and more..", [serviceCell quantity]]];
     }
     /*
     name = package name ('1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..)

@@ -18,7 +18,7 @@
 @synthesize scrollViewer;
 @synthesize segmentedControl;
 @synthesize invoiceField;
-@synthesize selectedBtnBg, selectedBtnBgTwo;
+@synthesize selectedBtnBg, selectedBtnBgTwo, companyLogo;
 
 -(void) viewDidAppear:(BOOL)animated {
 
@@ -26,14 +26,19 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     InvoiceManager*invMngr = [InvoiceManager sharedInvoiceManager];
-    NSLog(@"company is: %@", [invMngr currCompanyName]);
     
     if ([[invMngr currCompanyName] isEqualToString:@"carpetCare"]){
         [carpetCareOptionsView setHidden:false];
+        [companyLogo setImage:[UIImage imageNamed:@"mightyCleanCarpetCareLogo.png"]];
+        [companyLogo setFrame:CGRectMake(396.0, 148.0, 313.0, 186.0)];
     } else if ([[invMngr currCompanyName] isEqualToString:@"autoSpa"]){
         [carpetCareOptionsView setHidden:true];
+        [companyLogo setImage:[UIImage imageNamed:@"mightyCleanLogo.png"]];
+        [companyLogo setFrame:CGRectMake(396.0, 148.0, 328.0, 144.0)];
     } else if ([[invMngr currCompanyName] isEqualToString:@"ductFurnaceCleaning"]){
         [carpetCareOptionsView setHidden:true];
+        [companyLogo setImage:[UIImage imageNamed:@"mightyCleanLogo.png"]];
+        [companyLogo setFrame:CGRectMake(396.0, 148.0, 328.0, 144.0)];
     }
 }
 
@@ -147,7 +152,6 @@
 
 -(void)dismissKeyboard {
     [self.view endEditing:YES];
-    //NSLog(@"dismiss keyboard?");
 }
 
 /*

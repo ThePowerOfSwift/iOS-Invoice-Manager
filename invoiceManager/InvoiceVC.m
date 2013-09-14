@@ -111,7 +111,7 @@
     
     [self createInvoice];
     
-    [self saveInvoiceToDatabase];
+    //[self saveInvoiceToDatabase];
 }
 
 -(IBAction) saveInvoiceToDatabase {
@@ -200,7 +200,7 @@
     //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(0.0, 100.0, 300.0f, 100.0f) withFontSize:16.0];
     
     // Draw Invoice Text:
-    [self drawText:[NSString stringWithFormat:@"From: Mighty Clean 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 \n Address \n Edmonton, Alberta "] inFrame:CGRectMake(40.0, 200.0, 300.0f, 100.0f) withFontSize:16.0];
+    [self drawText:[NSString stringWithFormat:@"From: Mighty Clean \nEdmonton, Alberta\n1.780.488.8282\ninfo@mightyclean.ca\nwww.mightyclean.ca "] inFrame:CGRectMake(40.0, 200.0, 300.0f, 100.0f) withFontSize:16.0];
     
     //NSLog(@"first name: %@", [invMngr customerFirstName]);
     //NSLog(@"first name: %@", [invMngr customerLastName]);
@@ -208,7 +208,7 @@
     //NSLog(@"first name: %@", [invMngr customerEmail]);
     
     // Draw Customer Invoice Address:
-    [self drawText:[NSString stringWithFormat:@"To: %@ %@ \n %@\n email: %@\n haha \n 2 \n 3 \n 4 \n 5 \n 6 \n 7 \n 8 ", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerEmail]] inFrame:CGRectMake(40.0, 300.0, 300.0f, 100.0f) withFontSize:16.0];
+    [self drawText:[NSString stringWithFormat:@"To: %@ %@ \n%@,%@\nemail: %@\n", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerAddressTwo], [invMngr customerEmail]] inFrame:CGRectMake(40.0, 300.0, 300.0f, 100.0f) withFontSize:16.0];
     
     // Draw the Mighty Clean logo
     [self drawImage:@"mightyCleanCarpetCareLogo.png" withRect:CGRectMake(425.0, 35.0, 313.0f, 186.0f)];
@@ -709,23 +709,11 @@
         
         
         [self drawText:[[data_cell attributesListTwo] objectAtIndex:23] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
-        //[self drawText:@"THIS IS THE START AND NOW ITS IN THE MIDDLE TWO THREE FOUR BLAH BLAH HEY DUDE FIFTH SIX SEVEN EIGHT NINE TEN ELEVEN TWELVE AND SO ON AND SO FORTH AND WE GO ON AND ON BLAH BLAH THIS IS ANOTHER TARPY PARAGRAPH, ENGLISH OH ENGLISH ! LETS KEEP GOING SEE WHERE EAT CAT DOG BAHAHA MINORITY ANOTHER REPORT TOM CRUISE SOME OTHER GUY WITH EYES, SCANNERS< ALLARRRMS LARGE MEN WITH GUNS SOME ROSE ANESTEHSIA IS SHE SUPPOSED TO BE DANGEROUS COMPARED TO THE GUY WHO SEEMS VERY CREEPY !" inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
-        //[serviceDataLabelpdf sizeToFit];
-    }
-    
-    /*name = package name ( Bronze, Silver, Gold, Platinum )
-    itemAttribute = car type ( SUV, Compact, Midsize )
-    quantity = # of cars
-    price = price
-    priceRate = price per one car
-    notes = ..*/
-    
+    }    
     
     // add the subview to the screen
     [mainView addSubview:serviceDataLabel];
     
-    // *posx += 600.0;
-    // *pdfx += 625.0;
     float pricePosx = *posx + 600.0;
     float pricePdfx = *pdfx + 625.0;
     
@@ -741,8 +729,6 @@
         [priceDataLabel sizeToFit];
     }
     
-    //[priceDataLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
-    //[priceDataLabelpdf setTextAlignment:NSTextAlignmentCenter];
     [priceDataLabelpdf setText:[NSString stringWithFormat:@"$%.02f ", [data_cell price]]];
     
     [invoiceSubviews addObject:priceDataLabel];
@@ -801,15 +787,38 @@
     [invoiceSubviews addObject:serviceNameLabelpdf];
     
     // create label for the service name
-    [serviceNameLabel setText:[NSString stringWithFormat:@"%@ service ", service_name]];
+    NSLog(@"service name is %@", service_name);
+    if ([service_name isEqualToString:@"carpet"]){
+        [serviceNameLabel setText:@"Carpet Service"];
+        [self drawText:@"Carpet Service" inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:14.0f];         // print to pdf
+    } else if ([service_name isEqualToString:@"upholstery"]){
+        [serviceNameLabel setText:@"Upholstery Service"];
+        [self drawText:@"Upholstery Service" inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:14.0f];     // print to pdf
+    } else if ([service_name isEqualToString:@"mattress"]){
+        [serviceNameLabel setText:@"Mattress Service"];
+        [self drawText:@"Mattress Service" inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:14.0f];       // print to pdf
+    } else if ([service_name isEqualToString:@"miscellaneous"]){
+        [serviceNameLabel setText:@"Miscellaneous Service"];
+        [self drawText:@"Miscellaneous Service" inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:14.0f];  // print to pdf
+    } else if ([service_name isEqualToString:@"areaRugs"]){
+        [serviceNameLabel setText:@"Area Rugs Service"];
+        [self drawText:@"Area Rugs Service" inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:14.0f];      // print to pdf
+    } else if ([service_name isEqualToString:@"floodcleanup"]){
+        [serviceNameLabel setText:@"Flood Cleanup Service"];
+        [self drawText:@"Flood Cleanup Service" inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:14.0f];  // print to pdf
+    } else if ([service_name isEqualToString:@"autoSpa"]){
+        [serviceNameLabel setText:@"Auto Spa Service"];
+        [self drawText:@"Auto Spa Service" inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:14.0f];       // print to pdf
+    } else if ([service_name isEqualToString:@"ductFurnaceCleaning"]){
+        [serviceNameLabel setText:@"Duct & Furnace Cleaning"];
+        [self drawText:@"Duct & Furnace Cleaning" inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:14.0f];    // print to pdf
+    }
+    
     [serviceNameLabel setFont:[UIFont systemFontOfSize:25.0f]];
-    [serviceNameLabelpdf setText:[NSString stringWithFormat:@"%@ service ", service_name]];
-    [serviceNameLabelpdf setFont:[UIFont systemFontOfSize:25.0f]];
+    //[serviceNameLabelpdf setText:[NSString stringWithFormat:@"%@ service ", service_name]];
+    //[serviceNameLabelpdf setFont:[UIFont systemFontOfSize:25.0f]];
     // print to screen
     [mainView addSubview:serviceNameLabel];
-    // print to pdf
-    [self drawText:[NSString stringWithFormat:@"%@ service ", service_name] inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:14.0f];
-    
 }
 
 // prints a discount UIButton on screen

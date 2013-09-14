@@ -376,6 +376,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="carpetCareOptionsView" destination="wDs-3G-GFU" id="p0j-i4-z1G"/>
+                        <outlet property="companyLogo" destination="egh-aj-nlo" id="Qki-DH-p1z"/>
                         <outlet property="scrollViewer" destination="USD-bt-HXG" id="M3t-Cm-Ms0"/>
                         <outlet property="selectedBtnBg" destination="0qP-WX-dNL" id="xgf-ot-iis"/>
                         <outlet property="selectedBtnBgTwo" destination="fWX-s9-bkA" id="zhr-Va-30K"/>
@@ -989,67 +990,36 @@
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="carpetCare" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yHE-Nv-cD0">
-                                <rect key="frame" x="302" y="19" width="466" height="280"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" backgroundImage="introCarpetCleaningBtn.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="selectService:" destination="Ker-KP-VOE" eventType="touchUpInside" id="3M8-Zf-fkA"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="autoSpa" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q5Z-ck-UeP">
-                                <rect key="frame" x="302" y="205" width="466" height="280"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" backgroundImage="introAutoSpaBtn.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="selectService:" destination="Ker-KP-VOE" eventType="touchUpInside" id="BDn-le-Q5a"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="introSelectBtn.png" id="JQa-cB-OQG">
-                                <rect key="frame" x="25" y="50" width="111" height="134"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="introBg.png" id="uz2-bY-2mk">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="introSelectBtn.png" id="81Y-ZO-bq3">
+                                <rect key="frame" x="25" y="66" width="111" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="cleaningHouse.png" id="5ic-1p-iAs">
-                                <rect key="frame" x="145" y="29" width="140" height="154"/>
+                            <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="cleaningHouse.png" id="V3U-x5-fwi">
+                                <rect key="frame" x="145" y="45" width="140" height="154"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" image="introCleanCarImg.png" id="1bu-H3-RbG">
-                                <rect key="frame" x="149" y="237" width="119" height="123"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" image="introCleanCarImg.png" id="hHc-59-PnK">
+                                <rect key="frame" x="149" y="281" width="119" height="123"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" image="introFurnace.png" id="tLg-uE-H5O">
-                                <rect key="frame" x="149" y="391" width="108" height="185"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" image="introFurnace.png" id="qz5-nY-tIt">
+                                <rect key="frame" x="149" y="464" width="108" height="185"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" image="introSelectBtn2.png" id="cyU-0s-Z8v">
-                                <rect key="frame" x="25" y="232" width="111" height="134"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" image="introSelectBtn2.png" id="1pZ-Hs-mmO">
+                                <rect key="frame" x="25" y="276" width="111" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" image="introSelectBtn3.png" id="RO9-Os-efK">
-                                <rect key="frame" x="25" y="421" width="111" height="134"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" image="introSelectBtn3.png" id="Fh0-vb-YEO">
+                                <rect key="frame" x="25" y="494" width="111" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="letsStartBgHorizontal.png" id="Xtl-93-99T">
-                                <rect key="frame" x="87" y="638" width="610" height="356"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NA6-A5-hbF">
-                                <rect key="frame" x="287" y="778" width="233" height="76"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KVO-gm-FR4">
+                                <rect key="frame" x="72" y="885" width="233" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="letsStartBtn.png">
@@ -1060,35 +1030,53 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="goToNextVC:" destination="Ker-KP-VOE" eventType="touchUpInside" id="c5t-Bg-cHq"/>
+                                    <action selector="goToNextVC:" destination="Ker-KP-VOE" eventType="touchUpInside" id="4hl-Y5-6Te"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="ductFurnaceCleaning" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HA8-kl-l9k">
-                                <rect key="frame" x="302" y="391" width="466" height="280"/>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="carpetCare" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bGH-iI-wfN">
+                                <rect key="frame" x="319" y="37" width="449" height="162"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" backgroundImage="introFurnaceBtn.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="selectService:" destination="Ker-KP-VOE" eventType="touchUpInside" id="MCC-j5-wNu"/>
+                                    <action selector="selectService:" destination="Ker-KP-VOE" eventType="touchUpInside" id="ArL-Mq-cgF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sZf-Sj-LtS">
-                                <rect key="frame" x="-21" y="622" width="270" height="138"/>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="autoSpa" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yAa-w0-EZv">
+                                <rect key="frame" x="307" y="262" width="461" height="162"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                <state key="normal" title="bvxxg">
-                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="selectService:" destination="Ker-KP-VOE" eventType="touchUpInside" id="dMv-a0-qpf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="ductFurnaceCleaning" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="auy-6i-lhE">
+                                <rect key="frame" x="307" y="480" width="461" height="162"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectService:" destination="Ker-KP-VOE" eventType="touchUpInside" id="Amx-h4-xNw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -4715,7 +4703,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Invoice" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W0U-5Z-x8f">
-                                        <rect key="frame" x="33" y="99" width="204" height="49"/>
+                                        <rect key="frame" x="40" y="94" width="204" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="45"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -4738,8 +4726,8 @@
                                             <action selector="onTouchDownIcon" destination="2" eventType="touchDown" id="Gau-dk-Qtp"/>
                                         </connections>
                                     </button>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="mightyCleanCarpetCareLogo.png" id="Nhi-im-8Sr">
-                                        <rect key="frame" x="397" y="99" width="313" height="186"/>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="mightyCleanLogo.png" id="Nhi-im-8Sr">
+                                        <rect key="frame" x="397" y="123" width="328" height="144"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="horizontalLine5.png" id="6T0-B9-pAR">
@@ -4760,36 +4748,6 @@
                                         <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Ev-QO-kTN">
-                                        <rect key="frame" x="33" y="189" width="126" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Create Invoice">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="createInvoice" destination="vda-Om-qqT" eventType="touchUpInside" id="JC8-ZO-me8"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="a8r-lB-zKT">
-                                        <rect key="frame" x="33" y="251" width="126" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Email Invoice">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="sendMail" destination="vda-Om-qqT" eventType="touchUpInside" id="9kf-HW-n1Y"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8Rh-ws-MvJ">
                                         <rect key="frame" x="407" y="840" width="190" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -4822,6 +4780,50 @@
                                         </state>
                                         <connections>
                                             <action selector="gotoLastView" destination="vda-Om-qqT" eventType="touchUpInside" id="aof-mE-buP"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Email Invoice" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XoN-18-5NE">
+                                        <rect key="frame" x="40" y="282" width="102" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.10068558673469385" green="0.10068558673469385" blue="0.10068558673469385" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Save to Database" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1vn-ta-cWM">
+                                        <rect key="frame" x="180" y="282" width="128" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.1006855867" green="0.1006855867" blue="0.1006855867" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hOK-DX-gFy">
+                                        <rect key="frame" x="51" y="206" width="65" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Button" image="emailIcon@2x.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sendMail" destination="vda-Om-qqT" eventType="touchUpInside" id="z5x-Fa-aIz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Be8-gl-YhV">
+                                        <rect key="frame" x="199" y="202" width="86" height="72"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Button" image="databaseIcon.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveInvoiceToDatabase" destination="vda-Om-qqT" eventType="touchUpInside" id="REZ-7i-ft6"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -10100,7 +10102,9 @@
         <image name="cleaningHouse.png" width="196" height="215"/>
         <image name="close.png" width="64" height="64"/>
         <image name="compact.png" width="50" height="31"/>
+        <image name="databaseIcon.png" width="180" height="131"/>
         <image name="dayCabIcon.png" width="55" height="35"/>
+        <image name="emailIcon@2x.png" width="130" height="135"/>
         <image name="horizontalLine.png" width="337" height="4"/>
         <image name="horizontalLine5.png" width="720" height="4"/>
         <image name="horizontalLineFull.png" width="776" height="2"/>
@@ -10124,21 +10128,19 @@
         <image name="iconThree.png" width="42" height="41"/>
         <image name="iconTwo.png" width="43" height="42"/>
         <image name="iconVacant.png" width="55" height="58"/>
-        <image name="introAutoSpaBtn.png" width="969" height="581"/>
-        <image name="introCarpetCleaningBtn.png" width="969" height="579"/>
+        <image name="introBg.png" width="769" height="1025"/>
         <image name="introCleanCarImg.png" width="120" height="124"/>
         <image name="introFurnace.png" width="109" height="186"/>
-        <image name="introFurnaceBtn.png" width="466" height="280"/>
         <image name="introSelectBtn.png" width="111" height="134"/>
         <image name="introSelectBtn2.png" width="111" height="134"/>
         <image name="introSelectBtn3.png" width="111" height="134"/>
         <image name="labelCustomerInfo.png" width="263" height="31"/>
         <image name="labelOrderInfo.png" width="189" height="33"/>
         <image name="labelServices.png" width="148" height="31"/>
-        <image name="letsStartBgHorizontal.png" width="737" height="442"/>
         <image name="letsStartBtn.png" width="233" height="76"/>
         <image name="midsize.png" width="50" height="31"/>
         <image name="mightyCleanCarpetCareLogo.png" width="313" height="186"/>
+        <image name="mightyCleanLogo.png" width="328" height="144"/>
         <image name="pencil.png" width="64" height="64"/>
         <image name="plusIcon2.png" width="49" height="49"/>
         <image name="popoverBg.png" width="16" height="16"/>
@@ -10463,6 +10465,7 @@
                 <relationship kind="action" name="onTouchDownIcon"/>
                 <relationship kind="action" name="textFieldDidEndEditing:" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="carpetCareOptionsView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="companyLogo" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="currentDateField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="customerAddressOneField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="customerAddressTwoField" candidateClass="UITextField"/>
