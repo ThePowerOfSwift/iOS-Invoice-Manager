@@ -19,6 +19,7 @@
 @synthesize segmentedControl;
 @synthesize invoiceField;
 @synthesize selectedBtnBg, selectedBtnBgTwo, companyLogo;
+@synthesize clearAllFieldsBtn, clearAllFieldsLabel;
 
 -(void) viewDidAppear:(BOOL)animated {
 
@@ -31,14 +32,21 @@
         [carpetCareOptionsView setHidden:false];
         [companyLogo setImage:[UIImage imageNamed:@"mightyCleanCarpetCareLogo.png"]];
         [companyLogo setFrame:CGRectMake(396.0, 148.0, 313.0, 186.0)];
+        [clearAllFieldsLabel setHidden:false];
+        [clearAllFieldsBtn setHidden:false];
+        NSLog(@"DO YOU EVER GET HERE !!!");
     } else if ([[invMngr currCompanyName] isEqualToString:@"autoSpa"]){
         [carpetCareOptionsView setHidden:true];
         [companyLogo setImage:[UIImage imageNamed:@"mightyCleanLogo.png"]];
         [companyLogo setFrame:CGRectMake(396.0, 148.0, 328.0, 144.0)];
+        [clearAllFieldsLabel setHidden:true];
+        [clearAllFieldsBtn setHidden:true];
     } else if ([[invMngr currCompanyName] isEqualToString:@"ductFurnaceCleaning"]){
         [carpetCareOptionsView setHidden:true];
         [companyLogo setImage:[UIImage imageNamed:@"mightyCleanLogo.png"]];
         [companyLogo setFrame:CGRectMake(396.0, 148.0, 328.0, 144.0)];
+        [clearAllFieldsLabel setHidden:true];
+        [clearAllFieldsBtn setHidden:true];
     }
 }
 
@@ -344,7 +352,11 @@
     //[btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
--(IBAction)onTouchDownIcon {
+-(IBAction) clearAllFields:(id)sender {
+    
+}
+
+-(IBAction) onTouchDownIcon {
     [testBtn setBackgroundImage:[UIImage imageNamed:@"settingsBtnTouchDown.png"] forState:UIControlStateHighlighted];
 }
 

@@ -367,6 +367,28 @@
                                             <action selector="gotoLastView" destination="nw3-dJ-PuC" eventType="touchUpInside" id="vEx-bD-ezy"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CLEAR ALL FIELDS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zcI-OP-Ati">
+                                        <rect key="frame" x="653" y="5" width="222" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7aG-GL-LZ3">
+                                        <rect key="frame" x="620" y="10" width="25" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" backgroundImage="resetTextBtn@2x.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearAllFields:" destination="2" eventType="touchUpInside" id="14k-x0-jXp"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -376,6 +398,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="carpetCareOptionsView" destination="wDs-3G-GFU" id="p0j-i4-z1G"/>
+                        <outlet property="clearAllFieldsBtn" destination="7aG-GL-LZ3" id="7ZZ-Tu-Les"/>
+                        <outlet property="clearAllFieldsLabel" destination="zcI-OP-Ati" id="bbg-1d-Koj"/>
                         <outlet property="companyLogo" destination="egh-aj-nlo" id="Qki-DH-p1z"/>
                         <outlet property="scrollViewer" destination="USD-bt-HXG" id="M3t-Cm-Ms0"/>
                         <outlet property="selectedBtnBg" destination="0qP-WX-dNL" id="xgf-ot-iis"/>
@@ -10147,6 +10171,7 @@
         <image name="popoverBg5.png" width="657" height="70"/>
         <image name="popoverBgBottom.png" width="16" height="16"/>
         <image name="popoverBgBottom5.png" width="657" height="165"/>
+        <image name="resetTextBtn@2x.png" width="49" height="51"/>
         <image name="settingsBtn.png" width="34" height="19"/>
         <image name="sleeperCabIcon.png" width="55" height="35"/>
         <image name="topBarGreen.png" width="769" height="44"/>
@@ -10460,11 +10485,14 @@
         <class className="ViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
+                <relationship kind="action" name="clearAllFields:"/>
                 <relationship kind="action" name="gotoLastView"/>
                 <relationship kind="action" name="gotoNextView"/>
                 <relationship kind="action" name="onTouchDownIcon"/>
                 <relationship kind="action" name="textFieldDidEndEditing:" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="carpetCareOptionsView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="clearAllFieldsBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="clearAllFieldsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="companyLogo" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="currentDateField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="customerAddressOneField" candidateClass="UITextField"/>

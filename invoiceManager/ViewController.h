@@ -18,7 +18,8 @@
     IBOutlet UITextField *nameTextField;
     IBOutlet UIScrollView *scrollViewer;
     IBOutlet UISegmentedControl *segmentedControl;
-    IBOutlet UIButton *testBtn;
+    IBOutlet UIButton *testBtn, *clearAllFieldsBtn;
+    IBOutlet UILabel *clearAllFieldsLabel;
     
     IBOutlet UIImageView *selectedBtnBg, *selectedBtnBgTwo, *companyLogo;
     
@@ -34,10 +35,13 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollViewer;
 @property (assign, readwrite) IBOutlet UIImageView *selectedBtnBg, *selectedBtnBgTwo, *companyLogo;
+@property (assign, readwrite) IBOutlet UIButton *clearAllFieldsBtn;
+@property (assign, readwrite) IBOutlet UILabel *clearAllFieldsLabel;
 
 -(IBAction) textFieldDidEndEditing:(UITextField *)textField;
 -(IBAction) onTouchDownIcon;
 -(IBAction) gotoNextView;
 -(IBAction) gotoLastView;
+-(IBAction) clearAllFields:(id)sender;
 
 @end

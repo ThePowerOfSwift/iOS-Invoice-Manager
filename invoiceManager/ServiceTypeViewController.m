@@ -491,6 +491,7 @@
         
     } else if ([VCServiceNameType isEqualToString:@"ductFurnaceCleaning"]){
         [cell.colOne setText:[NSString stringWithFormat:@"Furnaces: %u, addons and more..", [serviceCell quantity]]];
+        [cell.colFour setText:[NSString stringWithFormat:@"$%.02f", [serviceCell price]]];
     }
     /*
     name = package name ('1st Rock Chip', '2nd Rock Chip', 'Additional Rock Chip', etc..)

@@ -38,13 +38,6 @@
     return self;
 }
 
-/*
- -(void) viewDidAppear:(BOOL)animated {
- [mainView setBackgroundColor:[UIColor clearColor]];
- [mainView setOpaque:NO];
- }
-*/
-
 - (void)viewDidLoad
 {
     //NSLog(@"setting scrollviewer");
@@ -116,46 +109,62 @@
 
 -(IBAction) saveInvoiceToDatabase {
     
-    InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
-    NSURL *url = [NSURL URLWithString:@"http://pokemonpacific.com/"];
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [invMngr customerFirstName], @"custFirstName",
-                            [invMngr customerLastName], @"custLastName",
-                            nil];
-    [httpClient postPath:@"/funcsPHP/test.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful, response '%@'", responseStr);
-        [responseStr release];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-    }];
+    // check if the device is connected to internet before sending !
+    if ([self connectedToInternet]){
+        InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
+        NSURL *url = [NSURL URLWithString:@"http://pokemonpacific.com/"];
+        AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [invMngr customerFirstName], @"custFirstName",
+                                [invMngr customerLastName], @"custLastName",
+                                [invMngr orderDate], @"orderDate",
+                                nil];
+        [httpClient postPath:@"/funcsPHP/test.php" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog(@"Request Successful, response '%@'", responseStr);
+            [responseStr release];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        }];
+        
+        //[httpClient release];
+        
+        
+        //httpClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.mysite.com"]];
+        
+        NSURLRequest *request =
+        [httpClient multipartFormRequestWithMethod:@"POST"
+                                          path:@"/funcsPHP/test.php"
+                                    parameters:params
+                     constructingBodyWithBlock: ^(id<AFMultipartFormData> formData) {
+                         [formData appendPartWithFileData:pdfData name:@"pdfData" fileName:@"someInvoice.pdf" mimeType:@"application/pdf"];
+                         [formData appendPartWithFormData:[[NSNumber numberWithInt:pdfData.length].stringValue dataUsingEncoding:NSUTF8StringEncoding] name:@"filelength"];
+                     }];
+        
+        AFHTTPRequestOperation *operation =
+        [httpClient HTTPRequestOperationWithRequest:request
+                                        success:^(AFHTTPRequestOperation *operation, id json) {
+                                            NSString *responseStr = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+                                            NSLog(@"All OK, %@", responseStr);
+                                        }
+                                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                            NSLog(@"All failed, %@", error);
+                                        }];
+        
+        [httpClient enqueueHTTPRequestOperation:operation];
+    } else {
+        NSLog(@"No Internet Connection.. invoice has not been sent !");
+    }
+}
+
+- (BOOL) connectedToInternet {
+    NSURL *url=[NSURL URLWithString:@"http://www.google.com"];
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"HEAD"];
+    NSHTTPURLResponse *response;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error: NULL];
     
-    //[httpClient release];
-    
-    
-    //httpClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://www.mysite.com"]];
-    
-    NSURLRequest *request =
-    [httpClient multipartFormRequestWithMethod:@"POST"
-                                      path:@"/funcsPHP/test.php"
-                                parameters:params
-                 constructingBodyWithBlock: ^(id<AFMultipartFormData> formData) {
-                     [formData appendPartWithFileData:pdfData name:@"pdfData" fileName:@"someInvoice.pdf" mimeType:@"application/pdf"];
-                     [formData appendPartWithFormData:[[NSNumber numberWithInt:pdfData.length].stringValue dataUsingEncoding:NSUTF8StringEncoding] name:@"filelength"];
-                 }];
-    
-    AFHTTPRequestOperation *operation =
-    [httpClient HTTPRequestOperationWithRequest:request
-                                    success:^(AFHTTPRequestOperation *operation, id json) {
-                                        NSString *responseStr = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
-                                        NSLog(@"All OK, %@", responseStr);
-                                    }
-                                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                        NSLog(@"All failed, %@", error);
-                                    }];
-    
-    [httpClient enqueueHTTPRequestOperation:operation];
+    return ([response statusCode]==200)?YES:NO;
 }
 
 -(IBAction) createInvoice {
@@ -193,19 +202,8 @@
     //[self drawImage:@"invoice_image" withRect:CGRectMake(40.0, 40.0, 174.0f, 35.0f)];
     [self drawText:[NSString stringWithFormat:@"Invoice "] inFrame:CGRectMake(39.0, 132.0, 300.0f, 100.0f) withFontSize:60.0];
     
-    // CGFloat fontSize = 33.0f;
-    //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(0.0, 100.0, 300.0f, 100.0f) withFontSize:fontSize];
-    //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(200.0, 1115.0, 300.0f, 100.0f) withFontSize:35.0f];
-    //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(400.0, 1114.0, 300.0f, 100.0f) withFontSize:35.0f];
-    //[self drawText:[NSString stringWithFormat:@"Hello \n World \n Again"] inFrame:CGRectMake(0.0, 100.0, 300.0f, 100.0f) withFontSize:16.0];
-    
     // Draw Invoice Text:
     [self drawText:[NSString stringWithFormat:@"From: Mighty Clean \nEdmonton, Alberta\n1.780.488.8282\ninfo@mightyclean.ca\nwww.mightyclean.ca "] inFrame:CGRectMake(40.0, 200.0, 300.0f, 100.0f) withFontSize:16.0];
-    
-    //NSLog(@"first name: %@", [invMngr customerFirstName]);
-    //NSLog(@"first name: %@", [invMngr customerLastName]);
-    //NSLog(@"first name: %@", [invMngr customerAddressOne]);
-    //NSLog(@"first name: %@", [invMngr customerEmail]);
     
     // Draw Customer Invoice Address:
     [self drawText:[NSString stringWithFormat:@"To: %@ %@ \n%@,%@\nemail: %@\n", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerAddressTwo], [invMngr customerEmail]] inFrame:CGRectMake(40.0, 300.0, 300.0f, 100.0f) withFontSize:16.0];
@@ -228,15 +226,11 @@
         ServiceItem *item = [[invMngr listOfServices] objectAtIndex:i];
         ServiceTypeViewController *vc = (ServiceTypeViewController*)[[[invMngr listOfServices] objectAtIndex:i] serviceVC];
         
-        //NSLog(@"this is service %u", i);
-        
         /* Print the service name on screen and in pdf context */
         [self printServiceNameAtX:posX AtY:posY AtPdfX:pdfX AtPdfY:pdfY withServiceName:[item name]];
-        //NSLog(@"Print service %@ at %f, %f", [item name], pdfX, pdfY);
         
         /* Draw Add Discount Button to the screen ( NOT TO PDF )*/
         [self printDiscountButtonAtX:(posX+400.0) AtY:posY withServiceName:[item name]];
-        //NSLog(@"-----Creating BUTTON for %@", [item name]);
         
         // increase current y position
         posY = posY + 45.0;
@@ -245,7 +239,6 @@
         // Draw horizontal line 
         [self printHorizLineBelowX:posX Y:posY pdfX:(pdfX - 8.0) pdfY:(pdfY - 23.0)];
         // substracted some pixels cause drawing the image doesn't render at proper coordinates ( should not affect flow as pdfY is not affected )
-        //NSLog(@"Print horizontal line at %f, %f", pdfX, pdfY);
         
         // adjust the scroll view / extend if necessary
         [self adjustScreenSize_CurrentY:posY];
@@ -254,11 +247,9 @@
         
         /* get the array of all data cells of service 'i', iterate through it and go through all subservices */
         NSMutableArray *dataCellArray = [vc serviceDataCellArray];
-        //float priceOfService = 0;
         
         posY += 15.0;
         pdfY += 55.0;
-        //NSLog(@" -- starting to print subservices at %f", pdfY);
         
         // for each data cell of service 'i'
         for (int j = 0; j < [dataCellArray count]; j++){
@@ -297,16 +288,7 @@
             // adjust the scroll view / extend if necessary
             [self adjustScreenSize_CurrentY:posY];
             // adjust the pdf pages, if necessary
-            [self adjustPdfPages_currentPdfY:&pdfY];
-            
-            //posY += 25.0;
-            //pdfY += 20.0;
-            
-            // adjust the scroll view / extend if necessary
-            //[self adjustScreenSize_CurrentY:posY];
-            // adjust the pdf pages, if necessary
-            //[self adjustPdfPages_currentPdfY:&pdfY];
-            
+            [self adjustPdfPages_currentPdfY:&pdfY];           
             
         }
         
@@ -387,19 +369,12 @@
     //[invoiceSubviews addObject:customerInfoDetailsLabel];
     
     InvoiceManager *invMngr = [InvoiceManager sharedInvoiceManager];
-    //NSString* customerInfo = [NSString stringWithFormat:@"Name:                %@ %@ \nAddress:            %@ \nAddress:            %@ \nE-mail:               %@ \nPhone:               %@ \nPhone:               %@ \nReferred By:      %@ \n\nBuilding Type:         %@ \nBuilding State:        %@ \n\nType of Products:   %@ \n\nInvoice No:    %@ \nPO No:           %@ \nOrder Date:   %@ \nTech Name:   %@", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerAddressTwo], [invMngr customerEmail], [invMngr customerPhoneNo], [invMngr customerPhoneNoTwo], [invMngr customerReferredBy], [invMngr typeOfBuilding], [invMngr buildingState], [invMngr usingProductType], [invMngr invoiceNo], [invMngr poNo], [invMngr orderDate], [invMngr technicianName]];
+    
     NSString* customerInfo = [NSString stringWithFormat:@"Name:\n%@ %@\n\nAddress:\n%@\n%@\n\nE-mail:\n%@\n\nPhone:\n%@ \n%@\n\nReferred By:\n%@\n\nBuilding Type:\n%@\n\nBuilding State:\n%@\n\nType of Products:\n%@\n\nInvoice No:\n%@\n\nPO No:\n%@\n\nOrder Date:\n%@\n\nTech Name:\n%@", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerAddressTwo], [invMngr customerEmail], [invMngr customerPhoneNo], [invMngr customerPhoneNoTwo], [invMngr customerReferredBy], [invMngr typeOfBuilding], [invMngr buildingState], [invMngr usingProductType], [invMngr invoiceNo], [invMngr poNo], [invMngr orderDate], [invMngr technicianName]];
     
-    /*NSString* titlesOnly = [NSString stringWithFormat:@"Name:\nAddress:\nAddress:\nE-mail:\nPhone:\nPhone\nReferred By:\nBuilding Type:\nBuilding State:\nType of Products:\nInvoice No:\nPO No:\nOrder Date:\nTechnician Name:"];
-     
-     NSString* detailsOnly = [NSString stringWithFormat:@"%@ %@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@", [invMngr customerFirstName], [invMngr customerLastName], [invMngr customerAddressOne], [invMngr customerAddressTwo], [invMngr customerEmail], [invMngr customerPhoneNo], [invMngr customerPhoneNoTwo], [invMngr customerReferredBy], [invMngr typeOfBuilding], [invMngr buildingState], [invMngr usingProductType], [invMngr invoiceNo], [invMngr poNo], [invMngr orderDate], [invMngr technicianName]];
-     */
     // add properties
     [customerInfoLabel setText:customerInfo];
     [customerInfoLabel setFont:[UIFont systemFontOfSize:17.0f]];
-    
-    //[customerInfoDetailsLabel setText:detailsOnly];
-    //[customerInfoDetailsLabel setFont:[UIFont systemFontOfSize:17.0f]];
     
     // print to screen
     [mainView addSubview:customerTitleLabel];
@@ -563,8 +538,6 @@
 -(void) printSubserviceNotes: (ServiceDataCell*) data_cell PosX: (CGFloat) posx PosY: (CGFloat*) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat*) pdfy {
     UILabel *serviceDataNotes = [[UILabel alloc] initWithFrame:CGRectMake(posx, *posy, 670.0f, 100.0f)];
     
-    //*pdfy += 20.0;
-    
     UILabel *serviceDataNotesPdf = [[UILabel alloc] initWithFrame:CGRectMake(pdfx, *pdfy, 670.0f, 50.0f)];
     
     [invoiceSubviews addObject:serviceDataNotes];
@@ -573,12 +546,10 @@
     
     CGFloat subserviceFontSize = 13.0f;
     
-    //NSLog(@"notes are: %@", [data_cell notes]);
     [serviceDataNotes setText:[NSString stringWithFormat:@"Notes: %@", [data_cell notes]]];
     
     [serviceDataNotes sizeToFit];
     int numLines = (int)(serviceDataNotes.frame.size.height/serviceDataNotes.font.leading);
-    //NSLog(@"# of lines = %d", numLines);
     
     // add the subview to the screen
     [mainView addSubview:serviceDataNotes];
@@ -602,14 +573,11 @@
     [serviceDataLabel setFont:[UIFont systemFontOfSize:17.0f]];
     
     CGFloat subserviceFontSize = 13.0f;
-    //[serviceNameLabelpdf setNumberOfLines:0];
-    //[serviceNameLabelpdf setFont:[UIFont systemFontOfSize:17.0f]];
     
     float extraPosy = 0;
     float extraPdfy = 0;
     
     NSString *servicetype = [data_cell serviceType];
-    // NSLog(@"THE SERVICE TYPE IS %@", servicetype);
     
     if ([servicetype isEqualToString:@"carpet"]){
         subtotalCarpetPrice += [data_cell price];   // add price to subtotal
@@ -679,14 +647,10 @@
         [serviceDataLabel setText:[NSString stringWithFormat: @"Package: %@, Car Type: %@\nquantity: %u",[data_cell name] , [data_cell itemAttribute], [data_cell quantity] ]];
         
         [self drawText:[NSString stringWithFormat: @"Package: %@, Car Type: %@\nquantity: %u",[data_cell name] , [data_cell itemAttribute], [data_cell quantity] ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
-        //[self drawText:[NSString stringWithFormat: @"Item: %@, Material: %@\nquantity: %u\naddons: %s%s%s",[data_cell name] , [data_cell materialType], [data_cell quantity], [data_cell addonBiocide] ? " (Biocide)" : "", [data_cell addonDeodorizer] ? " (Deodorizer)" : "", [data_cell addonFabricProtector] ? " (Fabric Protector)" : "" ] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
         
     } else if ([servicetype isEqualToString:@"ductFurnaceCleaning"]){
         subtotalDuctFurnace += [data_cell price];     // add price to subtotal
         discountedDuctFurnace = subtotalDuctFurnace - ductFurnaceDiscount;
-        
-        //UILabel *serviceDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 400.0f, 70.0f)];
-        //[serviceDataLabel setFrame:CGRectMake(posx, posy, 400.0f, 180.0f)];
         
         [serviceDataLabel setText:[[data_cell attributesListTwo] objectAtIndex:23]];
         [serviceDataLabel sizeToFit];
@@ -697,16 +661,8 @@
         extraPosy = numLines * 15.0f;
         extraPdfy = numLines * 13.0f;
         //[serviceDataLabel sizeToFit];
-        NSLog(@"num of lines IS %u", numLines);
         
-        //float extraHeight = 50.0f;
-        
-        [serviceDataLabelpdf setFrame:CGRectMake(*pdfx, (*pdfy + extraPdfy), serviceDataLabelpdf.frame.size.width, 70.0f + extraPdfy)];
-        
-        //NSLog(@"SCREEN: width, height, x, y of screen is %.02f, %.02f, %.02f, %.02f", serviceDataLabel.frame.size.width, serviceDataLabel.frame.size.height, serviceDataLabel.frame.origin.x, serviceDataLabel.frame.origin.y);
-        
-        //NSLog(@"PDF: width, height, x, y of screen is %.02f, %.02f, %.02f, %.02f", serviceDataLabelpdf.frame.size.width, serviceDataLabelpdf.frame.size.height, serviceDataLabelpdf.frame.origin.x, serviceDataLabelpdf.frame.origin.y);
-        
+        [serviceDataLabelpdf setFrame:CGRectMake(*pdfx, (*pdfy + extraPdfy), serviceDataLabelpdf.frame.size.width, 70.0f + extraPdfy)];        
         
         [self drawText:[[data_cell attributesListTwo] objectAtIndex:23] inFrame:serviceDataLabelpdf.frame withFontSize:subserviceFontSize];
     }    

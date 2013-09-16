@@ -30,7 +30,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self setServiceSelected:@"carpet"];
+    /*NSDate *date = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
+     [dateFormat setDateFormat:@"dd:MM:YYYY HH:mm:ss"];
+    NSString *dateString = [dateFormat stringFromDate:date];
+    NSLog(@"date is %@", dateString);*/
+    
+    [self setServiceSelected:@"carpetCare"];
+    //[[InvoiceManager sharedInvoiceManager] setCurrCompanyName:@"carpetCare"];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
