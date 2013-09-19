@@ -312,7 +312,7 @@
     posY += 30.0;
     pdfY += 30.0;
     // print subtotal, tax and total..
-    [self printTotal_PosX:posX PosY:posY PdfX:pdfX PdfY:pdfY];
+    [self printTotal_PosX:posX PosY:&posY PdfX:pdfX PdfY:&pdfY];
     
     // adjust the scroll view / extend if necessary
     [self adjustScreenSize_CurrentY:posY];
@@ -336,7 +336,7 @@
     pdfY += 800.0;
     
     // adjust the scroll view / extend if necessary
-    [self adjustScreenSize_CurrentY:posY];
+    [self adjustScreenSize_CurrentY:posY]; 
     // adjust the pdf pages, if necessary
     //[self adjustPdfPages_currentPdfY:&pdfY];
     
@@ -447,12 +447,35 @@
     [self drawText:[NSString stringWithFormat:@"%@ ", discountToDisplay] inFrame:CGRectMake(pdfx, pdfy, 250.0f, 38.0f) withFontSize:subserviceFontSize];
 }
 
--(void) printTotal_PosX: (CGFloat) posx PosY: (CGFloat) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat) pdfy {
+-(void) printTotal_PosX: (CGFloat) posx PosY: (CGFloat*) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat*) pdfy {
+    
+    // CGFloat totalPrice = subtotalCarpetPrice + subtotalUpholsteryPrice + subtotalMattressPrice + subtotalMiscePrice + subtotalAreaRugsPrice + subtotalFloodPrice;
+    CGFloat totalPrice = discountedCarpetPrice + discountedUpholsteryPrice + discountedMattressPrice + discountedMiscePrice + discountedAreaRugsPrice + discountedFloodPrice + discountedAutospaPrice + discountedDuctFurnace;
+    
+    CGFloat gstPrice = totalPrice * 5/100;
+    
+    totalPrice = gstPrice + totalPrice;
     
     CGFloat pdfFontSize = 15.0f;
     CGFloat screenFontSize = 21.0f;
     
-    UILabel *priceNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 250.0f, 70.0f)];
+    UILabel *GSTNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, *posy, 250.0f, 70.0f)];
+    [invoiceSubviews addObject:GSTNameLabel];
+    [GSTNameLabel setFont:[UIFont systemFontOfSize:screenFontSize]];
+    [GSTNameLabel setText:@"GST (5%) "];
+    
+    posx += 600.0;
+    
+    UILabel *priceGSTLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, *posy, 250.0f, 70.0f)];
+    [invoiceSubviews addObject:priceGSTLabel];
+    [priceGSTLabel setFont:[UIFont systemFontOfSize:screenFontSize]];
+    [priceGSTLabel setText:[NSString stringWithFormat:@"$%.02f ", gstPrice]];
+    
+    posx -= 600.0;
+    
+    *posy += 60.0;
+    
+    UILabel *priceNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, *posy, 250.0f, 70.0f)];
     [invoiceSubviews addObject:priceNameLabel];
     [priceNameLabel setFont:[UIFont systemFontOfSize:screenFontSize]];
     [priceNameLabel setText:@"Total "];
@@ -460,22 +483,25 @@
     posx += 600.0;
     //pdfx += 625.0;
     
-    // CGFloat totalPrice = subtotalCarpetPrice + subtotalUpholsteryPrice + subtotalMattressPrice + subtotalMiscePrice + subtotalAreaRugsPrice + subtotalFloodPrice;
-    CGFloat totalPrice = discountedCarpetPrice + discountedUpholsteryPrice + discountedMattressPrice + discountedMiscePrice + discountedAreaRugsPrice + discountedFloodPrice + discountedAutospaPrice + discountedDuctFurnace;
-    
-    UILabel *priceTotalLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, posy, 250.0f, 70.0f)];
+    UILabel *priceTotalLabel = [[UILabel alloc] initWithFrame:CGRectMake(posx, *posy, 250.0f, 70.0f)];
     [invoiceSubviews addObject:priceTotalLabel];
     [priceTotalLabel setFont:[UIFont systemFontOfSize:screenFontSize]];
     [priceTotalLabel setText:[NSString stringWithFormat:@"$%.02f ", totalPrice]];
     
     [mainView addSubview:priceNameLabel];
     [mainView addSubview:priceTotalLabel];
+    [mainView addSubview:GSTNameLabel];
+    [mainView addSubview:priceGSTLabel];
     
-    [self drawText:[NSString stringWithFormat: @"Total "] inFrame:CGRectMake(pdfx, pdfy,250.0, 70.0) withFontSize:pdfFontSize];
-    
+    [self drawText:[NSString stringWithFormat: @"GST "] inFrame:CGRectMake(pdfx, *pdfy,250.0, 70.0) withFontSize:pdfFontSize];
     pdfx += 625.0;
+    [self drawText:[NSString stringWithFormat: @"$%.02f ", gstPrice] inFrame:CGRectMake(pdfx, *pdfy,250.0, 70.0) withFontSize:pdfFontSize];
     
-    [self drawText:[NSString stringWithFormat: @"$%.02f ", totalPrice] inFrame:CGRectMake(pdfx, pdfy,250.0, 70.0) withFontSize:pdfFontSize];
+    pdfx -= 625.0;
+    *pdfy += 35.0;
+    [self drawText:[NSString stringWithFormat: @"Total "] inFrame:CGRectMake(pdfx, *pdfy,250.0, 70.0) withFontSize:pdfFontSize];
+    pdfx += 625.0;
+    [self drawText:[NSString stringWithFormat: @"$%.02f ", totalPrice] inFrame:CGRectMake(pdfx, *pdfy,250.0, 70.0) withFontSize:pdfFontSize];
 }
 
 -(void) printSubserviceDiscountService: (NSString*) service_name PosX: (CGFloat) posx PosY: (CGFloat) posy PdfX: (CGFloat) pdfx PdfY: (CGFloat) pdfy {

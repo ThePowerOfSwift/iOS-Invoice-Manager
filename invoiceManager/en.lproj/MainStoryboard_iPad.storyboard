@@ -1043,7 +1043,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KVO-gm-FR4">
-                                <rect key="frame" x="72" y="885" width="233" height="76"/>
+                                <rect key="frame" x="79" y="853" width="233" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="letsStartBtn.png">
@@ -1102,6 +1102,10 @@
                                     <action selector="selectService:" destination="Ker-KP-VOE" eventType="touchUpInside" id="Amx-h4-xNw"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="locomediaLogo2.png" id="RIL-WH-abs">
+                                <rect key="frame" x="9" y="946" width="168" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1673,11 +1677,11 @@
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="horizontalLine.png" id="a29-0g-Y9d">
-                                <rect key="frame" x="-7" y="345" width="778" height="4"/>
+                                <rect key="frame" x="-7" y="345" width="778" height="3"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="horizontalLine.png" id="IMI-JN-oJH">
-                                <rect key="frame" x="-7" y="874" width="778" height="4"/>
+                                <rect key="frame" x="-7" y="874" width="778" height="3"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -10162,6 +10166,7 @@
         <image name="labelOrderInfo.png" width="189" height="33"/>
         <image name="labelServices.png" width="148" height="31"/>
         <image name="letsStartBtn.png" width="233" height="76"/>
+        <image name="locomediaLogo2.png" width="168" height="51"/>
         <image name="midsize.png" width="50" height="31"/>
         <image name="mightyCleanCarpetCareLogo.png" width="313" height="186"/>
         <image name="mightyCleanLogo.png" width="328" height="144"/>

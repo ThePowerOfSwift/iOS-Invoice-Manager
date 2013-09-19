@@ -71,6 +71,8 @@
 		8946465E17E03A71005DE5EC /* letsStartBgHorizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8946465C17E03A71005DE5EC /* letsStartBgHorizontal.png */; };
 		8946465F17E03A71005DE5EC /* letsStartBgHorizontal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8946465D17E03A71005DE5EC /* letsStartBgHorizontal@2x.png */; };
 		8952344E17C80A6700201FFC /* OptionsWindshieldCrackPVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8952344D17C80A6700201FFC /* OptionsWindshieldCrackPVC.m */; };
+		89662E5D17EA944900A86B48 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 89662E5C17EA944900A86B48 /* Icon.png */; };
+		89662E5F17EA944B00A86B48 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89662E5E17EA944B00A86B48 /* Icon@2x.png */; };
 		89674AD617572AB600461BC3 /* SignaturePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89674AD517572AB600461BC3 /* SignaturePopoverVC.m */; };
 		896BF29917DEF8BA005E2631 /* introAutoSpaBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BF29517DEF8BA005E2631 /* introAutoSpaBtn.png */; };
 		896BF29A17DEF8BA005E2631 /* introAutoSpaBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 896BF29617DEF8BA005E2631 /* introAutoSpaBtn@2x.png */; };
@@ -179,6 +181,8 @@
 		89E4599217B037DB0069A43D /* midsize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89E4599017B037DB0069A43D /* midsize@2x.png */; };
 		89E4599517B037E40069A43D /* compact.png in Resources */ = {isa = PBXBuildFile; fileRef = 89E4599317B037E40069A43D /* compact.png */; };
 		89E4599617B037E40069A43D /* compact@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89E4599417B037E40069A43D /* compact@2x.png */; };
+		89F368F317E96A690011B8B0 /* locomediaLogo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F368F117E96A690011B8B0 /* locomediaLogo2.png */; };
+		89F368F417E96A690011B8B0 /* locomediaLogo2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F368F217E96A690011B8B0 /* locomediaLogo2@2x.png */; };
 		89F593E3174E8C58003F0608 /* bgCommercialResidential.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F593E1174E8C57003F0608 /* bgCommercialResidential.png */; };
 		89F593E4174E8C58003F0608 /* bgCommercialResidential@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F593E2174E8C58003F0608 /* bgCommercialResidential@2x.png */; };
 		89F593E9174E8CAF003F0608 /* btnBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F593E5174E8CAC003F0608 /* btnBack.png */; };
@@ -301,6 +305,8 @@
 		8946465D17E03A71005DE5EC /* letsStartBgHorizontal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "letsStartBgHorizontal@2x.png"; sourceTree = "<group>"; };
 		8952344C17C80A6700201FFC /* OptionsWindshieldCrackPVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsWindshieldCrackPVC.h; sourceTree = "<group>"; };
 		8952344D17C80A6700201FFC /* OptionsWindshieldCrackPVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsWindshieldCrackPVC.m; sourceTree = "<group>"; };
+		89662E5C17EA944900A86B48 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		89662E5E17EA944B00A86B48 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		89674AD417572AB500461BC3 /* SignaturePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignaturePopoverVC.h; sourceTree = "<group>"; };
 		89674AD517572AB600461BC3 /* SignaturePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignaturePopoverVC.m; sourceTree = "<group>"; };
 		896BF29517DEF8BA005E2631 /* introAutoSpaBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = introAutoSpaBtn.png; sourceTree = "<group>"; };
@@ -433,6 +439,8 @@
 		89E4599017B037DB0069A43D /* midsize@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "midsize@2x.png"; sourceTree = "<group>"; };
 		89E4599317B037E40069A43D /* compact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compact.png; sourceTree = "<group>"; };
 		89E4599417B037E40069A43D /* compact@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compact@2x.png"; sourceTree = "<group>"; };
+		89F368F117E96A690011B8B0 /* locomediaLogo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locomediaLogo2.png; sourceTree = "<group>"; };
+		89F368F217E96A690011B8B0 /* locomediaLogo2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locomediaLogo2@2x.png"; sourceTree = "<group>"; };
 		89F593E1174E8C57003F0608 /* bgCommercialResidential.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgCommercialResidential.png; sourceTree = "<group>"; };
 		89F593E2174E8C58003F0608 /* bgCommercialResidential@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgCommercialResidential@2x.png"; sourceTree = "<group>"; };
 		89F593E5174E8CAC003F0608 /* btnBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnBack.png; sourceTree = "<group>"; };
@@ -551,6 +559,8 @@
 		898994151742A4D7004D0A85 = {
 			isa = PBXGroup;
 			children = (
+				89662E5E17EA944B00A86B48 /* Icon@2x.png */,
+				89662E5C17EA944900A86B48 /* Icon.png */,
 				89CE716D1755E6BD009EE0DC /* CoreText.framework */,
 				89CE71681755C86B009EE0DC /* MessageUI.framework */,
 				8989942A1742A4D7004D0A85 /* invoiceManager */,
@@ -634,6 +644,8 @@
 		8989D25F17431419000F11BF /* images */ = {
 			isa = PBXGroup;
 			children = (
+				89F368F117E96A690011B8B0 /* locomediaLogo2.png */,
+				89F368F217E96A690011B8B0 /* locomediaLogo2@2x.png */,
 				8985484F17E6A4D900BB505F /* resetTextBtn.png */,
 				8985485017E6A4D900BB505F /* resetTextBtn@2x.png */,
 				89C8E84517E4F32C00335E17 /* databaseIcon.png */,
@@ -1101,6 +1113,10 @@
 				89C8E84617E4F32C00335E17 /* databaseIcon.png in Resources */,
 				8985485117E6A4D900BB505F /* resetTextBtn.png in Resources */,
 				8985485217E6A4D900BB505F /* resetTextBtn@2x.png in Resources */,
+				89F368F317E96A690011B8B0 /* locomediaLogo2.png in Resources */,
+				89F368F417E96A690011B8B0 /* locomediaLogo2@2x.png in Resources */,
+				89662E5D17EA944900A86B48 /* Icon.png in Resources */,
+				89662E5F17EA944B00A86B48 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
