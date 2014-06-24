@@ -1,2 +1,1 @@
-bam.
-i was here hurhurhur
+** Customized Invoice Manager intended for iPad use ** 
